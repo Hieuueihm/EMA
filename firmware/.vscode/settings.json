@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "random": "c",
+        "stm32f1xx_hal_adc.h": "c",
+        "math.h": "c"
+    }
+}
