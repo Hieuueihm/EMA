@@ -1,3 +1,1 @@
-# EMA
-# EMA
-# EMA
+
