@@ -1,7 +1,10 @@
 #include "main.h"
+#include "stm32f1xx_hal_rcc_ex.h"
+#include "stm32f1xx_hal_spi.h"
+#include "stm32f1xx_hal.h"
+
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-
 // SDS011 sds;
 
 SDS011 sds;
@@ -14,7 +17,8 @@ uint16_t size = 0;
 // uint16_t size = 0;
 UART_Handler huart;
 extern UART_HandleTypeDef huart1;
-
+uint8_t rxData[4] = {0};
+volatile uint8_t rx_ready = 0;
 int main(void)
 {
    
@@ -47,6 +51,7 @@ int main(void)
     //     Error_Handler();
     // }
 
+
     uart1_init(115200);
 
 
@@ -64,7 +69,7 @@ int main(void)
     };    
     // huart = UART_Init(cfg1);
     // huart.api.send_string(&huart, "test\r\n");
-    uart_print("test11");
+    uart_print("test11\n");
     
 
     // sds = SDS_Init(cfg2);
@@ -129,29 +134,35 @@ int main(void)
 
     // uart_printf((uint8_t*)data1);
     // Delay trước khi gửi tiếp
-    MQ7_Init();
-    MQ7_Calibrate();
+    // MQ7_Init();
+    // MQ7_Calibrate();
 
     char msg[64];
     float ppm = 0;
     
+//   HAL_SPI_Receive_IT(&hspi1, rxData, sizeof(rxData));
+
+
+    LoRa ins;
+    ins = SX1278_Init();
     while (1)
     {
+            ins = SX1278_Init();
+
+        
+
+    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+
+   
+    HAL_Delay(2000);
     
-    Status_e stt = MQ7_GetPPM(&ppm); 
-    sprintf(msg, "\tCO=%.1f ppm %d\r\n", ppm, stt);
-    HAL_UART_Transmit(&huart1, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
-
-    // HAL_Delay(1000);
-
-        delay_ms(2000);
-        HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-    /* USER CODE END 3 */
-
-
+    
+    
     }
     /* USER CODE END 3 */
 }
+
+
 
 
 void SystemClock_Config(void)
@@ -195,12 +206,12 @@ void SystemClock_Config(void)
  */
 static void MX_GPIO_Init(void)
 {
-    GPIO_InitTypeDef GPIO_InitStruct = {0};
 
     /* GPIO Ports Clock Enable */
     __HAL_RCC_GPIOC_CLK_ENABLE();
     __HAL_RCC_GPIOD_CLK_ENABLE();
     __HAL_RCC_GPIOA_CLK_ENABLE();
+    GPIO_InitTypeDef GPIO_InitStruct = {0};
 
     /*Configure GPIO pin Output Level */
     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
@@ -211,6 +222,33 @@ static void MX_GPIO_Init(void)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+
+
+    //  GPIO_InitStruct = {0};
+
+
+    /* SPI1 Master pins: PA5=SCK, PA7=MOSI, PA6=MISO */
+    //  GPIO_InitStruct.Pin = GPIO_PIN_5 | GPIO_PIN_7;
+    // GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    // GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+    // HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+    // GPIO_InitStruct.Pin = GPIO_PIN_6;
+    // GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+    // GPIO_InitStruct.Pull = GPIO_NOPULL;
+    // HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+    // // CS: PA4
+    // GPIO_InitStruct.Pin = GPIO_PIN_4;
+    // GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    // GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+    // HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+    // HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
+
+    // SCK = PA5
+
+   
 }
 
 /* USER CODE BEGIN 4 */
@@ -231,3 +269,4 @@ void Error_Handler(void)
     }
     /* USER CODE END Error_Handler_Debug */
 }
+

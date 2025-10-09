@@ -14,6 +14,7 @@ extern "C" {
 #include "stdio.h"
 #include "dht22.h"
 #include "mq7.h"
+#include "sx1278.h"
 
 void Error_Handler(void);
 

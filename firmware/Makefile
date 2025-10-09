@@ -38,6 +38,7 @@ CFLAGS    = -mcpu=cortex-m3 -mthumb -mlittle-endian \
 			-DHAL_TIM_MODULE_ENABLED\
 			-DHAL_UART_MODULE_ENABLED\
 			-DHAL_ADC_MODULE_ENABLED\
+			-DHAL_SPI_MODULE_ENABLED\
             $(OPT) $(DEBUG) $(CSTD)
 LIBS = -lm
 LDFLAGS = -T $(LDSCRIPT) --static -Wl,--gc-sections --specs=nosys.specs
@@ -57,6 +58,7 @@ HAL_FILES = $(HAL_DRIVER_F)/Src/stm32f1xx_hal_gpio_ex.c \
 		$(HAL_DRIVER_F)/Src/stm32f1xx_hal.c \
 		$(HAL_DRIVER_F)/Src/stm32f1xx_hal_rcc.c \
 		$(HAL_DRIVER_F)/Src/stm32f1xx_hal_rcc_ex.c \
+		$(HAL_DRIVER_F)/Src/stm32f1xx_hal_spi.c \
 		$(HAL_DRIVER_F)/Src/stm32f1xx_hal_gpio.c \
 		$(HAL_DRIVER_F)/Src/stm32f1xx_hal_dma.c \
 		$(HAL_DRIVER_F)/Src/stm32f1xx_hal_cortex.c \
