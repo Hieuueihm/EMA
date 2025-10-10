@@ -131,9 +131,94 @@ static void Lora_Disable_Crc(LoRa *lr)
    lr->api.lora_write_reg(REG_MODEM_LORA_2, lr->api.lora_read_reg(REG_MODEM_LORA_2) & 0xfb);
 }
 
+static void LoRa_Init(LoRa *lr){
+   lr->api.lora_reset();
+   lr->api.lora_sleep(&lr);
+   lr->api.lora_write_reg(REG_FIFO_RX_BASE_ADDR, 0);
+   lr->api.lora_write_reg(REG_FIFO_TX_BASE_ADDR, 0);
+   lr->api.lora_write_reg(REG_LNA, lora_read_reg(REG_LNA) | 0x03);
+   lr->api.lora_write_reg(REG_MODEM_LORA_3, 0x04);
+   lr->api.lora_set_tx_power(&lr, 17);
+
+   lr->api.lora_idle(&lr);
+
+
+}
+static void LoRa_Send_Packet(LoRa *lr, uint8_t *buf, uint32_t size){
+   lr->api.lora_idle(&lr);
+   lr->api.lora_write_reg(REG_FIFO_ADDR_PTR, 0);
+
+   for(int i=0; i<size; i++) 
+      lr->api.lora_write_reg(REG_FIFO, *buf++);
+   
+   lr->api.lora_write_reg(REG_PAYLOAD_LENGTH, size);
+   
+   /*
+    * Start transmission and wait for conclusion.
+    */
+   lr->api.lora_write_reg(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_TX);
+   while((lr->api.lora_read_reg(REG_IRQ_FLAGS) & IRQ_TX_DONE_MASK) == 0)
+   delay_ms(2);
+
+   lr->api.lora_write_reg(REG_IRQ_FLAGS, IRQ_TX_DONE_MASK);
+}
+
+static uint32_t LoRa_Receive_Packet(LoRa *lr, uint8_t *buf, uint32_t size){
+    uint32_t len = 0;
+
+   /*
+    * Check interrupts.
+    */
+   int irq = lr->api.lora_read_reg(REG_IRQ_FLAGS);
+   lr->api.lora_write_reg(REG_IRQ_FLAGS, irq);
+   if((irq & IRQ_RX_DONE_MASK) == 0) return 0;
+   if(irq & IRQ_PAYLOAD_CRC_ERROR_MASK) return 0;
+
+   /*
+    * Find packet size.
+    */
+   if (lr->implicit) len = lr->api.lora_read_reg(REG_PAYLOAD_LENGTH);
+   else len = lr->api.lora_read_reg(REG_RX_NB_BYTES);
+
+   /*
+    * Transfer data from radio.
+    */
+   lr->api.lora_idle(&lr);   
+   lr->api.lora_write_reg(REG_FIFO_ADDR_PTR, lr->api.lora_read_reg(REG_FIFO_RX_CURRENT_ADDR));
+   if(len > size) len = size;
+   for(int i=0; i<len; i++) 
+      *buf++ = lr->api.lora_read_reg(REG_FIFO);
+
+   return len;
+}
+static Status_e LoRa_Received(LoRa *lr)
+{
+   if(lr->api.lora_read_reg(REG_IRQ_FLAGS) & IRQ_RX_DONE_MASK) return OK;
+   return ERR;
+}
+static uint32_t Lora_Packet_Rssi(LoRa *lr)
+{
+   return (lr->api.lora_read_reg(REG_PKT_RSSI_VALUE) - (lr->freq < 868E6 ? 164 : 157));
+}
+
+static float LoRa_Packet_Snr(LoRa *lr)
+{
+   return ((int8_t)lr->api.lora_read_reg(REG_PKT_SNR_VALUE)) * 0.25;
+}
+static void LoRa_Dump_Register(LoRa *lr){
+   int i;
+   uart_printf("00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F\n");
+   for(i=0; i<0x40; i++) {
+      uart_printf("%02X ", lr->api.lora_read_reg(i));
+      if((i & 0x0f) == 0x0f) uart_printf("\n");
+   }
+   uart_printf("\n");
+}
 LoRa SX1278_Init(void){
 
-        __HAL_RCC_SPI1_CLK_ENABLE();
+      __HAL_RCC_SPI1_CLK_ENABLE();
+      __HAL_RCC_GPIOA_CLK_ENABLE();
+      __HAL_RCC_GPIOB_CLK_ENABLE();
 
     GPIO_InitTypeDef GPIO_InitStruct = {0};
 
@@ -155,8 +240,14 @@ LoRa SX1278_Init(void){
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
 
+    GPIO_InitStruct.Pin = LORA_RST_PIN;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+    HAL_GPIO_Init(LORA_RST_PORT, &GPIO_InitStruct);
+    HAL_GPIO_WritePin(LORA_RST_PORT, LORA_RST_PIN, GPIO_PIN_SET);
 
-     hspi1.Instance = SPI1;
+
+    hspi1.Instance = SPI1;
     hspi1.Init.Mode = SPI_MODE_MASTER;
     hspi1.Init.Direction = SPI_DIRECTION_2LINES;
     hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
@@ -188,7 +279,15 @@ LoRa SX1278_Init(void){
     ins.api.lora_set_sync_word = LoRa_Set_Sync_Word;
     ins.api.lora_enable_crc = LoRa_Enable_Crc;
     ins.api.lora_disable_crc = Lora_Disable_Crc;
+    ins.api.lora_init = LoRa_Init;
+    ins.api.lora_send_packet = LoRa_Send_Packet;
+    ins.api.lora_receive_packet = LoRa_Receive_Packet;
+    ins.api.lora_receive = LoRa_Receive;
+    ins.api.lora_packet_rssi = Lora_Packet_Rssi;
+    ins.api.lora_dump_registers = LoRa_Dump_Register;
 
+
+    ins.api.lora_init(&ins);
 
 
     return ins;

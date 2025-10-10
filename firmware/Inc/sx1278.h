@@ -8,6 +8,10 @@
 #define LORA_RST_PIN   0
 #define LORA_RST_PORT   GPIOB  
 
+#define LORA_CS_PIN     4
+#define LORA_CS_PORT    GPIOA
+
+
 
 #define REG_FIFO                       0x00
 #define REG_OP_MODE                    0x01
@@ -85,13 +89,12 @@ struct SX1278_t{
         void (*lora_enable_crc)(LoRa *lr);
         void (*lora_disable_crc)(LoRa *lr);
         int (*lora_init)(LoRa *lr);
-        void (*lora_send_packet)(uint8_t *buf, uint32_t size);
-        int (*lora_receive_packet)(uint8_t *buf, uint32_t size);
-        int (*lora_received)(void);
-        int (*lora_packet_rssi)(void);
-        float (*lora_packet_snr)(void);
-        void (*lora_close)(void);
-        void (*lora_dump_registers)(void);
+        void (*lora_send_packet)(LoRa *lr, uint8_t *buf, uint32_t size);
+        uint32_t (*lora_receive_packet)(LoRa *lr, uint8_t *buf, uint32_t size);
+        Status_e (*lora_received)(LoRa *lr);
+        uint32_t (*lora_packet_rssi)(LoRa *lr);
+        float (*lora_packet_snr)(LoRa *lr);
+        void (*lora_dump_registers)(LoRa *lr);
     } api;
 
 };
