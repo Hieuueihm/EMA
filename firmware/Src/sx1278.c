@@ -4,20 +4,19 @@ static SPI_HandleTypeDef hspi1;
 
 static void SPI_transmit(uint8_t txData[], size_t len){
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET);
-    HAL_Delay(1);
+    delay_ms(1);
     HAL_SPI_Transmit(&hspi1, txData, len, 100);
-
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
 }
 
 static void LoRa_Write_Reg(uint8_t reg, uint32_t val){
     uint8_t out[2] = { 0x80 | reg, val };
-        // uart_printf("out[0] = %02X, out[1] = %02X\r\n", out[0], out[1]);
+    uart_printf_tag(SPI_TAG, "out[0] = %02X, out[1] = %02X\r\n", out[0], out[1]);
     SPI_transmit(out, sizeof(out));
 }
 static uint32_t LoRa_Read_Reg(uint8_t reg){
-    uint8_t out[2] = { reg & 0x7F, 0x00 };
-    int8_t in[2] = {0};
+    uint8_t out[2] = { (uint8_t)reg & 0x7F, 0x00 };
+    uint8_t in[2] = {0};
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET); 
     HAL_SPI_TransmitReceive(&hspi1, out, in, 2, 100);
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);  
@@ -26,19 +25,21 @@ static uint32_t LoRa_Read_Reg(uint8_t reg){
 }
 
 static void LoRa_Reset(void){
+   
     HAL_GPIO_WritePin(LORA_RST_PORT, LORA_RST_PIN, 0);
-    HAL_Delay(1);
+    delay_ms(1);
     HAL_GPIO_WritePin(LORA_RST_PORT, LORA_RST_PIN, 1);
-    HAL_Delay(10);
+    delay_ms(10);
+
 }
 static void LoRa_Explicit_Header_Mode(LoRa *lr){
     lr->implicit = 0;
-    lr->api.lora_write_reg(REG_MODEM_LORA_1, lora_read_reg(REG_MODEM_LORA_1) & 0xfe);
+    lr->api.lora_write_reg(REG_MODEM_LORA_1, lr->api.lora_read_reg(REG_MODEM_LORA_1) & 0xfe);
 }
 static void Lora_Implicit_Header_Mode(LoRa *lr, uint32_t size)
 {
    lr->implicit = 0;
-   lr->api.lora_write_reg(REG_MODEM_LORA_1, lora_read_reg(REG_MODEM_LORA_1) | 0x01);
+   lr->api.lora_write_reg(REG_MODEM_LORA_1, lr->api.lora_read_reg(REG_MODEM_LORA_1) | 0x01);
    lr->api.lora_write_reg(REG_PAYLOAD_LENGTH, size);
 }
 static void LoRa_Idle(LoRa *lr)
@@ -47,6 +48,7 @@ static void LoRa_Idle(LoRa *lr)
 }
 static void LoRa_Sleep(LoRa *lr)
 { 
+   uart_printf_tag(LORA_TAG, "sleep spi trans: ");
    lr->api.lora_write_reg(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_SLEEP);
 }
 
@@ -57,6 +59,7 @@ static void LoRa_Receive(LoRa *lr)
 
 static void LoRa_Set_TX_Power(LoRa *lr, uint8_t level)
 {
+   uart_printf_tag(LORA_TAG, "lora set tx spi trans: ");
    if (level < 2) level = 2;
    else if (level > 17) level = 17;
    lr->api.lora_write_reg(REG_PA_CONFIG, PA_BOOST | (level - 2));
@@ -132,20 +135,23 @@ static void Lora_Disable_Crc(LoRa *lr)
 }
 
 static void LoRa_Init(LoRa *lr){
+   uart_printf_tag(LORA_TAG, "lora init start\r\n");
    lr->api.lora_reset();
-   lr->api.lora_sleep(&lr);
+   lr->api.lora_sleep(lr);
    lr->api.lora_write_reg(REG_FIFO_RX_BASE_ADDR, 0);
    lr->api.lora_write_reg(REG_FIFO_TX_BASE_ADDR, 0);
-   lr->api.lora_write_reg(REG_LNA, lora_read_reg(REG_LNA) | 0x03);
+   lr->api.lora_write_reg(REG_LNA, lr->api.lora_read_reg(REG_LNA) | 0x03);
    lr->api.lora_write_reg(REG_MODEM_LORA_3, 0x04);
-   lr->api.lora_set_tx_power(&lr, 17);
+   lr->api.lora_set_tx_power(lr, 17);
 
-   lr->api.lora_idle(&lr);
+   lr->api.lora_idle(lr);
+
+   uart_printf_tag(LORA_TAG, "lora init done\r\n");
 
 
 }
 static void LoRa_Send_Packet(LoRa *lr, uint8_t *buf, uint32_t size){
-   lr->api.lora_idle(&lr);
+   lr->api.lora_idle(lr);
    lr->api.lora_write_reg(REG_FIFO_ADDR_PTR, 0);
 
    for(int i=0; i<size; i++) 
@@ -183,7 +189,7 @@ static uint32_t LoRa_Receive_Packet(LoRa *lr, uint8_t *buf, uint32_t size){
    /*
     * Transfer data from radio.
     */
-   lr->api.lora_idle(&lr);   
+   lr->api.lora_idle(lr);   
    lr->api.lora_write_reg(REG_FIFO_ADDR_PTR, lr->api.lora_read_reg(REG_FIFO_RX_CURRENT_ADDR));
    if(len > size) len = size;
    for(int i=0; i<len; i++) 
@@ -216,9 +222,10 @@ static void LoRa_Dump_Register(LoRa *lr){
 }
 LoRa SX1278_Init(void){
 
-      __HAL_RCC_SPI1_CLK_ENABLE();
-      __HAL_RCC_GPIOA_CLK_ENABLE();
-      __HAL_RCC_GPIOB_CLK_ENABLE();
+   __HAL_RCC_SPI1_CLK_ENABLE();
+   __HAL_RCC_GPIOA_CLK_ENABLE();
+   __HAL_RCC_GPIOB_CLK_ENABLE();
+
 
     GPIO_InitTypeDef GPIO_InitStruct = {0};
 

@@ -1,10 +1,20 @@
 #ifndef __SX1278_H
 #define __SX1278_H
 
+
 #include "common.h"
 #include "stm32f1xx_hal_spi.h"
+#include "stm32f1xx_hal_gpio.h"
 
 
+
+/*
+    stm32 pin:
+        sclk: pa5
+        mosi: pa7
+        miso: pa6
+        css: pa4
+*/
 #define LORA_RST_PIN   0
 #define LORA_RST_PORT   GPIOB  
 

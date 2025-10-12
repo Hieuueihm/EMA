@@ -19,7 +19,9 @@ void blink_led_test(uint32_t time_ms);
 void uart1_init(uint32_t baudrate);
 void uart_print(const char *str);
 void uart_printf(const char *format, ...);
- 
+void uart_printf_tag(const char *TAG, const char *format, ...);
+
+
 
 
 

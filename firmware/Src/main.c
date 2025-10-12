@@ -69,7 +69,7 @@ int main(void)
     };    
     // huart = UART_Init(cfg1);
     // huart.api.send_string(&huart, "test\r\n");
-    uart_print("test11\n");
+    uart_print("program start\r\n");
     
 
     // sds = SDS_Init(cfg2);
@@ -145,10 +145,19 @@ int main(void)
 
     LoRa ins;
     ins = SX1278_Init();
+    ins.api.lora_set_frequency(&ins, 433E6);
+    ins.api.lora_set_spreading_factor(&ins, 12);
+    ins.api.lora_set_bandwidth(&ins, 125E3);
+    ins.api.lora_enable_crc(&ins);
+
     while (1)
     {
-            ins = SX1278_Init();
+    // char buf[100];
+    
+    // int len = snprintf(buf, sizeof(buf), "abc\r\n");
 
+
+    // ins.api.lora_send_packet(&ins, (uint8_t *)buf, len);
         
 
     HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);

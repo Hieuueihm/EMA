@@ -5,4 +5,10 @@ typedef enum {
     OK  = 1,
     TIMEOUT = -1
 } Status_e;
+
+#define LORA_TAG "LORA"
+#define SPI_TAG "SPI"
+
+
+
 #endif
