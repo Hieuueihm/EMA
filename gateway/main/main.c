@@ -11,10 +11,15 @@
 #include "esp_netif.h"
 #include "esp_wifi.h"
 
+#include "esp_timer.h"
+
+static int64_t s_ap_expire_ms = 0;
+static const int64_t AP_LIFETIME_MS = 180000;
 static const char *TAG = "APP";
 #define LED_GPIO 25 //
 #define LED_ON() gpio_set_level(LED_GPIO, 1)
 #define LED_OFF() gpio_set_level(LED_GPIO, 0)
+#define WIFI_RETRY_STA_MS 60000
 
 volatile bool ap_mode = false;
 extern wifi_state_t wifi_state;
@@ -141,7 +146,9 @@ static void network_supervisor_task(void *arg)
                 if (quick_retries >= MAX_QUICK_RETRIES)
                 {
                     ESP_LOGW(TAG, "Too many STA retries → switch to AP portal");
+                    wifi_sta_stop();
                     start_ap_and_server();
+                    s_ap_expire_ms = (esp_timer_get_time() / 1000) + AP_LIFETIME_MS;
                     ap_mode = true;
                 }
                 continue;
@@ -149,9 +156,16 @@ static void network_supervisor_task(void *arg)
 
             vTaskDelay(pdMS_TO_TICKS(500));
         }
-        else
+        else if (ap_mode)
         {
-            vTaskDelay(pdMS_TO_TICKS(1000));
+            int64_t now_ms = esp_timer_get_time() / 1000;
+            if (s_ap_expire_ms > 0 && now_ms > s_ap_expire_ms)
+            {
+                ap_mode = false;
+                wifi_sta_start_and_wait_ip(WIFI_RETRY_STA_MS);
+                ESP_LOGW(TAG, "AP portal expired → try STA");
+            }
+            vTaskDelay(pdMS_TO_TICKS(500));
         }
     }
 }
@@ -195,7 +209,7 @@ void app_main(void)
     if (have_saved)
     {
         ESP_LOGI(TAG, "Try STA first (60s)...");
-        bool ok = wifi_sta_start_and_wait_ip(60000);
+        bool ok = wifi_sta_start_and_wait_ip(WIFI_RETRY_STA_MS);
         if (ok)
         {
             ESP_LOGI(TAG, "Wi-Fi OK → run normally");
@@ -206,6 +220,7 @@ void app_main(void)
             ESP_LOGW(TAG, "No IP within 60s → start AP portal");
             wifi_sta_stop();
             start_ap_and_server();
+            s_ap_expire_ms = (esp_timer_get_time() / 1000) + AP_LIFETIME_MS;
             ap_mode = true;
         }
     }
@@ -213,6 +228,7 @@ void app_main(void)
     {
         ESP_LOGW(TAG, "No saved Wi-Fi → start AP portal immediately");
         start_ap_and_server();
+        s_ap_expire_ms = (esp_timer_get_time() / 1000) + AP_LIFETIME_MS;
         ap_mode = true;
     }
 
