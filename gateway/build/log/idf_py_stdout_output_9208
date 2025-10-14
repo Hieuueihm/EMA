@@ -1,0 +1,750 @@
+Command: C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe C:\Espressif\frameworks\esp-idf-v5.5.1\tools/idf_monitor.py -p COM20 -b 115200 --toolchain-prefix xtensa-esp32-elf- --target esp32 --revision 0 D:\my_first_app\build\my_first_app.elf D:\my_first_app\build\bootloader\bootloader.elf --force-color -m 'C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe' 'C:\Espressif\frameworks\esp-idf-v5.5.1\tools\idf.py' '-p' 'COM20'
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 188777542, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6380
+ho 0 tail 12 room 4
+load:0x40078000,len:15916
+load:0x40080400,len:3860
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Oct  9 2025 09:33:59[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (31) boot: chip revision: v1.1[0m
+[0;32mI (34) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (38) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (41) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (45) boot: Enabling RNG early entropy source...[0m
+[0;32mI (49) boot: Partition Table:[0m
+[0;32mI (52) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (71) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (78) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=216e4h (136932) map[0m
+[0;32mI (136) esp_image: segment 1: paddr=0003170c vaddr=3ffb0000 size=03f2ch ( 16172) load[0m
+[0;32mI (142) esp_image: segment 2: paddr=00035640 vaddr=40080000 size=0a9d8h ( 43480) load[0m
+[0;32mI (159) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=ad2a0h (709280) map[0m
+[0;32mI (401) esp_image: segment 4: paddr=000ed2c8 vaddr=4008a9d8 size=0d744h ( 55108) load[0m
+[0;32mI (423) esp_image: segment 5: paddr=000faa14 vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (435) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (435) boot: Disabling RNG early entropy source...[0m
+[0;32mI (446) cpu_start: Multicore app[0m
+[0;32mI (454) cpu_start: Pro cpu start user code[0m
+[0;32mI (454) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (454) app_init: Application information:[0m
+[0;32mI (454) app_init: Project name:     my_first_app[0m
+[0;32mI (459) app_init: App version:      1[0m
+[0;32mI (462) app_init: Compile time:     Oct 14 2025 17:54:40[0m
+[0;32mI (467) app_init: ELF file SHA256:  e36168570...[0m
+[0;32mI (471) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (475) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (479) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (483) efuse_init: Chip rev:         v1.1[0m
+[0;32mI (487) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (493) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (498) heap_init: At 3FFB8600 len 00027A00 (158 KiB): DRAM[0m
+[0;32mI (504) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (509) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (514) heap_init: At 4009811C len 00007EE4 (31 KiB): IRAM[0m
+[0;32mI (521) spi_flash: detected chip: gd[0m
+[0;32mI (523) spi_flash: flash io: dio[0m
+[0;33mW (526) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (539) main_task: Started on CPU0[0m
+[0;32mI (549) main_task: Calling app_main()[0m
+[0;32mI (579) APP: Not connected → medium blink[0m
+[0;32mI (589) wifi:wifi driver task: 3ffc0fe4, prio:23, stack:6656, core=0[0m
+[0;32mI (609) wifi:wifi firmware version: 14da9b7[0m
+[0;32mI (609) wifi:wifi certification version: v7.0[0m
+[0;32mI (609) wifi:config NVS flash: enabled[0m
+[0;32mI (609) wifi:config nano formatting: disabled[0m
+[0;32mI (609) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (619) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (619) wifi:Init management short buffer num: 32[0m
+[0;32mI (619) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (629) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (629) wifi:Init static rx buffer num: 10[0m
+[0;32mI (639) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (639) wifi_init: rx ba win: 6[0m
+[0;32mI (639) wifi_init: accept mbox: 6[0m
+[0;32mI (649) wifi_init: tcpip mbox: 32[0m
+[0;32mI (649) wifi_init: udp mbox: 6[0m
+[0;32mI (649) wifi_init: tcp mbox: 6[0m
+[0;32mI (649) wifi_init: tcp tx win: 5760[0m
+[0;32mI (659) wifi_init: tcp rx win: 5760[0m
+[0;32mI (659) wifi_init: tcp mss: 1440[0m
+[0;32mI (659) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (669) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (669) WIFI_STA: Target SSID: 'Hieu1'[0m
+[0;32mI (669) WIFI_STA: Connecting to Wi-Fi SSID='Hieu1' ...[0m
+[0;32mI (679) WIFI_STA: Using password '12345678'[0m
+[0;32mI (679) phy_init: phy_version 4861,b71b5ad,Aug  5 2025,11:16:06[0m
+[0;32mI (759) wifi:mode : sta (e8:6b:ea:09:d5:24)[0m
+[0;32mI (759) wifi:enable tsf[0m
+[0;32mI (769) WIFI_STA: Wi-Fi started[0m
+[0;32mI (779) wifi:new:<6,0>, old:<1,0>, ap:<255,255>, sta:<6,0>, prof:6, snd_ch_cfg:0x0[0m
+[0;32mI (779) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (1529) wifi:state: auth -> init (0x600)[0m
+[0;32mI (1599) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:6, snd_ch_cfg:0x0[0m
+[0;33mW (1599) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1779) APP: Not connected → medium blink[0m
+[0;32mI (2979) APP: Not connected → medium blink[0m
+[0;33mW (4009) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (4179) APP: Not connected → medium blink[0m
+[0;32mI (5379) APP: Not connected → medium blink[0m
+[0;33mW (6429) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (6449) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:6, snd_ch_cfg:0x0[0m
+[0;32mI (6449) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (6579) APP: Not connected → medium blink[0m
+[0;32mI (7749) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (7759) wifi:Association refused temporarily time 196, comeback time 296 (TUs)[0m
+[0;32mI (7779) APP: Not connected → medium blink[0m
+[0;32mI (8059) wifi:state: assoc -> auth (0xb0)[0m
+[0;32mI (8979) APP: Not connected → medium blink[0m
+[0;32mI (9339) wifi:state: auth -> assoc (0x0)[0m
+[1;31mE (9349) wifi:Association refused too many times, max allowed 1[0m
+[0;32mI (9349) wifi:state: assoc -> init (0xd010)[0m
+[0;32mI (9359) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:6, snd_ch_cfg:0x0[0m
+[0;33mW (9359) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (10179) APP: Not connected → medium blink[0m
+[0;32mI (11379) APP: Not connected → medium blink[0m
+[0;33mW (11779) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (11789) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:6, snd_ch_cfg:0x0[0m
+[0;32mI (11789) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (12579) APP: Not connected → medium blink[0m
+[0;32mI (13079) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (13079) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (13529) wifi:connected with Hieu1, aid = 1, channel 6, BW20, bssid = 3a:23:58:0f:49:dd[0m
+[0;32mI (13529) wifi:security: WPA3-SAE, phy: bgn, rssi: -24[0m
+[0;32mI (13539) wifi:pm start, type: 1[0m
+
+[0;32mI (13549) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (13549) WIFI_STA: Associated to AP[0m
+[0;32mI (13609) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (13779) APP: Associated to AP → fast blink[0m
+[0;32mI (14179) APP: Associated to AP → fast blink[0m
+[0;32mI (14579) APP: Associated to AP → fast blink[0m
+[0;32mI (14979) APP: Associated to AP → fast blink[0m
+I (15089) esp_netif_handlers: sta ip: 172.20.10.2, mask: 255.255.255.240, gw: 172.20.10.1
+[0;32mI (15089) WIFI_STA: Got IP: 172.20.10.2[0m
+[0;32mI (15089) APP: Wi-Fi OK → start your Gateway/MQTT here[0m
+[0;32mI (15089) MQTT: Other event id:7[0m
+[0;32mI (15099) main_task: Returned from app_main()[0m
+[0;32mI (15099) wifi:<ba-add>idx:0 (ifx:0, 3a:23:58:0f:49:dd), tid:0, ssn:10, winSize:64[0m
+[0;32mI (17599) MQTT: MQTT_EVENT_CONNECTED[0m
+[0;32mI (17609) MQTT: CONNECT NODE_A msg_id=26770[0m
+[0;32mI (17609) MQTT: CONNECT NODE_B msg_id=5829[0m
+[0;32mI (17609) MQTT: TX telemetry batch: {"NODE_A":[{"ts":17160,"values":{"temperature":25.4,"hum":53.2}}],"NODE_B":[{"values":{"voltage":3.74}}]}[0m
+[0;32mI (18579) MQTT: MQTT_EVENT_SUBSCRIBED, msg_id=20673, return code=0x01 [0m
+[0;32mI (21369) MQTT: MQTT_EVENT_SUBSCRIBED, msg_id=33688, return code=0x01 [0m
+[0;32mI (21379) MQTT: MQTT_EVENT_PUBLISHED, msg_id=26770[0m
+[0;32mI (21379) MQTT: MQTT_EVENT_PUBLISHED, msg_id=5829[0m
+[0;32mI (21389) MQTT: MQTT_EVENT_PUBLISHED, msg_id=10324[0m
+[0;32mI (1732139) wifi:bcn_timeout,ap_probe_send_start[0m
+[0;32mI (1734649) wifi:ap_probe_send over, reset wifi status to disassoc[0m
+[0;32mI (1734649) wifi:state: run -> init (0xc800)[0m
+[0;32mI (1734659) wifi:pm stop, total sleep time: 1528128461 us / 1721112024 us[0m
+
+[0;32mI (1734659) wifi:<ba-del>idx:0, tid:0[0m
+[0;32mI (1734659) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:6, snd_ch_cfg:0x0[0m
+[0;33mW (1734669) WIFI_STA: Disconnected → reconnect[0m
+[1;31mE (1734669) transport_base: tcp_read error, errno=Software caused connection abort[0m
+[1;31mE (1734679) mqtt_client: esp_mqtt_handle_transport_read_error: transport_read() error: errno=113[0m
+[0;32mI (1734689) MQTT: MQTT_EVENT_ERROR[0m
+[0;32mI (1734689) MQTT: Last error code reported from esp-tls: 0x0[0m
+[0;32mI (1734689) MQTT: Last tls stack error number: 0x0[0m
+[0;32mI (1734699) MQTT: Last captured errno : 113 (Software caused connection abort)[0m
+[1;31mE (1734709) mqtt_client: mqtt_process_receive: mqtt_message_receive() returned -2[0m
+[0;32mI (1734709) MQTT: MQTT_EVENT_DISCONNECTED[0m
+[0;32mI (1734979) APP: Not connected → medium blink[0m
+[0;32mI (1736179) APP: Not connected → medium blink[0m
+[0;33mW (1737089) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1737379) APP: Not connected → medium blink[0m
+[0;32mI (1738579) APP: Not connected → medium blink[0m
+[0;33mW (1739499) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1739779) APP: Not connected → medium blink[0m
+[0;32mI (1740979) APP: Not connected → medium blink[0m
+[0;33mW (1741919) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1742179) APP: Not connected → medium blink[0m
+[0;32mI (1743379) APP: Not connected → medium blink[0m
+[0;33mW (1744339) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1744579) APP: Not connected → medium blink[0m
+[0;32mI (1744719) MQTT: Other event id:7[0m
+[0;32mI (1745779) APP: Not connected → medium blink[0m
+[0;33mW (1746749) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1746979) APP: Not connected → medium blink[0m
+[0;32mI (1748179) APP: Not connected → medium blink[0m
+[0;33mW (1749169) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1749379) APP: Not connected → medium blink[0m
+[0;32mI (1750579) APP: Not connected → medium blink[0m
+[0;33mW (1751589) WIFI_STA: Disconnected → reconnect[0m
+[1;31mE (1751719) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (1751719) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (1751719) mqtt_client: Error transport connect[0m
+[0;32mI (1751719) MQTT: MQTT_EVENT_ERROR[0m
+[0;32mI (1751729) MQTT: Last error code reported from esp-tls: 0x8001[0m
+[0;32mI (1751729) MQTT: Last tls stack error number: 0x0[0m
+[0;32mI (1751739) MQTT: Last captured errno : 113 (Software caused connection abort)[0m
+[0;32mI (1751739) MQTT: MQTT_EVENT_DISCONNECTED[0m
+[0;32mI (1751779) APP: Not connected → medium blink[0m
+[0;32mI (1752979) APP: Not connected → medium blink[0m
+[0;33mW (1753999) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1754179) APP: Not connected → medium blink[0m
+[0;32mI (1755379) APP: Not connected → medium blink[0m
+[0;33mW (1756419) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1756579) APP: Not connected → medium blink[0m
+[0;32mI (1757779) APP: Not connected → medium blink[0m
+[0;33mW (1758829) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1758979) APP: Not connected → medium blink[0m
+[0;32mI (1760179) APP: Not connected → medium blink[0m
+[0;33mW (1761249) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1761379) APP: Not connected → medium blink[0m
+[0;32mI (1761749) MQTT: Other event id:7[0m
+[0;32mI (1762579) APP: Not connected → medium blink[0m
+[0;33mW (1763669) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1763779) APP: Not connected → medium blink[0m
+[0;32mI (1764979) APP: Not connected → medium blink[0m
+[0;33mW (1766079) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1766179) APP: Not connected → medium blink[0m
+[0;32mI (1767379) APP: Not connected → medium blink[0m
+[0;33mW (1768499) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1768579) APP: Not connected → medium blink[0m
+[1;31mE (1768749) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (1768749) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (1768749) mqtt_client: Error transport connect[0m
+[0;32mI (1768749) MQTT: MQTT_EVENT_ERROR[0m
+[0;32mI (1768759) MQTT: Last error code reported from esp-tls: 0x8001[0m
+[0;32mI (1768759) MQTT: Last tls stack error number: 0x0[0m
+[0;32mI (1768769) MQTT: Last captured errno : 113 (Software caused connection abort)[0m
+[0;32mI (1768769) MQTT: MQTT_EVENT_DISCONNECTED[0m
+[0;32mI (1769779) APP: Not connected → medium blink[0m
+[0;33mW (1770919) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1770979) APP: Not connected → medium blink[0m
+[0;32mI (1772179) APP: Not connected → medium blink[0m
+[0;33mW (1773329) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1773379) APP: Not connected → medium blink[0m
+[0;32mI (1774579) APP: Not connected → medium blink[0m
+[0;33mW (1775749) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1775779) APP: Not connected → medium blink[0m
+[0;32mI (1776979) APP: Not connected → medium blink[0m
+[0;33mW (1778169) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1778179) APP: Not connected → medium blink[0m
+[0;32mI (1778779) MQTT: Other event id:7[0m
+[0;32mI (1779379) APP: Not connected → medium blink[0m
+[0;32mI (1780579) APP: Not connected → medium blink[0m
+[0;33mW (1780579) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1781779) APP: Not connected → medium blink[0m
+[0;32mI (1782979) APP: Not connected → medium blink[0m
+[0;33mW (1782999) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1784179) APP: Not connected → medium blink[0m
+[0;32mI (1785379) APP: Not connected → medium blink[0m
+[0;33mW (1785419) WIFI_STA: Disconnected → reconnect[0m
+[1;31mE (1785779) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (1785779) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (1785779) mqtt_client: Error transport connect[0m
+[0;32mI (1785779) MQTT: MQTT_EVENT_ERROR[0m
+[0;32mI (1785789) MQTT: Last error code reported from esp-tls: 0x8001[0m
+[0;32mI (1785789) MQTT: Last tls stack error number: 0x0[0m
+[0;32mI (1785799) MQTT: Last captured errno : 113 (Software caused connection abort)[0m
+[0;32mI (1785799) MQTT: MQTT_EVENT_DISCONNECTED[0m
+[0;32mI (1786579) APP: Not connected → medium blink[0m
+[0;32mI (1787779) APP: Not connected → medium blink[0m
+[0;33mW (1787829) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1788979) APP: Not connected → medium blink[0m
+[0;32mI (1790179) APP: Not connected → medium blink[0m
+[0;33mW (1790249) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1791379) APP: Not connected → medium blink[0m
+[0;32mI (1792579) APP: Not connected → medium blink[0m
+[0;33mW (1792669) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1793779) APP: Not connected → medium blink[0m
+[0;32mI (1794979) APP: Not connected → medium blink[0m
+[0;33mW (1795079) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1795809) MQTT: Other event id:7[0m
+[0;32mI (1796179) APP: Not connected → medium blink[0m
+[0;32mI (1797379) APP: Not connected → medium blink[0m
+[0;33mW (1797499) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1798579) APP: Not connected → medium blink[0m
+[0;32mI (1799779) APP: Not connected → medium blink[0m
+[0;33mW (1799919) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1800979) APP: Not connected → medium blink[0m
+[0;32mI (1802179) APP: Not connected → medium blink[0m
+[0;33mW (1802329) WIFI_STA: Disconnected → reconnect[0m
+[1;31mE (1802809) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (1802809) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (1802809) mqtt_client: Error transport connect[0m
+[0;32mI (1802809) MQTT: MQTT_EVENT_ERROR[0m
+[0;32mI (1802819) MQTT: Last error code reported from esp-tls: 0x8001[0m
+[0;32mI (1802819) MQTT: Last tls stack error number: 0x0[0m
+[0;32mI (1802829) MQTT: Last captured errno : 113 (Software caused connection abort)[0m
+[0;32mI (1802829) MQTT: MQTT_EVENT_DISCONNECTED[0m
+[0;32mI (1803379) APP: Not connected → medium blink[0m
+[0;32mI (1804579) APP: Not connected → medium blink[0m
+[0;33mW (1804749) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1805779) APP: Not connected → medium blink[0m
+[0;32mI (1806979) APP: Not connected → medium blink[0m
+[0;33mW (1807169) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1808179) APP: Not connected → medium blink[0m
+[0;32mI (1809379) APP: Not connected → medium blink[0m
+[0;33mW (1809579) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1810579) APP: Not connected → medium blink[0m
+[0;32mI (1811779) APP: Not connected → medium blink[0m
+[0;33mW (1811999) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1812839) MQTT: Other event id:7[0m
+[0;32mI (1812979) APP: Not connected → medium blink[0m
+[0;32mI (1814179) APP: Not connected → medium blink[0m
+[0;33mW (1814419) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1815379) APP: Not connected → medium blink[0m
+[0;32mI (1816579) APP: Not connected → medium blink[0m
+[0;33mW (1816829) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1817779) APP: Not connected → medium blink[0m
+[0;32mI (1818979) APP: Not connected → medium blink[0m
+[0;33mW (1819249) WIFI_STA: Disconnected → reconnect[0m
+[1;31mE (1819839) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (1819839) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (1819839) mqtt_client: Error transport connect[0m
+[0;32mI (1819839) MQTT: MQTT_EVENT_ERROR[0m
+[0;32mI (1819849) MQTT: Last error code reported from esp-tls: 0x8001[0m
+[0;32mI (1819849) MQTT: Last tls stack error number: 0x0[0m
+[0;32mI (1819859) MQTT: Last captured errno : 113 (Software caused connection abort)[0m
+[0;32mI (1819859) MQTT: MQTT_EVENT_DISCONNECTED[0m
+[0;32mI (1820179) APP: Not connected → medium blink[0m
+[0;32mI (1821379) APP: Not connected → medium blink[0m
+[0;33mW (1821669) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1822579) APP: Not connected → medium blink[0m
+[0;32mI (1823779) APP: Not connected → medium blink[0m
+[0;33mW (1824079) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1824979) APP: Not connected → medium blink[0m
+[0;32mI (1826179) APP: Not connected → medium blink[0m
+[0;33mW (1826499) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1827379) APP: Not connected → medium blink[0m
+[0;32mI (1828579) APP: Not connected → medium blink[0m
+[0;33mW (1828909) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1829779) APP: Not connected → medium blink[0m
+[0;32mI (1829869) MQTT: Other event id:7[0m
+[0;32mI (1830979) APP: Not connected → medium blink[0m
+[0;33mW (1831329) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1832179) APP: Not connected → medium blink[0m
+[0;32mI (1833379) APP: Not connected → medium blink[0m
+[0;33mW (1833749) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1834579) APP: Not connected → medium blink[0m
+[0;32mI (1835779) APP: Not connected → medium blink[0m
+[0;33mW (1836159) WIFI_STA: Disconnected → reconnect[0m
+[1;31mE (1836869) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (1836869) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (1836869) mqtt_client: Error transport connect[0m
+[0;32mI (1836869) MQTT: MQTT_EVENT_ERROR[0m
+[0;32mI (1836879) MQTT: Last error code reported from esp-tls: 0x8001[0m
+[0;32mI (1836879) MQTT: Last tls stack error number: 0x0[0m
+[0;32mI (1836889) MQTT: Last captured errno : 113 (Software caused connection abort)[0m
+[0;32mI (1836889) MQTT: MQTT_EVENT_DISCONNECTED[0m
+[0;32mI (1836979) APP: Not connected → medium blink[0m
+[0;32mI (1838179) APP: Not connected → medium blink[0m
+[0;33mW (1838579) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1839379) APP: Not connected → medium blink[0m
+[0;32mI (1840579) APP: Not connected → medium blink[0m
+[0;33mW (1840999) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1841779) APP: Not connected → medium blink[0m
+[0;32mI (1842979) APP: Not connected → medium blink[0m
+[0;33mW (1843409) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1844179) APP: Not connected → medium blink[0m
+[0;32mI (1845379) APP: Not connected → medium blink[0m
+[0;33mW (1845829) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1846579) APP: Not connected → medium blink[0m
+[0;32mI (1846899) MQTT: Other event id:7[0m
+[0;32mI (1847779) APP: Not connected → medium blink[0m
+[0;33mW (1848249) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1848979) APP: Not connected → medium blink[0m
+[0;32mI (1850179) APP: Not connected → medium blink[0m
+[0;33mW (1850659) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1851379) APP: Not connected → medium blink[0m
+[0;32mI (1852579) APP: Not connected → medium blink[0m
+[0;33mW (1853079) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1853779) APP: Not connected → medium blink[0m
+[1;31mE (1853899) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (1853899) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (1853899) mqtt_client: Error transport connect[0m
+[0;32mI (1853899) MQTT: MQTT_EVENT_ERROR[0m
+[0;32mI (1853909) MQTT: Last error code reported from esp-tls: 0x8001[0m
+[0;32mI (1853909) MQTT: Last tls stack error number: 0x0[0m
+[0;32mI (1853919) MQTT: Last captured errno : 113 (Software caused connection abort)[0m
+[0;32mI (1853919) MQTT: MQTT_EVENT_DISCONNECTED[0m
+[0;32mI (1854979) APP: Not connected → medium blink[0m
+[0;33mW (1855499) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1856179) APP: Not connected → medium blink[0m
+[0;32mI (1857379) APP: Not connected → medium blink[0m
+[0;33mW (1857909) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1858579) APP: Not connected → medium blink[0m
+[0;32mI (1859779) APP: Not connected → medium blink[0m
+[0;33mW (1860329) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1860979) APP: Not connected → medium blink[0m
+[0;32mI (1862179) APP: Not connected → medium blink[0m
+[0;33mW (1862749) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1863379) APP: Not connected → medium blink[0m
+[0;32mI (1863929) MQTT: Other event id:7[0m
+[0;32mI (1864579) APP: Not connected → medium blink[0m
+[0;33mW (1865159) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1865779) APP: Not connected → medium blink[0m
+[0;32mI (1866979) APP: Not connected → medium blink[0m
+[0;33mW (1867579) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1868179) APP: Not connected → medium blink[0m
+[0;32mI (1869379) APP: Not connected → medium blink[0m
+[0;33mW (1869999) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1870579) APP: Not connected → medium blink[0m
+[1;31mE (1870929) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (1870929) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (1870929) mqtt_client: Error transport connect[0m
+[0;32mI (1870929) MQTT: MQTT_EVENT_ERROR[0m
+[0;32mI (1870939) MQTT: Last error code reported from esp-tls: 0x8001[0m
+[0;32mI (1870939) MQTT: Last tls stack error number: 0x0[0m
+[0;32mI (1870949) MQTT: Last captured errno : 113 (Software caused connection abort)[0m
+[0;32mI (1870949) MQTT: MQTT_EVENT_DISCONNECTED[0m
+[0;32mI (1871779) APP: Not connected → medium blink[0m
+[0;33mW (1872409) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1872979) APP: Not connected → medium blink[0m
+[0;32mI (1874179) APP: Not connected → medium blink[0m
+[0;33mW (1874829) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1875379) APP: Not connected → medium blink[0m
+[0;32mI (1876579) APP: Not connected → medium blink[0m
+[0;33mW (1877249) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1877779) APP: Not connected → medium blink[0m
+[0;32mI (1878979) APP: Not connected → medium blink[0m
+[0;33mW (1879659) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1880179) APP: Not connected → medium blink[0m
+[0;32mI (1880959) MQTT: Other event id:7[0m
+[0;32mI (1881379) APP: Not connected → medium blink[0m
+[0;33mW (1882079) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1882579) APP: Not connected → medium blink[0m
+[0;32mI (1883779) APP: Not connected → medium blink[0m
+[0;33mW (1884499) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1884979) APP: Not connected → medium blink[0m
+[0;32mI (1886179) APP: Not connected → medium blink[0m
+[0;33mW (1886909) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1887379) APP: Not connected → medium blink[0m
+[1;31mE (1887959) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (1887959) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (1887959) mqtt_client: Error transport connect[0m
+[0;32mI (1887959) MQTT: MQTT_EVENT_ERROR[0m
+[0;32mI (1887969) MQTT: Last error code reported from esp-tls: 0x8001[0m
+[0;32mI (1887969) MQTT: Last tls stack error number: 0x0[0m
+[0;32mI (1887979) MQTT: Last captured errno : 113 (Software caused connection abort)[0m
+[0;32mI (1887979) MQTT: MQTT_EVENT_DISCONNECTED[0m
+[0;32mI (1888579) APP: Not connected → medium blink[0m
+[0;33mW (1889329) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1889779) APP: Not connected → medium blink[0m
+[0;32mI (1890979) APP: Not connected → medium blink[0m
+[0;33mW (1891749) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1892179) APP: Not connected → medium blink[0m
+[0;32mI (1893379) APP: Not connected → medium blink[0m
+[0;33mW (1894159) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1894579) APP: Not connected → medium blink[0m
+[0;32mI (1895779) APP: Not connected → medium blink[0m
+[0;33mW (1896579) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1896979) APP: Not connected → medium blink[0m
+[0;32mI (1897989) MQTT: Other event id:7[0m
+[0;32mI (1898179) APP: Not connected → medium blink[0m
+[0;33mW (1898989) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1899379) APP: Not connected → medium blink[0m
+[0;32mI (1900579) APP: Not connected → medium blink[0m
+[0;33mW (1901409) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1901779) APP: Not connected → medium blink[0m
+[0;32mI (1902979) APP: Not connected → medium blink[0m
+[0;33mW (1903829) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1904179) APP: Not connected → medium blink[0m
+[1;31mE (1904989) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (1904989) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (1904989) mqtt_client: Error transport connect[0m
+[0;32mI (1904989) MQTT: MQTT_EVENT_ERROR[0m
+[0;32mI (1904999) MQTT: Last error code reported from esp-tls: 0x8001[0m
+[0;32mI (1904999) MQTT: Last tls stack error number: 0x0[0m
+[0;32mI (1905009) MQTT: Last captured errno : 113 (Software caused connection abort)[0m
+[0;32mI (1905009) MQTT: MQTT_EVENT_DISCONNECTED[0m
+[0;32mI (1905379) APP: Not connected → medium blink[0m
+[0;33mW (1906249) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1906579) APP: Not connected → medium blink[0m
+[0;32mI (1907779) APP: Not connected → medium blink[0m
+[0;33mW (1908659) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1908979) APP: Not connected → medium blink[0m
+[0;32mI (1910179) APP: Not connected → medium blink[0m
+[0;33mW (1911079) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1911379) APP: Not connected → medium blink[0m
+[0;32mI (1912579) APP: Not connected → medium blink[0m
+[0;33mW (1913489) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1913779) APP: Not connected → medium blink[0m
+[0;32mI (1914979) APP: Not connected → medium blink[0m
+[0;32mI (1915019) MQTT: Other event id:7[0m
+[0;33mW (1915909) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1916179) APP: Not connected → medium blink[0m
+[0;32mI (1917379) APP: Not connected → medium blink[0m
+[0;33mW (1918329) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1918579) APP: Not connected → medium blink[0m
+[0;32mI (1919779) APP: Not connected → medium blink[0m
+[0;33mW (1920739) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1920979) APP: Not connected → medium blink[0m
+[1;31mE (1922019) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (1922019) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (1922019) mqtt_client: Error transport connect[0m
+[0;32mI (1922019) MQTT: MQTT_EVENT_ERROR[0m
+[0;32mI (1922029) MQTT: Last error code reported from esp-tls: 0x8001[0m
+[0;32mI (1922029) MQTT: Last tls stack error number: 0x0[0m
+[0;32mI (1922039) MQTT: Last captured errno : 113 (Software caused connection abort)[0m
+[0;32mI (1922039) MQTT: MQTT_EVENT_DISCONNECTED[0m
+[0;32mI (1922179) APP: Not connected → medium blink[0m
+[0;33mW (1923159) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1923379) APP: Not connected → medium blink[0m
+[0;32mI (1924579) APP: Not connected → medium blink[0m
+[0;33mW (1925579) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1925779) APP: Not connected → medium blink[0m
+[0;32mI (1926979) APP: Not connected → medium blink[0m
+[0;33mW (1927989) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1928179) APP: Not connected → medium blink[0m
+[0;32mI (1929379) APP: Not connected → medium blink[0m
+[0;33mW (1930409) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1930579) APP: Not connected → medium blink[0m
+[0;32mI (1931779) APP: Not connected → medium blink[0m
+[0;32mI (1932049) MQTT: Other event id:7[0m
+[0;33mW (1932829) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1932979) APP: Not connected → medium blink[0m
+[0;32mI (1934179) APP: Not connected → medium blink[0m
+[0;33mW (1935239) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1935379) APP: Not connected → medium blink[0m
+[0;32mI (1936579) APP: Not connected → medium blink[0m
+[0;33mW (1937659) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1937779) APP: Not connected → medium blink[0m
+[0;32mI (1938979) APP: Not connected → medium blink[0m
+[1;31mE (1939049) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (1939049) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (1939049) mqtt_client: Error transport connect[0m
+[0;32mI (1939049) MQTT: MQTT_EVENT_ERROR[0m
+[0;32mI (1939059) MQTT: Last error code reported from esp-tls: 0x8001[0m
+[0;32mI (1939059) MQTT: Last tls stack error number: 0x0[0m
+[0;32mI (1939069) MQTT: Last captured errno : 113 (Software caused connection abort)[0m
+[0;32mI (1939069) MQTT: MQTT_EVENT_DISCONNECTED[0m
+[0;33mW (1940079) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1940179) APP: Not connected → medium blink[0m
+[0;32mI (1941379) APP: Not connected → medium blink[0m
+[0;33mW (1942489) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1942579) APP: Not connected → medium blink[0m
+[0;32mI (1943779) APP: Not connected → medium blink[0m
+[0;33mW (1944909) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1944979) APP: Not connected → medium blink[0m
+[0;32mI (1946179) APP: Not connected → medium blink[0m
+[0;33mW (1947329) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1947379) APP: Not connected → medium blink[0m
+[0;32mI (1948579) APP: Not connected → medium blink[0m
+[0;32mI (1949079) MQTT: Other event id:7[0m
+[0;33mW (1949739) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1949779) APP: Not connected → medium blink[0m
+[0;32mI (1950979) APP: Not connected → medium blink[0m
+[0;33mW (1952159) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1952179) APP: Not connected → medium blink[0m
+[0;32mI (1953379) APP: Not connected → medium blink[0m
+[0;32mI (1954579) APP: Not connected → medium blink[0m
+[0;33mW (1954579) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1955779) APP: Not connected → medium blink[0m
+[1;31mE (1956079) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (1956079) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (1956079) mqtt_client: Error transport connect[0m
+[0;32mI (1956079) MQTT: MQTT_EVENT_ERROR[0m
+[0;32mI (1956089) MQTT: Last error code reported from esp-tls: 0x8001[0m
+[0;32mI (1956089) MQTT: Last tls stack error number: 0x0[0m
+[0;32mI (1956099) MQTT: Last captured errno : 113 (Software caused connection abort)[0m
+[0;32mI (1956099) MQTT: MQTT_EVENT_DISCONNECTED[0m
+[0;32mI (1956979) APP: Not connected → medium blink[0m
+[0;33mW (1956989) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1958179) APP: Not connected → medium blink[0m
+[0;32mI (1959379) APP: Not connected → medium blink[0m
+[0;33mW (1959409) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1960579) APP: Not connected → medium blink[0m
+[0;32mI (1961779) APP: Not connected → medium blink[0m
+[0;33mW (1961829) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1962979) APP: Not connected → medium blink[0m
+[0;32mI (1964179) APP: Not connected → medium blink[0m
+[0;33mW (1964239) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1965379) APP: Not connected → medium blink[0m
+[0;32mI (1966109) MQTT: Other event id:7[0m
+[0;32mI (1966579) APP: Not connected → medium blink[0m
+[0;33mW (1966659) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1967779) APP: Not connected → medium blink[0m
+[0;32mI (1968979) APP: Not connected → medium blink[0m
+[0;33mW (1969069) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1970179) APP: Not connected → medium blink[0m
+[0;32mI (1971379) APP: Not connected → medium blink[0m
+[0;33mW (1971489) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1972579) APP: Not connected → medium blink[0m
+[1;31mE (1973109) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (1973109) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (1973109) mqtt_client: Error transport connect[0m
+[0;32mI (1973109) MQTT: MQTT_EVENT_ERROR[0m
+[0;32mI (1973119) MQTT: Last error code reported from esp-tls: 0x8001[0m
+[0;32mI (1973119) MQTT: Last tls stack error number: 0x0[0m
+[0;32mI (1973129) MQTT: Last captured errno : 113 (Software caused connection abort)[0m
+[0;32mI (1973129) MQTT: MQTT_EVENT_DISCONNECTED[0m
+[0;32mI (1973779) APP: Not connected → medium blink[0m
+[0;33mW (1973909) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1974979) APP: Not connected → medium blink[0m
+[0;32mI (1976179) APP: Not connected → medium blink[0m
+[0;33mW (1976319) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1977379) APP: Not connected → medium blink[0m
+[0;32mI (1978579) APP: Not connected → medium blink[0m
+[0;33mW (1978739) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1979779) APP: Not connected → medium blink[0m
+[0;32mI (1980979) APP: Not connected → medium blink[0m
+[0;33mW (1981159) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1982179) APP: Not connected → medium blink[0m
+[0;32mI (1983139) MQTT: Other event id:7[0m
+[0;32mI (1983379) APP: Not connected → medium blink[0m
+[0;33mW (1983569) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1984579) APP: Not connected → medium blink[0m
+[0;32mI (1985779) APP: Not connected → medium blink[0m
+[0;33mW (1985989) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1986979) APP: Not connected → medium blink[0m
+[0;32mI (1988179) APP: Not connected → medium blink[0m
+[0;33mW (1988409) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1989379) APP: Not connected → medium blink[0m
+[1;31mE (1990139) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (1990139) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (1990139) mqtt_client: Error transport connect[0m
+[0;32mI (1990139) MQTT: MQTT_EVENT_ERROR[0m
+[0;32mI (1990149) MQTT: Last error code reported from esp-tls: 0x8001[0m
+[0;32mI (1990149) MQTT: Last tls stack error number: 0x0[0m
+[0;32mI (1990159) MQTT: Last captured errno : 113 (Software caused connection abort)[0m
+[0;32mI (1990159) MQTT: MQTT_EVENT_DISCONNECTED[0m
+[0;32mI (1990579) APP: Not connected → medium blink[0m
+[0;33mW (1990819) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1991779) APP: Not connected → medium blink[0m
+[0;32mI (1992979) APP: Not connected → medium blink[0m
+[0;33mW (1993239) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1994179) APP: Not connected → medium blink[0m
+[0;32mI (1995379) APP: Not connected → medium blink[0m
+[0;33mW (1995659) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1996579) APP: Not connected → medium blink[0m
+[0;32mI (1997779) APP: Not connected → medium blink[0m
+[0;33mW (1998069) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (1998979) APP: Not connected → medium blink[0m
+[0;32mI (2000169) MQTT: Other event id:7[0m
+[0;32mI (2000179) APP: Not connected → medium blink[0m
+[0;33mW (2000489) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2001379) APP: Not connected → medium blink[0m
+[0;32mI (2002579) APP: Not connected → medium blink[0m
+[0;33mW (2002909) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2003779) APP: Not connected → medium blink[0m
+[0;32mI (2004979) APP: Not connected → medium blink[0m
+[0;33mW (2005319) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2006179) APP: Not connected → medium blink[0m
+[1;31mE (2007169) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (2007169) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (2007169) mqtt_client: Error transport connect[0m
+[0;32mI (2007169) MQTT: MQTT_EVENT_ERROR[0m
+[0;32mI (2007179) MQTT: Last error code reported from esp-tls: 0x8001[0m
+[0;32mI (2007179) MQTT: Last tls stack error number: 0x0[0m
+[0;32mI (2007189) MQTT: Last captured errno : 113 (Software caused connection abort)[0m
+[0;32mI (2007189) MQTT: MQTT_EVENT_DISCONNECTED[0m
+[0;32mI (2007379) APP: Not connected → medium blink[0m
+[0;33mW (2007739) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2008579) APP: Not connected → medium blink[0m
+[0;32mI (2009779) APP: Not connected → medium blink[0m
+[0;33mW (2010149) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2010979) APP: Not connected → medium blink[0m
+[0;32mI (2012179) APP: Not connected → medium blink[0m
+[0;33mW (2012569) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2013379) APP: Not connected → medium blink[0m
+[0;32mI (2014579) APP: Not connected → medium blink[0m
+[0;33mW (2014989) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2015779) APP: Not connected → medium blink[0m
+[0;32mI (2016979) APP: Not connected → medium blink[0m
+[0;32mI (2017199) MQTT: Other event id:7[0m
+[0;33mW (2017399) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2018179) APP: Not connected → medium blink[0m
+[0;32mI (2019379) APP: Not connected → medium blink[0m
+[0;33mW (2019819) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2020579) APP: Not connected → medium blink[0m
+[0;32mI (2021779) APP: Not connected → medium blink[0m
+[0;33mW (2022239) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2022979) APP: Not connected → medium blink[0m
+[0;32mI (2024179) APP: Not connected → medium blink[0m
+[1;31mE (2024199) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (2024199) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (2024199) mqtt_client: Error transport connect[0m
+[0;32mI (2024199) MQTT: MQTT_EVENT_ERROR[0m
+[0;32mI (2024209) MQTT: Last error code reported from esp-tls: 0x8001[0m
+[0;32mI (2024209) MQTT: Last tls stack error number: 0x0[0m
+[0;32mI (2024219) MQTT: Last captured errno : 113 (Software caused connection abort)[0m
+[0;32mI (2024219) MQTT: MQTT_EVENT_DISCONNECTED[0m
+[0;33mW (2024649) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2025379) APP: Not connected → medium blink[0m
+[0;32mI (2026579) APP: Not connected → medium blink[0m
+[0;33mW (2027069) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2027779) APP: Not connected → medium blink[0m
+[0;32mI (2028979) APP: Not connected → medium blink[0m
+[0;33mW (2029489) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2030179) APP: Not connected → medium blink[0m
+[0;32mI (2031379) APP: Not connected → medium blink[0m
+[0;33mW (2031899) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2032579) APP: Not connected → medium blink[0m
+[0;32mI (2033779) APP: Not connected → medium blink[0m
+[0;32mI (2034229) MQTT: Other event id:7[0m
+[0;33mW (2034319) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2034979) APP: Not connected → medium blink[0m
+[0;32mI (2036179) APP: Not connected → medium blink[0m
+[0;33mW (2036739) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2037379) APP: Not connected → medium blink[0m
+[0;32mI (2038579) APP: Not connected → medium blink[0m
+[0;33mW (2039149) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2039779) APP: Not connected → medium blink[0m
+[0;32mI (2040979) APP: Not connected → medium blink[0m
+[1;31mE (2041229) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (2041229) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (2041229) mqtt_client: Error transport connect[0m
+[0;32mI (2041229) MQTT: MQTT_EVENT_ERROR[0m
+[0;32mI (2041239) MQTT: Last error code reported from esp-tls: 0x8001[0m
+[0;32mI (2041239) MQTT: Last tls stack error number: 0x0[0m
+[0;32mI (2041249) MQTT: Last captured errno : 113 (Software caused connection abort)[0m
+[0;32mI (2041249) MQTT: MQTT_EVENT_DISCONNECTED[0m
+[0;33mW (2041569) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2042179) APP: Not connected → medium blink[0m
+[0;32mI (2043379) APP: Not connected → medium blink[0m
+[0;33mW (2043989) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2044579) APP: Not connected → medium blink[0m
+[0;32mI (2045779) APP: Not connected → medium blink[0m
+[0;33mW (2046399) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2046979) APP: Not connected → medium blink[0m
+[0;32mI (2048179) APP: Not connected → medium blink[0m
+[0;33mW (2048819) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2049379) APP: Not connected → medium blink[0m
+[0;32mI (2050579) APP: Not connected → medium blink[0m
+[0;33mW (2051239) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2051259) MQTT: Other event id:7[0m
+[0;32mI (2051779) APP: Not connected → medium blink[0m
+[0;32mI (2052979) APP: Not connected → medium blink[0m
+[0;33mW (2053649) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2054179) APP: Not connected → medium blink[0m
+[0;32mI (2055379) APP: Not connected → medium blink[0m
+[0;33mW (2056069) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2056579) APP: Not connected → medium blink[0m
+[0;32mI (2057779) APP: Not connected → medium blink[0m
+[1;31mE (2058259) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (2058259) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (2058259) mqtt_client: Error transport connect[0m
+[0;32mI (2058259) MQTT: MQTT_EVENT_ERROR[0m
+[0;32mI (2058269) MQTT: Last error code reported from esp-tls: 0x8001[0m
+[0;32mI (2058269) MQTT: Last tls stack error number: 0x0[0m
+[0;32mI (2058279) MQTT: Last captured errno : 113 (Software caused connection abort)[0m
+[0;32mI (2058279) MQTT: MQTT_EVENT_DISCONNECTED[0m
+[0;33mW (2058489) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2058979) APP: Not connected → medium blink[0m
+[0;32mI (2060179) APP: Not connected → medium blink[0m
+[0;33mW (2060899) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2061379) APP: Not connected → medium blink[0m
+[0;32mI (2062579) APP: Not connected → medium blink[0m
+[0;33mW (2063319) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2063779) APP: Not connected → medium blink[0m
+[0;32mI (2064979) APP: Not connected → medium blink[0m
+[0;33mW (2065739) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2066179) APP: Not connected → medium blink[0m
+[0;32mI (2067379) APP: Not connected → medium blink[0m
+[0;33mW (2068149) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (2068289) MQTT: Other event id:7[0m
+[0;32mI (2068579) APP: Not connected → medium blink[0m

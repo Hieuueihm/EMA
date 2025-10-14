@@ -1,0 +1,221 @@
+Command: C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe C:\Espressif\frameworks\esp-idf-v5.5.1\tools/idf_monitor.py -p COM20 -b 115200 --toolchain-prefix xtensa-esp32-elf- --target esp32 --revision 0 D:\my_first_app\build\my_first_app.elf D:\my_first_app\build\bootloader\bootloader.elf --force-color -m 'C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe' 'C:\Espressif\frameworks\esp-idf-v5.5.1\tools\idf.py' '-p' 'COM20'
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 188777542, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6380
+ho 0 tail 12 room 4
+load:0x40078000,len:15916
+load:0x40080400,len:3860
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Oct  9 2025 09:33:59[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (31) boot: chip revision: v1.1[0m
+[0;32mI (34) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (38) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (42) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (45) boot: Enabling RNG early entropy source...[0m
+[0;32mI (50) boot: Partition Table:[0m
+[0;32mI (52) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (59) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (72) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (78) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=1e48ch (124044) map[0m
+[0;32mI (131) esp_image: segment 1: paddr=0002e4b4 vaddr=3ffb0000 size=01b64h (  7012) load[0m
+[0;32mI (134) esp_image: segment 2: paddr=00030020 vaddr=400d0020 size=a6168h (680296) map[0m
+[0;32mI (367) esp_image: segment 3: paddr=000d6190 vaddr=3ffb1b64 size=02398h (  9112) load[0m
+[0;32mI (371) esp_image: segment 4: paddr=000d8530 vaddr=40080000 size=17f48h ( 98120) load[0m
+[0;32mI (410) esp_image: segment 5: paddr=000f0480 vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (421) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (422) boot: Disabling RNG early entropy source...[0m
+[0;32mI (432) cpu_start: Multicore app[0m
+[0;32mI (441) cpu_start: Pro cpu start user code[0m
+[0;32mI (441) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (441) app_init: Application information:[0m
+[0;32mI (441) app_init: Project name:     my_first_app[0m
+[0;32mI (445) app_init: App version:      1[0m
+[0;32mI (448) app_init: Compile time:     Oct 14 2025 10:13:22[0m
+[0;32mI (454) app_init: ELF file SHA256:  aaab67197...[0m
+[0;32mI (458) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (462) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (465) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (469) efuse_init: Chip rev:         v1.1[0m
+[0;32mI (474) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (480) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (485) heap_init: At 3FFB85C8 len 00027A38 (158 KiB): DRAM[0m
+[0;32mI (490) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (495) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (501) heap_init: At 40097F48 len 000080B8 (32 KiB): IRAM[0m
+[0;32mI (508) spi_flash: detected chip: gd[0m
+[0;32mI (509) spi_flash: flash io: dio[0m
+[0;33mW (512) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (526) main_task: Started on CPU0[0m
+[0;32mI (536) main_task: Calling app_main()[0m
+[0;32mI (566) wifi:wifi driver task: 3ffc05fc, prio:23, stack:6656, core=0[0m
+[0;32mI (576) wifi:wifi firmware version: 14da9b7[0m
+[0;32mI (576) wifi:wifi certification version: v7.0[0m
+[0;32mI (576) wifi:config NVS flash: enabled[0m
+[0;32mI (576) wifi:config nano formatting: disabled[0m
+[0;32mI (586) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (586) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (586) wifi:Init management short buffer num: 32[0m
+[0;32mI (596) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (596) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (606) wifi:Init static rx buffer num: 10[0m
+[0;32mI (606) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (616) wifi_init: rx ba win: 6[0m
+[0;32mI (616) wifi_init: accept mbox: 6[0m
+[0;32mI (616) wifi_init: tcpip mbox: 32[0m
+[0;32mI (616) wifi_init: udp mbox: 6[0m
+[0;32mI (626) wifi_init: tcp mbox: 6[0m
+[0;32mI (626) wifi_init: tcp tx win: 5760[0m
+[0;32mI (626) wifi_init: tcp rx win: 5760[0m
+[0;32mI (636) wifi_init: tcp mss: 1440[0m
+[0;32mI (636) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (636) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (726) phy_init: phy_version 4861,b71b5ad,Aug  5 2025,11:16:06[0m
+[0;32mI (796) phy_init: Saving new calibration data due to checksum failure or outdated calibration data, mode(0)[0m
+[0;32mI (826) wifi:mode : sta (e8:6b:ea:09:d5:24)[0m
+[0;32mI (826) wifi:enable tsf[0m
+[0;32mI (826) TB_GW_MQTT: Connecting Wi-Fi...[0m
+[1;31mE (836) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (836) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (836) mqtt_client: Error transport connect[0m
+[0;33mW (846) TB_GW_MQTT: MQTT disconnected[0m
+[0;32mI (846) main_task: Returned from app_main()[0m
+[1;31mE (15846) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (15846) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (15846) mqtt_client: Error transport connect[0m
+[0;33mW (15846) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (25856) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (25856) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (25856) mqtt_client: Error transport connect[0m
+[0;33mW (25856) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (35866) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (35866) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (35866) mqtt_client: Error transport connect[0m
+[0;33mW (35866) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (45876) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (45876) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (45876) mqtt_client: Error transport connect[0m
+[0;33mW (45876) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (55886) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (55886) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (55886) mqtt_client: Error transport connect[0m
+[0;33mW (55886) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (65896) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (65896) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (65896) mqtt_client: Error transport connect[0m
+[0;33mW (65896) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (75906) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (75906) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (75906) mqtt_client: Error transport connect[0m
+[0;33mW (75906) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (85916) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (85916) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (85916) mqtt_client: Error transport connect[0m
+[0;33mW (85916) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (95926) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (95926) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (95926) mqtt_client: Error transport connect[0m
+[0;33mW (95926) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (105936) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (105936) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (105936) mqtt_client: Error transport connect[0m
+[0;33mW (105936) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (115946) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (115946) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (115946) mqtt_client: Error transport connect[0m
+[0;33mW (115946) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (125956) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (125956) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (125956) mqtt_client: Error transport connect[0m
+[0;33mW (125956) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (135966) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (135966) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (135966) mqtt_client: Error transport connect[0m
+[0;33mW (135966) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (145976) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (145976) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (145976) mqtt_client: Error transport connect[0m
+[0;33mW (145976) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (155986) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (155986) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (155986) mqtt_client: Error transport connect[0m
+[0;33mW (155986) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (165996) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (165996) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (165996) mqtt_client: Error transport connect[0m
+[0;33mW (165996) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (176006) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (176006) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (176006) mqtt_client: Error transport connect[0m
+[0;33mW (176006) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (186016) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (186016) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (186016) mqtt_client: Error transport connect[0m
+[0;33mW (186016) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (196026) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (196026) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (196026) mqtt_client: Error transport connect[0m
+[0;33mW (196026) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (206036) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (206036) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (206036) mqtt_client: Error transport connect[0m
+[0;33mW (206036) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (216046) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (216046) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (216046) mqtt_client: Error transport connect[0m
+[0;33mW (216046) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (226056) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (226056) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (226056) mqtt_client: Error transport connect[0m
+[0;33mW (226056) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (236066) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (236066) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (236066) mqtt_client: Error transport connect[0m
+[0;33mW (236066) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (246076) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (246076) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (246076) mqtt_client: Error transport connect[0m
+[0;33mW (246076) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (256086) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (256086) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (256086) mqtt_client: Error transport connect[0m
+[0;33mW (256086) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (266096) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (266096) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (266096) mqtt_client: Error transport connect[0m
+[0;33mW (266096) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (276106) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (276106) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (276106) mqtt_client: Error transport connect[0m
+[0;33mW (276106) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (286116) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (286116) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (286116) mqtt_client: Error transport connect[0m
+[0;33mW (286116) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (296126) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (296126) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (296126) mqtt_client: Error transport connect[0m
+[0;33mW (296126) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (306136) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (306136) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (306136) mqtt_client: Error transport connect[0m
+[0;33mW (306136) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (316146) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (316146) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (316146) mqtt_client: Error transport connect[0m
+[0;33mW (316146) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (326156) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (326156) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (326156) mqtt_client: Error transport connect[0m
+[0;33mW (326156) TB_GW_MQTT: MQTT disconnected[0m
+[1;31mE (336166) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (336166) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (336166) mqtt_client: Error transport connect[0m
+[0;33mW (336166) TB_GW_MQTT: MQTT disconnected[0m

@@ -1,0 +1,762 @@
+Command: C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe C:\Espressif\frameworks\esp-idf-v5.5.1\tools/idf_monitor.py -p COM20 -b 115200 --toolchain-prefix xtensa-esp32-elf- --target esp32 --revision 0 D:\my_first_app\build\my_first_app.elf D:\my_first_app\build\bootloader\bootloader.elf --force-color -m 'C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe' 'C:\Espressif\frameworks\esp-idf-v5.5.1\tools\idf.py' '-p' 'COM20'
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 188777542, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6380
+ho 0 tail 12 room 4
+load:0x40078000,len:15916
+load:0x40080400,len:3860
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Oct  9 2025 09:33:59[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (31) boot: chip revision: v1.1[0m
+[0;32mI (34) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (38) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (41) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (45) boot: Enabling RNG early entropy source...[0m
+[0;32mI (49) boot: Partition Table:[0m
+[0;32mI (52) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (71) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (78) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=1c430h (115760) map[0m
+[0;32mI (128) esp_image: segment 1: paddr=0002c458 vaddr=3ffb0000 size=03bc0h ( 15296) load[0m
+[0;32mI (134) esp_image: segment 2: paddr=00030020 vaddr=400d0020 size=8f8c8h (587976) map[0m
+[0;32mI (335) esp_image: segment 3: paddr=000bf8f0 vaddr=3ffb3bc0 size=0035ch (   860) load[0m
+[0;32mI (336) esp_image: segment 4: paddr=000bfc54 vaddr=40080000 size=17fe0h ( 98272) load[0m
+[0;32mI (377) esp_image: segment 5: paddr=000d7c3c vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (389) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (389) boot: Disabling RNG early entropy source...[0m
+[0;32mI (400) cpu_start: Multicore app[0m
+[0;32mI (409) cpu_start: Pro cpu start user code[0m
+[0;32mI (409) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (409) app_init: Application information:[0m
+[0;32mI (409) app_init: Project name:     my_first_app[0m
+[0;32mI (413) app_init: App version:      1[0m
+[0;32mI (416) app_init: Compile time:     Oct 14 2025 14:06:21[0m
+[0;32mI (421) app_init: ELF file SHA256:  df8fd73a4...[0m
+[0;32mI (426) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (430) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (433) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (437) efuse_init: Chip rev:         v1.1[0m
+[0;32mI (442) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (448) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (453) heap_init: At 3FFB8008 len 00027FF8 (159 KiB): DRAM[0m
+[0;32mI (458) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (463) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (469) heap_init: At 40097FE0 len 00008020 (32 KiB): IRAM[0m
+[0;32mI (476) spi_flash: detected chip: gd[0m
+[0;32mI (477) spi_flash: flash io: dio[0m
+[0;33mW (480) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (494) main_task: Started on CPU0[0m
+[0;32mI (504) main_task: Calling app_main()[0m
+[0;32mI (534) APP: Not connected → medium blink[0m
+[0;32mI (544) wifi:wifi driver task: 3ffc09ec, prio:23, stack:6656, core=0[0m
+[0;32mI (564) wifi:wifi firmware version: 14da9b7[0m
+[0;32mI (564) wifi:wifi certification version: v7.0[0m
+[0;32mI (564) wifi:config NVS flash: enabled[0m
+[0;32mI (564) wifi:config nano formatting: disabled[0m
+[0;32mI (564) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (574) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (574) wifi:Init management short buffer num: 32[0m
+[0;32mI (574) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (584) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (584) wifi:Init static rx buffer num: 10[0m
+[0;32mI (594) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (594) wifi_init: rx ba win: 6[0m
+[0;32mI (594) wifi_init: accept mbox: 6[0m
+[0;32mI (604) wifi_init: tcpip mbox: 32[0m
+[0;32mI (604) wifi_init: udp mbox: 6[0m
+[0;32mI (604) wifi_init: tcp mbox: 6[0m
+[0;32mI (604) wifi_init: tcp tx win: 5760[0m
+[0;32mI (614) wifi_init: tcp rx win: 5760[0m
+[0;32mI (614) wifi_init: tcp mss: 1440[0m
+[0;32mI (614) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (624) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (624) WIFI_STA: Target SSID: 'Hieu12'[0m
+[0;32mI (624) WIFI_STA: Connecting to Wi-Fi SSID='Hieu12' ...[0m
+[0;32mI (634) WIFI_STA: Using password '12345678'[0m
+[0;32mI (634) phy_init: phy_version 4861,b71b5ad,Aug  5 2025,11:16:06[0m
+[0;32mI (714) wifi:mode : sta (e8:6b:ea:09:d5:24)[0m
+[0;32mI (714) wifi:enable tsf[0m
+[0;32mI (724) WIFI_STA: Wi-Fi started[0m
+[0;32mI (1734) APP: Not connected → medium blink[0m
+[0;32mI (2934) APP: Not connected → medium blink[0m
+[0;33mW (3134) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (4134) APP: Not connected → medium blink[0m
+[0;32mI (5334) APP: Not connected → medium blink[0m
+[0;33mW (5554) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (6534) APP: Not connected → medium blink[0m
+[0;32mI (7734) APP: Not connected → medium blink[0m
+[0;33mW (7964) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (8934) APP: Not connected → medium blink[0m
+[0;32mI (10134) APP: Not connected → medium blink[0m
+[0;33mW (10374) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (11334) APP: Not connected → medium blink[0m
+[0;32mI (12534) APP: Not connected → medium blink[0m
+[0;33mW (12794) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (13734) APP: Not connected → medium blink[0m
+[0;32mI (14934) APP: Not connected → medium blink[0m
+[0;33mW (15204) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (16134) APP: Not connected → medium blink[0m
+[0;32mI (17334) APP: Not connected → medium blink[0m
+[0;33mW (17624) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (18534) APP: Not connected → medium blink[0m
+[0;32mI (19734) APP: Not connected → medium blink[0m
+[0;33mW (20034) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (20934) APP: Not connected → medium blink[0m
+[0;32mI (22134) APP: Not connected → medium blink[0m
+[0;33mW (22444) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (23334) APP: Not connected → medium blink[0m
+[0;32mI (24534) APP: Not connected → medium blink[0m
+[0;33mW (24864) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (25734) APP: Not connected → medium blink[0m
+[0;32mI (26934) APP: Not connected → medium blink[0m
+[0;33mW (27274) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (28134) APP: Not connected → medium blink[0m
+[0;32mI (29334) APP: Not connected → medium blink[0m
+[0;33mW (29694) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (30534) APP: Not connected → medium blink[0m
+[0;32mI (31734) APP: Not connected → medium blink[0m
+[0;33mW (32104) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (32934) APP: Not connected → medium blink[0m
+[0;32mI (34134) APP: Not connected → medium blink[0m
+[0;33mW (34514) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (35334) APP: Not connected → medium blink[0m
+[0;32mI (36534) APP: Not connected → medium blink[0m
+[0;33mW (36934) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (37734) APP: Not connected → medium blink[0m
+[0;32mI (38934) APP: Not connected → medium blink[0m
+[0;33mW (39344) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (40134) APP: Not connected → medium blink[0m
+[0;32mI (41334) APP: Not connected → medium blink[0m
+[0;33mW (41764) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (42534) APP: Not connected → medium blink[0m
+[0;32mI (43734) APP: Not connected → medium blink[0m
+[0;33mW (44174) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (44934) APP: Not connected → medium blink[0m
+[0;32mI (46134) APP: Not connected → medium blink[0m
+[0;33mW (46584) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (47334) APP: Not connected → medium blink[0m
+[0;32mI (48534) APP: Not connected → medium blink[0m
+[0;33mW (49004) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (49734) APP: Not connected → medium blink[0m
+[0;32mI (50934) APP: Not connected → medium blink[0m
+[0;33mW (51414) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (52134) APP: Not connected → medium blink[0m
+[0;32mI (53334) APP: Not connected → medium blink[0m
+[0;33mW (53834) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (54534) APP: Not connected → medium blink[0m
+[0;32mI (55734) APP: Not connected → medium blink[0m
+[0;33mW (56244) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (56934) APP: Not connected → medium blink[0m
+[0;32mI (58134) APP: Not connected → medium blink[0m
+[0;33mW (58654) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (59334) APP: Not connected → medium blink[0m
+[0;32mI (60534) APP: Not connected → medium blink[0m
+[0;33mW (60724) APP: No IP within 60s → start AP portal[0m
+[0;33mW (60724) WIFI_AP: Switching to AP + Portal[0m
+[0;32mI (60724) wifi:mode : softAP (e8:6b:ea:09:d5:25)[0m
+[0;32mI (60724) wifi:Total power save buffer number: 16[0m
+[0;32mI (60734) wifi:Init max length of beacon: 752/752[0m
+[0;32mI (60734) wifi:Init max length of beacon: 752/752[0m
+[0;32mI (60744) esp_netif_lwip: DHCP server started on interface WIFI_AP_DEF with IP: 192.168.4.1[0m
+[0;32mI (60754) wifi:Total power save buffer number: 16[0m
+[0;33mW (60754) WIFI_AP: AP: SSID='GW-Setup-D525' PASS='12345678'[0m
+[0;32mI (60754) esp_netif_lwip: DHCP server started on interface WIFI_AP_DEF with IP: 192.168.4.1[0m
+[0;32mI (60764) WIFI_AP: HTTP server started: http://192.168.4.1/[0m
+[0;32mI (60764) main_task: Returned from app_main()[0m
+[0;32mI (61734) APP: AP mode → slow blink[0m
+[0;32mI (65734) APP: AP mode → slow blink[0m
+[0;32mI (69734) APP: AP mode → slow blink[0m
+[0;32mI (73734) APP: AP mode → slow blink[0m
+[0;32mI (77734) APP: AP mode → slow blink[0m
+[0;32mI (79264) wifi:new:<6,1>, old:<6,1>, ap:<6,1>, sta:<255,255>, prof:6, snd_ch_cfg:0x0[0m
+[0;32mI (79264) wifi:station: a8:64:f1:35:01:4c join, AID=1, bgn, 40U[0m
+[0;32mI (79454) esp_netif_lwip: DHCP server assigned IP to a client, IP is: 192.168.4.2[0m
+[0;32mI (79764) wifi:<ba-add>idx:2 (ifx:1, a8:64:f1:35:01:4c), tid:0, ssn:22, winSize:64[0m
+[0;32mI (81734) APP: AP mode → slow blink[0m
+[0;32mI (85734) APP: AP mode → slow blink[0m
+[0;32mI (89734) APP: AP mode → slow blink[0m
+[0;32mI (93734) APP: AP mode → slow blink[0m
+[0;32mI (95854) WIFI_STA: Saved creds: ssid='Hieu1'[0m
+[0;32mI (96454) wifi:station: a8:64:f1:35:01:4c leave, AID = 1, reason = 2, bss_flags is 756835, bss:0x3ffb93bc[0m
+[0;32mI (96454) wifi:new:<6,0>, old:<6,1>, ap:<6,1>, sta:<255,255>, prof:6, snd_ch_cfg:0x0[0m
+[0;32mI (96454) wifi:<ba-del>idx:2, tid:0[0m
+[0;32mI (96464) wifi:new:<6,1>, old:<6,0>, ap:<6,1>, sta:<255,255>, prof:6, snd_ch_cfg:0x0[0m
+[0;32mI (96534) wifi:flush txq[0m
+[0;32mI (96534) wifi:stop sw txq[0m
+[0;32mI (96534) wifi:lmac stop hw txq[0m
+ets Jun  8 2016 00:22:57
+
+rst:0xc (SW_CPU_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 188777542, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6380
+ho 0 tail 12 room 4
+load:0x40078000,len:15916
+load:0x40080400,len:3860
+entry 0x40080638
+[0;32mI (29) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (29) boot: compile time Oct  9 2025 09:33:59[0m
+[0;32mI (29) boot: Multicore bootloader[0m
+[0;32mI (31) boot: chip revision: v1.1[0m
+[0;32mI (34) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (38) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (41) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (45) boot: Enabling RNG early entropy source...[0m
+[0;32mI (49) boot: Partition Table:[0m
+[0;32mI (52) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (71) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (78) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=1c430h (115760) map[0m
+[0;32mI (128) esp_image: segment 1: paddr=0002c458 vaddr=3ffb0000 size=03bc0h ( 15296) load[0m
+[0;32mI (134) esp_image: segment 2: paddr=00030020 vaddr=400d0020 size=8f8c8h (587976) map[0m
+[0;32mI (335) esp_image: segment 3: paddr=000bf8f0 vaddr=3ffb3bc0 size=0035ch (   860) load[0m
+[0;32mI (336) esp_image: segment 4: paddr=000bfc54 vaddr=40080000 size=17fe0h ( 98272) load[0m
+[0;32mI (377) esp_image: segment 5: paddr=000d7c3c vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (389) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (389) boot: Disabling RNG early entropy source...[0m
+[0;32mI (400) cpu_start: Multicore app[0m
+[0;32mI (408) cpu_start: Pro cpu start user code[0m
+[0;32mI (408) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (408) app_init: Application information:[0m
+[0;32mI (408) app_init: Project name:     my_first_app[0m
+[0;32mI (413) app_init: App version:      1[0m
+[0;32mI (416) app_init: Compile time:     Oct 14 2025 14:06:21[0m
+[0;32mI (421) app_init: ELF file SHA256:  df8fd73a4...[0m
+[0;32mI (425) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (429) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (433) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (437) efuse_init: Chip rev:         v1.1[0m
+[0;32mI (441) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (447) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (452) heap_init: At 3FFB8008 len 00027FF8 (159 KiB): DRAM[0m
+[0;32mI (458) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (463) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (468) heap_init: At 40097FE0 len 00008020 (32 KiB): IRAM[0m
+[0;32mI (475) spi_flash: detected chip: gd[0m
+[0;32mI (477) spi_flash: flash io: dio[0m
+[0;33mW (480) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (493) main_task: Started on CPU0[0m
+[0;32mI (503) main_task: Calling app_main()[0m
+[0;32mI (533) APP: Not connected → medium blink[0m
+[0;32mI (543) wifi:wifi driver task: 3ffc09ec, prio:23, stack:6656, core=0[0m
+[0;32mI (563) wifi:wifi firmware version: 14da9b7[0m
+[0;32mI (563) wifi:wifi certification version: v7.0[0m
+[0;32mI (563) wifi:config NVS flash: enabled[0m
+[0;32mI (563) wifi:config nano formatting: disabled[0m
+[0;32mI (563) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (573) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (573) wifi:Init management short buffer num: 32[0m
+[0;32mI (573) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (583) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (583) wifi:Init static rx buffer num: 10[0m
+[0;32mI (593) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (593) wifi_init: rx ba win: 6[0m
+[0;32mI (593) wifi_init: accept mbox: 6[0m
+[0;32mI (603) wifi_init: tcpip mbox: 32[0m
+[0;32mI (603) wifi_init: udp mbox: 6[0m
+[0;32mI (603) wifi_init: tcp mbox: 6[0m
+[0;32mI (603) wifi_init: tcp tx win: 5760[0m
+[0;32mI (613) wifi_init: tcp rx win: 5760[0m
+[0;32mI (613) wifi_init: tcp mss: 1440[0m
+[0;32mI (613) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (623) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (623) WIFI_STA: Target SSID: 'Hieu1'[0m
+[0;32mI (623) WIFI_STA: Connecting to Wi-Fi SSID='Hieu1' ...[0m
+[0;32mI (633) WIFI_STA: Using password '12345678'[0m
+[0;32mI (663) phy_init: phy_version 4861,b71b5ad,Aug  5 2025,11:16:06[0m
+[0;32mI (743) wifi:mode : sta (e8:6b:ea:09:d5:24)[0m
+[0;32mI (743) wifi:enable tsf[0m
+[0;32mI (743) WIFI_STA: Wi-Fi started[0m
+[0;32mI (1733) APP: Not connected → medium blink[0m
+[0;32mI (2933) APP: Not connected → medium blink[0m
+[0;33mW (3163) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (4133) APP: Not connected → medium blink[0m
+[0;32mI (5333) APP: Not connected → medium blink[0m
+[0;33mW (5573) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (6533) APP: Not connected → medium blink[0m
+[0;32mI (7733) APP: Not connected → medium blink[0m
+[0;33mW (7993) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (8933) APP: Not connected → medium blink[0m
+[0;32mI (10133) APP: Not connected → medium blink[0m
+[0;33mW (10403) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (11333) APP: Not connected → medium blink[0m
+[0;32mI (12533) APP: Not connected → medium blink[0m
+[0;33mW (12813) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (13733) APP: Not connected → medium blink[0m
+[0;32mI (14933) APP: Not connected → medium blink[0m
+[0;33mW (15233) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (15253) wifi:new:<6,0>, old:<1,0>, ap:<255,255>, sta:<6,0>, prof:6, snd_ch_cfg:0x0[0m
+[0;32mI (15253) wifi:state: init -> auth (0xb0)[0m
+[0;32mI (16133) APP: Not connected → medium blink[0m
+[0;32mI (16543) wifi:state: auth -> assoc (0x0)[0m
+[0;32mI (16553) wifi:state: assoc -> run (0x10)[0m
+[0;32mI (17103) wifi:connected with Hieu1, aid = 1, channel 6, BW20, bssid = de:23:95:bf:c9:a8[0m
+[0;32mI (17113) wifi:security: WPA3-SAE, phy: bgn, rssi: -26[0m
+[0;32mI (17123) wifi:pm start, type: 1[0m
+
+[0;32mI (17123) wifi:dp: 1, bi: 102400, li: 3, scale listen interval from 307200 us to 307200 us[0m
+[0;32mI (17123) WIFI_STA: Associated to AP[0m
+[0;32mI (17233) wifi:AP's beacon interval = 102400 us, DTIM period = 1[0m
+[0;32mI (17333) APP: Associated to AP → fast blink[0m
+[0;32mI (17733) APP: Associated to AP → fast blink[0m
+[0;32mI (18133) APP: Associated to AP → fast blink[0m
+[0;32mI (18533) APP: Associated to AP → fast blink[0m
+[0;32mI (18543) esp_netif_handlers: sta ip: 172.20.10.2, mask: 255.255.255.240, gw: 172.20.10.1[0m
+[0;32mI (18543) WIFI_STA: Got IP: 172.20.10.2[0m
+[0;32mI (18543) APP: Wi-Fi OK → start your Gateway/MQTT here[0m
+[0;32mI (18543) main_task: Returned from app_main()[0m
+[0;32mI (18933) APP: Got IP → ON[0m
+[0;32mI (19533) APP: Got IP → ON[0m
+[0;32mI (20133) APP: Got IP → ON[0m
+[0;32mI (20733) APP: Got IP → ON[0m
+[0;32mI (21333) APP: Got IP → ON[0m
+[0;32mI (21933) APP: Got IP → ON[0m
+[0;32mI (22533) APP: Got IP → ON[0m
+[0;32mI (23133) APP: Got IP → ON[0m
+[0;32mI (23733) APP: Got IP → ON[0m
+[0;32mI (24333) APP: Got IP → ON[0m
+[0;32mI (24933) APP: Got IP → ON[0m
+[0;32mI (25533) APP: Got IP → ON[0m
+[0;32mI (26133) APP: Got IP → ON[0m
+[0;32mI (26733) APP: Got IP → ON[0m
+[0;32mI (27333) APP: Got IP → ON[0m
+[0;32mI (27933) APP: Got IP → ON[0m
+[0;32mI (28533) APP: Got IP → ON[0m
+[0;32mI (29133) APP: Got IP → ON[0m
+[0;32mI (29733) APP: Got IP → ON[0m
+[0;32mI (30333) APP: Got IP → ON[0m
+[0;32mI (30933) APP: Got IP → ON[0m
+[0;32mI (31533) APP: Got IP → ON[0m
+[0;32mI (32133) APP: Got IP → ON[0m
+[0;32mI (32733) APP: Got IP → ON[0m
+[0;32mI (33333) APP: Got IP → ON[0m
+[0;32mI (33933) APP: Got IP → ON[0m
+[0;32mI (34533) APP: Got IP → ON[0m
+[0;32mI (35133) APP: Got IP → ON[0m
+[0;32mI (35733) APP: Got IP → ON[0m
+[0;32mI (36333) APP: Got IP → ON[0m
+[0;32mI (36933) APP: Got IP → ON[0m
+[0;32mI (37533) APP: Got IP → ON[0m
+[0;32mI (38133) APP: Got IP → ON[0m
+[0;32mI (38733) APP: Got IP → ON[0m
+[0;32mI (39333) APP: Got IP → ON[0m
+[0;32mI (39933) APP: Got IP → ON[0m
+[0;32mI (40533) APP: Got IP → ON[0m
+[0;32mI (41133) APP: Got IP → ON[0m
+[0;32mI (41733) APP: Got IP → ON[0m
+[0;32mI (42333) APP: Got IP → ON[0m
+[0;32mI (42933) APP: Got IP → ON[0m
+[0;32mI (43533) APP: Got IP → ON[0m
+[0;32mI (44133) APP: Got IP → ON[0m
+[0;32mI (44733) APP: Got IP → ON[0m
+[0;32mI (45333) APP: Got IP → ON[0m
+[0;32mI (45933) APP: Got IP → ON[0m
+[0;32mI (46533) APP: Got IP → ON[0m
+[0;32mI (47133) APP: Got IP → ON[0m
+[0;32mI (47733) APP: Got IP → ON[0m
+[0;32mI (48333) APP: Got IP → ON[0m
+[0;32mI (48933) APP: Got IP → ON[0m
+[0;32mI (49533) APP: Got IP → ON[0m
+[0;32mI (50133) APP: Got IP → ON[0m
+[0;32mI (50733) APP: Got IP → ON[0m
+[0;32mI (51333) APP: Got IP → ON[0m
+[0;32mI (51933) APP: Got IP → ON[0m
+[0;32mI (52533) APP: Got IP → ON[0m
+[0;32mI (53133) APP: Got IP → ON[0m
+[0;32mI (53733) APP: Got IP → ON[0m
+[0;32mI (54333) APP: Got IP → ON[0m
+[0;32mI (54933) APP: Got IP → ON[0m
+[0;32mI (55533) APP: Got IP → ON[0m
+[0;32mI (56133) APP: Got IP → ON[0m
+[0;32mI (56733) APP: Got IP → ON[0m
+[0;32mI (57333) APP: Got IP → ON[0m
+[0;32mI (57933) APP: Got IP → ON[0m
+[0;32mI (58533) APP: Got IP → ON[0m
+[0;32mI (59133) APP: Got IP → ON[0m
+[0;32mI (59733) APP: Got IP → ON[0m
+[0;32mI (60333) APP: Got IP → ON[0m
+[0;32mI (60933) APP: Got IP → ON[0m
+[0;32mI (61533) APP: Got IP → ON[0m
+[0;32mI (62133) APP: Got IP → ON[0m
+[0;32mI (62733) APP: Got IP → ON[0m
+[0;32mI (63333) APP: Got IP → ON[0m
+[0;32mI (63933) APP: Got IP → ON[0m
+[0;32mI (64533) APP: Got IP → ON[0m
+[0;32mI (65133) APP: Got IP → ON[0m
+[0;32mI (65733) APP: Got IP → ON[0m
+[0;32mI (66333) APP: Got IP → ON[0m
+[0;32mI (66933) APP: Got IP → ON[0m
+[0;32mI (67533) APP: Got IP → ON[0m
+[0;32mI (68133) APP: Got IP → ON[0m
+[0;32mI (68733) APP: Got IP → ON[0m
+[0;32mI (69333) APP: Got IP → ON[0m
+[0;32mI (69933) APP: Got IP → ON[0m
+[0;32mI (70533) APP: Got IP → ON[0m
+[0;32mI (71133) APP: Got IP → ON[0m
+[0;32mI (71733) APP: Got IP → ON[0m
+[0;32mI (72333) APP: Got IP → ON[0m
+[0;32mI (72933) APP: Got IP → ON[0m
+[0;32mI (73533) APP: Got IP → ON[0m
+[0;32mI (74133) APP: Got IP → ON[0m
+[0;32mI (74733) APP: Got IP → ON[0m
+[0;32mI (75333) APP: Got IP → ON[0m
+[0;32mI (75933) APP: Got IP → ON[0m
+[0;32mI (76533) APP: Got IP → ON[0m
+[0;32mI (77133) APP: Got IP → ON[0m
+[0;32mI (77733) APP: Got IP → ON[0m
+[0;32mI (78333) APP: Got IP → ON[0m
+[0;32mI (78933) APP: Got IP → ON[0m
+[0;32mI (79533) APP: Got IP → ON[0m
+[0;32mI (80133) APP: Got IP → ON[0m
+[0;32mI (80733) APP: Got IP → ON[0m
+[0;32mI (81333) APP: Got IP → ON[0m
+[0;32mI (81933) APP: Got IP → ON[0m
+[0;32mI (82533) APP: Got IP → ON[0m
+[0;32mI (83133) APP: Got IP → ON[0m
+[0;32mI (83733) APP: Got IP → ON[0m
+[0;32mI (84333) APP: Got IP → ON[0m
+[0;32mI (84933) APP: Got IP → ON[0m
+[0;32mI (85533) APP: Got IP → ON[0m
+[0;32mI (86133) APP: Got IP → ON[0m
+[0;32mI (86733) APP: Got IP → ON[0m
+[0;32mI (87333) APP: Got IP → ON[0m
+[0;32mI (87933) APP: Got IP → ON[0m
+[0;32mI (88533) APP: Got IP → ON[0m
+[0;32mI (89133) APP: Got IP → ON[0m
+[0;32mI (89583) wifi:bcn_timeout,ap_probe_send_start[0m
+[0;32mI (89733) APP: Got IP → ON[0m
+[0;32mI (90333) APP: Got IP → ON[0m
+[0;32mI (90933) APP: Got IP → ON[0m
+[0;32mI (91533) APP: Got IP → ON[0m
+[0;32mI (92083) wifi:ap_probe_send over, reset wifi status to disassoc[0m
+[0;32mI (92083) wifi:state: run -> init (0xc800)[0m
+[0;32mI (92103) wifi:pm stop, total sleep time: 59294207 us / 74978395 us[0m
+
+[0;32mI (92103) wifi:new:<6,0>, old:<6,0>, ap:<255,255>, sta:<6,0>, prof:6, snd_ch_cfg:0x0[0m
+[0;33mW (92103) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (92133) APP: Not connected → medium blink[0m
+[0;32mI (93333) APP: Not connected → medium blink[0m
+[0;33mW (94523) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (94533) APP: Not connected → medium blink[0m
+[0;32mI (95733) APP: Not connected → medium blink[0m
+[0;32mI (96933) APP: Not connected → medium blink[0m
+[0;33mW (96933) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (98133) APP: Not connected → medium blink[0m
+[0;32mI (99333) APP: Not connected → medium blink[0m
+[0;33mW (99353) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (100533) APP: Not connected → medium blink[0m
+[0;32mI (101733) APP: Not connected → medium blink[0m
+[0;33mW (101763) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (102933) APP: Not connected → medium blink[0m
+[0;32mI (104133) APP: Not connected → medium blink[0m
+[0;33mW (104173) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (105333) APP: Not connected → medium blink[0m
+[0;32mI (106533) APP: Not connected → medium blink[0m
+[0;33mW (106593) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (107733) APP: Not connected → medium blink[0m
+[0;32mI (108933) APP: Not connected → medium blink[0m
+[0;33mW (109003) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (110133) APP: Not connected → medium blink[0m
+[0;32mI (111333) APP: Not connected → medium blink[0m
+[0;33mW (111423) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (112533) APP: Not connected → medium blink[0m
+[0;32mI (113733) APP: Not connected → medium blink[0m
+[0;33mW (113833) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (114933) APP: Not connected → medium blink[0m
+[0;32mI (116133) APP: Not connected → medium blink[0m
+[0;33mW (116243) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (117333) APP: Not connected → medium blink[0m
+[0;32mI (118533) APP: Not connected → medium blink[0m
+[0;33mW (118663) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (119733) APP: Not connected → medium blink[0m
+[0;32mI (120933) APP: Not connected → medium blink[0m
+[0;33mW (121073) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (122133) APP: Not connected → medium blink[0m
+[0;32mI (123333) APP: Not connected → medium blink[0m
+[0;33mW (123483) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (124533) APP: Not connected → medium blink[0m
+[0;32mI (125733) APP: Not connected → medium blink[0m
+[0;33mW (125903) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (126933) APP: Not connected → medium blink[0m
+[0;32mI (128133) APP: Not connected → medium blink[0m
+[0;33mW (128313) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (129333) APP: Not connected → medium blink[0m
+[0;32mI (130533) APP: Not connected → medium blink[0m
+[0;33mW (130733) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (131733) APP: Not connected → medium blink[0m
+[0;32mI (132933) APP: Not connected → medium blink[0m
+[0;33mW (133143) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (134133) APP: Not connected → medium blink[0m
+[0;32mI (135333) APP: Not connected → medium blink[0m
+[0;33mW (135553) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (136533) APP: Not connected → medium blink[0m
+[0;32mI (137733) APP: Not connected → medium blink[0m
+[0;33mW (137973) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (138933) APP: Not connected → medium blink[0m
+[0;32mI (140133) APP: Not connected → medium blink[0m
+[0;33mW (140383) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (141333) APP: Not connected → medium blink[0m
+[0;32mI (142533) APP: Not connected → medium blink[0m
+[0;33mW (142803) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (143733) APP: Not connected → medium blink[0m
+[0;32mI (144933) APP: Not connected → medium blink[0m
+[0;33mW (145213) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (146133) APP: Not connected → medium blink[0m
+[0;32mI (147333) APP: Not connected → medium blink[0m
+[0;33mW (147623) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (148533) APP: Not connected → medium blink[0m
+[0;32mI (149733) APP: Not connected → medium blink[0m
+[0;33mW (150043) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (150933) APP: Not connected → medium blink[0m
+[0;32mI (152133) APP: Not connected → medium blink[0m
+[0;33mW (152453) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (153333) APP: Not connected → medium blink[0m
+[0;32mI (154533) APP: Not connected → medium blink[0m
+[0;33mW (154873) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (155733) APP: Not connected → medium blink[0m
+[0;32mI (156933) APP: Not connected → medium blink[0m
+[0;33mW (157283) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (158133) APP: Not connected → medium blink[0m
+[0;32mI (159333) APP: Not connected → medium blink[0m
+[0;33mW (159693) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (160533) APP: Not connected → medium blink[0m
+[0;32mI (161733) APP: Not connected → medium blink[0m
+[0;33mW (162113) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (162933) APP: Not connected → medium blink[0m
+[0;32mI (164133) APP: Not connected → medium blink[0m
+[0;33mW (164523) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (165333) APP: Not connected → medium blink[0m
+[0;32mI (166533) APP: Not connected → medium blink[0m
+[0;33mW (166943) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (167733) APP: Not connected → medium blink[0m
+[0;32mI (168933) APP: Not connected → medium blink[0m
+[0;33mW (169353) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (170133) APP: Not connected → medium blink[0m
+[0;32mI (171333) APP: Not connected → medium blink[0m
+[0;33mW (171763) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (172533) APP: Not connected → medium blink[0m
+[0;32mI (173733) APP: Not connected → medium blink[0m
+[0;33mW (174183) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (174933) APP: Not connected → medium blink[0m
+[0;32mI (176133) APP: Not connected → medium blink[0m
+[0;33mW (176593) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (177333) APP: Not connected → medium blink[0m
+[0;32mI (178533) APP: Not connected → medium blink[0m
+[0;33mW (179003) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (179733) APP: Not connected → medium blink[0m
+[0;32mI (180933) APP: Not connected → medium blink[0m
+[0;33mW (181423) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (182133) APP: Not connected → medium blink[0m
+[0;32mI (183333) APP: Not connected → medium blink[0m
+[0;33mW (183833) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (184533) APP: Not connected → medium blink[0m
+[0;32mI (185733) APP: Not connected → medium blink[0m
+[0;33mW (186253) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (186933) APP: Not connected → medium blink[0m
+[0;32mI (188133) APP: Not connected → medium blink[0m
+[0;33mW (188663) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (189333) APP: Not connected → medium blink[0m
+[0;32mI (190533) APP: Not connected → medium blink[0m
+[0;33mW (191073) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (191733) APP: Not connected → medium blink[0m
+[0;32mI (192933) APP: Not connected → medium blink[0m
+[0;33mW (193493) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (194133) APP: Not connected → medium blink[0m
+[0;32mI (195333) APP: Not connected → medium blink[0m
+[0;33mW (195903) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (196533) APP: Not connected → medium blink[0m
+[0;32mI (197733) APP: Not connected → medium blink[0m
+[0;33mW (198323) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (198933) APP: Not connected → medium blink[0m
+[0;32mI (200133) APP: Not connected → medium blink[0m
+[0;33mW (200733) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (201333) APP: Not connected → medium blink[0m
+[0;32mI (202533) APP: Not connected → medium blink[0m
+[0;33mW (203143) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (203733) APP: Not connected → medium blink[0m
+[0;32mI (204933) APP: Not connected → medium blink[0m
+[0;33mW (205563) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (206133) APP: Not connected → medium blink[0m
+[0;32mI (207333) APP: Not connected → medium blink[0m
+[0;33mW (207973) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (208533) APP: Not connected → medium blink[0m
+[0;32mI (209733) APP: Not connected → medium blink[0m
+[0;33mW (210393) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (210933) APP: Not connected → medium blink[0m
+[0;32mI (212133) APP: Not connected → medium blink[0m
+[0;33mW (212803) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (213333) APP: Not connected → medium blink[0m
+[0;32mI (214533) APP: Not connected → medium blink[0m
+[0;33mW (215213) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (215733) APP: Not connected → medium blink[0m
+[0;32mI (216933) APP: Not connected → medium blink[0m
+[0;33mW (217633) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (218133) APP: Not connected → medium blink[0m
+[0;32mI (219333) APP: Not connected → medium blink[0m
+[0;33mW (220043) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (220533) APP: Not connected → medium blink[0m
+[0;32mI (221733) APP: Not connected → medium blink[0m
+[0;33mW (222463) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (222933) APP: Not connected → medium blink[0m
+[0;32mI (224133) APP: Not connected → medium blink[0m
+[0;33mW (224873) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (225333) APP: Not connected → medium blink[0m
+[0;32mI (226533) APP: Not connected → medium blink[0m
+[0;33mW (227283) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (227733) APP: Not connected → medium blink[0m
+[0;32mI (228933) APP: Not connected → medium blink[0m
+[0;33mW (229703) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (230133) APP: Not connected → medium blink[0m
+[0;32mI (231333) APP: Not connected → medium blink[0m
+[0;33mW (232113) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (232533) APP: Not connected → medium blink[0m
+[0;32mI (233733) APP: Not connected → medium blink[0m
+[0;33mW (234533) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (234933) APP: Not connected → medium blink[0m
+[0;32mI (236133) APP: Not connected → medium blink[0m
+[0;33mW (236943) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (237333) APP: Not connected → medium blink[0m
+[0;32mI (238533) APP: Not connected → medium blink[0m
+[0;33mW (239353) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (239733) APP: Not connected → medium blink[0m
+[0;32mI (240933) APP: Not connected → medium blink[0m
+[0;33mW (241773) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (242133) APP: Not connected → medium blink[0m
+[0;32mI (243333) APP: Not connected → medium blink[0m
+[0;33mW (244183) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (244533) APP: Not connected → medium blink[0m
+[0;32mI (245733) APP: Not connected → medium blink[0m
+[0;33mW (246603) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (246933) APP: Not connected → medium blink[0m
+[0;32mI (248133) APP: Not connected → medium blink[0m
+[0;33mW (249013) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (249333) APP: Not connected → medium blink[0m
+[0;32mI (250533) APP: Not connected → medium blink[0m
+[0;33mW (251433) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (251733) APP: Not connected → medium blink[0m
+[0;32mI (252933) APP: Not connected → medium blink[0m
+[0;33mW (253843) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (254133) APP: Not connected → medium blink[0m
+[0;32mI (255333) APP: Not connected → medium blink[0m
+[0;33mW (256253) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (256533) APP: Not connected → medium blink[0m
+[0;32mI (257733) APP: Not connected → medium blink[0m
+[0;33mW (258673) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (258933) APP: Not connected → medium blink[0m
+[0;32mI (260133) APP: Not connected → medium blink[0m
+[0;33mW (261083) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (261333) APP: Not connected → medium blink[0m
+[0;32mI (262533) APP: Not connected → medium blink[0m
+[0;33mW (263493) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (263733) APP: Not connected → medium blink[0m
+[0;32mI (264933) APP: Not connected → medium blink[0m
+[0;33mW (265913) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (266133) APP: Not connected → medium blink[0m
+[0;32mI (267333) APP: Not connected → medium blink[0m
+[0;33mW (268323) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (268533) APP: Not connected → medium blink[0m
+[0;32mI (269733) APP: Not connected → medium blink[0m
+[0;33mW (270743) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (270933) APP: Not connected → medium blink[0m
+[0;32mI (272133) APP: Not connected → medium blink[0m
+[0;33mW (273153) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (273333) APP: Not connected → medium blink[0m
+[0;32mI (274533) APP: Not connected → medium blink[0m
+[0;33mW (275573) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (275733) APP: Not connected → medium blink[0m
+[0;32mI (276933) APP: Not connected → medium blink[0m
+[0;33mW (277983) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (278133) APP: Not connected → medium blink[0m
+[0;32mI (279333) APP: Not connected → medium blink[0m
+[0;33mW (280393) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (280533) APP: Not connected → medium blink[0m
+[0;32mI (281733) APP: Not connected → medium blink[0m
+[0;33mW (282813) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (282933) APP: Not connected → medium blink[0m
+[0;32mI (284133) APP: Not connected → medium blink[0m
+[0;33mW (285223) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (285333) APP: Not connected → medium blink[0m
+[0;32mI (286533) APP: Not connected → medium blink[0m
+[0;33mW (287633) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (287733) APP: Not connected → medium blink[0m
+[0;32mI (288933) APP: Not connected → medium blink[0m
+[0;33mW (290053) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (290133) APP: Not connected → medium blink[0m
+[0;32mI (291333) APP: Not connected → medium blink[0m
+[0;33mW (292463) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (292533) APP: Not connected → medium blink[0m
+[0;32mI (293733) APP: Not connected → medium blink[0m
+[0;33mW (294883) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (294933) APP: Not connected → medium blink[0m
+[0;32mI (296133) APP: Not connected → medium blink[0m
+[0;33mW (297293) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (297333) APP: Not connected → medium blink[0m
+[0;32mI (298533) APP: Not connected → medium blink[0m
+[0;33mW (299703) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (299733) APP: Not connected → medium blink[0m
+[0;32mI (300933) APP: Not connected → medium blink[0m
+[0;33mW (302123) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (302133) APP: Not connected → medium blink[0m
+[0;32mI (303333) APP: Not connected → medium blink[0m
+[0;32mI (304533) APP: Not connected → medium blink[0m
+[0;33mW (304533) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (305733) APP: Not connected → medium blink[0m
+[0;32mI (306933) APP: Not connected → medium blink[0m
+[0;33mW (306953) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (308133) APP: Not connected → medium blink[0m
+[0;32mI (309333) APP: Not connected → medium blink[0m
+[0;33mW (309363) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (310533) APP: Not connected → medium blink[0m
+[0;32mI (311733) APP: Not connected → medium blink[0m
+[0;33mW (311773) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (312933) APP: Not connected → medium blink[0m
+[0;32mI (314133) APP: Not connected → medium blink[0m
+[0;33mW (314193) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (315333) APP: Not connected → medium blink[0m
+[0;32mI (316533) APP: Not connected → medium blink[0m
+[0;33mW (316603) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (317733) APP: Not connected → medium blink[0m
+[0;32mI (318933) APP: Not connected → medium blink[0m
+[0;33mW (319023) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (320133) APP: Not connected → medium blink[0m
+[0;32mI (321333) APP: Not connected → medium blink[0m
+[0;33mW (321433) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (322533) APP: Not connected → medium blink[0m
+[0;32mI (323733) APP: Not connected → medium blink[0m
+[0;33mW (323843) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (324933) APP: Not connected → medium blink[0m
+[0;32mI (326133) APP: Not connected → medium blink[0m
+[0;33mW (326263) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (327333) APP: Not connected → medium blink[0m
+[0;32mI (328533) APP: Not connected → medium blink[0m
+[0;33mW (328673) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (329733) APP: Not connected → medium blink[0m
+[0;32mI (330933) APP: Not connected → medium blink[0m
+[0;33mW (331093) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (332133) APP: Not connected → medium blink[0m
+[0;32mI (333333) APP: Not connected → medium blink[0m
+[0;33mW (333503) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (334533) APP: Not connected → medium blink[0m
+[0;32mI (335733) APP: Not connected → medium blink[0m
+[0;33mW (335913) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (336933) APP: Not connected → medium blink[0m
+[0;32mI (338133) APP: Not connected → medium blink[0m
+[0;33mW (338333) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (339333) APP: Not connected → medium blink[0m
+[0;32mI (340533) APP: Not connected → medium blink[0m
+[0;33mW (340743) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (341733) APP: Not connected → medium blink[0m
+[0;32mI (342933) APP: Not connected → medium blink[0m
+[0;33mW (343163) WIFI_STA: Disconnected → reconnect[0m
+[0;32mI (344133) APP: Not connected → medium blink[0m

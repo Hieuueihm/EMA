@@ -1,0 +1,739 @@
+Command: C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe C:\Espressif\frameworks\esp-idf-v5.5.1\tools/idf_monitor.py -p COM20 -b 115200 --toolchain-prefix xtensa-esp32-elf- --target esp32 --revision 0 D:\my_first_app\build\my_first_app.elf D:\my_first_app\build\bootloader\bootloader.elf --force-color -m 'C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe' 'C:\Espressif\frameworks\esp-idf-v5.5.1\tools\idf.py' '-p' 'COM20'
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 188777542, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6380
+ho 0 tail 12 room 4
+load:0x40078000,len:15916
+load:0x40080400,len:3860
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Oct  9 2025 09:33:59[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (31) boot: chip revision: v1.1[0m
+[0;32mI (34) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (38) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (41) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (45) boot: Enabling RNG early entropy source...[0m
+[0;32mI (50) boot: Partition Table:[0m
+[0;32mI (52) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (72) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (78) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=1fbe0h (130016) map[0m
+[0;32mI (133) esp_image: segment 1: paddr=0002fc08 vaddr=3ffb0000 size=00410h (  1040) load[0m
+[0;32mI (134) esp_image: segment 2: paddr=00030020 vaddr=400d0020 size=a7500h (685312) map[0m
+[0;32mI (371) esp_image: segment 3: paddr=000d7528 vaddr=3ffb0410 size=03c64h ( 15460) load[0m
+[0;32mI (377) esp_image: segment 4: paddr=000db194 vaddr=40080000 size=1998ch (104844) load[0m
+[0;32mI (418) esp_image: segment 5: paddr=000f4b28 vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (431) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (431) boot: Disabling RNG early entropy source...[0m
+[0;32mI (441) cpu_start: Multicore app[0m
+[0;32mI (450) cpu_start: Pro cpu start user code[0m
+[0;32mI (450) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (450) app_init: Application information:[0m
+[0;32mI (450) app_init: Project name:     my_first_app[0m
+[0;32mI (454) app_init: App version:      1[0m
+[0;32mI (458) app_init: Compile time:     Oct  9 2025 09:37:52[0m
+[0;32mI (463) app_init: ELF file SHA256:  f5fd04c7a...[0m
+[0;32mI (467) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (471) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (475) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (479) efuse_init: Chip rev:         v1.1[0m
+[0;32mI (483) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (489) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (494) heap_init: At 3FFB8778 len 00027888 (158 KiB): DRAM[0m
+[0;32mI (499) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (505) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (510) heap_init: At 4009998C len 00006674 (25 KiB): IRAM[0m
+[0;32mI (517) spi_flash: detected chip: gd[0m
+[0;32mI (519) spi_flash: flash io: dio[0m
+[0;33mW (522) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (535) main_task: Started on CPU0[0m
+[0;32mI (545) main_task: Calling app_main()[0m
+[0;32mI (575) wifi:wifi driver task: 3ffc07ac, prio:23, stack:6656, core=0[0m
+[0;32mI (585) wifi:wifi firmware version: 14da9b7[0m
+[0;32mI (585) wifi:wifi certification version: v7.0[0m
+[0;32mI (585) wifi:config NVS flash: enabled[0m
+[0;32mI (585) wifi:config nano formatting: disabled[0m
+[0;32mI (595) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (595) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (595) wifi:Init management short buffer num: 32[0m
+[0;32mI (605) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (605) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (615) wifi:Init static rx buffer num: 10[0m
+[0;32mI (615) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (625) wifi_init: rx ba win: 6[0m
+[0;32mI (625) wifi_init: accept mbox: 6[0m
+[0;32mI (625) wifi_init: tcpip mbox: 32[0m
+[0;32mI (625) wifi_init: udp mbox: 6[0m
+[0;32mI (635) wifi_init: tcp mbox: 6[0m
+[0;32mI (635) wifi_init: tcp tx win: 5760[0m
+[0;32mI (635) wifi_init: tcp rx win: 5760[0m
+[0;32mI (645) wifi_init: tcp mss: 1440[0m
+[0;32mI (645) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (645) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;33mW (655) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2[0m
+[0;32mI (665) phy_init: phy_version 4861,b71b5ad,Aug  5 2025,11:16:06[0m
+[0;32mI (735) wifi:mode : sta (e8:6b:ea:09:d5:24)[0m
+[0;32mI (735) wifi:enable tsf[0m
+[0;32mI (745) main_task: Returned from app_main()[0m
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 188777542, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6380
+ho 0 tail 12 room 4
+load:0x40078000,len:15916
+load:0x40080400,len:3860
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Oct  9 2025 09:33:59[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (31) boot: chip revision: v1.1[0m
+[0;32mI (34) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (38) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (41) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (45) boot: Enabling RNG early entropy source...[0m
+[0;32mI (50) boot: Partition Table:[0m
+[0;32mI (52) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (72) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (78) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=1fbe0h (130016) map[0m
+[0;32mI (133) esp_image: segment 1: paddr=0002fc08 vaddr=3ffb0000 size=00410h (  1040) load[0m
+[0;32mI (134) esp_image: segment 2: paddr=00030020 vaddr=400d0020 size=a7500h (685312) map[0m
+[0;32mI (371) esp_image: segment 3: paddr=000d7528 vaddr=3ffb0410 size=03c64h ( 15460) load[0m
+[0;32mI (377) esp_image: segment 4: paddr=000db194 vaddr=40080000 size=1998ch (104844) load[0m
+[0;32mI (418) esp_image: segment 5: paddr=000f4b28 vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (431) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (431) boot: Disabling RNG early entropy source...[0m
+[0;32mI (441) cpu_start: Multicore app[0m
+[0;32mI (450) cpu_start: Pro cpu start user code[0m
+[0;32mI (450) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (450) app_init: Application information:[0m
+[0;32mI (450) app_init: Project name:     my_first_app[0m
+[0;32mI (454) app_init: App version:      1[0m
+[0;32mI (458) app_init: Compile time:     Oct  9 2025 09:37:52[0m
+[0;32mI (463) app_init: ELF file SHA256:  f5fd04c7a...[0m
+[0;32mI (467) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (471) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (475) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (479) efuse_init: Chip rev:         v1.1[0m
+[0;32mI (483) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (489) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (494) heap_init: At 3FFB8778 len 00027888 (158 KiB): DRAM[0m
+[0;32mI (499) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (505) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (510) heap_init: At 4009998C len 00006674 (25 KiB): IRAM[0m
+[0;32mI (517) spi_flash: detected chip: gd[0m
+[0;32mI (519) spi_flash: flash io: dio[0m
+[0;33mW (522) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (535) main_task: Started on CPU0[0m
+[0;32mI (545) main_task: Calling app_main()[0m
+[0;32mI (575) wifi:wifi driver task: 3ffc07ac, prio:23, stack:6656, core=0[0m
+[0;32mI (585) wifi:wifi firmware version: 14da9b7[0m
+[0;32mI (585) wifi:wifi certification version: v7.0[0m
+[0;32mI (585) wifi:config NVS flash: enabled[0m
+[0;32mI (585) wifi:config nano formatting: disabled[0m
+[0;32mI (595) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (595) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (595) wifi:Init management short buffer num: 32[0m
+[0;32mI (605) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (605) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (615) wifi:Init static rx buffer num: 10[0m
+[0;32mI (615) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (625) wifi_init: rx ba win: 6[0m
+[0;32mI (625) wifi_init: accept mbox: 6[0m
+[0;32mI (625) wifi_init: tcpip mbox: 32[0m
+[0;32mI (625) wifi_init: udp mbox: 6[0m
+[0;32mI (635) wifi_init: tcp mbox: 6[0m
+[0;32mI (635) wifi_init: tcp tx win: 5760[0m
+[0;32mI (635) wifi_init: tcp rx win: 5760[0m
+[0;32mI (645) wifi_init: tcp mss: 1440[0m
+[0;32mI (645) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (645) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;33mW (655) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2[0m
+[0;32mI (665) phy_init: phy_version 4861,b71b5ad,Aug  5 2025,11:16:06[0m
+[0;32mI (735) wifi:mode : sta (e8:6b:ea:09:d5:24)[0m
+[0;32mI (735) wifi:enable tsf[0m
+[0;32mI (745) main_task: Returned from app_main()[0m
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 188777542, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6380
+ho 0 tail 12 room 4
+load:0x40078000,len:15916
+load:0x40080400,len:3860
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Oct  9 2025 09:33:59[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (31) boot: chip revision: v1.1[0m
+[0;32mI (34) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (38) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (41) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (45) boot: Enabling RNG early entropy source...[0m
+[0;32mI (50) boot: Partition Table:[0m
+[0;32mI (52) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (71) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (78) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=1fbe0h (130016) map[0m
+[0;32mI (133) esp_image: segment 1: paddr=0002fc08 vaddr=3ffb0000 size=00410h (  1040) load[0m
+[0;32mI (134) esp_image: segment 2: paddr=00030020 vaddr=400d0020 size=a7500h (685312) map[0m
+[0;32mI (371) esp_image: segment 3: paddr=000d7528 vaddr=3ffb0410 size=03c64h ( 15460) load[0m
+[0;32mI (377) esp_image: segment 4: paddr=000db194 vaddr=40080000 size=1998ch (104844) load[0m
+[0;32mI (418) esp_image: segment 5: paddr=000f4b28 vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (431) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (431) boot: Disabling RNG early entropy source...[0m
+[0;32mI (441) cpu_start: Multicore app[0m
+[0;32mI (450) cpu_start: Pro cpu start user code[0m
+[0;32mI (450) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (450) app_init: Application information:[0m
+[0;32mI (450) app_init: Project name:     my_first_app[0m
+[0;32mI (454) app_init: App version:      1[0m
+[0;32mI (458) app_init: Compile time:     Oct  9 2025 09:37:52[0m
+[0;32mI (463) app_init: ELF file SHA256:  f5fd04c7a...[0m
+[0;32mI (467) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (471) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (475) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (479) efuse_init: Chip rev:         v1.1[0m
+[0;32mI (483) heap�ets Jun  8 2016 00:22:57[0m
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 188777542, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6380
+ho 0 tail 12 room 4
+load:0x40078000,len:15916
+load:0x40080400,len:3860
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Oct  9 2025 09:33:59[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (31) boot: chip revision: v1.1[0m
+[0;32mI (34) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (38) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (41) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (45) boot: Enabling RNG early entropy source...[0m
+[0;32mI (50) boot: Partition Table:[0m
+[0;32mI (52) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (72) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (78) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=1fbe0h (130016) map[0m
+[0;32mI (133) esp_image: segment 1: paddr=0002fc08 vaddr=3ffb0000 size=00410h (  1040) load[0m
+[0;32mI (134) esp_image: segment 2: paddr=00030020 vaddr=400d0020 size=a7500h (685312) map[0m
+[0;32mI (371) esp_image: segment 3: paddr=000d7528 vaddr=3ffb0410 size=03c64h ( 15460) load[0m
+[0;32mI (377) esp_image: segment 4: paddr=000db194 vaddr=40080000 size=1998ch (104844) load[0m
+[0;32mI (418) esp_image: segment 5: paddr=000f4b28 vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (431) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (431) boot: Disabling RNG early entropy source...[0m
+[0;32mI (441) cpu_start: Multicore app[0m
+[0;32mI (450) cpu_start: Pro cpu start user code[0m
+[0;32mI (450) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (450) app_init: Application information:[0m
+[0;32mI (450) app_init: Project name:     my_first_app[0m
+[0;32mI (454) app_init: App version:      1[0m
+[0;32mI (458) app_init: Compile time:     Oct  9 2025 09:37:52[0m
+[0;32mI (463) app_init: ELF file SHA256:  f5fd04c7a...[0m
+[0;32mI (467) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (471) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (475) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (479) efuse_init: Chip rev:         v1.1[0m
+[0;32mI (483) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (489) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (494) heap_init: At 3FFB8778 len 00027888 (158 KiB): DRAM[0m
+[0;32mI (499) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (505) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (510) heap_init: At 4009998C len 00006674 (25 KiB): IRAM[0m
+[0;32mI (517) spi_flash: detected chip: gd[0m
+[0;32mI (519) spi_flash: flash io: dio[0m
+[0;33mW (522) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (535) main_task: Started on CPU0[0m
+[0;32mI (545) main_task: Calling app_main()[0m
+[0;32mI (575) wifi:wifi driver task: 3ffc07ac, prio:23, stack:6656, core=0[0m
+[0;32mI (585) wifi:wifi firmware version: 14da9b7[0m
+[0;32mI (585) wifi:wifi certification version: v7.0[0m
+[0;32mI (585) wifi:config NVS flash: enabled[0m
+[0;32mI (585) wifi:config nano formatting: disabled[0m
+[0;32mI (595) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (595) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (595) wifi:Init management short buffer num: 32[0m
+[0;32mI (605) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (605) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (615) wifi:Init static rx buffer num: 10[0m
+[0;32mI (615) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (625) wifi_init: rx ba win: 6[0m
+[0;32mI (625) wifi_init: accept mbox: 6[0m
+[0;32mI (625) wifi_init: tcpip mbox: 32[0m
+[0;32mI (625) wifi_init: udp mbox: 6[0m
+[0;32mI (635) wifi_init: tcp mbox: 6[0m
+[0;32mI (635) wifi_init: tcp tx win: 5760[0m
+[0;32mI (635) wifi_init: tcp rx win: 5760[0m
+[0;32mI (645) wifi_init: tcp mss: 1440[0m
+[0;32mI (645) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (645) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;33mW (655) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2[0m
+[0;32mI (665) phy_init: phy_version 4861,b71b5ad,Aug  5 2025,11:16:06[0m
+[0;32mI (735) wifi:mode : sta (e8:6b:ea:09:d5:24)[0m
+[0;32mI (735) wifi:enable tsf[0m
+[0;32mI (745) main_task: Returned from app_main()[0m
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 188777542, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6380
+ho 0 tail 12 room 4
+load:0x40078000,len:15916
+load:0x40080400,len:3860
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Oct  9 2025 09:33:59[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (31) boot: chip revision: v1.1[0m
+[0;32mI (34) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (38) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (41) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (45) boot: Enabling RNG early entropy source...[0m
+[0;32mI (50) boot: Partition Table:[0m
+[0;32mI (52) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (59) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (72) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (78) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=1fbe0h (130016) map[0m
+[0;32mI (133) esp_image: segment 1: paddr=0002fc08 vaddr=3ffb0000 size=00410h (  1040) load[0m
+[0;32mI (134) esp_image: segment 2: paddr=00030020 vaddr=400d0020 size=a7500h (685312) map[0m
+[0;32mI (371) esp_image: segment 3: paddr=000d7528 vaddr=3ffb0410 size=03c64h ( 15460) load[0m
+[0;32mI (377) esp_image: segment 4: paddr=000db194 vaddr=40080000 size=1998ch (104844) load[0m
+[0;32mI (418) esp_image: segment 5: paddr=000f4b28 vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (431) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (431) boot: Disabling RNG early entropy source...[0m
+[0;32mI (441) cpu_start: Multicore app[0m
+[0;32mI (450) cpu_start: Pro cpu start user code[0m
+[0;32mI (450) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (450) app_init: Application information:[0m
+[0;32mI (450) app_init: Project name:     my_first_app[0m
+[0;32mI (454) app_init: App version:      1[0m
+[0;32mI (458) app_init: Compile time:     Oct  9 2025 09:37:52[0m
+[0;32mI (463) app_init: ELF file SHA256:  f5fd04c7a...[0m
+[0;32mI (467) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (471) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (475) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (479) efuse_init: Chip rev:         v1.1[0m
+[0;32mI (483) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (489) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (494) heap_init: At 3FFB8778 len 00027888 (158 KiB): DRAM[0m
+[0;32mI (499) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (505) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (510) heap_init: At 4009998C len 00006674 (25 KiB): IRAM[0m
+[0;32mI (517) spi_flash: detected chip: gd[0m
+[0;32mI (519) spi_flash: flash io: dio[0m
+[0;33mW (522) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (535) main_task: Started on CPU0[0m
+[0;32mI (545) main_task: Calling app_main()[0m
+[0;32mI (575) wifi:wifi driver task: 3ffc07ac, prio:23, stack:6656, core=0[0m
+[0;32mI (585) wifi:wifi firmware version: 14da9b7[0m
+[0;32mI (585) wifi:wifi certification version: v7.0[0m
+[0;32mI (585) wifi:config NVS flash: enabled[0m
+[0;32mI (585) wifi:config nano formatting: disabled[0m
+[0;32mI (595) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (595) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (595) wifi:Init management short buffer num: 32[0m
+[0;32mI (605) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (605) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (615) wifi:Init static rx buffer num: 10[0m
+[0;32mI (615) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (625) wifi_init: rx ba win: 6[0m
+[0;32mI (625) wifi_init: accept mbox: 6[0m
+[0;32mI (625) wifi_init: tcpip mbox: 32[0m
+[0;32mI (625) wifi_init: udp mbox: 6[0m
+[0;32mI (635) wifi_init: tcp mbox: 6[0m
+[0;32mI (635) wifi_init: tcp tx win: 5760[0m
+[0;32mI (635) wifi_init: tcp rx win: 5760[0m
+[0;32mI (645) wifi_init: tcp mss: 1440[0m
+[0;32mI (645) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (645) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;33mW (655) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2[0m
+[0;32mI (665) phy_init: phy_version 4861,b71b5ad,Aug  5 2025,11:16:06[0m
+[0;32mI (735) phy_init: Saving new calibration data due to checksum failure or outdated calibration data, mode(0)[0m
+[0;32mI (755) wifi:mode : sta (e8:6b:ea:09:d5:24)[0m
+[0;32mI (755) wifi:enable tsf[0m
+[0;32mI (765) main_task: Returned from app_main()[0m
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 188777542, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6380
+ho 0 tail 12 room 4
+load:0x40078000,len:15916
+load:0x40080400,len:3860
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Oct  9 2025 09:33:59[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (31) boot: chip revision: v1.1[0m
+[0;32mI (34) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (38) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (42) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (45) boot: Enabling RNG early entropy source...[0m
+[0;32mI (50) boot: Partition Table:[0m
+[0;32mI (52) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (59) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (72) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (78) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=1fbe0h (130016) map[0m
+[0;32mI (133) esp_image: segment 1: paddr=0002fc08 vaddr=3ffb0000 size=00410h (  1040) load[0m
+[0;32mI (134) esp_image: segment 2: paddr=00030020 vaddr=400d0020 size=a7500h (685312) map[0m
+[0;32mI (371) esp_image: segment 3: paddr=000d7528 vaddr=3ffb0410 size=03c64h ( 15460) load[0m
+[0;32mI (377) esp_image: segment 4: paddr=000db194 vaddr=40080000 size=1998ch (104844) load[0m
+[0;32mI (418) esp_image: segment 5: paddr=000f4b28 vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (431) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (431) boot: Disabling RNG early entropy source...[0m
+[0;32mI (441) cpu_start: Multicore app[0m
+[0;32mI (450) cpu_start: Pro cpu start user code[0m
+[0;32mI (450) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (450) app_init: Application information:[0m
+[0;32mI (450) app_init: Project name:     my_first_app[0m
+[0;32mI (454) app_init: App version:      1[0m
+[0;32mI (458) app_init: Compile time:     Oct  9 2025 09:37:52[0m
+[0;32mI (463) app_init: ELF file SHA256:  f5fd04c7a...[0m
+[0;32mI (467) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (471) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (475) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (479) efuse_init: Chip rev:         v1.1[0m
+[0;32mI (483) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (489) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (494) heap_init: At 3FFB8778 len 00027888 (158 KiB): DRAM[0m
+[0;32mI (499) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (505) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (510) heap_init: At 4009998C len 00006674 (25 KiB): IRAM[0m
+[0;32mI (517) spi_flash: detected chip: gd[0m
+[0;32mI (519) spi_flash: flash io: dio[0m
+[0;33mW (522) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (535) main_task: Started on CPU0[0m
+[0;32mI (545) main_task: Calling app_main()[0m
+[0;32mI (575) wifi:wifi driver task: 3ffc07ac, prio:23, stack:6656, core=0[0m
+[0;32mI (585) wifi:wifi firmware version: 14da9b7[0m
+[0;32mI (585) wifi:wifi certification version: v7.0[0m
+[0;32mI (585) wifi:config NVS flash: enabled[0m
+[0;32mI (585) wifi:config nano formatting: disabled[0m
+[0;32mI (595) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (595) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (595) wifi:Init management short buffer num: 32[0m
+[0;32mI (605) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (605) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (615) wifi:Init static rx buffer num: 10[0m
+[0;32mI (615) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (625) wifi_init: rx ba win: 6[0m
+[0;32mI (625) wifi_init: accept mbox: 6[0m
+[0;32mI (625) wifi_init: tcpip mbox: 32[0m
+[0;32mI (625) wifi_init: udp mbox: 6[0m
+[0;32mI (635) wifi_init: tcp mbox: 6[0m
+[0;32mI (635) wifi_init: tcp tx win: 5760[0m
+[0;32mI (635) wifi_init: tcp rx win: 5760[0m
+[0;32mI (645) wifi_init: tcp mss: 1440[0m
+[0;32mI (645) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (645) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;33mW (655) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2[0m
+[0;32mI (665) phy_init: phy_version 4861,b71b5ad,Aug  5 2025,11:16:06[0m
+[0;32mI (735) phy_init: Saving new calibration data due to checksum failure or outdated calibration data, mode(0)[0m
+[0;32mI (795) wifi:mode : sta (e8:6b:ea:09:d5:24)[0m
+[0;32mI (795) wifi:enable tsf[0m
+[0;32mI (805) main_task: Returned from app_main()[0m
+[0;32mI (9815) ThingsBoard: Received data: MAC: EC:64:C9:86:DC:EC, Temp: 20.00, HR: 0.00, SpO2: 0.00[0m
+[0;32mI (9815) ThingsBoard: Parsed data - MAC: EC:64:C9:86:DC:EC, Temperature: 20.00 C, Heart Rate: 0.00 bpm, SpO2: 0.00%[0m
+[1;31mE (9825) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (9825) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (9835) mqtt_client: Error transport connect[0m
+[0;32mI (9835) ThingsBoard: Disconnected from ThingsBoard[0m
+[0;32mI (9845) ThingsBoard: Data sent successfully for EC:64:C9:86:DC:EC, msg_id=27310, payload={"mac_address":"EC:64:C9:86:DC:EC","temperature":20.00,"heart_rate":0.00,"spo2":0.00}[0m
+[0;32mI (18845) ThingsBoard: Received data: MAC: EC:64:C9:86:DC:EC, Temp: 20.00, HR: 0.00, SpO2: 0.00[0m
+[0;32mI (18845) ThingsBoard: Parsed data - MAC: EC:64:C9:86:DC:EC, Temperature: 20.00 C, Heart Rate: 0.00 bpm, SpO2: 0.00%[0m
+[1;31mE (18855) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (18855) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (18865) mqtt_client: Error transport connect[0m
+[0;32mI (18865) ThingsBoard: Disconnected from ThingsBoard[0m
+[0;32mI (18875) ThingsBoard: Data sent successfully for EC:64:C9:86:DC:EC, msg_id=26836, payload={"mac_address":"EC:64:C9:86:DC:EC","temperature":20.00,"heart_rate":0.00,"spo2":0.00}[0m
+[0;32mI (29875) ThingsBoard: Received data: MAC: EC:64:C9:86:DC:EC, Temp: 20.00, HR: 0.00, SpO2: 0.00[0m
+[0;32mI (29875) ThingsBoard: Parsed data - MAC: EC:64:C9:86:DC:EC, Temperature: 20.00 C, Heart Rate: 0.00 bpm, SpO2: 0.00%[0m
+[1;31mE (29885) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (29885) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (29895) mqtt_client: Error transport connect[0m
+[0;32mI (29895) ThingsBoard: Disconnected from ThingsBoard[0m
+[0;32mI (29905) ThingsBoard: Data sent successfully for EC:64:C9:86:DC:EC, msg_id=13579, payload={"mac_address":"EC:64:C9:86:DC:EC","temperature":20.00,"heart_rate":0.00,"spo2":0.00}[0m
+[0;32mI (38905) ThingsBoard: Received data: MAC: EC:64:C9:86:DC:EC, Temp: 20.00, HR: 0.00, SpO2: 0.00[0m
+[0;32mI (38905) ThingsBoard: Parsed data - MAC: EC:64:C9:86:DC:EC, Temperature: 20.00 C, Heart Rate: 0.00 bpm, SpO2: 0.00%[0m
+[1;31mE (38915) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (38915) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (38925) mqtt_client: Error transport connect[0m
+[0;32mI (38925) ThingsBoard: Disconnected from ThingsBoard[0m
+[0;32mI (38935) ThingsBoard: Data sent successfully for EC:64:C9:86:DC:EC, msg_id=5943, payload={"mac_address":"EC:64:C9:86:DC:EC","temperature":20.00,"heart_rate":0.00,"spo2":0.00}[0m
+[0;32mI (47935) ThingsBoard: Received data: MAC: EC:64:C9:86:DC:EC, Temp: 20.00, HR: 0.00, SpO2: 0.00[0m
+[0;32mI (47935) ThingsBoard: Parsed data - MAC: EC:64:C9:86:DC:EC, Temperature: 20.00 C, Heart Rate: 0.00 bpm, SpO2: 0.00%[0m
+[1;31mE (47945) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (47945) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (47955) mqtt_client: Error transport connect[0m
+[0;32mI (47955) ThingsBoard: Disconnected from ThingsBoard[0m
+[0;32mI (47965) ThingsBoard: Data sent successfully for EC:64:C9:86:DC:EC, msg_id=59641, payload={"mac_address":"EC:64:C9:86:DC:EC","temperature":20.00,"heart_rate":0.00,"spo2":0.00}[0m
+[0;32mI (59965) ThingsBoard: Received data: MAC: EC:64:C9:86:DC:EC, Temp: 20.00, HR: 0.00, SpO2: 0.00[0m
+[0;32mI (59965) ThingsBoard: Parsed data - MAC: EC:64:C9:86:DC:EC, Temperature: 20.00 C, Heart Rate: 0.00 bpm, SpO2: 0.00%[0m
+[1;31mE (59975) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (59975) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (59985) mqtt_client: Error transport connect[0m
+[0;32mI (59985) ThingsBoard: Disconnected from ThingsBoard[0m
+[0;32mI (59995) ThingsBoard: Data sent successfully for EC:64:C9:86:DC:EC, msg_id=13909, payload={"mac_address":"EC:64:C9:86:DC:EC","temperature":20.00,"heart_rate":0.00,"spo2":0.00}[0m
+[0;32mI (70995) ThingsBoard: Received data: MAC: EC:64:C9:86:DC:EC, Temp: 20.00, HR: 0.00, SpO2: 0.00[0m
+[0;32mI (70995) ThingsBoard: Parsed data - MAC: EC:64:C9:86:DC:EC, Temperature: 20.00 C, Heart Rate: 0.00 bpm, SpO2: 0.00%[0m
+[1;31mE (71005) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (71005) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (71015) mqtt_client: Error transport connect[0m
+[0;32mI (71015) ThingsBoard: Disconnected from ThingsBoard[0m
+[0;32mI (71025) ThingsBoard: Data sent successfully for EC:64:C9:86:DC:EC, msg_id=54014, payload={"mac_address":"EC:64:C9:86:DC:EC","temperature":20.00,"heart_rate":0.00,"spo2":0.00}[0m
+[0;32mI (80025) ThingsBoard: Received data: MAC: EC:64:C9:86:DC:EC, Temp: 20.00, HR: 0.00, SpO2: 0.00[0m
+[0;32mI (80025) ThingsBoard: Parsed data - MAC: EC:64:C9:86:DC:EC, Temperature: 20.00 C, Heart Rate: 0.00 bpm, SpO2: 0.00%[0m
+[1;31mE (80035) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (80035) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (80045) mqtt_client: Error transport connect[0m
+[0;32mI (80045) ThingsBoard: Disconnected from ThingsBoard[0m
+[0;32mI (80055) ThingsBoard: Data sent successfully for EC:64:C9:86:DC:EC, msg_id=4853, payload={"mac_address":"EC:64:C9:86:DC:EC","temperature":20.00,"heart_rate":0.00,"spo2":0.00}[0m
+[0;32mI (89055) ThingsBoard: Received data: MAC: EC:64:C9:86:DC:EC, Temp: 20.00, HR: 0.00, SpO2: 0.00[0m
+[0;32mI (89055) ThingsBoard: Parsed data - MAC: EC:64:C9:86:DC:EC, Temperature: 20.00 C, Heart Rate: 0.00 bpm, SpO2: 0.00%[0m
+[1;31mE (89065) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (89065) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (89075) mqtt_client: Error transport connect[0m
+[0;32mI (89075) ThingsBoard: Disconnected from ThingsBoard[0m
+[0;32mI (89085) ThingsBoard: Data sent successfully for EC:64:C9:86:DC:EC, msg_id=27000, payload={"mac_address":"EC:64:C9:86:DC:EC","temperature":20.00,"heart_rate":0.00,"spo2":0.00}[0m
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 188777542, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6380
+ho 0 tail 12 room 4
+load:0x40078000,len:15916
+load:0x40080400,len:3860
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Oct  9 2025 09:33:59[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (31) boot: chip revision: v1.1[0m
+[0;32mI (34) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (38) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (41) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (45) boot: Enabling RNG early entropy source...[0m
+[0;32mI (50) boot: Partition Table:[0m
+[0;32mI (52) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (59) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (72) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (78) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=1fbe0h (130016) map[0m
+[0;32mI (133) esp_image: segment 1: paddr=0002fc08 vaddr=3ffb0000 size=00410h (  1040) load[0m
+[0;32mI (134) esp_image: segment 2: paddr=00030020 vaddr=400d0020 size=a7500h (685312) map[0m
+[0;32mI (371) esp_image: segment 3: paddr=000d7528 vaddr=3ffb0410 size=03c64h ( 15460) load[0m
+[0;32mI (377) esp_image: segment 4: paddr=000db194 vaddr=40080000 size=1998ch (104844) load[0m
+[0;32mI (418) esp_image: segment 5: paddr=000f4b28 vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (431) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (431) boot: Disabling RNG early entropy source...[0m
+[0;32mI (441) cpu_start: Multicore app[0m
+[0;32mI (450) cpu_start: Pro cpu start user code[0m
+[0;32mI (450) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (450) app_init: Application information:[0m
+[0;32mI (450) app_init: Project name:     my_first_app[0m
+[0;32mI (454) app_init: App version:      1[0m
+[0;32mI (458) app_init: Compile time:     Oct  9 2025 09:37:52[0m
+[0;32mI (463) app_init: ELF file SHA256:  f5fd04c7a...[0m
+[0;32mI (467) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (471) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (475) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (479) efuse_init: Chip rev:         v1.1[0m
+[0;32mI (483) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (489) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (494) heap_init: At 3FFB8778 len 00027888 (158 KiB): DRAM[0m
+[0;32mI (499) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (505) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (510) heap_init: At 4009998C len 00006674 (25 KiB): IRAM[0m
+[0;32mI (517) spi_flash: detected chip: gd[0m
+[0;32mI (519) spi_flash: flash io: dio[0m
+[0;33mW (522) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (535) main_task: Started on CPU0[0m
+[0;32mI (545) main_task: Calling app_main()[0m
+[0;32mI (575) wifi:wifi driver task: 3ffc07ac, prio:23, stack:6656, core=0[0m
+[0;32mI (585) wifi:wifi firmware version: 14da9b7[0m
+[0;32mI (585) wifi:wifi certification version: v7.0[0m
+[0;32mI (585) wifi:config NVS flash: enabled[0m
+[0;32mI (585) wifi:config nano formatting: disabled[0m
+[0;32mI (595) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (595) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (595) wifi:Init management short buffer num: 32[0m
+[0;32mI (605) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (605) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (615) wifi:Init static rx buffer num: 10[0m
+[0;32mI (615) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (625) wifi_init: rx ba win: 6[0m
+[0;32mI (625) wifi_init: accept mbox: 6[0m
+[0;32mI (625) wifi_init: tcpip mbox: 32[0m
+[0;32mI (625) wifi_init: udp mbox: 6[0m
+[0;32mI (635) wifi_init: tcp mbox: 6[0m
+[0;32mI (635) wifi_init: tcp tx win: 5760[0m
+[0;32mI (635) wifi_init: tcp rx win: 5760[0m
+[0;32mI (645) wifi_init: tcp mss: 1440[0m
+[0;32mI (645) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (645) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;33mW (655) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2[0m
+[0;32mI (665) phy_init: phy_version 4861,b71b5ad,Aug  5 2025,11:16:06[0m
+[0;32mI (735) wifi:mode : sta (e8:6b:ea:09:d5:24)[0m
+[0;32mI (735) wifi:enable tsf[0m
+[0;32mI (745) main_task: Returned from app_main()[0m
+[0;32mI (6755) ThingsBoard: Received data: MAC: EC:64:C9:86:DC:EC, Temp: 20.00, HR: 0.00, SpO2: 0.00[0m
+[0;32mI (6755) ThingsBoard: Parsed data - MAC: EC:64:C9:86:DC:EC, Temperature: 20.00 C, Heart Rate: 0.00 bpm, SpO2: 0.00%[0m
+[1;31mE (6765) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (6765) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (6775) mqtt_client: Error transport connect[0m
+[0;32mI (6775) ThingsBoard: Disconnected from ThingsBoard[0m
+[0;32mI (6785) ThingsBoard: Data sent successfully for EC:64:C9:86:DC:EC, msg_id=18300, payload={"mac_address":"EC:64:C9:86:DC:EC","temperature":20.00,"heart_rate":0.00,"spo2":0.00}[0m
+[0;32mI (15785) ThingsBoard: Received data: MAC: EC:64:C9:86:DC:EC, Temp: 20.00, HR: 0.00, SpO2: 0.00[0m
+[0;32mI (15785) ThingsBoard: Parsed data - MAC: EC:64:C9:86:DC:EC, Temperature: 20.00 C, Heart Rate: 0.00 bpm, SpO2: 0.00%[0m
+[1;31mE (15795) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (15795) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (15805) mqtt_client: Error transport connect[0m
+[0;32mI (15805) ThingsBoard: Disconnected from ThingsBoard[0m
+[0;32mI (15815) ThingsBoard: Data sent successfully for EC:64:C9:86:DC:EC, msg_id=31508, payload={"mac_address":"EC:64:C9:86:DC:EC","temperature":20.00,"heart_rate":0.00,"spo2":0.00}[0m
+[0;32mI (27815) ThingsBoard: Received data: MAC: EC:64:C9:86:DC:EC, Temp: 20.00, HR: 0.00, SpO2: 0.00[0m
+[0;32mI (27815) ThingsBoard: Parsed data - MAC: EC:64:C9:86:DC:EC, Temperature: 20.00 C, Heart Rate: 0.00 bpm, SpO2: 0.00%[0m
+[1;31mE (27825) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (27825) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (27835) mqtt_client: Error transport connect[0m
+[0;32mI (27835) ThingsBoard: Disconnected from ThingsBoard[0m
+[0;32mI (27845) ThingsBoard: Data sent successfully for EC:64:C9:86:DC:EC, msg_id=36585, payload={"mac_address":"EC:64:C9:86:DC:EC","temperature":20.00,"heart_rate":0.00,"spo2":0.00}[0m
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 188777542, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6380
+ho 0 tail 12 room 4
+load:0x40078000,len:15916
+load:0x40080400,len:3860
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Oct  9 2025 09:33:59[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (31) boot: chip revision: v1.1[0m
+[0;32mI (34) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (38) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (42) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (45) boot: Enabling RNG early entropy source...[0m
+[0;32mI (50) boot: Partition Table:[0m
+[0;32mI (52) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (59) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (72) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (78) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=1fbe0h (130016) map[0m
+[0;32mI (133) esp_image: segment 1: paddr=0002fc08 vaddr=3ffb0000 size=00410h (  1040) load[0m
+[0;32mI (134) esp_image: segment 2: paddr=00030020 vaddr=400d0020 size=a7500h (685312) map[0m
+[0;32mI (371) esp_image: segment 3: paddr=000d7528 vaddr=3ffb0410 size=03c64h ( 15460) load[0m
+[0;32mI (377) esp_image: segment 4: paddr=000db194 vaddr=40080000 size=1998ch (104844) load[0m
+[0;32mI (418) esp_image: segment 5: paddr=000f4b28 vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (431) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (431) boot: Disabling RNG early entropy source...[0m
+[0;32mI (441) cpu_start: Multicore app[0m
+[0;32mI (450) cpu_start: Pro cpu start user code[0m
+[0;32mI (450) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (450) app_init: Application information:[0m
+[0;32mI (450) app_init: Project name:     my_first_app[0m
+[0;32mI (454) app_init: App version:      1[0m
+[0;32mI (458) app_init: Compile time:     Oct  9 2025 09:37:52[0m
+[0;32mI (463) app_init: ELF file SHA256:  f5fd04c7a...[0m
+[0;32mI (467) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (471) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (475) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (479) efuse_init: Chip rev:         v1.1[0m
+[0;32mI (483) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (489) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (494) heap_init: At 3FFB8778 len 00027888 (158 KiB): DRAM[0m
+[0;32mI (499) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (505) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (510) heap_init: At 4009998C len 00006674 (25 KiB): IRAM[0m
+[0;32mI (517) spi_flash: detected chip: gd[0m
+[0;32mI (519) spi_flash: flash io: dio[0m
+[0;33mW (522) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (535) main_task: Started on CPU0[0m
+[0;32mI (545) main_task: Calling app_main()[0m
+[0;32mI (575) wifi:wifi driver task: 3ffc07ac, prio:23, stack:6656, core=0[0m
+[0;32mI (585) wifi:wifi firmware version: 14da9b7[0m
+[0;32mI (585) wifi:wifi certification version: v7.0[0m
+[0;32mI (585) wifi:config NVS flash: enabled[0m
+[0;32mI (585) wifi:config nano formatting: disabled[0m
+[0;32mI (595) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (595) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (595) wifi:Init management short buffer num: 32[0m
+[0;32mI (605) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (605) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (615) wifi:Init static rx buffer num: 10[0m
+[0;32mI (615) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (625) wifi_init: rx ba win: 6[0m
+[0;32mI (625) wifi_init: accept mbox: 6[0m
+[0;32mI (625) wifi_init: tcpip mbox: 32[0m
+[0;32mI (625) wifi_init: udp mbox: 6[0m
+[0;32mI (635) wifi_init: tcp mbox: 6[0m
+[0;32mI (635) wifi_init: tcp tx win: 5760[0m
+[0;32mI (635) wifi_init: tcp rx win: 5760[0m
+[0;32mI (645) wifi_init: tcp mss: 1440[0m
+[0;32mI (645) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (645) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;33mW (655) wifi:Password length matches WPA2 standards, authmode threshold changes from OPEN to WPA2[0m
+[0;32mI (665) phy_init: phy_version 4861,b71b5ad,Aug  5 2025,11:16:06[0m
+[0;32mI (735) wifi:mode : sta (e8:6b:ea:09:d5:24)[0m
+[0;32mI (735) wifi:enable tsf[0m
+[0;32mI (745) main_task: Returned from app_main()[0m
+[0;32mI (9755) ThingsBoard: Received data: MAC: EC:64:C9:86:DC:EC, Temp: 20.00, HR: 0.00, SpO2: 0.00[0m
+[0;32mI (9755) ThingsBoard: Parsed data - MAC: EC:64:C9:86:DC:EC, Temperature: 20.00 C, Heart Rate: 0.00 bpm, SpO2: 0.00%[0m
+[1;31mE (9765) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (9765) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (9775) mqtt_client: Error transport connect[0m
+[0;32mI (9775) ThingsBoard: Disconnected from ThingsBoard[0m
+[0;32mI (9785) ThingsBoard: Data sent successfully for EC:64:C9:86:DC:EC, msg_id=8273, payload={"mac_address":"EC:64:C9:86:DC:EC","temperature":20.00,"heart_rate":0.00,"spo2":0.00}[0m
+[0;32mI (18785) ThingsBoard: Received data: MAC: EC:64:C9:86:DC:EC, Temp: 20.00, HR: 0.00, SpO2: 0.00[0m
+[0;32mI (18785) ThingsBoard: Parsed data - MAC: EC:64:C9:86:DC:EC, Temperature: 20.00 C, Heart Rate: 0.00 bpm, SpO2: 0.00%[0m
+[1;31mE (18795) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (18795) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (18805) mqtt_client: Error transport connect[0m
+[0;32mI (18805) ThingsBoard: Disconnected from ThingsBoard[0m
+[0;32mI (18815) ThingsBoard: Data sent successfully for EC:64:C9:86:DC:EC, msg_id=49499, payload={"mac_address":"EC:64:C9:86:DC:EC","temperature":20.00,"heart_rate":0.00,"spo2":0.00}[0m
+[0;32mI (30815) ThingsBoard: Received data: MAC: EC:64:C9:86:DC:EC, Temp: 20.00, HR: 0.00, SpO2: 0.00[0m
+[0;32mI (30815) ThingsBoard: Parsed data - MAC: EC:64:C9:86:DC:EC, Temperature: 20.00 C, Heart Rate: 0.00 bpm, SpO2: 0.00%[0m
+[1;31mE (30825) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (30825) transport_base: Failed to open a new connection: 32769[0m
+[1;31mE (30835) mqtt_client: Error transport connect[0m
+[0;32mI (30835) ThingsBoard: Disconnected from ThingsBoard[0m
+[0;32mI (30845) ThingsBoard: Data sent successfully for EC:64:C9:86:DC:EC, msg_id=31499, payload={"mac_address":"EC:64:C9:86:DC:EC","temperature":20.00,"heart_rate":0.00,"spo2":0.00}[0m
+[0;32mI (41845) ThingsBoard: Received data: MAC: EC:64:C9:86:DC:EC, Temp: 20.00, HR: 0.00, SpO2: 0.00[0m
+[0;32mI (41845) ThingsBoard: Parsed data - MAC: EC:64:C9:86:DC:EC, Temperature: 20.00 C, Heart Rate: 0.00 bpm, SpO2: 0.00%[0m
+[1;31mE (41855) esp-tls: couldn't get hostname for :demo.thingsboard.io: getaddrinfo() returns 202, addrinfo=0x0[0m
+[1;31mE (41855) transport_base: Failed to open a new connection: 32769[0m
+

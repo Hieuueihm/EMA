@@ -1,0 +1,737 @@
+Command: C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe C:\Espressif\frameworks\esp-idf-v5.5.1\tools/idf_monitor.py -p COM20 -b 115200 --toolchain-prefix xtensa-esp32-elf- --target esp32 --revision 0 D:\my_first_app\build\my_first_app.elf D:\my_first_app\build\bootloader\bootloader.elf --force-color -m 'C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe' 'C:\Espressif\frameworks\esp-idf-v5.5.1\tools\idf.py' '-p' 'COM20'
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 188777542, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6380
+ho 0 tail 12 room 4
+load:0x40078000,len:15916
+load:0x40080400,len:3860
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Oct  9 2025 09:33:59[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (31) boot: chip revision: v1.1[0m
+[0;32mI (34) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (38) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (41) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (45) boot: Enabling RNG early entropy source...[0m
+[0;32mI (49) boot: Partition Table:[0m
+[0;32mI (52) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (71) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (78) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=21884h (137348) map[0m
+[0;32mI (136) esp_image: segment 1: paddr=000318ac vaddr=3ffb0000 size=03f2ch ( 16172) load[0m
+[0;32mI (142) esp_image: segment 2: paddr=000357e0 vaddr=40080000 size=0a838h ( 43064) load[0m
+[0;32mI (159) esp_image: segment 3: paddr=00040020 vaddr=400d0020 size=ad5ech (710124) map[0m
+[0;32mI (402) esp_image: segment 4: paddr=000ed614 vaddr=4008a838 size=0d8e4h ( 55524) load[0m
+[0;32mI (424) esp_image: segment 5: paddr=000faf00 vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (436) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (436) boot: Disabling RNG early entropy source...[0m
+[0;32mI (446) cpu_start: Multicore app[0m
+[0;32mI (455) cpu_start: Pro cpu start user code[0m
+[0;32mI (455) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (455) app_init: Application information:[0m
+[0;32mI (455) app_init: Project name:     my_first_app[0m
+[0;32mI (459) app_init: App version:      1[0m
+[0;32mI (463) app_init: Compile time:     Oct 14 2025 19:13:23[0m
+[0;32mI (468) app_init: ELF file SHA256:  9a6baec03...[0m
+[0;32mI (472) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (476) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (480) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (484) efuse_init: Chip rev:         v1.1[0m
+[0;32mI (488) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (494) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (499) heap_init: At 3FFB8600 len 00027A00 (158 KiB): DRAM[0m
+[0;32mI (504) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (509) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (515) heap_init: At 4009811C len 00007EE4 (31 KiB): IRAM[0m
+[0;32mI (522) spi_flash: detected chip: gd[0m
+[0;32mI (523) spi_flash: flash io: dio[0m
+[0;33mW (526) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (540) main_task: Started on CPU0[0m
+[0;32mI (550) main_task: Calling app_main()[0m
+[0;32mI (580) APP: Not connected → medium blink[0m
+[0;32mI (580) main_task: Returned from app_main()[0m
+[0;32mI (590) wifi:wifi driver task: 3ffc2360, prio:23, stack:6656, core=0[0m
+[0;32mI (610) wifi:wifi firmware version: 14da9b7[0m
+[0;32mI (610) wifi:wifi certification version: v7.0[0m
+[0;32mI (610) wifi:config NVS flash: enabled[0m
+[0;32mI (610) wifi:config nano formatting: disabled[0m
+[0;32mI (610) wifi:Init data frame dynamic rx buffer num: 32[0m
+[0;32mI (620) wifi:Init static rx mgmt buffer num: 5[0m
+[0;32mI (620) wifi:Init management short buffer num: 32[0m
+[0;32mI (620) wifi:Init dynamic tx buffer num: 32[0m
+[0;32mI (630) wifi:Init static rx buffer size: 1600[0m
+[0;32mI (630) wifi:Init static rx buffer num: 10[0m
+[0;32mI (640) wifi:Init dynamic rx buffer num: 32[0m
+[0;32mI (640) wifi_init: rx ba win: 6[0m
+[0;32mI (640) wifi_init: accept mbox: 6[0m
+[0;32mI (650) wifi_init: tcpip mbox: 32[0m
+[0;32mI (650) wifi_init: udp mbox: 6[0m
+[0;32mI (650) wifi_init: tcp mbox: 6[0m
+[0;32mI (650) wifi_init: tcp tx win: 5760[0m
+[0;32mI (660) wifi_init: tcp rx win: 5760[0m
+[0;32mI (660) wifi_init: tcp mss: 1440[0m
+[0;32mI (660) wifi_init: WiFi IRAM OP enabled[0m
+[0;32mI (670) wifi_init: WiFi RX IRAM OP enabled[0m
+[0;32mI (670) phy_init: phy_version 4861,b71b5ad,Aug  5 2025,11:16:06[0m
+[0;32mI (750) wifi:mode : sta (e8:6b:ea:09:d5:24)[0m
+[0;32mI (750) wifi:enable tsf[0m
+[1;31mE (760) wifi:sta is connecting, return error[0m
+[0;32mI (760) WIFI_STA: Wi-Fi started[0m
+[0;32mI (1780) APP: Not connected → medium blink[0m
+[0;32mI (2980) APP: Not connected → medium blink[0m
+[0;33mW (3170) WIFI_STA: Disconnected[0m
+[0;32mI (4180) APP: Not connected → medium blink[0m
+[0;32mI (5380) APP: Not connected → medium blink[0m
+[0;33mW (5580) WIFI_STA: Disconnected[0m
+[0;32mI (6580) APP: Not connected → medium blink[0m
+[0;32mI (7780) APP: Not connected → medium blink[0m
+[0;33mW (8000) WIFI_STA: Disconnected[0m
+[0;32mI (8980) APP: Not connected → medium blink[0m
+[0;32mI (10180) APP: Not connected → medium blink[0m
+[0;33mW (10420) WIFI_STA: Disconnected[0m
+[0;33mW (10750) WIFI_STA: Timeout waiting IP[0m
+[0;33mW (10750) APP: STA retry 1/6 failed[0m
+[1;31mE (10750) wifi:sta is connecting, return error[0m
+[0;33mW (10750) WIFI_STA: esp_wifi_connect: already connecting, wait for IP[0m
+[0;32mI (11380) APP: Not connected → medium blink[0m
+[0;32mI (12580) APP: Not connected → medium blink[0m
+[0;33mW (12840) WIFI_STA: Disconnected[0m
+[0;32mI (13780) APP: Not connected → medium blink[0m
+[0;32mI (14980) APP: Not connected → medium blink[0m
+[0;33mW (15250) WIFI_STA: Disconnected[0m
+[0;32mI (16180) APP: Not connected → medium blink[0m
+[0;32mI (17380) APP: Not connected → medium blink[0m
+[0;33mW (17670) WIFI_STA: Disconnected[0m
+[0;32mI (18580) APP: Not connected → medium blink[0m
+[0;32mI (19780) APP: Not connected → medium blink[0m
+[0;33mW (20080) WIFI_STA: Disconnected[0m
+[0;33mW (20750) WIFI_STA: Timeout waiting IP[0m
+[0;33mW (20750) APP: STA retry 2/6 failed[0m
+[1;31mE (20750) wifi:sta is connecting, return error[0m
+[0;33mW (20750) WIFI_STA: esp_wifi_connect: already connecting, wait for IP[0m
+[0;32mI (20980) APP: Not connected → medium blink[0m
+[0;32mI (22180) APP: Not connected → medium blink[0m
+[0;33mW (22500) WIFI_STA: Disconnected[0m
+[0;32mI (23380) APP: Not connected → medium blink[0m
+[0;32mI (24580) APP: Not connected → medium blink[0m
+[0;33mW (24920) WIFI_STA: Disconnected[0m
+[0;32mI (25780) APP: Not connected → medium blink[0m
+[0;32mI (26980) APP: Not connected → medium blink[0m
+[0;33mW (27330) WIFI_STA: Disconnected[0m
+[0;32mI (28180) APP: Not connected → medium blink[0m
+[0;32mI (29380) APP: Not connected → medium blink[0m
+[0;33mW (29750) WIFI_STA: Disconnected[0m
+[0;32mI (30580) APP: Not connected → medium blink[0m
+[0;33mW (30750) WIFI_STA: Timeout waiting IP[0m
+[0;33mW (30750) APP: STA retry 3/6 failed[0m
+[1;31mE (30750) wifi:sta is connecting, return error[0m
+[0;33mW (30750) WIFI_STA: esp_wifi_connect: already connecting, wait for IP[0m
+[0;32mI (31780) APP: Not connected → medium blink[0m
+[0;33mW (32170) WIFI_STA: Disconnected[0m
+[0;32mI (32980) APP: Not connected → medium blink[0m
+[0;32mI (34180) APP: Not connected → medium blink[0m
+[0;33mW (34580) WIFI_STA: Disconnected[0m
+[0;32mI (35380) APP: Not connected → medium blink[0m
+[0;32mI (36580) APP: Not connected → medium blink[0m
+[0;33mW (37000) WIFI_STA: Disconnected[0m
+[0;32mI (37780) APP: Not connected → medium blink[0m
+[0;32mI (38980) APP: Not connected → medium blink[0m
+[0;33mW (39420) WIFI_STA: Disconnected[0m
+[0;32mI (40180) APP: Not connected → medium blink[0m
+[0;33mW (40750) WIFI_STA: Timeout waiting IP[0m
+[0;33mW (40750) APP: STA retry 4/6 failed[0m
+[1;31mE (40750) wifi:sta is connecting, return error[0m
+[0;33mW (40750) WIFI_STA: esp_wifi_connect: already connecting, wait for IP[0m
+[0;32mI (41380) APP: Not connected → medium blink[0m
+[0;33mW (41830) WIFI_STA: Disconnected[0m
+[0;32mI (42580) APP: Not connected → medium blink[0m
+[0;32mI (43780) APP: Not connected → medium blink[0m
+[0;33mW (44250) WIFI_STA: Disconnected[0m
+[0;32mI (44980) APP: Not connected → medium blink[0m
+[0;32mI (46180) APP: Not connected → medium blink[0m
+[0;33mW (46670) WIFI_STA: Disconnected[0m
+[0;32mI (47380) APP: Not connected → medium blink[0m
+[0;32mI (48580) APP: Not connected → medium blink[0m
+[0;33mW (49080) WIFI_STA: Disconnected[0m
+[0;32mI (49780) APP: Not connected → medium blink[0m
+[0;33mW (50750) WIFI_STA: Timeout waiting IP[0m
+[0;33mW (50750) APP: STA retry 5/6 failed[0m
+[1;31mE (50750) wifi:sta is connecting, return error[0m
+[0;33mW (50750) WIFI_STA: esp_wifi_connect: already connecting, wait for IP[0m
+[0;32mI (50980) APP: Not connected → medium blink[0m
+[0;33mW (51500) WIFI_STA: Disconnected[0m
+[0;32mI (52180) APP: Not connected → medium blink[0m
+[0;32mI (53380) APP: Not connected → medium blink[0m
+[0;33mW (53920) WIFI_STA: Disconnected[0m
+[0;32mI (54580) APP: Not connected → medium blink[0m
+[0;32mI (55780) APP: Not connected → medium blink[0m
+[0;33mW (56330) WIFI_STA: Disconnected[0m
+[0;32mI (56980) APP: Not connected → medium blink[0m
+[0;32mI (58180) APP: Not connected → medium blink[0m
+[0;33mW (58750) WIFI_STA: Disconnected[0m
+[0;32mI (59380) APP: Not connected → medium blink[0m
+[0;32mI (60580) APP: Not connected → medium blink[0m
+[0;33mW (60750) WIFI_STA: Timeout waiting IP[0m
+[0;33mW (60750) APP: STA retry 6/6 failed[0m
+[0;33mW (60750) APP: Too many STA retries → switch to AP portal[0m
+[0;32mI (60750) wifi:flush txq[0m
+[0;32mI (60750) wifi:stop sw txq[0m
+[0;32mI (60750) wifi:lmac stop hw txq[0m
+[0;33mW (60750) WIFI_AP: Switching to AP + Portal[0m
+[0;32mI (60770) wifi:mode : softAP (e8:6b:ea:09:d5:25)[0m
+[0;32mI (60780) wifi:Total power save buffer number: 16[0m
+[0;32mI (60780) wifi:Init max length of beacon: 752/752[0m
+[0;32mI (60780) wifi:Init max length of beacon: 752/752[0m
+[0;33mW (60780) WIFI_AP: AP: SSID='GW-Setup-D525' PASS='12345678'[0m
+[0;32mI (60790) esp_netif_lwip: DHCP server started on interface WIFI_AP_DEF with IP: 192.168.4.1[0m
+[0;32mI (60800) WIFI_AP: DHCP server IP: 192.168.4.1[0m
+[0;32mI (60810) WIFI_AP: HTTP server started: http://192.168.4.1/[0m
+[0;32mI (60810) APP: AP mode → try STA reconnect[0m
+[0;32mI (60810) wifi:mode : sta (e8:6b:ea:09:d5:24)[0m
+[0;32mI (60820) wifi:enable tsf[0m
+[1;31mE (60830) wifi:sta is connecting, return error[0m
+[0;32mI (60830) WIFI_STA: Wi-Fi started[0m
+[0;32mI (61780) APP: AP mode → slow blink[0m
+[0;33mW (63240) WIFI_STA: Disconnected[0m
+[0;32mI (65780) APP: AP mode → slow blink[0m
+[0;33mW (68830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (68830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (69780) APP: AP mode → slow blink[0m
+[0;32mI (73780) APP: AP mode → slow blink[0m
+[0;32mI (77780) APP: AP mode → slow blink[0m
+[0;32mI (81780) APP: AP mode → slow blink[0m
+[0;32mI (85780) APP: AP mode → slow blink[0m
+[0;32mI (89780) APP: AP mode → slow blink[0m
+[0;32mI (90830) APP: AP mode → try STA reconnect[0m
+[0;33mW (93240) WIFI_STA: Disconnected[0m
+[0;32mI (93780) APP: AP mode → slow blink[0m
+[0;32mI (97780) APP: AP mode → slow blink[0m
+[0;33mW (98830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (98830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (101780) APP: AP mode → slow blink[0m
+[0;32mI (105780) APP: AP mode → slow blink[0m
+[0;32mI (109780) APP: AP mode → slow blink[0m
+[0;32mI (113780) APP: AP mode → slow blink[0m
+[0;32mI (117780) APP: AP mode → slow blink[0m
+[0;32mI (121330) APP: AP mode → try STA reconnect[0m
+[0;32mI (121780) APP: AP mode → slow blink[0m
+[0;33mW (123740) WIFI_STA: Disconnected[0m
+[0;32mI (125780) APP: AP mode → slow blink[0m
+[0;33mW (129330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (129330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (129780) APP: AP mode → slow blink[0m
+[0;32mI (133780) APP: AP mode → slow blink[0m
+[0;32mI (137780) APP: AP mode → slow blink[0m
+[0;32mI (141780) APP: AP mode → slow blink[0m
+[0;32mI (145780) APP: AP mode → slow blink[0m
+[0;32mI (149780) APP: AP mode → slow blink[0m
+[0;32mI (151830) APP: AP mode → try STA reconnect[0m
+[0;32mI (153780) APP: AP mode → slow blink[0m
+[0;33mW (154240) WIFI_STA: Disconnected[0m
+[0;32mI (157780) APP: AP mode → slow blink[0m
+[0;33mW (159830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (159830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (161780) APP: AP mode → slow blink[0m
+[0;32mI (165780) APP: AP mode → slow blink[0m
+[0;32mI (169780) APP: AP mode → slow blink[0m
+[0;32mI (173780) APP: AP mode → slow blink[0m
+[0;32mI (177780) APP: AP mode → slow blink[0m
+[0;32mI (181780) APP: AP mode → slow blink[0m
+[0;32mI (182330) APP: AP mode → try STA reconnect[0m
+[0;33mW (184740) WIFI_STA: Disconnected[0m
+[0;32mI (185780) APP: AP mode → slow blink[0m
+[0;32mI (189780) APP: AP mode → slow blink[0m
+[0;33mW (190330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (190330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (193780) APP: AP mode → slow blink[0m
+[0;32mI (197780) APP: AP mode → slow blink[0m
+[0;32mI (201780) APP: AP mode → slow blink[0m
+[0;32mI (205780) APP: AP mode → slow blink[0m
+[0;32mI (209780) APP: AP mode → slow blink[0m
+[0;32mI (212830) APP: AP mode → try STA reconnect[0m
+[0;32mI (213780) APP: AP mode → slow blink[0m
+[0;33mW (215240) WIFI_STA: Disconnected[0m
+[0;32mI (217780) APP: AP mode → slow blink[0m
+[0;33mW (220830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (220830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (221780) APP: AP mode → slow blink[0m
+[0;32mI (225780) APP: AP mode → slow blink[0m
+[0;32mI (229780) APP: AP mode → slow blink[0m
+[0;32mI (233780) APP: AP mode → slow blink[0m
+[0;32mI (237780) APP: AP mode → slow blink[0m
+[0;32mI (241780) APP: AP mode → slow blink[0m
+[0;32mI (243330) APP: AP mode → try STA reconnect[0m
+[0;33mW (245740) WIFI_STA: Disconnected[0m
+[0;32mI (245780) APP: AP mode → slow blink[0m
+[0;32mI (249780) APP: AP mode → slow blink[0m
+[0;33mW (251330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (251330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (253780) APP: AP mode → slow blink[0m
+[0;32mI (257780) APP: AP mode → slow blink[0m
+[0;32mI (261780) APP: AP mode → slow blink[0m
+[0;32mI (265780) APP: AP mode → slow blink[0m
+[0;32mI (269780) APP: AP mode → slow blink[0m
+[0;32mI (273780) APP: AP mode → slow blink[0m
+[0;32mI (273830) APP: AP mode → try STA reconnect[0m
+[0;33mW (276240) WIFI_STA: Disconnected[0m
+[0;32mI (277780) APP: AP mode → slow blink[0m
+[0;32mI (281780) APP: AP mode → slow blink[0m
+[0;33mW (281830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (281830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (285780) APP: AP mode → slow blink[0m
+[0;32mI (289780) APP: AP mode → slow blink[0m
+[0;32mI (293780) APP: AP mode → slow blink[0m
+[0;32mI (297780) APP: AP mode → slow blink[0m
+[0;32mI (301780) APP: AP mode → slow blink[0m
+[0;32mI (304330) APP: AP mode → try STA reconnect[0m
+[0;32mI (305780) APP: AP mode → slow blink[0m
+[0;33mW (306740) WIFI_STA: Disconnected[0m
+[0;32mI (309780) APP: AP mode → slow blink[0m
+[0;33mW (312330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (312330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (313780) APP: AP mode → slow blink[0m
+[0;32mI (317780) APP: AP mode → slow blink[0m
+[0;32mI (321780) APP: AP mode → slow blink[0m
+[0;32mI (325780) APP: AP mode → slow blink[0m
+[0;32mI (329780) APP: AP mode → slow blink[0m
+[0;32mI (333780) APP: AP mode → slow blink[0m
+[0;32mI (334830) APP: AP mode → try STA reconnect[0m
+[0;33mW (337240) WIFI_STA: Disconnected[0m
+[0;32mI (337780) APP: AP mode → slow blink[0m
+[0;32mI (341780) APP: AP mode → slow blink[0m
+[0;33mW (342830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (342830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (345780) APP: AP mode → slow blink[0m
+[0;32mI (349780) APP: AP mode → slow blink[0m
+[0;32mI (353780) APP: AP mode → slow blink[0m
+[0;32mI (357780) APP: AP mode → slow blink[0m
+[0;32mI (361780) APP: AP mode → slow blink[0m
+[0;32mI (365330) APP: AP mode → try STA reconnect[0m
+[0;32mI (365780) APP: AP mode → slow blink[0m
+[0;33mW (367740) WIFI_STA: Disconnected[0m
+[0;32mI (369780) APP: AP mode → slow blink[0m
+[0;33mW (373330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (373330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (373780) APP: AP mode → slow blink[0m
+[0;32mI (377780) APP: AP mode → slow blink[0m
+[0;32mI (381780) APP: AP mode → slow blink[0m
+[0;32mI (385780) APP: AP mode → slow blink[0m
+[0;32mI (389780) APP: AP mode → slow blink[0m
+[0;32mI (393780) APP: AP mode → slow blink[0m
+[0;32mI (395830) APP: AP mode → try STA reconnect[0m
+[0;32mI (397780) APP: AP mode → slow blink[0m
+[0;33mW (398240) WIFI_STA: Disconnected[0m
+[0;32mI (401780) APP: AP mode → slow blink[0m
+[0;33mW (403830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (403830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (405780) APP: AP mode → slow blink[0m
+[0;32mI (409780) APP: AP mode → slow blink[0m
+[0;32mI (413780) APP: AP mode → slow blink[0m
+[0;32mI (417780) APP: AP mode → slow blink[0m
+[0;32mI (421780) APP: AP mode → slow blink[0m
+[0;32mI (425780) APP: AP mode → slow blink[0m
+[0;32mI (426330) APP: AP mode → try STA reconnect[0m
+[0;33mW (428740) WIFI_STA: Disconnected[0m
+[0;32mI (429780) APP: AP mode → slow blink[0m
+[0;32mI (433780) APP: AP mode → slow blink[0m
+[0;33mW (434330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (434330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (437780) APP: AP mode → slow blink[0m
+[0;32mI (441780) APP: AP mode → slow blink[0m
+[0;32mI (445780) APP: AP mode → slow blink[0m
+[0;32mI (449780) APP: AP mode → slow blink[0m
+[0;32mI (453780) APP: AP mode → slow blink[0m
+[0;32mI (456830) APP: AP mode → try STA reconnect[0m
+[0;32mI (457780) APP: AP mode → slow blink[0m
+[0;33mW (459240) WIFI_STA: Disconnected[0m
+[0;32mI (461780) APP: AP mode → slow blink[0m
+[0;33mW (464830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (464830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (465780) APP: AP mode → slow blink[0m
+[0;32mI (469780) APP: AP mode → slow blink[0m
+[0;32mI (473780) APP: AP mode → slow blink[0m
+[0;32mI (477780) APP: AP mode → slow blink[0m
+[0;32mI (481780) APP: AP mode → slow blink[0m
+[0;32mI (485780) APP: AP mode → slow blink[0m
+[0;32mI (487330) APP: AP mode → try STA reconnect[0m
+[0;33mW (489740) WIFI_STA: Disconnected[0m
+[0;32mI (489780) APP: AP mode → slow blink[0m
+[0;32mI (493780) APP: AP mode → slow blink[0m
+[0;33mW (495330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (495330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (497780) APP: AP mode → slow blink[0m
+[0;32mI (501780) APP: AP mode → slow blink[0m
+[0;32mI (505780) APP: AP mode → slow blink[0m
+[0;32mI (509780) APP: AP mode → slow blink[0m
+[0;32mI (513780) APP: AP mode → slow blink[0m
+[0;32mI (517780) APP: AP mode → slow blink[0m
+[0;32mI (517830) APP: AP mode → try STA reconnect[0m
+[0;33mW (520240) WIFI_STA: Disconnected[0m
+[0;32mI (521780) APP: AP mode → slow blink[0m
+[0;32mI (525780) APP: AP mode → slow blink[0m
+[0;33mW (525830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (525830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (529780) APP: AP mode → slow blink[0m
+[0;32mI (533780) APP: AP mode → slow blink[0m
+[0;32mI (537780) APP: AP mode → slow blink[0m
+[0;32mI (541780) APP: AP mode → slow blink[0m
+[0;32mI (545780) APP: AP mode → slow blink[0m
+[0;32mI (548330) APP: AP mode → try STA reconnect[0m
+[0;32mI (549780) APP: AP mode → slow blink[0m
+[0;33mW (550740) WIFI_STA: Disconnected[0m
+[0;32mI (553780) APP: AP mode → slow blink[0m
+[0;33mW (556330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (556330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (557780) APP: AP mode → slow blink[0m
+[0;32mI (561780) APP: AP mode → slow blink[0m
+[0;32mI (565780) APP: AP mode → slow blink[0m
+[0;32mI (569780) APP: AP mode → slow blink[0m
+[0;32mI (573780) APP: AP mode → slow blink[0m
+[0;32mI (577780) APP: AP mode → slow blink[0m
+[0;32mI (578830) APP: AP mode → try STA reconnect[0m
+[0;33mW (581240) WIFI_STA: Disconnected[0m
+[0;32mI (581780) APP: AP mode → slow blink[0m
+[0;32mI (585780) APP: AP mode → slow blink[0m
+[0;33mW (586830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (586830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (589780) APP: AP mode → slow blink[0m
+[0;32mI (593780) APP: AP mode → slow blink[0m
+[0;32mI (597780) APP: AP mode → slow blink[0m
+[0;32mI (601780) APP: AP mode → slow blink[0m
+[0;32mI (605780) APP: AP mode → slow blink[0m
+[0;32mI (609330) APP: AP mode → try STA reconnect[0m
+[0;32mI (609780) APP: AP mode → slow blink[0m
+[0;33mW (611740) WIFI_STA: Disconnected[0m
+[0;32mI (613780) APP: AP mode → slow blink[0m
+[0;33mW (617330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (617330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (617780) APP: AP mode → slow blink[0m
+[0;32mI (621780) APP: AP mode → slow blink[0m
+[0;32mI (625780) APP: AP mode → slow blink[0m
+[0;32mI (629780) APP: AP mode → slow blink[0m
+[0;32mI (633780) APP: AP mode → slow blink[0m
+[0;32mI (637780) APP: AP mode → slow blink[0m
+[0;32mI (639830) APP: AP mode → try STA reconnect[0m
+[0;32mI (641780) APP: AP mode → slow blink[0m
+[0;33mW (642240) WIFI_STA: Disconnected[0m
+[0;32mI (645780) APP: AP mode → slow blink[0m
+[0;33mW (647830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (647830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (649780) APP: AP mode → slow blink[0m
+[0;32mI (653780) APP: AP mode → slow blink[0m
+[0;32mI (657780) APP: AP mode → slow blink[0m
+[0;32mI (661780) APP: AP mode → slow blink[0m
+[0;32mI (665780) APP: AP mode → slow blink[0m
+[0;32mI (669780) APP: AP mode → slow blink[0m
+[0;32mI (670330) APP: AP mode → try STA reconnect[0m
+[0;33mW (672740) WIFI_STA: Disconnected[0m
+[0;32mI (673780) APP: AP mode → slow blink[0m
+[0;32mI (677780) APP: AP mode → slow blink[0m
+[0;33mW (678330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (678330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (681780) APP: AP mode → slow blink[0m
+[0;32mI (685780) APP: AP mode → slow blink[0m
+[0;32mI (689780) APP: AP mode → slow blink[0m
+[0;32mI (693780) APP: AP mode → slow blink[0m
+[0;32mI (697780) APP: AP mode → slow blink[0m
+[0;32mI (700830) APP: AP mode → try STA reconnect[0m
+[0;32mI (701780) APP: AP mode → slow blink[0m
+[0;33mW (703240) WIFI_STA: Disconnected[0m
+[0;32mI (705780) APP: AP mode → slow blink[0m
+[0;33mW (708830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (708830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (709780) APP: AP mode → slow blink[0m
+[0;32mI (713780) APP: AP mode → slow blink[0m
+[0;32mI (717780) APP: AP mode → slow blink[0m
+[0;32mI (721780) APP: AP mode → slow blink[0m
+[0;32mI (725780) APP: AP mode → slow blink[0m
+[0;32mI (729780) APP: AP mode → slow blink[0m
+[0;32mI (731330) APP: AP mode → try STA reconnect[0m
+[0;33mW (733740) WIFI_STA: Disconnected[0m
+[0;32mI (733780) APP: AP mode → slow blink[0m
+[0;32mI (737780) APP: AP mode → slow blink[0m
+[0;33mW (739330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (739330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (741780) APP: AP mode → slow blink[0m
+[0;32mI (745780) APP: AP mode → slow blink[0m
+[0;32mI (749780) APP: AP mode → slow blink[0m
+[0;32mI (753780) APP: AP mode → slow blink[0m
+[0;32mI (757780) APP: AP mode → slow blink[0m
+[0;32mI (761780) APP: AP mode → slow blink[0m
+[0;32mI (761830) APP: AP mode → try STA reconnect[0m
+[0;33mW (764240) WIFI_STA: Disconnected[0m
+[0;32mI (765780) APP: AP mode → slow blink[0m
+[0;32mI (769780) APP: AP mode → slow blink[0m
+[0;33mW (769830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (769830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (773780) APP: AP mode → slow blink[0m
+[0;32mI (777780) APP: AP mode → slow blink[0m
+[0;32mI (781780) APP: AP mode → slow blink[0m
+[0;32mI (785780) APP: AP mode → slow blink[0m
+[0;32mI (789780) APP: AP mode → slow blink[0m
+[0;32mI (792330) APP: AP mode → try STA reconnect[0m
+[0;32mI (793780) APP: AP mode → slow blink[0m
+[0;33mW (794740) WIFI_STA: Disconnected[0m
+[0;32mI (797780) APP: AP mode → slow blink[0m
+[0;33mW (800330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (800330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (801780) APP: AP mode → slow blink[0m
+[0;32mI (805780) APP: AP mode → slow blink[0m
+[0;32mI (809780) APP: AP mode → slow blink[0m
+[0;32mI (813780) APP: AP mode → slow blink[0m
+[0;32mI (817780) APP: AP mode → slow blink[0m
+[0;32mI (821780) APP: AP mode → slow blink[0m
+[0;32mI (822830) APP: AP mode → try STA reconnect[0m
+[0;33mW (825240) WIFI_STA: Disconnected[0m
+[0;32mI (825780) APP: AP mode → slow blink[0m
+[0;32mI (829780) APP: AP mode → slow blink[0m
+[0;33mW (830830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (830830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (833780) APP: AP mode → slow blink[0m
+[0;32mI (837780) APP: AP mode → slow blink[0m
+[0;32mI (841780) APP: AP mode → slow blink[0m
+[0;32mI (845780) APP: AP mode → slow blink[0m
+[0;32mI (849780) APP: AP mode → slow blink[0m
+[0;32mI (853330) APP: AP mode → try STA reconnect[0m
+[0;32mI (853780) APP: AP mode → slow blink[0m
+[0;33mW (855740) WIFI_STA: Disconnected[0m
+[0;32mI (857780) APP: AP mode → slow blink[0m
+[0;33mW (861330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (861330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (861780) APP: AP mode → slow blink[0m
+[0;32mI (865780) APP: AP mode → slow blink[0m
+[0;32mI (869780) APP: AP mode → slow blink[0m
+[0;32mI (873780) APP: AP mode → slow blink[0m
+[0;32mI (877780) APP: AP mode → slow blink[0m
+[0;32mI (881780) APP: AP mode → slow blink[0m
+[0;32mI (883830) APP: AP mode → try STA reconnect[0m
+[0;32mI (885780) APP: AP mode → slow blink[0m
+[0;33mW (886240) WIFI_STA: Disconnected[0m
+[0;32mI (889780) APP: AP mode → slow blink[0m
+[0;33mW (891830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (891830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (893780) APP: AP mode → slow blink[0m
+[0;32mI (897780) APP: AP mode → slow blink[0m
+[0;32mI (901780) APP: AP mode → slow blink[0m
+[0;32mI (905780) APP: AP mode → slow blink[0m
+[0;32mI (909780) APP: AP mode → slow blink[0m
+[0;32mI (913780) APP: AP mode → slow blink[0m
+[0;32mI (914330) APP: AP mode → try STA reconnect[0m
+[0;33mW (916740) WIFI_STA: Disconnected[0m
+[0;32mI (917780) APP: AP mode → slow blink[0m
+[0;32mI (921780) APP: AP mode → slow blink[0m
+[0;33mW (922330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (922330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (925780) APP: AP mode → slow blink[0m
+[0;32mI (929780) APP: AP mode → slow blink[0m
+[0;32mI (933780) APP: AP mode → slow blink[0m
+[0;32mI (937780) APP: AP mode → slow blink[0m
+[0;32mI (941780) APP: AP mode → slow blink[0m
+[0;32mI (944830) APP: AP mode → try STA reconnect[0m
+[0;32mI (945780) APP: AP mode → slow blink[0m
+[0;33mW (947240) WIFI_STA: Disconnected[0m
+[0;32mI (949780) APP: AP mode → slow blink[0m
+[0;33mW (952830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (952830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (953780) APP: AP mode → slow blink[0m
+[0;32mI (957780) APP: AP mode → slow blink[0m
+[0;32mI (961780) APP: AP mode → slow blink[0m
+[0;32mI (965780) APP: AP mode → slow blink[0m
+[0;32mI (969780) APP: AP mode → slow blink[0m
+[0;32mI (973780) APP: AP mode → slow blink[0m
+[0;32mI (975330) APP: AP mode → try STA reconnect[0m
+[0;33mW (977740) WIFI_STA: Disconnected[0m
+[0;32mI (977780) APP: AP mode → slow blink[0m
+[0;32mI (981780) APP: AP mode → slow blink[0m
+[0;33mW (983330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (983330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (985780) APP: AP mode → slow blink[0m
+[0;32mI (989780) APP: AP mode → slow blink[0m
+[0;32mI (993780) APP: AP mode → slow blink[0m
+[0;32mI (997780) APP: AP mode → slow blink[0m
+[0;32mI (1001780) APP: AP mode → slow blink[0m
+[0;32mI (1005780) APP: AP mode → slow blink[0m
+[0;32mI (1005830) APP: AP mode → try STA reconnect[0m
+[0;33mW (1008240) WIFI_STA: Disconnected[0m
+[0;32mI (1009780) APP: AP mode → slow blink[0m
+[0;32mI (1013780) APP: AP mode → slow blink[0m
+[0;33mW (1013830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (1013830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (1017780) APP: AP mode → slow blink[0m
+[0;32mI (1021780) APP: AP mode → slow blink[0m
+[0;32mI (1025780) APP: AP mode → slow blink[0m
+[0;32mI (1029780) APP: AP mode → slow blink[0m
+[0;32mI (1033780) APP: AP mode → slow blink[0m
+[0;32mI (1036330) APP: AP mode → try STA reconnect[0m
+[0;32mI (1037780) APP: AP mode → slow blink[0m
+[0;33mW (1038740) WIFI_STA: Disconnected[0m
+[0;32mI (1041780) APP: AP mode → slow blink[0m
+[0;33mW (1044330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (1044330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (1045780) APP: AP mode → slow blink[0m
+[0;32mI (1049780) APP: AP mode → slow blink[0m
+[0;32mI (1053780) APP: AP mode → slow blink[0m
+[0;32mI (1057780) APP: AP mode → slow blink[0m
+[0;32mI (1061780) APP: AP mode → slow blink[0m
+[0;32mI (1065780) APP: AP mode → slow blink[0m
+[0;32mI (1066830) APP: AP mode → try STA reconnect[0m
+[0;33mW (1069240) WIFI_STA: Disconnected[0m
+[0;32mI (1069780) APP: AP mode → slow blink[0m
+[0;32mI (1073780) APP: AP mode → slow blink[0m
+[0;33mW (1074830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (1074830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (1077780) APP: AP mode → slow blink[0m
+[0;32mI (1081780) APP: AP mode → slow blink[0m
+[0;32mI (1085780) APP: AP mode → slow blink[0m
+[0;32mI (1089780) APP: AP mode → slow blink[0m
+[0;32mI (1093780) APP: AP mode → slow blink[0m
+[0;32mI (1097330) APP: AP mode → try STA reconnect[0m
+[0;32mI (1097780) APP: AP mode → slow blink[0m
+[0;33mW (1099740) WIFI_STA: Disconnected[0m
+[0;32mI (1101780) APP: AP mode → slow blink[0m
+[0;33mW (1105330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (1105330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (1105780) APP: AP mode → slow blink[0m
+[0;32mI (1109780) APP: AP mode → slow blink[0m
+[0;32mI (1113780) APP: AP mode → slow blink[0m
+[0;32mI (1117780) APP: AP mode → slow blink[0m
+[0;32mI (1121780) APP: AP mode → slow blink[0m
+[0;32mI (1125780) APP: AP mode → slow blink[0m
+[0;32mI (1127830) APP: AP mode → try STA reconnect[0m
+[0;32mI (1129780) APP: AP mode → slow blink[0m
+[0;33mW (1130240) WIFI_STA: Disconnected[0m
+[0;32mI (1133780) APP: AP mode → slow blink[0m
+[0;33mW (1135830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (1135830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (1137780) APP: AP mode → slow blink[0m
+[0;32mI (1141780) APP: AP mode → slow blink[0m
+[0;32mI (1145780) APP: AP mode → slow blink[0m
+[0;32mI (1149780) APP: AP mode → slow blink[0m
+[0;32mI (1153780) APP: AP mode → slow blink[0m
+[0;32mI (1157780) APP: AP mode → slow blink[0m
+[0;32mI (1158330) APP: AP mode → try STA reconnect[0m
+[0;33mW (1160740) WIFI_STA: Disconnected[0m
+[0;32mI (1161780) APP: AP mode → slow blink[0m
+[0;32mI (1165780) APP: AP mode → slow blink[0m
+[0;33mW (1166330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (1166330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (1169780) APP: AP mode → slow blink[0m
+[0;32mI (1173780) APP: AP mode → slow blink[0m
+[0;32mI (1177780) APP: AP mode → slow blink[0m
+[0;32mI (1181780) APP: AP mode → slow blink[0m
+[0;32mI (1185780) APP: AP mode → slow blink[0m
+[0;32mI (1188830) APP: AP mode → try STA reconnect[0m
+[0;32mI (1189780) APP: AP mode → slow blink[0m
+[0;33mW (1191240) WIFI_STA: Disconnected[0m
+[0;32mI (1193780) APP: AP mode → slow blink[0m
+[0;33mW (1196830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (1196830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (1197780) APP: AP mode → slow blink[0m
+[0;32mI (1201780) APP: AP mode → slow blink[0m
+[0;32mI (1205780) APP: AP mode → slow blink[0m
+[0;32mI (1209780) APP: AP mode → slow blink[0m
+[0;32mI (1213780) APP: AP mode → slow blink[0m
+[0;32mI (1217780) APP: AP mode → slow blink[0m
+[0;32mI (1219330) APP: AP mode → try STA reconnect[0m
+[0;33mW (1221740) WIFI_STA: Disconnected[0m
+[0;32mI (1221780) APP: AP mode → slow blink[0m
+[0;32mI (1225780) APP: AP mode → slow blink[0m
+[0;33mW (1227330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (1227330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (1229780) APP: AP mode → slow blink[0m
+[0;32mI (1233780) APP: AP mode → slow blink[0m
+[0;32mI (1237780) APP: AP mode → slow blink[0m
+[0;32mI (1241780) APP: AP mode → slow blink[0m
+[0;32mI (1245780) APP: AP mode → slow blink[0m
+[0;32mI (1249780) APP: AP mode → slow blink[0m
+[0;32mI (1249830) APP: AP mode → try STA reconnect[0m
+[0;33mW (1252240) WIFI_STA: Disconnected[0m
+[0;32mI (1253780) APP: AP mode → slow blink[0m
+[0;32mI (1257780) APP: AP mode → slow blink[0m
+[0;33mW (1257830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (1257830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (1261780) APP: AP mode → slow blink[0m
+[0;32mI (1265780) APP: AP mode → slow blink[0m
+[0;32mI (1269780) APP: AP mode → slow blink[0m
+[0;32mI (1273780) APP: AP mode → slow blink[0m
+[0;32mI (1277780) APP: AP mode → slow blink[0m
+[0;32mI (1280330) APP: AP mode → try STA reconnect[0m
+[0;32mI (1281780) APP: AP mode → slow blink[0m
+[0;33mW (1282740) WIFI_STA: Disconnected[0m
+[0;32mI (1285780) APP: AP mode → slow blink[0m
+[0;33mW (1288330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (1288330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (1289780) APP: AP mode → slow blink[0m
+[0;32mI (1293780) APP: AP mode → slow blink[0m
+[0;32mI (1297780) APP: AP mode → slow blink[0m
+[0;32mI (1301780) APP: AP mode → slow blink[0m
+[0;32mI (1305780) APP: AP mode → slow blink[0m
+[0;32mI (1309780) APP: AP mode → slow blink[0m
+[0;32mI (1310830) APP: AP mode → try STA reconnect[0m
+[0;33mW (1313240) WIFI_STA: Disconnected[0m
+[0;32mI (1313780) APP: AP mode → slow blink[0m
+[0;32mI (1317780) APP: AP mode → slow blink[0m
+[0;33mW (1318830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (1318830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (1321780) APP: AP mode → slow blink[0m
+[0;32mI (1325780) APP: AP mode → slow blink[0m
+[0;32mI (1329780) APP: AP mode → slow blink[0m
+[0;32mI (1333780) APP: AP mode → slow blink[0m
+[0;32mI (1337780) APP: AP mode → slow blink[0m
+[0;32mI (1341330) APP: AP mode → try STA reconnect[0m
+[0;32mI (1341780) APP: AP mode → slow blink[0m
+[0;33mW (1343740) WIFI_STA: Disconnected[0m
+[0;32mI (1345780) APP: AP mode → slow blink[0m
+[0;33mW (1349330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (1349330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (1349780) APP: AP mode → slow blink[0m
+[0;32mI (1353780) APP: AP mode → slow blink[0m
+[0;32mI (1357780) APP: AP mode → slow blink[0m
+[0;32mI (1361780) APP: AP mode → slow blink[0m
+[0;32mI (1365780) APP: AP mode → slow blink[0m
+[0;32mI (1369780) APP: AP mode → slow blink[0m
+[0;32mI (1371830) APP: AP mode → try STA reconnect[0m
+[0;32mI (1373780) APP: AP mode → slow blink[0m
+[0;33mW (1374240) WIFI_STA: Disconnected[0m
+[0;32mI (1377780) APP: AP mode → slow blink[0m
+[0;33mW (1379830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (1379830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (1381780) APP: AP mode → slow blink[0m
+[0;32mI (1385780) APP: AP mode → slow blink[0m
+[0;32mI (1389780) APP: AP mode → slow blink[0m
+[0;32mI (1393780) APP: AP mode → slow blink[0m
+[0;32mI (1397780) APP: AP mode → slow blink[0m
+[0;32mI (1401780) APP: AP mode → slow blink[0m
+[0;32mI (1402330) APP: AP mode → try STA reconnect[0m
+[0;33mW (1404740) WIFI_STA: Disconnected[0m
+[0;32mI (1405780) APP: AP mode → slow blink[0m
+[0;32mI (1409780) APP: AP mode → slow blink[0m
+[0;33mW (1410330) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (1410330) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (1413780) APP: AP mode → slow blink[0m
+[0;32mI (1417780) APP: AP mode → slow blink[0m
+[0;32mI (1421780) APP: AP mode → slow blink[0m
+[0;32mI (1425780) APP: AP mode → slow blink[0m
+[0;32mI (1429780) APP: AP mode → slow blink[0m
+[0;32mI (1432830) APP: AP mode → try STA reconnect[0m
+[0;32mI (1433780) APP: AP mode → slow blink[0m
+[0;33mW (1435240) WIFI_STA: Disconnected[0m
+[0;32mI (1437780) APP: AP mode → slow blink[0m
+[0;33mW (1440830) WIFI_STA: Timeout waiting IP[0m
+[0;32mI (1440830) APP: Still no STA IP, keep AP mode[0m
+[0;32mI (1441780) APP: AP mode → slow blink[0m
+[0;32mI (1445780) APP: AP mode → slow blink[0m
+[0;32mI (1449780) APP: AP mode → slow blink[0m
+[0;32mI (1453780) APP: AP mode → slow blink[0m
+[0;32mI (1457780) APP: AP mode → slow blink[0m
+[0;32mI (1461780) APP: AP mode → slow blink[0m
+[0;32mI (1463330) APP: AP mode → try STA reconnect[0m
+[0;33mW (1465740) WIFI_STA: Disconnected[0m
+[0;32mI (1465780) APP: AP mode → slow blink[0m

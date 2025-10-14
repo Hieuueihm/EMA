@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Wi-Fi Setup</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 2rem
+        }
+
+        input {
+            padding: .5rem;
+            margin: .25rem 0;
+            width: 100%;
+            max-width: 420px
+        }
+
+        button {
+            padding: .6rem 1rem;
+            margin-top: .5rem
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Configure Wi-Fi</h2>
+    <form method="POST" action="/save">
+        <label>SSID</label><br>
+        <input name="ssid" maxlength="32" required>
+        <br><label>Password</label><br>
+        <input name="pass" maxlength="64" type="password">
+        <br><button type="submit">Save</button>
+    </form>
+</body>
+
+</html>

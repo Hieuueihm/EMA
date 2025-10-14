@@ -1,0 +1,16 @@
+Command: ninja flash
+[1/10] Performing build step for 'bootloader'
+[1/1] C:\WINDOWS\system32\cmd.exe /C "cd /D D:\my_first_app\build\bootloader\esp-idf\esptool_py && C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe C:/Espressif/frameworks/esp-idf-v5.5.1/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 D:/my_first_app/build/bootloader/bootloader.bin"
+Bootloader binary size 0x6680 bytes. 0x980 bytes (8%) free.
+[2/10] No install step for 'bootloader'
+[3/10] Completed 'bootloader'
+[4/10] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/main.c.obj
+D:/my_first_app/main/main.c: In function 'radio_loop_task':
+D:/my_first_app/main/main.c:67:46: warning: passing argument 1 of 'lora_send_packet' discards 'const' qualifier from pointer target type [-Wdiscarded-qualifiers]
+   67 |                             lora_send_packet((const uint8_t *)&res.frame.offer, sizeof(res.frame.offer));
+      |                                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from D:/my_first_app/main/main.c:6:
+D:/my_first_app/main/lora.h:26:32: note: expected 'uint8_t *' {aka 'unsigned char *'} but argument is of type 'const uint8_t *' {aka 'const unsigned char *'}
+   26 | void lora_send_packet(uint8_t *buf, int size);
+      |                       ~~~~~~~~~^~~
+[5/10] Linking C static library esp-idf\main\libmain.a

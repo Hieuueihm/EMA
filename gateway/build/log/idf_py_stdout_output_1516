@@ -1,0 +1,127 @@
+Command: C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe C:\Espressif\frameworks\esp-idf-v5.5.1\tools/idf_monitor.py -p COM20 -b 115200 --toolchain-prefix xtensa-esp32-elf- --target esp32 --revision 0 D:\my_first_app\build\my_first_app.elf D:\my_first_app\build\bootloader\bootloader.elf --force-color -m 'C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe' 'C:\Espressif\frameworks\esp-idf-v5.5.1\tools\idf.py' '-p' 'COM20'
+�+�ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 188777542, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6380
+ho 0 tail 12 room 4
+load:0x40078000,len:15916
+load:0x40080400,len:3860
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Oct  9 2025 09:33:59[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (31) boot: chip revision: v1.1[0m
+[0;32mI (34) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (38) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (41) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (45) boot: Enabling RNG early entropy source...[0m
+[0;32mI (50) boot: Partition Table:[0m
+[0;32mI (52) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (72) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (78) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=0c28ch ( 49804) map[0m
+[0;32mI (106) esp_image: segment 1: paddr=0001c2b4 vaddr=3ffb0000 size=026b8h (  9912) load[0m
+[0;32mI (110) esp_image: segment 2: paddr=0001e974 vaddr=40080000 size=016a4h (  5796) load[0m
+[0;32mI (112) esp_image: segment 3: paddr=00020020 vaddr=400d0020 size=1e370h (123760) map[0m
+[0;32mI (160) esp_image: segment 4: paddr=0003e398 vaddr=400816a4 size=0dea0h ( 56992) load[0m
+[0;32mI (182) esp_image: segment 5: paddr=0004c240 vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (190) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (190) boot: Disabling RNG early entropy source...[0m
+[0;32mI (202) cpu_start: Multicore app[0m
+[0;32mI (211) cpu_start: Pro cpu start user code[0m
+[0;32mI (211) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (211) app_init: Application information:[0m
+[0;32mI (211) app_init: Project name:     my_first_app[0m
+[0;32mI (215) app_init: App version:      1[0m
+[0;32mI (219) app_init: Compile time:     Oct 13 2025 23:46:37[0m
+[0;32mI (224) app_init: ELF file SHA256:  888da822b...[0m
+[0;32mI (228) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (232) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (236) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (240) efuse_init: Chip rev:         v1.1[0m
+[0;32mI (244) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (250) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (255) heap_init: At 3FFB3C00 len 0002C400 (177 KiB): DRAM[0m
+[0;32mI (260) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (266) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (271) heap_init: At 4008F544 len 00010ABC (66 KiB): IRAM[0m
+[0;32mI (278) spi_flash: detected chip: gd[0m
+[0;32mI (280) spi_flash: flash io: dio[0m
+[0;33mW (283) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (295) main_task: Started on CPU0[0m
+[0;32mI (305) main_task: Calling app_main()[0m
+[0;32mI (325) GW: Wi-Fi STA MAC: E8:6B:EA:09:D5:24[0m
+Gateway ID: E8:6B:EA:09:D5:24
+Starting UID: E86BEA09D5240001
+Next UID:     E86BEA09D5240002
+[0;32mI (335) GW: RX loop start[0m
+[0;32mI (335) main_task: Returned from app_main()[0m
+[0;32mI (3935) GW: HELLO: seq=0xB653 flags=0x00 nonce=0xAB86 uid=00:00:00:00:00:00:00:00[0m
+[0;32mI (3935) GW: Action: SEND_OFFER[0m
+[0;32mI (5275) GW: >> SENT OFFER: seq=0xB653[0m
+[0;32mI (8095) GW: HELLO: seq=0xF212 flags=0x00 nonce=0x145E uid=00:00:00:00:00:00:00:00[0m
+[0;32mI (8095) GW: Action: SEND_OFFER[0m
+[0;32mI (9435) GW: >> SENT OFFER: seq=0xF212[0m
+[0;32mI (12255) GW: HELLO: seq=0x6E0A flags=0x00 nonce=0x8C32 uid=00:00:00:00:00:00:00:00[0m
+[0;32mI (12255) GW: Action: SEND_OFFER[0m
+[0;32mI (13595) GW: >> SENT OFFER: seq=0x6E0A[0m
+[0;32mI (16415) GW: HELLO: seq=0xDABC flags=0x00 nonce=0xD006 uid=00:00:00:00:00:00:00:00[0m
+[0;32mI (16415) GW: Action: SEND_OFFER[0m
+[0;32mI (17755) GW: >> SENT OFFER: seq=0xDABC[0m
+[0;32mI (20575) GW: HELLO: seq=0x1DD4 flags=0x00 nonce=0xBCF8 uid=00:00:00:00:00:00:00:00[0m
+[0;32mI (20575) GW: Action: SEND_OFFER[0m
+[0;32mI (21915) GW: >> SENT OFFER: seq=0x1DD4[0m
+[0;32mI (24735) GW: HELLO: seq=0xA6FF flags=0x00 nonce=0x0FC0 uid=00:00:00:00:00:00:00:00[0m
+[0;32mI (24735) GW: Action: SEND_OFFER[0m
+[0;32mI (26075) GW: >> SENT OFFER: seq=0xA6FF[0m
+[0;32mI (28895) GW: HELLO: seq=0x44F0 flags=0x00 nonce=0x23CF uid=00:00:00:00:00:00:00:00[0m
+[0;32mI (28895) GW: Action: SEND_OFFER[0m
+[0;32mI (30235) GW: >> SENT OFFER: seq=0x44F0[0m
+[0;32mI (33055) GW: HELLO: seq=0xE010 flags=0x00 nonce=0xFCD4 uid=00:00:00:00:00:00:00:00[0m
+[0;32mI (33055) GW: Action: SEND_OFFER[0m
+[0;32mI (34395) GW: >> SENT OFFER: seq=0xE010[0m
+[0;32mI (37215) GW: HELLO: seq=0xD91D flags=0x00 nonce=0xB035 uid=00:00:00:00:00:00:00:00[0m
+[0;32mI (37215) GW: Action: SEND_OFFER[0m
+[0;32mI (38555) GW: >> SENT OFFER: seq=0xD91D[0m
+[0;32mI (41375) GW: HELLO: seq=0x8DFA flags=0x00 nonce=0xF8CE uid=00:00:00:00:00:00:00:00[0m
+[0;32mI (41375) GW: Action: SEND_OFFER[0m
+[0;32mI (42715) GW: >> SENT OFFER: seq=0x8DFA[0m
+[0;32mI (45535) GW: HELLO: seq=0x7B4E flags=0x00 nonce=0x682D uid=00:00:00:00:00:00:00:00[0m
+[0;32mI (45535) GW: Action: SEND_OFFER[0m
+[0;32mI (46875) GW: >> SENT OFFER: seq=0x7B4E[0m
+[0;32mI (49695) GW: HELLO: seq=0x1D17 flags=0x00 nonce=0x9801 uid=00:00:00:00:00:00:00:00[0m
+[0;32mI (49695) GW: Action: SEND_OFFER[0m
+[0;32mI (51035) GW: >> SENT OFFER: seq=0x1D17[0m
+[0;32mI (53855) GW: HELLO: seq=0xAD78 flags=0x00 nonce=0x48C7 uid=00:00:00:00:00:00:00:00[0m
+[0;32mI (53855) GW: Action: SEND_OFFER[0m
+[0;32mI (55195) GW: >> SENT OFFER: seq=0xAD78[0m
+[0;32mI (58015) GW: HELLO: seq=0x7BF6 flags=0x00 nonce=0x2505 uid=00:00:00:00:00:00:00:00[0m
+[0;32mI (58015) GW: Action: SEND_OFFER[0m
+[0;32mI (59355) GW: >> SENT OFFER: seq=0x7BF6[0m
+[0;32mI (62175) GW: HELLO: seq=0x468C flags=0x00 nonce=0x0628 uid=00:00:00:00:00:00:00:00[0m
+[0;32mI (62175) GW: Action: SEND_OFFER[0m
+[0;32mI (63515) GW: >> SENT OFFER: seq=0x468C[0m
+[0;32mI (66335) GW: HELLO: seq=0xD8A9 flags=0x00 nonce=0xF78D uid=00:00:00:00:00:00:00:00[0m
+[0;32mI (66335) GW: Action: SEND_OFFER[0m
+[0;32mI (67675) GW: >> SENT OFFER: seq=0xD8A9[0m
+[0;32mI (70495) GW: HELLO: seq=0x9F3B flags=0x00 nonce=0x1BF3 uid=00:00:00:00:00:00:00:00[0m
+[0;32mI (70495) GW: Action: SEND_OFFER[0m
+[0;32mI (71835) GW: >> SENT OFFER: seq=0x9F3B[0m
+[0;32mI (74655) GW: HELLO: seq=0xC75B flags=0x00 nonce=0x8EAA uid=00:00:00:00:00:00:00:00[0m
+[0;32mI (74655) GW: Action: SEND_OFFER[0m
+[0;32mI (75995) GW: >> SENT OFFER: seq=0xC75B[0m
+[0;32mI (78815) GW: HELLO: seq=0xFEF3 flags=0x00 nonce=0x2857 uid=00:00:00:00:00:00:00:00[0m
+[0;32mI (78815) GW: Action: SEND_OFFER[0m
+[0;32mI (80155) GW: >> SENT OFFER: seq=0xFEF3[0m
+[0;32mI (82975) GW: HELLO: seq=0x071B flags=0x00 nonce=0x4804 uid=00:00:00:00:00:00:00:00[0m
+[0;32mI (82975) GW: Action: SEND_OFFER[0m
+[0;32mI (84315) GW: >> SENT OFFER: seq=0x071B[0m
+[0;32mI (87135) GW: HELLO: seq=0x0987 flags=0x00 nonce=0xC784 uid=00:00:00:00:00:00:00:00[0m
+[0;32mI (87135) GW: Action: SEND_OFFER[0m
+[0;32mI (88475) GW: >> SENT OFFER: seq=0x0987[0m
+[0;32mI (91295) GW: HELLO: seq=0xB7A8 flags=0x00 nonce=0x7E7E uid=00:00

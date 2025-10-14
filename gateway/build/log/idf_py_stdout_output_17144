@@ -1,0 +1,1274 @@
+Command: C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe C:\Espressif\frameworks\esp-idf-v5.5.1\tools/idf_monitor.py -p COM18 -b 115200 --toolchain-prefix xtensa-esp32-elf- --target esp32 --revision 0 D:\my_first_app\build\my_first_app.elf D:\my_first_app\build\bootloader\bootloader.elf --force-color -m 'C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe' 'C:\Espressif\frameworks\esp-idf-v5.5.1\tools\idf.py' '-p' 'COM18'
+ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 188777542, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6380
+ho 0 tail 12 room 4
+load:0x40078000,len:15916
+load:0x40080400,len:3860
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Oct  9 2025 09:33:59[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (31) boot: chip revision: v1.1[0m
+[0;32mI (34) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (38) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (41) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (45) boot: Enabling RNG early entropy source...[0m
+[0;32mI (50) boot: Partition Table:[0m
+[0;32mI (52) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (71) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (78) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=0b5d0h ( 46544) map[0m
+[0;32mI (105) esp_image: segment 1: paddr=0001b5f8 vaddr=3ffb0000 size=02560h (  9568) load[0m
+[0;32mI (109) esp_image: segment 2: paddr=0001db60 vaddr=40080000 size=024b8h (  9400) load[0m
+[0;32mI (112) esp_image: segment 3: paddr=00020020 vaddr=400d0020 size=194bch (103612) map[0m
+[0;32mI (152) esp_image: segment 4: paddr=000394e4 vaddr=400824b8 size=0c82ch ( 51244) load[0m
+[0;32mI (172) esp_image: segment 5: paddr=00045d18 vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (179) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (179) boot: Disabling RNG early entropy source...[0m
+[0;32mI (190) cpu_start: Multicore app[0m
+[0;32mI (198) cpu_start: Pro cpu start user code[0m
+[0;32mI (198) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (198) app_init: Application information:[0m
+[0;32mI (198) app_init: Project name:     my_first_app[0m
+[0;32mI (203) app_init: App version:      1[0m
+[0;32mI (206) app_init: Compile time:     Oct 13 2025 23:25:48[0m
+[0;32mI (211) app_init: ELF file SHA256:  bde284c15...[0m
+[0;32mI (216) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (219) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (223) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (227) efuse_init: Chip rev:         v1.1[0m
+[0;32mI (231) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (237) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (242) heap_init: At 3FFB2E68 len 0002D198 (180 KiB): DRAM[0m
+[0;32mI (248) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (253) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (259) heap_init: At 4008ECE4 len 0001131C (68 KiB): IRAM[0m
+[0;32mI (265) spi_flash: detected chip: gd[0m
+[0;32mI (267) spi_flash: flash io: dio[0m
+[0;33mW (270) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (283) main_task: Started on CPU0[0m
+[0;32mI (293) main_task: Calling app_main()[0m
+[0;32mI (303) main_task: Returned from app_main()[0m
+[0;32mI (1463) NODE_HELLO: HELLO sent (len=14, seq=0xF42D, nonce=0x8CCF)[0m
+[0;32mI (1463) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (5623) NODE_HELLO: HELLO sent (len=14, seq=0xF646, nonce=0x3129)[0m
+[0;32mI (5623) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (7013) NODE_HELLO: OFFER: seq16=0xF646, echo_nonce=0x3129, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:E3, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 46 F6 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 E3 29 31 01 01 
+[0;32mI (9783) NODE_HELLO: HELLO sent (len=14, seq=0x5B04, nonce=0x5DB4)[0m
+[0;32mI (9783) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (11173) NODE_HELLO: OFFER: seq16=0x5B04, echo_nonce=0x5DB4, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:E4, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 04 5B E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 E4 B4 5D 01 01 
+[0;32mI (13943) NODE_HELLO: HELLO sent (len=14, seq=0x7F78, nonce=0x59D8)[0m
+[0;32mI (13943) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (15333) NODE_HELLO: OFFER: seq16=0x7F78, echo_nonce=0x59D8, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:E5, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 78 7F E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 E5 D8 59 01 01 
+[0;32mI (18103) NODE_HELLO: HELLO sent (len=14, seq=0x4868, nonce=0x56A7)[0m
+[0;32mI (18103) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (19493) NODE_HELLO: OFFER: seq16=0x4868, echo_nonce=0x56A7, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:E6, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 68 48 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 E6 A7 56 01 01 
+[0;32mI (22263) NODE_HELLO: HELLO sent (len=14, seq=0xB7FF, nonce=0xD43F)[0m
+[0;32mI (22263) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (23653) NODE_HELLO: OFFER: seq16=0xB7FF, echo_nonce=0xD43F, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:E7, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 FF B7 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 E7 3F D4 01 01 
+[0;32mI (26423) NODE_HELLO: HELLO sent (len=14, seq=0xA52B, nonce=0xBAF1)[0m
+[0;32mI (26423) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (27813) NODE_HELLO: OFFER: seq16=0xA52B, echo_nonce=0xBAF1, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:E8, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 2B A5 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 E8 F1 BA 01 01 
+[0;32mI (30583) NODE_HELLO: HELLO sent (len=14, seq=0x41FC, nonce=0x6FD9)[0m
+[0;32mI (30583) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (31973) NODE_HELLO: OFFER: seq16=0x41FC, echo_nonce=0x6FD9, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:E9, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 FC 41 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 E9 D9 6F 01 01 
+[0;32mI (34743) NODE_HELLO: HELLO sent (len=14, seq=0x2F7A, nonce=0x0796)[0m
+[0;32mI (34743) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (36133) NODE_HELLO: OFFER: seq16=0x2F7A, echo_nonce=0x0796, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:EA, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 7A 2F E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 EA 96 07 01 01 
+[0;32mI (38903) NODE_HELLO: HELLO sent (len=14, seq=0x5E09, nonce=0x702C)[0m
+[0;32mI (38903) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (40293) NODE_HELLO: OFFER: seq16=0x5E09, echo_nonce=0x702C, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:EB, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 09 5E E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 EB 2C 70 01 01 
+[0;32mI (43063) NODE_HELLO: HELLO sent (len=14, seq=0x2CA5, nonce=0x4157)[0m
+[0;32mI (43063) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (44453) NODE_HELLO: OFFER: seq16=0x2CA5, echo_nonce=0x4157, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:EC, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 A5 2C E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 EC 57 41 01 01 
+[0;32mI (47223) NODE_HELLO: HELLO sent (len=14, seq=0xDF74, nonce=0x0364)[0m
+[0;32mI (47223) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (48613) NODE_HELLO: OFFER: seq16=0xDF74, echo_nonce=0x0364, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:ED, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 74 DF E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 ED 64 03 01 01 
+[0;32mI (51383) NODE_HELLO: HELLO sent (len=14, seq=0x3CC4, nonce=0x5FAF)[0m
+[0;32mI (51383) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (52773) NODE_HELLO: OFFER: seq16=0x3CC4, echo_nonce=0x5FAF, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:EE, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 C4 3C E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 EE AF 5F 01 01 
+[0;32mI (55543) NODE_HELLO: HELLO sent (len=14, seq=0xB115, nonce=0x8628)[0m
+[0;32mI (55543) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (56933) NODE_HELLO: OFFER: seq16=0xB115, echo_nonce=0x8628, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:EF, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 15 B1 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 EF 28 86 01 01 
+[0;32mI (59703) NODE_HELLO: HELLO sent (len=14, seq=0xBFA4, nonce=0x50E9)[0m
+[0;32mI (59703) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (61093) NODE_HELLO: OFFER: seq16=0xBFA4, echo_nonce=0x50E9, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:F0, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 A4 BF E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 F0 E9 50 01 01 
+[0;32mI (63863) NODE_HELLO: HELLO sent (len=14, seq=0x1657, nonce=0x2FDB)[0m
+[0;32mI (63863) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (65253) NODE_HELLO: OFFER: seq16=0x1657, echo_nonce=0x2FDB, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:F1, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 57 16 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 F1 DB 2F 01 01 
+[0;32mI (68023) NODE_HELLO: HELLO sent (len=14, seq=0x625E, nonce=0x5020)[0m
+[0;32mI (68023) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (69413) NODE_HELLO: OFFER: seq16=0x625E, echo_nonce=0x5020, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:F2, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 5E 62 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 F2 20 50 01 01 
+[0;32mI (72183) NODE_HELLO: HELLO sent (len=14, seq=0x54FB, nonce=0xC038)[0m
+[0;32mI (72183) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (73573) NODE_HELLO: OFFER: seq16=0x54FB, echo_nonce=0xC038, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:F3, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 FB 54 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 F3 38 C0 01 01 
+[0;32mI (76343) NODE_HELLO: HELLO sent (len=14, seq=0xD5A8, nonce=0x004E)[0m
+[0;32mI (76343) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (77733) NODE_HELLO: OFFER: seq16=0xD5A8, echo_nonce=0x004E, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:F4, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 A8 D5 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 F4 4E 00 01 01 
+[0;32mI (80503) NODE_HELLO: HELLO sent (len=14, seq=0x87A6, nonce=0xC714)[0m
+[0;32mI (80503) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (81893) NODE_HELLO: OFFER: seq16=0x87A6, echo_nonce=0xC714, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:F5, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 A6 87 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 F5 14 C7 01 01 
+[0;32mI (84663) NODE_HELLO: HELLO sent (len=14, seq=0x8D93, nonce=0xD725)[0m
+[0;32mI (84663) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (86053) NODE_HELLO: OFFER: seq16=0x8D93, echo_nonce=0xD725, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:F6, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 93 8D E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 F6 25 D7 01 01 
+[0;32mI (88823) NODE_HELLO: HELLO sent (len=14, seq=0x9456, nonce=0x8624)[0m
+[0;32mI (88823) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (90213) NODE_HELLO: OFFER: seq16=0x9456, echo_nonce=0x8624, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:F7, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 56 94 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 F7 24 86 01 01 
+[0;32mI (92983) NODE_HELLO: HELLO sent (len=14, seq=0xE644, nonce=0x32DF)[0m
+[0;32mI (92983) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (94373) NODE_HELLO: OFFER: seq16=0xE644, echo_nonce=0x32DF, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:F8, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 44 E6 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 F8 DF 32 01 01 
+[0;32mI (97143) NODE_HELLO: HELLO sent (len=14, seq=0x0559, nonce=0x7D8D)[0m
+[0;32mI (97143) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (98533) NODE_HELLO: OFFER: seq16=0x0559, echo_nonce=0x7D8D, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:F9, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 59 05 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 F9 8D 7D 01 01 
+[0;32mI (101303) NODE_HELLO: HELLO sent (len=14, seq=0xED43, nonce=0x977B)[0m
+[0;32mI (101303) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (102693) NODE_HELLO: OFFER: seq16=0xED43, echo_nonce=0x977B, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:FA, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 43 ED E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 FA 7B 97 01 01 
+[0;32mI (105463) NODE_HELLO: HELLO sent (len=14, seq=0xBBBE, nonce=0x4B90)[0m
+[0;32mI (105463) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (106853) NODE_HELLO: OFFER: seq16=0xBBBE, echo_nonce=0x4B90, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:FB, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 BE BB E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 FB 90 4B 01 01 
+[0;32mI (109623) NODE_HELLO: HELLO sent (len=14, seq=0x9716, nonce=0x9589)[0m
+[0;32mI (109623) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (111013) NODE_HELLO: OFFER: seq16=0x9716, echo_nonce=0x9589, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:FC, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 16 97 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 FC 89 95 01 01 
+[0;32mI (113783) NODE_HELLO: HELLO sent (len=14, seq=0x589D, nonce=0xE07E)[0m
+[0;32mI (113783) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (115173) NODE_HELLO: OFFER: seq16=0x589D, echo_nonce=0xE07E, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:FD, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 9D 58 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 FD 7E E0 01 01 
+[0;32mI (117943) NODE_HELLO: HELLO sent (len=14, seq=0xBB77, nonce=0x16C6)[0m
+[0;32mI (117943) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (119333) NODE_HELLO: OFFER: seq16=0xBB77, echo_nonce=0x16C6, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:FE, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 77 BB E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 FE C6 16 01 01 
+[0;32mI (122103) NODE_HELLO: HELLO sent (len=14, seq=0x132F, nonce=0x7726)[0m
+[0;32mI (122103) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (123493) NODE_HELLO: OFFER: seq16=0x132F, echo_nonce=0x7726, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:FF, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 2F 13 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 FF 26 77 01 01 
+[0;32mI (126263) NODE_HELLO: HELLO sent (len=14, seq=0x2298, nonce=0x0688)[0m
+[0;32mI (126263) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (127653) NODE_HELLO: OFFER: seq16=0x2298, echo_nonce=0x0688, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:00, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 98 22 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 00 88 06 01 01 
+[0;32mI (130423) NODE_HELLO: HELLO sent (len=14, seq=0x8DF5, nonce=0x79B4)[0m
+[0;32mI (130423) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (131813) NODE_HELLO: OFFER: seq16=0x8DF5, echo_nonce=0x79B4, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:01, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 F5 8D E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 01 B4 79 01 01 
+[0;32mI (134583) NODE_HELLO: HELLO sent (len=14, seq=0x3A30, nonce=0x8DD4)[0m
+[0;32mI (134583) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (135973) NODE_HELLO: OFFER: seq16=0x3A30, echo_nonce=0x8DD4, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:02, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 30 3A E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 02 D4 8D 01 01 
+[0;32mI (138743) NODE_HELLO: HELLO sent (len=14, seq=0xB934, nonce=0x489D)[0m
+[0;32mI (138743) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (140133) NODE_HELLO: OFFER: seq16=0xB934, echo_nonce=0x489D, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:03, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 34 B9 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 03 9D 48 01 01 
+[0;32mI (142903) NODE_HELLO: HELLO sent (len=14, seq=0x1C3A, nonce=0x680D)[0m
+[0;32mI (142903) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (144293) NODE_HELLO: OFFER: seq16=0x1C3A, echo_nonce=0x680D, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:04, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 3A 1C E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 04 0D 68 01 01 
+[0;32mI (147063) NODE_HELLO: HELLO sent (len=14, seq=0xD60F, nonce=0xE6BD)[0m
+[0;32mI (147063) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (148453) NODE_HELLO: OFFER: seq16=0xD60F, echo_nonce=0xE6BD, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:05, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 0F D6 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 05 BD E6 01 01 
+[0;32mI (151223) NODE_HELLO: HELLO sent (len=14, seq=0x022F, nonce=0xEDA1)[0m
+[0;32mI (151223) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (152613) NODE_HELLO: OFFER: seq16=0x022F, echo_nonce=0xEDA1, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:06, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 2F 02 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 06 A1 ED 01 01 
+[0;32mI (155383) NODE_HELLO: HELLO sent (len=14, seq=0x2FF7, nonce=0x210F)[0m
+[0;32mI (155383) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (156773) NODE_HELLO: OFFER: seq16=0x2FF7, echo_nonce=0x210F, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:07, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 F7 2F E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 07 0F 21 01 01 
+[0;32mI (159543) NODE_HELLO: HELLO sent (len=14, seq=0x90D9, nonce=0x9168)[0m
+[0;32mI (159543) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (160933) NODE_HELLO: OFFER: seq16=0x90D9, echo_nonce=0x9168, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:08, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 D9 90 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 08 68 91 01 01 
+[0;32mI (163703) NODE_HELLO: HELLO sent (len=14, seq=0xE2F4, nonce=0x02D9)[0m
+[0;32mI (163703) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (165093) NODE_HELLO: OFFER: seq16=0xE2F4, echo_nonce=0x02D9, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:09, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 F4 E2 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 09 D9 02 01 01 
+[0;32mI (167863) NODE_HELLO: HELLO sent (len=14, seq=0xC93C, nonce=0x2BA8)[0m
+[0;32mI (167863) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (169253) NODE_HELLO: OFFER: seq16=0xC93C, echo_nonce=0x2BA8, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:0A, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 3C C9 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 0A A8 2B 01 01 
+[0;32mI (172023) NODE_HELLO: HELLO sent (len=14, seq=0x5135, nonce=0x06E5)[0m
+[0;32mI (172023) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (173413) NODE_HELLO: OFFER: seq16=0x5135, echo_nonce=0x06E5, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:0B, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 35 51 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 0B E5 06 01 01 
+[0;32mI (176183) NODE_HELLO: HELLO sent (len=14, seq=0x758F, nonce=0xFE2A)[0m
+[0;32mI (176183) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (177573) NODE_HELLO: OFFER: seq16=0x758F, echo_nonce=0xFE2A, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:0C, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 8F 75 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 0C 2A FE 01 01 
+[0;32mI (180343) NODE_HELLO: HELLO sent (len=14, seq=0x59CD, nonce=0x94C2)[0m
+[0;32mI (180343) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (181733) NODE_HELLO: OFFER: seq16=0x59CD, echo_nonce=0x94C2, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:0D, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 CD 59 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 0D C2 94 01 01 
+[0;32mI (184503) NODE_HELLO: HELLO sent (len=14, seq=0x6440, nonce=0x0FC1)[0m
+[0;32mI (184503) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (185893) NODE_HELLO: OFFER: seq16=0x6440, echo_nonce=0x0FC1, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:0E, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 40 64 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 0E C1 0F 01 01 
+[0;32mI (188663) NODE_HELLO: HELLO sent (len=14, seq=0x9ACF, nonce=0x2C52)[0m
+[0;32mI (188663) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (190053) NODE_HELLO: OFFER: seq16=0x9ACF, echo_nonce=0x2C52, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:0F, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 CF 9A E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 0F 52 2C 01 01 
+[0;32mI (192823) NODE_HELLO: HELLO sent (len=14, seq=0x6171, nonce=0xFE6A)[0m
+[0;32mI (192823) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (194213) NODE_HELLO: OFFER: seq16=0x6171, echo_nonce=0xFE6A, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:10, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 71 61 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 10 6A FE 01 01 
+[0;32mI (196983) NODE_HELLO: HELLO sent (len=14, seq=0x7A72, nonce=0x3B29)[0m
+[0;32mI (196983) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (198373) NODE_HELLO: OFFER: seq16=0x7A72, echo_nonce=0x3B29, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:11, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 72 7A E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 11 29 3B 01 01 
+[0;32mI (201143) NODE_HELLO: HELLO sent (len=14, seq=0x0023, nonce=0x9DB0)[0m
+[0;32mI (201143) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (202533) NODE_HELLO: OFFER: seq16=0x0023, echo_nonce=0x9DB0, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:12, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 23 00 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 12 B0 9D 01 01 
+[0;32mI (205303) NODE_HELLO: HELLO sent (len=14, seq=0x5A5B, nonce=0xA51B)[0m
+[0;32mI (205303) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (206693) NODE_HELLO: OFFER: seq16=0x5A5B, echo_nonce=0xA51B, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:13, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 5B 5A E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 13 1B A5 01 01 
+[0;32mI (209463) NODE_HELLO: HELLO sent (len=14, seq=0xB1A3, nonce=0x872A)[0m
+[0;32mI (209463) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (210853) NODE_HELLO: OFFER: seq16=0xB1A3, echo_nonce=0x872A, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:14, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 A3 B1 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 14 2A 87 01 01 
+[0;32mI (213623) NODE_HELLO: HELLO sent (len=14, seq=0x7E82, nonce=0x9488)[0m
+[0;32mI (213623) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (215013) NODE_HELLO: OFFER: seq16=0x7E82, echo_nonce=0x9488, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:15, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 82 7E E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 15 88 94 01 01 
+[0;32mI (217783) NODE_HELLO: HELLO sent (len=14, seq=0x5B44, nonce=0xCC19)[0m
+[0;32mI (217783) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (219173) NODE_HELLO: OFFER: seq16=0x5B44, echo_nonce=0xCC19, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:16, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 44 5B E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 16 19 CC 01 01 
+[0;32mI (221943) NODE_HELLO: HELLO sent (len=14, seq=0x2B0E, nonce=0x5630)[0m
+[0;32mI (221943) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (223333) NODE_HELLO: OFFER: seq16=0x2B0E, echo_nonce=0x5630, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:17, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 0E 2B E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 17 30 56 01 01 
+[0;32mI (226103) NODE_HELLO: HELLO sent (len=14, seq=0x71F2, nonce=0x556B)[0m
+[0;32mI (226103) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (227493) NODE_HELLO: OFFER: seq16=0x71F2, echo_nonce=0x556B, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:18, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 F2 71 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 18 6B 55 01 01 
+[0;32mI (230263) NODE_HELLO: HELLO sent (len=14, seq=0x6AA3, nonce=0xD8AE)[0m
+[0;32mI (230263) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (231653) NODE_HELLO: OFFER: seq16=0x6AA3, echo_nonce=0xD8AE, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:19, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 A3 6A E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 19 AE D8 01 01 
+[0;32mI (234423) NODE_HELLO: HELLO sent (len=14, seq=0x300F, nonce=0x8A84)[0m
+[0;32mI (234423) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (235813) NODE_HELLO: OFFER: seq16=0x300F, echo_nonce=0x8A84, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:1A, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 0F 30 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 1A 84 8A 01 01 
+[0;32mI (238583) NODE_HELLO: HELLO sent (len=14, seq=0x7DCD, nonce=0x7F49)[0m
+[0;32mI (238583) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (239973) NODE_HELLO: OFFER: seq16=0x7DCD, echo_nonce=0x7F49, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:1B, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 CD 7D E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 1B 49 7F 01 01 
+[0;32mI (242743) NODE_HELLO: HELLO sent (len=14, seq=0xB6D6, nonce=0xE283)[0m
+[0;32mI (242743) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (244133) NODE_HELLO: OFFER: seq16=0xB6D6, echo_nonce=0xE283, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:1C, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 D6 B6 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 1C 83 E2 01 01 
+[0;32mI (246903) NODE_HELLO: HELLO sent (len=14, seq=0x1D42, nonce=0x4C17)[0m
+[0;32mI (246903) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (248293) NODE_HELLO: OFFER: seq16=0x1D42, echo_nonce=0x4C17, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:1D, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 42 1D E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 1D 17 4C 01 01 
+[0;32mI (251063) NODE_HELLO: HELLO sent (len=14, seq=0xFFE7, nonce=0x1FA3)[0m
+[0;32mI (251063) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (252453) NODE_HELLO: OFFER: seq16=0xFFE7, echo_nonce=0x1FA3, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:1E, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 E7 FF E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 1E A3 1F 01 01 
+[0;32mI (255223) NODE_HELLO: HELLO sent (len=14, seq=0x8039, nonce=0x0C93)[0m
+[0;32mI (255223) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (256613) NODE_HELLO: OFFER: seq16=0x8039, echo_nonce=0x0C93, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:1F, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 39 80 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 1F 93 0C 01 01 
+[0;32mI (259383) NODE_HELLO: HELLO sent (len=14, seq=0x8073, nonce=0xABC6)[0m
+[0;32mI (259383) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (260773) NODE_HELLO: OFFER: seq16=0x8073, echo_nonce=0xABC6, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:20, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 73 80 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 20 C6 AB 01 01 
+[0;32mI (263543) NODE_HELLO: HELLO sent (len=14, seq=0x4EE6, nonce=0x1EF1)[0m
+[0;32mI (263543) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (264933) NODE_HELLO: OFFER: seq16=0x4EE6, echo_nonce=0x1EF1, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:21, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 E6 4E E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 21 F1 1E 01 01 
+[0;32mI (267703) NODE_HELLO: HELLO sent (len=14, seq=0x048A, nonce=0xA8FE)[0m
+[0;32mI (267703) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (269093) NODE_HELLO: OFFER: seq16=0x048A, echo_nonce=0xA8FE, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:22, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 8A 04 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 22 FE A8 01 01 
+[0;32mI (271863) NODE_HELLO: HELLO sent (len=14, seq=0xAC21, nonce=0x241B)[0m
+[0;32mI (271863) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (273253) NODE_HELLO: OFFER: seq16=0xAC21, echo_nonce=0x241B, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:23, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 21 AC E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 23 1B 24 01 01 
+[0;32mI (276023) NODE_HELLO: HELLO sent (len=14, seq=0xC119, nonce=0x8B7E)[0m
+[0;32mI (276023) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (277423) NODE_HELLO: OFFER: seq16=0xC119, echo_nonce=0x8B7E, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:24, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 19 C1 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 24 7E 8B 01 01 
+[0;32mI (280183) NODE_HELLO: HELLO sent (len=14, seq=0xF8E4, nonce=0x6B75)[0m
+[0;32mI (280183) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (281583) NODE_HELLO: OFFER: seq16=0xF8E4, echo_nonce=0x6B75, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:25, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 E4 F8 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 25 75 6B 01 01 
+[0;32mI (284343) NODE_HELLO: HELLO sent (len=14, seq=0x3C8E, nonce=0xFCC6)[0m
+[0;32mI (284343) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (285743) NODE_HELLO: OFFER: seq16=0x3C8E, echo_nonce=0xFCC6, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:26, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 8E 3C E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 26 C6 FC 01 01 
+[0;32mI (288503) NODE_HELLO: HELLO sent (len=14, seq=0x9587, nonce=0x2085)[0m
+[0;32mI (288503) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (289903) NODE_HELLO: OFFER: seq16=0x9587, echo_nonce=0x2085, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:27, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 87 95 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 27 85 20 01 01 
+[0;32mI (292663) NODE_HELLO: HELLO sent (len=14, seq=0xBC58, nonce=0x54DD)[0m
+[0;32mI (292663) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (294063) NODE_HELLO: OFFER: seq16=0xBC58, echo_nonce=0x54DD, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:28, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 58 BC E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 28 DD 54 01 01 
+[0;32mI (296823) NODE_HELLO: HELLO sent (len=14, seq=0x3024, nonce=0x20E6)[0m
+[0;32mI (296823) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (298223) NODE_HELLO: OFFER: seq16=0x3024, echo_nonce=0x20E6, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:29, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 24 30 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 29 E6 20 01 01 
+[0;32mI (300983) NODE_HELLO: HELLO sent (len=14, seq=0x4E9D, nonce=0x5E5D)[0m
+[0;32mI (300983) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (302383) NODE_HELLO: OFFER: seq16=0x4E9D, echo_nonce=0x5E5D, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:2A, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 9D 4E E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 2A 5D 5E 01 01 
+[0;32mI (305143) NODE_HELLO: HELLO sent (len=14, seq=0x3244, nonce=0x6040)[0m
+[0;32mI (305143) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (306543) NODE_HELLO: OFFER: seq16=0x3244, echo_nonce=0x6040, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:2B, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 44 32 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 2B 40 60 01 01 
+[0;32mI (309303) NODE_HELLO: HELLO sent (len=14, seq=0xA68B, nonce=0x905A)[0m
+[0;32mI (309303) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (310703) NODE_HELLO: OFFER: seq16=0xA68B, echo_nonce=0x905A, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:2C, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 8B A6 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 2C 5A 90 01 01 
+[0;32mI (313463) NODE_HELLO: HELLO sent (len=14, seq=0xF223, nonce=0xBA5E)[0m
+[0;32mI (313463) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (314863) NODE_HELLO: OFFER: seq16=0xF223, echo_nonce=0xBA5E, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:2D, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 23 F2 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 2D 5E BA 01 01 
+[0;32mI (317623) NODE_HELLO: HELLO sent (len=14, seq=0x5DA9, nonce=0x5DEF)[0m
+[0;32mI (317623) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (319023) NODE_HELLO: OFFER: seq16=0x5DA9, echo_nonce=0x5DEF, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:2E, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 A9 5D E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 2E EF 5D 01 01 
+[0;32mI (321783) NODE_HELLO: HELLO sent (len=14, seq=0xD2EC, nonce=0xFE3F)[0m
+[0;32mI (321783) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (323183) NODE_HELLO: OFFER: seq16=0xD2EC, echo_nonce=0xFE3F, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:2F, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 EC D2 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 2F 3F FE 01 01 
+[0;32mI (325943) NODE_HELLO: HELLO sent (len=14, seq=0x3791, nonce=0x199C)[0m
+[0;32mI (325943) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (327343) NODE_HELLO: OFFER: seq16=0x3791, echo_nonce=0x199C, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:30, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 91 37 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 30 9C 19 01 01 
+[0;32mI (330103) NODE_HELLO: HELLO sent (len=14, seq=0xAB7A, nonce=0xAA41)[0m
+[0;32mI (330103) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (331503) NODE_HELLO: OFFER: seq16=0xAB7A, echo_nonce=0xAA41, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:31, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 7A AB E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 31 41 AA 01 01 
+[0;32mI (334263) NODE_HELLO: HELLO sent (len=14, seq=0xDF17, nonce=0xDB18)[0m
+[0;32mI (334263) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (335663) NODE_HELLO: OFFER: seq16=0xDF17, echo_nonce=0xDB18, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:32, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 17 DF E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 32 18 DB 01 01 
+[0;32mI (338423) NODE_HELLO: HELLO sent (len=14, seq=0x5972, nonce=0xAEEB)[0m
+[0;32mI (338423) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (339823) NODE_HELLO: OFFER: seq16=0x5972, echo_nonce=0xAEEB, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:33, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 72 59 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 33 EB AE 01 01 
+[0;32mI (342583) NODE_HELLO: HELLO sent (len=14, seq=0xC606, nonce=0x7BF2)[0m
+[0;32mI (342583) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (346743) NODE_HELLO: HELLO sent (len=14, seq=0x5F91, nonce=0x64EE)[0m
+[0;32mI (346743) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (348143) NODE_HELLO: OFFER: seq16=0x5F91, echo_nonce=0x64EE, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:34, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 91 5F E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 34 EE 64 01 01 
+[0;32mI (350903) NODE_HELLO: HELLO sent (len=14, seq=0x12B8, nonce=0x7A6C)[0m
+[0;32mI (350903) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (352303) NODE_HELLO: OFFER: seq16=0x12B8, echo_nonce=0x7A6C, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:35, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 B8 12 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 35 6C 7A 01 01 
+[0;32mI (355063) NODE_HELLO: HELLO sent (len=14, seq=0xE6BE, nonce=0x99D9)[0m
+[0;32mI (355063) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (356463) NODE_HELLO: OFFER: seq16=0xE6BE, echo_nonce=0x99D9, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:36, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 BE E6 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 36 D9 99 01 01 
+[0;32mI (359223) NODE_HELLO: HELLO sent (len=14, seq=0x7B34, nonce=0x3DF7)[0m
+[0;32mI (359223) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (360623) NODE_HELLO: OFFER: seq16=0x7B34, echo_nonce=0x3DF7, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:37, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 34 7B E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 37 F7 3D 01 01 
+[0;32mI (363383) NODE_HELLO: HELLO sent (len=14, seq=0x5234, nonce=0xEF23)[0m
+[0;32mI (363383) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (364783) NODE_HELLO: OFFER: seq16=0x5234, echo_nonce=0xEF23, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:38, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 34 52 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 38 23 EF 01 01 
+[0;32mI (367543) NODE_HELLO: HELLO sent (len=14, seq=0xE306, nonce=0xED7A)[0m
+[0;32mI (367543) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (368943) NODE_HELLO: OFFER: seq16=0xE306, echo_nonce=0xED7A, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:39, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 06 E3 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 39 7A ED 01 01 
+[0;32mI (371703) NODE_HELLO: HELLO sent (len=14, seq=0x3D33, nonce=0x1E70)[0m
+[0;32mI (371703) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (373103) NODE_HELLO: OFFER: seq16=0x3D33, echo_nonce=0x1E70, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:3A, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 33 3D E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 3A 70 1E 01 01 
+[0;32mI (375863) NODE_HELLO: HELLO sent (len=14, seq=0x4297, nonce=0xD8D7)[0m
+[0;32mI (375863) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (377263) NODE_HELLO: OFFER: seq16=0x4297, echo_nonce=0xD8D7, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:3B, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 97 42 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 3B D7 D8 01 01 
+[0;32mI (380023) NODE_HELLO: HELLO sent (len=14, seq=0xE452, nonce=0xC612)[0m
+[0;32mI (380023) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (381423) NODE_HELLO: OFFER: seq16=0xE452, echo_nonce=0xC612, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:3C, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 52 E4 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 3C 12 C6 01 01 
+[0;32mI (384183) NODE_HELLO: HELLO sent (len=14, seq=0xB2F5, nonce=0x347E)[0m
+[0;32mI (384183) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (385583) NODE_HELLO: OFFER: seq16=0xB2F5, echo_nonce=0x347E, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:3D, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 F5 B2 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 3D 7E 34 01 01 
+[0;32mI (388343) NODE_HELLO: HELLO sent (len=14, seq=0x72D2, nonce=0xFF94)[0m
+[0;32mI (388343) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (389743) NODE_HELLO: OFFER: seq16=0x72D2, echo_nonce=0xFF94, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:3E, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 D2 72 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 3E 94 FF 01 01 
+[0;32mI (392503) NODE_HELLO: HELLO sent (len=14, seq=0x4295, nonce=0xDB66)[0m
+[0;32mI (392503) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (393903) NODE_HELLO: OFFER: seq16=0x4295, echo_nonce=0xDB66, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:3F, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 95 42 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 3F 66 DB 01 01 
+[0;32mI (396663) NODE_HELLO: HELLO sent (len=14, seq=0xFE06, nonce=0xE123)[0m
+[0;32mI (396663) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (398063) NODE_HELLO: OFFER: seq16=0xFE06, echo_nonce=0xE123, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:40, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 06 FE E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 40 23 E1 01 01 
+[0;32mI (400823) NODE_HELLO: HELLO sent (len=14, seq=0xF559, nonce=0x80F2)[0m
+[0;32mI (400823) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (402223) NODE_HELLO: OFFER: seq16=0xF559, echo_nonce=0x80F2, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:41, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 59 F5 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 41 F2 80 01 01 
+[0;32mI (404983) NODE_HELLO: HELLO sent (len=14, seq=0x426F, nonce=0x77FA)[0m
+[0;32mI (404983) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (406383) NODE_HELLO: OFFER: seq16=0x426F, echo_nonce=0x77FA, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:42, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 6F 42 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 42 FA 77 01 01 
+[0;32mI (409143) NODE_HELLO: HELLO sent (len=14, seq=0xEEE7, nonce=0xB4EC)[0m
+[0;32mI (409143) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (410543) NODE_HELLO: OFFER: seq16=0xEEE7, echo_nonce=0xB4EC, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:43, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 E7 EE E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 43 EC B4 01 01 
+[0;32mI (413303) NODE_HELLO: HELLO sent (len=14, seq=0xE0A9, nonce=0x6EE6)[0m
+[0;32mI (413303) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (414703) NODE_HELLO: OFFER: seq16=0xE0A9, echo_nonce=0x6EE6, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:44, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 A9 E0 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 44 E6 6E 01 01 
+[0;32mI (417463) NODE_HELLO: HELLO sent (len=14, seq=0x58AB, nonce=0x97AA)[0m
+[0;32mI (417463) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (418863) NODE_HELLO: OFFER: seq16=0x58AB, echo_nonce=0x97AA, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:45, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 AB 58 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 45 AA 97 01 01 
+[0;32mI (421623) NODE_HELLO: HELLO sent (len=14, seq=0x5839, nonce=0x36BF)[0m
+[0;32mI (421623) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (423023) NODE_HELLO: OFFER: seq16=0x5839, echo_nonce=0x36BF, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:46, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 39 58 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 46 BF 36 01 01 
+[0;32mI (425783) NODE_HELLO: HELLO sent (len=14, seq=0x1FBA, nonce=0xD75F)[0m
+[0;32mI (425783) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (427183) NODE_HELLO: OFFER: seq16=0x1FBA, echo_nonce=0xD75F, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:47, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 BA 1F E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 47 5F D7 01 01 
+[0;32mI (429943) NODE_HELLO: HELLO sent (len=14, seq=0x94A5, nonce=0xC8B1)[0m
+[0;32mI (429943) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (431343) NODE_HELLO: OFFER: seq16=0x94A5, echo_nonce=0xC8B1, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:48, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 A5 94 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 48 B1 C8 01 01 
+[0;32mI (434103) NODE_HELLO: HELLO sent (len=14, seq=0xD8AE, nonce=0x8124)[0m
+[0;32mI (434103) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (435503) NODE_HELLO: OFFER: seq16=0xD8AE, echo_nonce=0x8124, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:49, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 AE D8 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 49 24 81 01 01 
+[0;32mI (438263) NODE_HELLO: HELLO sent (len=14, seq=0x5A81, nonce=0x3961)[0m
+[0;32mI (438263) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (439663) NODE_HELLO: OFFER: seq16=0x5A81, echo_nonce=0x3961, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:4A, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 81 5A E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 4A 61 39 01 01 
+[0;32mI (442423) NODE_HELLO: HELLO sent (len=14, seq=0x0B8A, nonce=0x4C78)[0m
+[0;32mI (442423) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (443823) NODE_HELLO: OFFER: seq16=0x0B8A, echo_nonce=0x4C78, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:4B, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 8A 0B E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 4B 78 4C 01 01 
+[0;32mI (446583) NODE_HELLO: HELLO sent (len=14, seq=0x5745, nonce=0xE9E4)[0m
+[0;32mI (446583) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (447983) NODE_HELLO: OFFER: seq16=0x5745, echo_nonce=0xE9E4, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:4C, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 45 57 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 4C E4 E9 01 01 
+[0;32mI (450743) NODE_HELLO: HELLO sent (len=14, seq=0x263C, nonce=0xFE47)[0m
+[0;32mI (450743) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (452143) NODE_HELLO: OFFER: seq16=0x263C, echo_nonce=0xFE47, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:4D, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 3C 26 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 4D 47 FE 01 01 
+[0;32mI (454903) NODE_HELLO: HELLO sent (len=14, seq=0x2C78, nonce=0xE639)[0m
+[0;32mI (454903) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (456303) NODE_HELLO: OFFER: seq16=0x2C78, echo_nonce=0xE639, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:4E, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 78 2C E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 4E 39 E6 01 01 
+[0;32mI (459063) NODE_HELLO: HELLO sent (len=14, seq=0x8C47, nonce=0x7CC7)[0m
+[0;32mI (459063) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (460463) NODE_HELLO: OFFER: seq16=0x8C47, echo_nonce=0x7CC7, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:4F, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 47 8C E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 4F C7 7C 01 01 
+[0;32mI (463223) NODE_HELLO: HELLO sent (len=14, seq=0x759D, nonce=0x81D9)[0m
+[0;32mI (463223) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (464623) NODE_HELLO: OFFER: seq16=0x759D, echo_nonce=0x81D9, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:50, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 9D 75 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 50 D9 81 01 01 
+[0;32mI (467383) NODE_HELLO: HELLO sent (len=14, seq=0x8C4A, nonce=0x97AF)[0m
+[0;32mI (467383) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (468783) NODE_HELLO: OFFER: seq16=0x8C4A, echo_nonce=0x97AF, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:51, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 4A 8C E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 51 AF 97 01 01 
+[0;32mI (471543) NODE_HELLO: HELLO sent (len=14, seq=0xFD61, nonce=0xB017)[0m
+[0;32mI (471543) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (472943) NODE_HELLO: OFFER: seq16=0xFD61, echo_nonce=0xB017, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:52, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 61 FD E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 52 17 B0 01 01 
+[0;32mI (475703) NODE_HELLO: HELLO sent (len=14, seq=0xBB3B, nonce=0xC3BD)[0m
+[0;32mI (475703) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (477103) NODE_HELLO: OFFER: seq16=0xBB3B, echo_nonce=0xC3BD, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:53, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 3B BB E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 53 BD C3 01 01 
+[0;32mI (479863) NODE_HELLO: HELLO sent (len=14, seq=0xE26A, nonce=0x78F5)[0m
+[0;32mI (479863) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (481263) NODE_HELLO: OFFER: seq16=0xE26A, echo_nonce=0x78F5, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:54, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 6A E2 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 54 F5 78 01 01 
+[0;32mI (484023) NODE_HELLO: HELLO sent (len=14, seq=0xC7D0, nonce=0x3544)[0m
+[0;32mI (484023) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (485423) NODE_HELLO: OFFER: seq16=0xC7D0, echo_nonce=0x3544, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:55, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 D0 C7 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 55 44 35 01 01 
+[0;32mI (488183) NODE_HELLO: HELLO sent (len=14, seq=0x235B, nonce=0xE991)[0m
+[0;32mI (488183) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (489583) NODE_HELLO: OFFER: seq16=0x235B, echo_nonce=0xE991, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:56, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 5B 23 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 56 91 E9 01 01 
+[0;32mI (492343) NODE_HELLO: HELLO sent (len=14, seq=0xA9CD, nonce=0x7F5F)[0m
+[0;32mI (492343) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (493743) NODE_HELLO: OFFER: seq16=0xA9CD, echo_nonce=0x7F5F, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:57, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 CD A9 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 57 5F 7F 01 01 
+[0;32mI (496503) NODE_HELLO: HELLO sent (len=14, seq=0x8D75, nonce=0x7B5F)[0m
+[0;32mI (496503) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (497903) NODE_HELLO: OFFER: seq16=0x8D75, echo_nonce=0x7B5F, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:58, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 75 8D E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 58 5F 7B 01 01 
+[0;32mI (500663) NODE_HELLO: HELLO sent (len=14, seq=0x2F41, nonce=0xFBB8)[0m
+[0;32mI (500663) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (502063) NODE_HELLO: OFFER: seq16=0x2F41, echo_nonce=0xFBB8, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:59, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 41 2F E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 59 B8 FB 01 01 
+[0;32mI (504823) NODE_HELLO: HELLO sent (len=14, seq=0x85D5, nonce=0x4438)[0m
+[0;32mI (504823) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (506223) NODE_HELLO: OFFER: seq16=0x85D5, echo_nonce=0x4438, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:5A, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 D5 85 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 5A 38 44 01 01 
+[0;32mI (508983) NODE_HELLO: HELLO sent (len=14, seq=0xD007, nonce=0x95FE)[0m
+[0;32mI (508983) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (510383) NODE_HELLO: OFFER: seq16=0xD007, echo_nonce=0x95FE, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:5B, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 07 D0 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 5B FE 95 01 01 
+[0;32mI (513143) NODE_HELLO: HELLO sent (len=14, seq=0x13D8, nonce=0xCD5A)[0m
+[0;32mI (513143) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (514543) NODE_HELLO: OFFER: seq16=0x13D8, echo_nonce=0xCD5A, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:5C, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 D8 13 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 5C 5A CD 01 01 
+[0;32mI (517303) NODE_HELLO: HELLO sent (len=14, seq=0x04B1, nonce=0xB52F)[0m
+[0;32mI (517303) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (518703) NODE_HELLO: OFFER: seq16=0x04B1, echo_nonce=0xB52F, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:5D, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 B1 04 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 5D 2F B5 01 01 
+[0;32mI (521463) NODE_HELLO: HELLO sent (len=14, seq=0x7846, nonce=0xC5BC)[0m
+[0;32mI (521463) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (522863) NODE_HELLO: OFFER: seq16=0x7846, echo_nonce=0xC5BC, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:5E, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 46 78 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 5E BC C5 01 01 
+[0;32mI (525623) NODE_HELLO: HELLO sent (len=14, seq=0xB48E, nonce=0xF035)[0m
+[0;32mI (525623) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (527023) NODE_HELLO: OFFER: seq16=0xB48E, echo_nonce=0xF035, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:5F, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 8E B4 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 5F 35 F0 01 01 
+[0;32mI (529783) NODE_HELLO: HELLO sent (len=14, seq=0xC92A, nonce=0x5738)[0m
+[0;32mI (529783) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (531183) NODE_HELLO: OFFER: seq16=0xC92A, echo_nonce=0x5738, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:60, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 2A C9 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 60 38 57 01 01 
+[0;32mI (533943) NODE_HELLO: HELLO sent (len=14, seq=0xE4CC, nonce=0x4A2A)[0m
+[0;32mI (533943) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (535343) NODE_HELLO: OFFER: seq16=0xE4CC, echo_nonce=0x4A2A, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:61, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 CC E4 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 61 2A 4A 01 01 
+[0;32mI (538103) NODE_HELLO: HELLO sent (len=14, seq=0x5AAF, nonce=0xC2AF)[0m
+[0;32mI (538103) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (539503) NODE_HELLO: OFFER: seq16=0x5AAF, echo_nonce=0xC2AF, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:62, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 AF 5A E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 62 AF C2 01 01 
+[0;32mI (542263) NODE_HELLO: HELLO sent (len=14, seq=0x5462, nonce=0x210F)[0m
+[0;32mI (542263) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (543663) NODE_HELLO: OFFER: seq16=0x5462, echo_nonce=0x210F, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:63, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 62 54 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 63 0F 21 01 01 
+[0;32mI (546423) NODE_HELLO: HELLO sent (len=14, seq=0x5A86, nonce=0x7875)[0m
+[0;32mI (546423) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (547823) NODE_HELLO: OFFER: seq16=0x5A86, echo_nonce=0x7875, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:64, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 86 5A E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 64 75 78 01 01 
+[0;32mI (550583) NODE_HELLO: HELLO sent (len=14, seq=0xF355, nonce=0xC774)[0m
+[0;32mI (550583) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (551983) NODE_HELLO: OFFER: seq16=0xF355, echo_nonce=0xC774, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:65, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 55 F3 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 65 74 C7 01 01 
+[0;32mI (554743) NODE_HELLO: HELLO sent (len=14, seq=0x221C, nonce=0xAC70)[0m
+[0;32mI (554743) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (556143) NODE_HELLO: OFFER: seq16=0x221C, echo_nonce=0xAC70, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:66, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 1C 22 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 66 70 AC 01 01 
+[0;32mI (558903) NODE_HELLO: HELLO sent (len=14, seq=0xEBA3, nonce=0x6A09)[0m
+[0;32mI (558903) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (560303) NODE_HELLO: OFFER: seq16=0xEBA3, echo_nonce=0x6A09, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:67, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 A3 EB E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 67 09 6A 01 01 
+[0;32mI (563063) NODE_HELLO: HELLO sent (len=14, seq=0x64E3, nonce=0xCB5F)[0m
+[0;32mI (563063) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (564463) NODE_HELLO: OFFER: seq16=0x64E3, echo_nonce=0xCB5F, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:68, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 E3 64 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 68 5F CB 01 01 
+[0;32mI (567223) NODE_HELLO: HELLO sent (len=14, seq=0xACBE, nonce=0x1DB3)[0m
+[0;32mI (567223) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (568623) NODE_HELLO: OFFER: seq16=0xACBE, echo_nonce=0x1DB3, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:69, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 BE AC E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 69 B3 1D 01 01 
+[0;32mI (571383) NODE_HELLO: HELLO sent (len=14, seq=0x1014, nonce=0x357A)[0m
+[0;32mI (571383) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (572783) NODE_HELLO: OFFER: seq16=0x1014, echo_nonce=0x357A, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:6A, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 14 10 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 6A 7A 35 01 01 
+[0;32mI (575543) NODE_HELLO: HELLO sent (len=14, seq=0xF327, nonce=0x7458)[0m
+[0;32mI (575543) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (576943) NODE_HELLO: OFFER: seq16=0xF327, echo_nonce=0x7458, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:6B, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 27 F3 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 6B 58 74 01 01 
+[0;32mI (579703) NODE_HELLO: HELLO sent (len=14, seq=0x4927, nonce=0x946B)[0m
+[0;32mI (579703) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (581103) NODE_HELLO: OFFER: seq16=0x4927, echo_nonce=0x946B, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:6C, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 27 49 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 6C 6B 94 01 01 
+[0;32mI (583863) NODE_HELLO: HELLO sent (len=14, seq=0x2310, nonce=0x2ED8)[0m
+[0;32mI (583863) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (585263) NODE_HELLO: OFFER: seq16=0x2310, echo_nonce=0x2ED8, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:6D, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 10 23 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 6D D8 2E 01 01 
+[0;32mI (588023) NODE_HELLO: HELLO sent (len=14, seq=0x5CB1, nonce=0x7D10)[0m
+[0;32mI (588023) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (589423) NODE_HELLO: OFFER: seq16=0x5CB1, echo_nonce=0x7D10, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:01:6E, priority=1, ttl_s=1[0m
+OFFER_RAW (22B): 02 00 B1 5C E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 01 6E 10 7D 01 01 
+[0;32mI (592183) NODE_HELLO: HELLO sent (len=14, seq=0x719A, nonce=0x7CAE)[0m
+[0;32mI (592183) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (596343) NODE_HELLO: HELLO sent (len=14, seq=0x5105, nonce=0x2208)[0m
+[0;32mI (596343) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (600503) NODE_HELLO: HELLO sent (len=14, seq=0xE338, nonce=0xDD84)[0m
+[0;32mI (600503) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (601933) NODE_HELLO: OFFER: seq16=0xE338, echo_nonce=0xDD84, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:02, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 38 E3 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 02 84 DD 64 0A 
+[0;32mI (604663) NODE_HELLO: HELLO sent (len=14, seq=0x6BD6, nonce=0x990A)[0m
+[0;32mI (604663) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (606093) NODE_HELLO: OFFER: seq16=0x6BD6, echo_nonce=0x990A, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:03, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 D6 6B E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 03 0A 99 64 0A 
+[0;32mI (608823) NODE_HELLO: HELLO sent (len=14, seq=0x2187, nonce=0x4A55)[0m
+[0;32mI (608823) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (610253) NODE_HELLO: OFFER: seq16=0x2187, echo_nonce=0x4A55, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:04, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 87 21 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 04 55 4A 64 0A 
+[0;32mI (612983) NODE_HELLO: HELLO sent (len=14, seq=0xD87A, nonce=0xE3A3)[0m
+[0;32mI (612983) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (614413) NODE_HELLO: OFFER: seq16=0xD87A, echo_nonce=0xE3A3, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:05, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 7A D8 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 05 A3 E3 64 0A 
+[0;32mI (617143) NODE_HELLO: HELLO sent (len=14, seq=0xCE75, nonce=0xAA35)[0m
+[0;32mI (617143) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (618573) NODE_HELLO: OFFER: seq16=0xCE75, echo_nonce=0xAA35, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:06, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 75 CE E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 06 35 AA 64 0A 
+[0;32mI (621303) NODE_HELLO: HELLO sent (len=14, seq=0x52BF, nonce=0xF23E)[0m
+[0;32mI (621303) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (622733) NODE_HELLO: OFFER: seq16=0x52BF, echo_nonce=0xF23E, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:07, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 BF 52 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 07 3E F2 64 0A 
+[0;32mI (625463) NODE_HELLO: HELLO sent (len=14, seq=0x6871, nonce=0x1E6C)[0m
+[0;32mI (625463) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (626893) NODE_HELLO: OFFER: seq16=0x6871, echo_nonce=0x1E6C, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:08, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 71 68 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 08 6C 1E 64 0A 
+[0;32mI (629623) NODE_HELLO: HELLO sent (len=14, seq=0xA884, nonce=0x7827)[0m
+[0;32mI (629623) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (631053) NODE_HELLO: OFFER: seq16=0xA884, echo_nonce=0x7827, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:09, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 84 A8 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 09 27 78 64 0A 
+[0;32mI (633783) NODE_HELLO: HELLO sent (len=14, seq=0xDA77, nonce=0xF9C1)[0m
+[0;32mI (633783) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (635213) NODE_HELLO: OFFER: seq16=0xDA77, echo_nonce=0xF9C1, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:0A, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 77 DA E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 0A C1 F9 64 0A 
+[0;32mI (637943) NODE_HELLO: HELLO sent (len=14, seq=0xF7D1, nonce=0x7DC2)[0m
+[0;32mI (637943) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (639373) NODE_HELLO: OFFER: seq16=0xF7D1, echo_nonce=0x7DC2, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:0B, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 D1 F7 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 0B C2 7D 64 0A 
+[0;32mI (642103) NODE_HELLO: HELLO sent (len=14, seq=0xADE0, nonce=0xD396)[0m
+[0;32mI (642103) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (643533) NODE_HELLO: OFFER: seq16=0xADE0, echo_nonce=0xD396, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:0C, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 E0 AD E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 0C 96 D3 64 0A 
+[0;32mI (646263) NODE_HELLO: HELLO sent (len=14, seq=0x0065, nonce=0x6620)[0m
+[0;32mI (646263) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (647693) NODE_HELLO: OFFER: seq16=0x0065, echo_nonce=0x6620, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:0D, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 65 00 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 0D 20 66 64 0A 
+[0;32mI (650423) NODE_HELLO: HELLO sent (len=14, seq=0xE964, nonce=0x686D)[0m
+[0;32mI (650423) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (651853) NODE_HELLO: OFFER: seq16=0xE964, echo_nonce=0x686D, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:0E, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 64 E9 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 0E 6D 68 64 0A 
+[0;32mI (654583) NODE_HELLO: HELLO sent (len=14, seq=0xF374, nonce=0xEB07)[0m
+[0;32mI (654583) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (656013) NODE_HELLO: OFFER: seq16=0xF374, echo_nonce=0xEB07, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:0F, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 74 F3 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 0F 07 EB 64 0A 
+[0;32mI (658743) NODE_HELLO: HELLO sent (len=14, seq=0x4C0B, nonce=0xAA5D)[0m
+[0;32mI (658743) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (660173) NODE_HELLO: OFFER: seq16=0x4C0B, echo_nonce=0xAA5D, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:10, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 0B 4C E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 10 5D AA 64 0A 
+[0;32mI (662903) NODE_HELLO: HELLO sent (len=14, seq=0xF387, nonce=0x9960)[0m
+[0;32mI (662903) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (664333) NODE_HELLO: OFFER: seq16=0xF387, echo_nonce=0x9960, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:11, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 87 F3 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 11 60 99 64 0A 
+[0;32mI (667063) NODE_HELLO: HELLO sent (len=14, seq=0xC1DE, nonce=0x8CB7)[0m
+[0;32mI (667063) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (668493) NODE_HELLO: OFFER: seq16=0xC1DE, echo_nonce=0x8CB7, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:12, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 DE C1 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 12 B7 8C 64 0A 
+[0;32mI (671223) NODE_HELLO: HELLO sent (len=14, seq=0x8D5D, nonce=0x648B)[0m
+[0;32mI (671223) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (672653) NODE_HELLO: OFFER: seq16=0x8D5D, echo_nonce=0x648B, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:13, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 5D 8D E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 13 8B 64 64 0A 
+[0;32mI (675383) NODE_HELLO: HELLO sent (len=14, seq=0x1684, nonce=0xBA36)[0m
+[0;32mI (675383) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (676813) NODE_HELLO: OFFER: seq16=0x1684, echo_nonce=0xBA36, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:14, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 84 16 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 14 36 BA 64 0A 
+[0;32mI (679543) NODE_HELLO: HELLO sent (len=14, seq=0xC2E0, nonce=0x23BB)[0m
+[0;32mI (679543) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (680973) NODE_HELLO: OFFER: seq16=0xC2E0, echo_nonce=0x23BB, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:15, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 E0 C2 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 15 BB 23 64 0A 
+[0;32mI (683703) NODE_HELLO: HELLO sent (len=14, seq=0x9DBF, nonce=0x4497)[0m
+[0;32mI (683703) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (685133) NODE_HELLO: OFFER: seq16=0x9DBF, echo_nonce=0x4497, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:16, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 BF 9D E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 16 97 44 64 0A 
+[0;32mI (687863) NODE_HELLO: HELLO sent (len=14, seq=0xBE85, nonce=0x7EA2)[0m
+[0;32mI (687863) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (689293) NODE_HELLO: OFFER: seq16=0xBE85, echo_nonce=0x7EA2, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:17, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 85 BE E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 17 A2 7E 64 0A 
+[0;32mI (692023) NODE_HELLO: HELLO sent (len=14, seq=0x4E0A, nonce=0xB2C1)[0m
+[0;32mI (692023) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (693453) NODE_HELLO: OFFER: seq16=0x4E0A, echo_nonce=0xB2C1, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:18, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 0A 4E E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 18 C1 B2 64 0A 
+[0;32mI (696183) NODE_HELLO: HELLO sent (len=14, seq=0xB15A, nonce=0x1848)[0m
+[0;32mI (696183) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (697613) NODE_HELLO: OFFER: seq16=0xB15A, echo_nonce=0x1848, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:19, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 5A B1 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 19 48 18 64 0A 
+[0;32mI (700343) NODE_HELLO: HELLO sent (len=14, seq=0xCD1C, nonce=0x17C9)[0m
+[0;32mI (700343) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (701773) NODE_HELLO: OFFER: seq16=0xCD1C, echo_nonce=0x17C9, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:1A, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 1C CD E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 1A C9 17 64 0A 
+[0;32mI (704503) NODE_HELLO: HELLO sent (len=14, seq=0x04C5, nonce=0x6589)[0m
+[0;32mI (704503) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (705933) NODE_HELLO: OFFER: seq16=0x04C5, echo_nonce=0x6589, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:1B, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 C5 04 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 1B 89 65 64 0A 
+[0;32mI (708663) NODE_HELLO: HELLO sent (len=14, seq=0xCB69, nonce=0x84D2)[0m
+[0;32mI (708663) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (710093) NODE_HELLO: OFFER: seq16=0xCB69, echo_nonce=0x84D2, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:1C, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 69 CB E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 1C D2 84 64 0A 
+[0;32mI (712823) NODE_HELLO: HELLO sent (len=14, seq=0x83AA, nonce=0xAA32)[0m
+[0;32mI (712823) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (714253) NODE_HELLO: OFFER: seq16=0x83AA, echo_nonce=0xAA32, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:1D, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 AA 83 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 1D 32 AA 64 0A 
+[0;32mI (716983) NODE_HELLO: HELLO sent (len=14, seq=0x89CF, nonce=0x6171)[0m
+[0;32mI (716983) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (718413) NODE_HELLO: OFFER: seq16=0x89CF, echo_nonce=0x6171, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:1E, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 CF 89 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 1E 71 61 64 0A 
+[0;32mI (721143) NODE_HELLO: HELLO sent (len=14, seq=0x11C8, nonce=0x49D7)[0m
+[0;32mI (721143) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (722573) NODE_HELLO: OFFER: seq16=0x11C8, echo_nonce=0x49D7, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:1F, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 C8 11 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 1F D7 49 64 0A 
+[0;32mI (725303) NODE_HELLO: HELLO sent (len=14, seq=0x3614, nonce=0xAE51)[0m
+[0;32mI (725303) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (726733) NODE_HELLO: OFFER: seq16=0x3614, echo_nonce=0xAE51, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:20, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 14 36 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 20 51 AE 64 0A 
+[0;32mI (729463) NODE_HELLO: HELLO sent (len=14, seq=0x64A2, nonce=0x0206)[0m
+[0;32mI (729463) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (730893) NODE_HELLO: OFFER: seq16=0x64A2, echo_nonce=0x0206, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:21, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 A2 64 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 21 06 02 64 0A 
+[0;32mI (733623) NODE_HELLO: HELLO sent (len=14, seq=0x4E8D, nonce=0xD31D)[0m
+[0;32mI (733623) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (735053) NODE_HELLO: OFFER: seq16=0x4E8D, echo_nonce=0xD31D, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:22, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 8D 4E E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 22 1D D3 64 0A 
+[0;32mI (737783) NODE_HELLO: HELLO sent (len=14, seq=0xF3CD, nonce=0x6FED)[0m
+[0;32mI (737783) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (739213) NODE_HELLO: OFFER: seq16=0xF3CD, echo_nonce=0x6FED, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:23, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 CD F3 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 23 ED 6F 64 0A 
+[0;32mI (741943) NODE_HELLO: HELLO sent (len=14, seq=0x3DC9, nonce=0x3FFA)[0m
+[0;32mI (741943) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (743373) NODE_HELLO: OFFER: seq16=0x3DC9, echo_nonce=0x3FFA, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:24, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 C9 3D E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 24 FA 3F 64 0A 
+[0;32mI (746103) NODE_HELLO: HELLO sent (len=14, seq=0x47C9, nonce=0x7E18)[0m
+[0;32mI (746103) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (747533) NODE_HELLO: OFFER: seq16=0x47C9, echo_nonce=0x7E18, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:25, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 C9 47 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 25 18 7E 64 0A 
+[0;32mI (750263) NODE_HELLO: HELLO sent (len=14, seq=0xD357, nonce=0x7B05)[0m
+[0;32mI (750263) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (751693) NODE_HELLO: OFFER: seq16=0xD357, echo_nonce=0x7B05, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:26, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 57 D3 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 26 05 7B 64 0A 
+[0;32mI (754423) NODE_HELLO: HELLO sent (len=14, seq=0x4367, nonce=0x24FD)[0m
+[0;32mI (754423) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (755853) NODE_HELLO: OFFER: seq16=0x4367, echo_nonce=0x24FD, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:27, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 67 43 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 27 FD 24 64 0A 
+[0;32mI (758583) NODE_HELLO: HELLO sent (len=14, seq=0x0989, nonce=0x4794)[0m
+[0;32mI (758583) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (760013) NODE_HELLO: OFFER: seq16=0x0989, echo_nonce=0x4794, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:28, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 89 09 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 28 94 47 64 0A 
+[0;32mI (762743) NODE_HELLO: HELLO sent (len=14, seq=0x1CEA, nonce=0x4C53)[0m
+[0;32mI (762743) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (764173) NODE_HELLO: OFFER: seq16=0x1CEA, echo_nonce=0x4C53, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:29, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 EA 1C E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 29 53 4C 64 0A 
+[0;32mI (766903) NODE_HELLO: HELLO sent (len=14, seq=0x37BD, nonce=0xC6FF)[0m
+[0;32mI (766903) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (768333) NODE_HELLO: OFFER: seq16=0x37BD, echo_nonce=0xC6FF, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:2A, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 BD 37 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 2A FF C6 64 0A 
+[0;32mI (771063) NODE_HELLO: HELLO sent (len=14, seq=0x2644, nonce=0x31DC)[0m
+[0;32mI (771063) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (772493) NODE_HELLO: OFFER: seq16=0x2644, echo_nonce=0x31DC, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:2B, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 44 26 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 2B DC 31 64 0A 
+[0;32mI (775223) NODE_HELLO: HELLO sent (len=14, seq=0x60A5, nonce=0x1520)[0m
+[0;32mI (775223) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (776653) NODE_HELLO: OFFER: seq16=0x60A5, echo_nonce=0x1520, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:2C, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 A5 60 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 2C 20 15 64 0A 
+[0;32mI (779383) NODE_HELLO: HELLO sent (len=14, seq=0x37D5, nonce=0x7DA3)[0m
+[0;32mI (779383) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (780813) NODE_HELLO: OFFER: seq16=0x37D5, echo_nonce=0x7DA3, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:2D, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 D5 37 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 2D A3 7D 64 0A 
+[0;32mI (783543) NODE_HELLO: HELLO sent (len=14, seq=0xE24C, nonce=0x058E)[0m
+[0;32mI (783543) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (784973) NODE_HELLO: OFFER: seq16=0xE24C, echo_nonce=0x058E, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:2E, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 4C E2 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 2E 8E 05 64 0A 
+[0;32mI (787703) NODE_HELLO: HELLO sent (len=14, seq=0x9394, nonce=0x3193)[0m
+[0;32mI (787703) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (789133) NODE_HELLO: OFFER: seq16=0x9394, echo_nonce=0x3193, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:2F, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 94 93 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 2F 93 31 64 0A 
+[0;32mI (791863) NODE_HELLO: HELLO sent (len=14, seq=0x7DA1, nonce=0xD524)[0m
+[0;32mI (791863) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (793293) NODE_HELLO: OFFER: seq16=0x7DA1, echo_nonce=0xD524, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:30, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 A1 7D E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 30 24 D5 64 0A 
+[0;32mI (796023) NODE_HELLO: HELLO sent (len=14, seq=0x3874, nonce=0xDCCD)[0m
+[0;32mI (796023) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (797453) NODE_HELLO: OFFER: seq16=0x3874, echo_nonce=0xDCCD, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:31, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 74 38 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 31 CD DC 64 0A 
+[0;32mI (800183) NODE_HELLO: HELLO sent (len=14, seq=0x331A, nonce=0xA604)[0m
+[0;32mI (800183) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (801613) NODE_HELLO: OFFER: seq16=0x331A, echo_nonce=0xA604, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:32, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 1A 33 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 32 04 A6 64 0A 
+[0;32mI (804343) NODE_HELLO: HELLO sent (len=14, seq=0x3BA3, nonce=0x777F)[0m
+[0;32mI (804343) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (805773) NODE_HELLO: OFFER: seq16=0x3BA3, echo_nonce=0x777F, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:33, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 A3 3B E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 33 7F 77 64 0A 
+[0;32mI (808503) NODE_HELLO: HELLO sent (len=14, seq=0xFD41, nonce=0x35FF)[0m
+[0;32mI (808503) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (809933) NODE_HELLO: OFFER: seq16=0xFD41, echo_nonce=0x35FF, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:34, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 41 FD E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 34 FF 35 64 0A 
+[0;32mI (812663) NODE_HELLO: HELLO sent (len=14, seq=0x8012, nonce=0xF44F)[0m
+[0;32mI (812663) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (814093) NODE_HELLO: OFFER: seq16=0x8012, echo_nonce=0xF44F, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:35, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 12 80 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 35 4F F4 64 0A 
+[0;32mI (816823) NODE_HELLO: HELLO sent (len=14, seq=0x5642, nonce=0xF098)[0m
+[0;32mI (816823) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (818253) NODE_HELLO: OFFER: seq16=0x5642, echo_nonce=0xF098, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:36, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 42 56 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 36 98 F0 64 0A 
+[0;32mI (820983) NODE_HELLO: HELLO sent (len=14, seq=0xC0CB, nonce=0xEE73)[0m
+[0;32mI (820983) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (822413) NODE_HELLO: OFFER: seq16=0xC0CB, echo_nonce=0xEE73, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:37, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 CB C0 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 37 73 EE 64 0A 
+[0;32mI (825143) NODE_HELLO: HELLO sent (len=14, seq=0xF6F6, nonce=0x41F9)[0m
+[0;32mI (825143) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (826573) NODE_HELLO: OFFER: seq16=0xF6F6, echo_nonce=0x41F9, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:38, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 F6 F6 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 38 F9 41 64 0A 
+[0;32mI (829303) NODE_HELLO: HELLO sent (len=14, seq=0xD954, nonce=0xC8B3)[0m
+[0;32mI (829303) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (830733) NODE_HELLO: OFFER: seq16=0xD954, echo_nonce=0xC8B3, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:39, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 54 D9 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 39 B3 C8 64 0A 
+[0;32mI (833463) NODE_HELLO: HELLO sent (len=14, seq=0x49D4, nonce=0x1EEC)[0m
+[0;32mI (833463) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (834893) NODE_HELLO: OFFER: seq16=0x49D4, echo_nonce=0x1EEC, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:3A, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 D4 49 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 3A EC 1E 64 0A 
+[0;32mI (837623) NODE_HELLO: HELLO sent (len=14, seq=0x94B5, nonce=0x901E)[0m
+[0;32mI (837623) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (839053) NODE_HELLO: OFFER: seq16=0x94B5, echo_nonce=0x901E, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:3B, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 B5 94 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 3B 1E 90 64 0A 
+[0;32mI (841783) NODE_HELLO: HELLO sent (len=14, seq=0xFE82, nonce=0x437F)[0m
+[0;32mI (841783) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (843213) NODE_HELLO: OFFER: seq16=0xFE82, echo_nonce=0x437F, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:3C, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 82 FE E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 3C 7F 43 64 0A 
+[0;32mI (845943) NODE_HELLO: HELLO sent (len=14, seq=0x6956, nonce=0xDE63)[0m
+[0;32mI (845943) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (847373) NODE_HELLO: OFFER: seq16=0x6956, echo_nonce=0xDE63, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:3D, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 56 69 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 3D 63 DE 64 0A 
+[0;32mI (850103) NODE_HELLO: HELLO sent (len=14, seq=0x897B, nonce=0xA560)[0m
+[0;32mI (850103) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (851533) NODE_HELLO: OFFER: seq16=0x897B, echo_nonce=0xA560, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:3E, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 7B 89 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 3E 60 A5 64 0A 
+[0;32mI (854263) NODE_HELLO: HELLO sent (len=14, seq=0xC9A7, nonce=0xC1AA)[0m
+[0;32mI (854263) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (855693) NODE_HELLO: OFFER: seq16=0xC9A7, echo_nonce=0xC1AA, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:3F, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 A7 C9 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 3F AA C1 64 0A 
+[0;32mI (858423) NODE_HELLO: HELLO sent (len=14, seq=0x997F, nonce=0x6CAC)[0m
+[0;32mI (858423) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (859853) NODE_HELLO: OFFER: seq16=0x997F, echo_nonce=0x6CAC, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:40, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 7F 99 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 40 AC 6C 64 0A 
+[0;32mI (862583) NODE_HELLO: HELLO sent (len=14, seq=0x48E1, nonce=0x2BF0)[0m
+[0;32mI (862583) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (864013) NODE_HELLO: OFFER: seq16=0x48E1, echo_nonce=0x2BF0, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:41, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 E1 48 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 41 F0 2B 64 0A 
+[0;32mI (866743) NODE_HELLO: HELLO sent (len=14, seq=0xC8E4, nonce=0x1D38)[0m
+[0;32mI (866743) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (868173) NODE_HELLO: OFFER: seq16=0xC8E4, echo_nonce=0x1D38, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:42, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 E4 C8 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 42 38 1D 64 0A 
+[0;32mI (870903) NODE_HELLO: HELLO sent (len=14, seq=0x7C4D, nonce=0x0866)[0m
+[0;32mI (870903) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (872333) NODE_HELLO: OFFER: seq16=0x7C4D, echo_nonce=0x0866, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:43, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 4D 7C E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 43 66 08 64 0A 
+[0;32mI (875063) NODE_HELLO: HELLO sent (len=14, seq=0x963A, nonce=0x171E)[0m
+[0;32mI (875063) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (876493) NODE_HELLO: OFFER: seq16=0x963A, echo_nonce=0x171E, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:44, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 3A 96 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 44 1E 17 64 0A 
+[0;32mI (879223) NODE_HELLO: HELLO sent (len=14, seq=0x45B7, nonce=0x9B50)[0m
+[0;32mI (879223) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (880653) NODE_HELLO: OFFER: seq16=0x45B7, echo_nonce=0x9B50, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:45, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 B7 45 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 45 50 9B 64 0A 
+[0;32mI (883383) NODE_HELLO: HELLO sent (len=14, seq=0xB4AA, nonce=0x9767)[0m
+[0;32mI (883383) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (884813) NODE_HELLO: OFFER: seq16=0xB4AA, echo_nonce=0x9767, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:46, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 AA B4 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 46 67 97 64 0A 
+[0;32mI (887543) NODE_HELLO: HELLO sent (len=14, seq=0x2738, nonce=0x26E0)[0m
+[0;32mI (887543) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (888973) NODE_HELLO: OFFER: seq16=0x2738, echo_nonce=0x26E0, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:47, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 38 27 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 47 E0 26 64 0A 
+[0;32mI (891703) NODE_HELLO: HELLO sent (len=14, seq=0xABEE, nonce=0xC4B6)[0m
+[0;32mI (891703) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (893133) NODE_HELLO: OFFER: seq16=0xABEE, echo_nonce=0xC4B6, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:48, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 EE AB E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 48 B6 C4 64 0A 
+[0;32mI (895863) NODE_HELLO: HELLO sent (len=14, seq=0x4466, nonce=0xB68C)[0m
+[0;32mI (895863) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (897293) NODE_HELLO: OFFER: seq16=0x4466, echo_nonce=0xB68C, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:49, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 66 44 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 49 8C B6 64 0A 
+[0;32mI (900023) NODE_HELLO: HELLO sent (len=14, seq=0xD847, nonce=0x2F83)[0m
+[0;32mI (900023) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (901453) NODE_HELLO: OFFER: seq16=0xD847, echo_nonce=0x2F83, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:4A, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 47 D8 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 4A 83 2F 64 0A 
+[0;32mI (904183) NODE_HELLO: HELLO sent (len=14, seq=0x3607, nonce=0xC8C3)[0m
+[0;32mI (904183) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (905613) NODE_HELLO: OFFER: seq16=0x3607, echo_nonce=0xC8C3, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:4B, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 07 36 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 4B C3 C8 64 0A 
+[0;32mI (908343) NODE_HELLO: HELLO sent (len=14, seq=0xDF64, nonce=0x95C3)[0m
+[0;32mI (908343) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (909773) NODE_HELLO: OFFER: seq16=0xDF64, echo_nonce=0x95C3, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:4C, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 64 DF E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 4C C3 95 64 0A 
+[0;32mI (912503) NODE_HELLO: HELLO sent (len=14, seq=0x8C0C, nonce=0x0DEA)[0m
+[0;32mI (912503) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (913933) NODE_HELLO: OFFER: seq16=0x8C0C, echo_nonce=0x0DEA, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:4D, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 0C 8C E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 4D EA 0D 64 0A 
+[0;32mI (916663) NODE_HELLO: HELLO sent (len=14, seq=0x8660, nonce=0x7E48)[0m
+[0;32mI (916663) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (918093) NODE_HELLO: OFFER: seq16=0x8660, echo_nonce=0x7E48, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:4E, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 60 86 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 4E 48 7E 64 0A 
+[0;32mI (920823) NODE_HELLO: HELLO sent (len=14, seq=0x8AEE, nonce=0x7166)[0m
+[0;32mI (920823) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (922253) NODE_HELLO: OFFER: seq16=0x8AEE, echo_nonce=0x7166, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:4F, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 EE 8A E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 4F 66 71 64 0A 
+[0;32mI (924983) NODE_HELLO: HELLO sent (len=14, seq=0x5183, nonce=0xACAB)[0m
+[0;32mI (924983) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (926413) NODE_HELLO: OFFER: seq16=0x5183, echo_nonce=0xACAB, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:50, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 83 51 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 50 AB AC 64 0A 
+[0;32mI (929143) NODE_HELLO: HELLO sent (len=14, seq=0xEE27, nonce=0xCF73)[0m
+[0;32mI (929143) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (930573) NODE_HELLO: OFFER: seq16=0xEE27, echo_nonce=0xCF73, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:51, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 27 EE E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 51 73 CF 64 0A 
+[0;32mI (933303) NODE_HELLO: HELLO sent (len=14, seq=0xF75C, nonce=0x0A94)[0m
+[0;32mI (933303) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (934733) NODE_HELLO: OFFER: seq16=0xF75C, echo_nonce=0x0A94, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:52, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 5C F7 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 52 94 0A 64 0A 
+[0;32mI (937463) NODE_HELLO: HELLO sent (len=14, seq=0x5E18, nonce=0x66D7)[0m
+[0;32mI (937463) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (938893) NODE_HELLO: OFFER: seq16=0x5E18, echo_nonce=0x66D7, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:53, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 18 5E E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 53 D7 66 64 0A 
+[0;32mI (941623) NODE_HELLO: HELLO sent (len=14, seq=0x6049, nonce=0xF31F)[0m
+[0;32mI (941623) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (943053) NODE_HELLO: OFFER: seq16=0x6049, echo_nonce=0xF31F, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:54, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 49 60 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 54 1F F3 64 0A 
+[0;32mI (945783) NODE_HELLO: HELLO sent (len=14, seq=0x3D30, nonce=0xE981)[0m
+[0;32mI (945783) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (947213) NODE_HELLO: OFFER: seq16=0x3D30, echo_nonce=0xE981, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:55, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 30 3D E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 55 81 E9 64 0A 
+[0;32mI (949943) NODE_HELLO: HELLO sent (len=14, seq=0xC121, nonce=0x0FCD)[0m
+[0;32mI (949943) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (951373) NODE_HELLO: OFFER: seq16=0xC121, echo_nonce=0x0FCD, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:56, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 21 C1 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 56 CD 0F 64 0A 
+[0;32mI (954103) NODE_HELLO: HELLO sent (len=14, seq=0xEB0D, nonce=0xD0D9)[0m
+[0;32mI (954103) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (955533) NODE_HELLO: OFFER: seq16=0xEB0D, echo_nonce=0xD0D9, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:57, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 0D EB E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 57 D9 D0 64 0A 
+[0;32mI (958263) NODE_HELLO: HELLO sent (len=14, seq=0x5D46, nonce=0xE871)[0m
+[0;32mI (958263) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (959693) NODE_HELLO: OFFER: seq16=0x5D46, echo_nonce=0xE871, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:58, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 46 5D E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 58 71 E8 64 0A 
+[0;32mI (962423) NODE_HELLO: HELLO sent (len=14, seq=0xDDB1, nonce=0xEB9A)[0m
+[0;32mI (962423) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (963853) NODE_HELLO: OFFER: seq16=0xDDB1, echo_nonce=0xEB9A, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:59, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 B1 DD E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 59 9A EB 64 0A 
+[0;32mI (966583) NODE_HELLO: HELLO sent (len=14, seq=0x5172, nonce=0xE02A)[0m
+[0;32mI (966583) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (968013) NODE_HELLO: OFFER: seq16=0x5172, echo_nonce=0xE02A, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:5A, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 72 51 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 5A 2A E0 64 0A 
+[0;32mI (970743) NODE_HELLO: HELLO sent (len=14, seq=0xC525, nonce=0x3911)[0m
+[0;32mI (970743) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (972173) NODE_HELLO: OFFER: seq16=0xC525, echo_nonce=0x3911, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:5B, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 25 C5 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 5B 11 39 64 0A 
+[0;32mI (974903) NODE_HELLO: HELLO sent (len=14, seq=0x8F8C, nonce=0x8C81)[0m
+[0;32mI (974903) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (976333) NODE_HELLO: OFFER: seq16=0x8F8C, echo_nonce=0x8C81, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:5C, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 8C 8F E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 5C 81 8C 64 0A 
+[0;32mI (979063) NODE_HELLO: HELLO sent (len=14, seq=0x6E1A, nonce=0xAAD4)[0m
+[0;32mI (979063) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (980493) NODE_HELLO: OFFER: seq16=0x6E1A, echo_nonce=0xAAD4, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:5D, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 1A 6E E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 5D D4 AA 64 0A 
+[0;32mI (983223) NODE_HELLO: HELLO sent (len=14, seq=0x332D, nonce=0xD134)[0m
+[0;32mI (983223) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (984653) NODE_HELLO: OFFER: seq16=0x332D, echo_nonce=0xD134, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:5E, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 2D 33 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 5E 34 D1 64 0A 
+[0;32mI (987383) NODE_HELLO: HELLO sent (len=14, seq=0x68AA, nonce=0x0768)[0m
+[0;32mI (987383) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (988813) NODE_HELLO: OFFER: seq16=0x68AA, echo_nonce=0x0768, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:5F, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 AA 68 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 5F 68 07 64 0A 
+[0;32mI (991543) NODE_HELLO: HELLO sent (len=14, seq=0xC1AC, nonce=0x1E76)[0m
+[0;32mI (991543) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (992973) NODE_HELLO: OFFER: seq16=0xC1AC, echo_nonce=0x1E76, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:60, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 AC C1 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 60 76 1E 64 0A 
+[0;32mI (995703) NODE_HELLO: HELLO sent (len=14, seq=0x8A72, nonce=0x7881)[0m
+[0;32mI (995703) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (997133) NODE_HELLO: OFFER: seq16=0x8A72, echo_nonce=0x7881, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:61, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 72 8A E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 61 81 78 64 0A 
+[0;32mI (999863) NODE_HELLO: HELLO sent (len=14, seq=0x9D87, nonce=0x008B)[0m
+[0;32mI (999863) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1001293) NODE_HELLO: OFFER: seq16=0x9D87, echo_nonce=0x008B, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:62, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 87 9D E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 62 8B 00 64 0A 
+[0;32mI (1004023) NODE_HELLO: HELLO sent (len=14, seq=0xB32B, nonce=0x7B5A)[0m
+[0;32mI (1004023) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1005453) NODE_HELLO: OFFER: seq16=0xB32B, echo_nonce=0x7B5A, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:63, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 2B B3 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 63 5A 7B 64 0A 
+[0;32mI (1008183) NODE_HELLO: HELLO sent (len=14, seq=0x3F2F, nonce=0x4226)[0m
+[0;32mI (1008183) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1009613) NODE_HELLO: OFFER: seq16=0x3F2F, echo_nonce=0x4226, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:64, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 2F 3F E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 64 26 42 64 0A 
+[0;32mI (1012343) NODE_HELLO: HELLO sent (len=14, seq=0x91BE, nonce=0x7BDE)[0m
+[0;32mI (1012343) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1013773) NODE_HELLO: OFFER: seq16=0x91BE, echo_nonce=0x7BDE, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:65, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 BE 91 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 65 DE 7B 64 0A 
+[0;32mI (1016503) NODE_HELLO: HELLO sent (len=14, seq=0x1AEC, nonce=0x56BF)[0m
+[0;32mI (1016503) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1017933) NODE_HELLO: OFFER: seq16=0x1AEC, echo_nonce=0x56BF, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:66, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 EC 1A E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 66 BF 56 64 0A 
+[0;32mI (1020663) NODE_HELLO: HELLO sent (len=14, seq=0x5A38, nonce=0x00AD)[0m
+[0;32mI (1020663) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1022093) NODE_HELLO: OFFER: seq16=0x5A38, echo_nonce=0x00AD, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:67, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 38 5A E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 67 AD 00 64 0A 
+[0;32mI (1024823) NODE_HELLO: HELLO sent (len=14, seq=0xDFB0, nonce=0x32DF)[0m
+[0;32mI (1024823) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1026253) NODE_HELLO: OFFER: seq16=0xDFB0, echo_nonce=0x32DF, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:68, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 B0 DF E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 68 DF 32 64 0A 
+[0;32mI (1028983) NODE_HELLO: HELLO sent (len=14, seq=0x0BA3, nonce=0x790D)[0m
+[0;32mI (1028983) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1030413) NODE_HELLO: OFFER: seq16=0x0BA3, echo_nonce=0x790D, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:69, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 A3 0B E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 69 0D 79 64 0A 
+[0;32mI (1033143) NODE_HELLO: HELLO sent (len=14, seq=0xFC29, nonce=0xFDC8)[0m
+[0;32mI (1033143) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1034573) NODE_HELLO: OFFER: seq16=0xFC29, echo_nonce=0xFDC8, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:6A, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 29 FC E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 6A C8 FD 64 0A 
+[0;32mI (1037303) NODE_HELLO: HELLO sent (len=14, seq=0x3C6F, nonce=0x93DF)[0m
+[0;32mI (1037303) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1038733) NODE_HELLO: OFFER: seq16=0x3C6F, echo_nonce=0x93DF, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:6B, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 6F 3C E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 6B DF 93 64 0A 
+[0;32mI (1041463) NODE_HELLO: HELLO sent (len=14, seq=0x9078, nonce=0xF606)[0m
+[0;32mI (1041463) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1042893) NODE_HELLO: OFFER: seq16=0x9078, echo_nonce=0xF606, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:6C, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 78 90 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 6C 06 F6 64 0A 
+[0;32mI (1045623) NODE_HELLO: HELLO sent (len=14, seq=0xDDB8, nonce=0x0184)[0m
+[0;32mI (1045623) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1047053) NODE_HELLO: OFFER: seq16=0xDDB8, echo_nonce=0x0184, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:6D, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 B8 DD E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 6D 84 01 64 0A 
+[0;32mI (1049783) NODE_HELLO: HELLO sent (len=14, seq=0xCB0A, nonce=0x0872)[0m
+[0;32mI (1049783) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1051213) NODE_HELLO: OFFER: seq16=0xCB0A, echo_nonce=0x0872, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:6E, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 0A CB E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 6E 72 08 64 0A 
+[0;32mI (1053943) NODE_HELLO: HELLO sent (len=14, seq=0x85A2, nonce=0x382A)[0m
+[0;32mI (1053943) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1055373) NODE_HELLO: OFFER: seq16=0x85A2, echo_nonce=0x382A, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:6F, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 A2 85 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 6F 2A 38 64 0A 
+[0;32mI (1058103) NODE_HELLO: HELLO sent (len=14, seq=0xB84C, nonce=0x03AE)[0m
+[0;32mI (1058103) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1059533) NODE_HELLO: OFFER: seq16=0xB84C, echo_nonce=0x03AE, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:70, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 4C B8 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 70 AE 03 64 0A 
+[0;32mI (1062263) NODE_HELLO: HELLO sent (len=14, seq=0xE877, nonce=0xB3C7)[0m
+[0;32mI (1062263) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1063693) NODE_HELLO: OFFER: seq16=0xE877, echo_nonce=0xB3C7, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:71, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 77 E8 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 71 C7 B3 64 0A 
+[0;32mI (1066423) NODE_HELLO: HELLO sent (len=14, seq=0x068A, nonce=0x47BF)[0m
+[0;32mI (1066423) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1067853) NODE_HELLO: OFFER: seq16=0x068A, echo_nonce=0x47BF, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:72, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 8A 06 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 72 BF 47 64 0A 
+[0;32mI (1070583) NODE_HELLO: HELLO sent (len=14, seq=0x137D, nonce=0x4700)[0m
+[0;32mI (1070583) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1072013) NODE_HELLO: OFFER: seq16=0x137D, echo_nonce=0x4700, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:73, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 7D 13 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 73 00 47 64 0A 
+[0;32mI (1074743) NODE_HELLO: HELLO sent (len=14, seq=0xD3C5, nonce=0x971F)[0m
+[0;32mI (1074743) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1076173) NODE_HELLO: OFFER: seq16=0xD3C5, echo_nonce=0x971F, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:74, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 C5 D3 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 74 1F 97 64 0A 
+[0;32mI (1078903) NODE_HELLO: HELLO sent (len=14, seq=0xE4C7, nonce=0xD218)[0m
+[0;32mI (1078903) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1080333) NODE_HELLO: OFFER: seq16=0xE4C7, echo_nonce=0xD218, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:75, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 C7 E4 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 75 18 D2 64 0A 
+[0;32mI (1083063) NODE_HELLO: HELLO sent (len=14, seq=0x2144, nonce=0x4318)[0m
+[0;32mI (1083063) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1084493) NODE_HELLO: OFFER: seq16=0x2144, echo_nonce=0x4318, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:76, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 44 21 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 76 18 43 64 0A 
+[0;32mI (1087223) NODE_HELLO: HELLO sent (len=14, seq=0x54EC, nonce=0x9E5F)[0m
+[0;32mI (1087223) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1088653) NODE_HELLO: OFFER: seq16=0x54EC, echo_nonce=0x9E5F, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:77, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 EC 54 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 77 5F 9E 64 0A 
+[0;32mI (1091383) NODE_HELLO: HELLO sent (len=14, seq=0xC366, nonce=0xCCF1)[0m
+[0;32mI (1091383) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1092813) NODE_HELLO: OFFER: seq16=0xC366, echo_nonce=0xCCF1, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:78, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 66 C3 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 78 F1 CC 64 0A 
+[0;32mI (1095543) NODE_HELLO: HELLO sent (len=14, seq=0x739C, nonce=0x116A)[0m
+[0;32mI (1095543) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1096973) NODE_HELLO: OFFER: seq16=0x739C, echo_nonce=0x116A, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:79, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 9C 73 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 79 6A 11 64 0A 
+[0;32mI (1099703) NODE_HELLO: HELLO sent (len=14, seq=0x01C0, nonce=0xF7D8)[0m
+[0;32mI (1099703) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1101133) NODE_HELLO: OFFER: seq16=0x01C0, echo_nonce=0xF7D8, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:7A, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 C0 01 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 7A D8 F7 64 0A 
+[0;32mI (1103863) NODE_HELLO: HELLO sent (len=14, seq=0x0330, nonce=0x694D)[0m
+[0;32mI (1103863) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1105293) NODE_HELLO: OFFER: seq16=0x0330, echo_nonce=0x694D, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:7B, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 30 03 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 7B 4D 69 64 0A 
+[0;32mI (1108023) NODE_HELLO: HELLO sent (len=14, seq=0x774F, nonce=0xE03A)[0m
+[0;32mI (1108023) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1109453) NODE_HELLO: OFFER: seq16=0x774F, echo_nonce=0xE03A, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:7C, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 4F 77 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 7C 3A E0 64 0A 
+[0;32mI (1112183) NODE_HELLO: HELLO sent (len=14, seq=0x4210, nonce=0x13C0)[0m
+[0;32mI (1112183) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1113613) NODE_HELLO: OFFER: seq16=0x4210, echo_nonce=0x13C0, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:7D, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 10 42 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 7D C0 13 64 0A 
+[0;32mI (1116343) NODE_HELLO: HELLO sent (len=14, seq=0x22D6, nonce=0x6C7B)[0m
+[0;32mI (1116343) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1117773) NODE_HELLO: OFFER: seq16=0x22D6, echo_nonce=0x6C7B, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:7E, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 D6 22 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 7E 7B 6C 64 0A 
+[0;32mI (1120503) NODE_HELLO: HELLO sent (len=14, seq=0x9061, nonce=0x6B78)[0m
+[0;32mI (1120503) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1121933) NODE_HELLO: OFFER: seq16=0x9061, echo_nonce=0x6B78, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:7F, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 61 90 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 7F 78 6B 64 0A 
+[0;32mI (1124663) NODE_HELLO: HELLO sent (len=14, seq=0xEF2C, nonce=0x3BE2)[0m
+[0;32mI (1124663) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1126093) NODE_HELLO: OFFER: seq16=0xEF2C, echo_nonce=0x3BE2, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:80, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 2C EF E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 80 E2 3B 64 0A 
+[0;32mI (1128823) NODE_HELLO: HELLO sent (len=14, seq=0xED05, nonce=0x8AD7)[0m
+[0;32mI (1128823) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1130253) NODE_HELLO: OFFER: seq16=0xED05, echo_nonce=0x8AD7, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:81, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 05 ED E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 81 D7 8A 64 0A 
+[0;32mI (1132983) NODE_HELLO: HELLO sent (len=14, seq=0xE92C, nonce=0x4384)[0m
+[0;32mI (1132983) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1134413) NODE_HELLO: OFFER: seq16=0xE92C, echo_nonce=0x4384, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:82, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 2C E9 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 82 84 43 64 0A 
+[0;32mI (1137143) NODE_HELLO: HELLO sent (len=14, seq=0xFBC9, nonce=0x5EAA)[0m
+[0;32mI (1137143) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1138573) NODE_HELLO: OFFER: seq16=0xFBC9, echo_nonce=0x5EAA, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:83, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 C9 FB E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 83 AA 5E 64 0A 
+[0;32mI (1141303) NODE_HELLO: HELLO sent (len=14, seq=0xE7D8, nonce=0xB12D)[0m
+[0;32mI (1141303) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1142733) NODE_HELLO: OFFER: seq16=0xE7D8, echo_nonce=0xB12D, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:84, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 D8 E7 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 84 2D B1 64 0A 
+[0;32mI (1145463) NODE_HELLO: HELLO sent (len=14, seq=0xF02D, nonce=0x81B1)[0m
+[0;32mI (1145463) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1146893) NODE_HELLO: OFFER: seq16=0xF02D, echo_nonce=0x81B1, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:85, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 2D F0 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 85 B1 81 64 0A 
+[0;32mI (1149623) NODE_HELLO: HELLO sent (len=14, seq=0xD1A0, nonce=0x51E2)[0m
+[0;32mI (1149623) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1151053) NODE_HELLO: OFFER: seq16=0xD1A0, echo_nonce=0x51E2, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:86, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 A0 D1 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 86 E2 51 64 0A 
+[0;32mI (1153783) NODE_HELLO: HELLO sent (len=14, seq=0xE954, nonce=0x0EA3)[0m
+[0;32mI (1153783) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1155213) NODE_HELLO: OFFER: seq16=0xE954, echo_nonce=0x0EA3, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:87, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 54 E9 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 87 A3 0E 64 0A 
+[0;32mI (1157943) NODE_HELLO: HELLO sent (len=14, seq=0x0ACD, nonce=0xF806)[0m
+[0;32mI (1157943) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1159373) NODE_HELLO: OFFER: seq16=0x0ACD, echo_nonce=0xF806, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:88, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 CD 0A E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 88 06 F8 64 0A 
+[0;32mI (1162103) NODE_HELLO: HELLO sent (len=14, seq=0x6501, nonce=0xC563)[0m
+[0;32mI (1162103) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1163533) NODE_HELLO: OFFER: seq16=0x6501, echo_nonce=0xC563, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:89, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 01 65 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 89 63 C5 64 0A 
+[0;32mI (1166263) NODE_HELLO: HELLO sent (len=14, seq=0xC313, nonce=0xCC6F)[0m
+[0;32mI (1166263) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1167693) NODE_HELLO: OFFER: seq16=0xC313, echo_nonce=0xCC6F, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:8A, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 13 C3 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 8A 6F CC 64 0A 
+[0;32mI (1170423) NODE_HELLO: HELLO sent (len=14, seq=0x5E10, nonce=0x7589)[0m
+[0;32mI (1170423) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1171853) NODE_HELLO: OFFER: seq16=0x5E10, echo_nonce=0x7589, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:8B, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 10 5E E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 8B 89 75 64 0A 
+[0;32mI (1174583) NODE_HELLO: HELLO sent (len=14, seq=0x0644, nonce=0xA996)[0m
+[0;32mI (1174583) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1176013) NODE_HELLO: OFFER: seq16=0x0644, echo_nonce=0xA996, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:8C, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 44 06 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 8C 96 A9 64 0A 
+[0;32mI (1178743) NODE_HELLO: HELLO sent (len=14, seq=0xA70E, nonce=0xD74D)[0m
+[0;32mI (1178743) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1180173) NODE_HELLO: OFFER: seq16=0xA70E, echo_nonce=0xD74D, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:8D, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 0E A7 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 8D 4D D7 64 0A 
+[0;32mI (1182903) NODE_HELLO: HELLO sent (len=14, seq=0x0CEF, nonce=0xE7C2)[0m
+[0;32mI (1182903) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1184333) NODE_HELLO: OFFER: seq16=0x0CEF, echo_nonce=0xE7C2, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:8E, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 EF 0C E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 8E C2 E7 64 0A 
+[0;32mI (1187063) NODE_HELLO: HELLO sent (len=14, seq=0x6064, nonce=0x28F2)[0m
+[0;32mI (1187063) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1188493) NODE_HELLO: OFFER: seq16=0x6064, echo_nonce=0x28F2, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:8F, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 64 60 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 8F F2 28 64 0A 
+[0;32mI (1191223) NODE_HELLO: HELLO sent (len=14, seq=0x9FB4, nonce=0x2947)[0m
+[0;32mI (1191223) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1192653) NODE_HELLO: OFFER: seq16=0x9FB4, echo_nonce=0x2947, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:90, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 B4 9F E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 90 47 29 64 0A 
+[0;32mI (1195383) NODE_HELLO: HELLO sent (len=14, seq=0x1B9E, nonce=0x3C80)[0m
+[0;32mI (1195383) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1196813) NODE_HELLO: OFFER: seq16=0x1B9E, echo_nonce=0x3C80, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:91, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 9E 1B E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 91 80 3C 64 0A 
+[0;32mI (1199543) NODE_HELLO: HELLO sent (len=14, seq=0x725D, nonce=0xC577)[0m
+[0;32mI (1199543) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1200973) NODE_HELLO: OFFER: seq16=0x725D, echo_nonce=0xC577, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:92, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 5D 72 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 92 77 C5 64 0A 
+[0;32mI (1203703) NODE_HELLO: HELLO sent (len=14, seq=0xEF83, nonce=0xED42)[0m
+[0;32mI (1203703) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1205133) NODE_HELLO: OFFER: seq16=0xEF83, echo_nonce=0xED42, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:93, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 83 EF E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 93 42 ED 64 0A 
+[0;32mI (1207863) NODE_HELLO: HELLO sent (len=14, seq=0x951A, nonce=0x6C19)[0m
+[0;32mI (1207863) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1209293) NODE_HELLO: OFFER: seq16=0x951A, echo_nonce=0x6C19, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:94, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 1A 95 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 94 19 6C 64 0A 
+[0;32mI (1212023) NODE_HELLO: HELLO sent (len=14, seq=0x5B9E, nonce=0x6019)[0m
+[0;32mI (1212023) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1213453) NODE_HELLO: OFFER: seq16=0x5B9E, echo_nonce=0x6019, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:95, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 9E 5B E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 95 19 60 64 0A 
+[0;32mI (1216183) NODE_HELLO: HELLO sent (len=14, seq=0x10F9, nonce=0x41AD)[0m
+[0;32mI (1216183) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1217613) NODE_HELLO: OFFER: seq16=0x10F9, echo_nonce=0x41AD, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:96, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 F9 10 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 96 AD 41 64 0A 
+[0;32mI (1220343) NODE_HELLO: HELLO sent (len=14, seq=0x524E, nonce=0x42E3)[0m
+[0;32mI (1220343) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1221773) NODE_HELLO: OFFER: seq16=0x524E, echo_nonce=0x42E3, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:97, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 4E 52 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 97 E3 42 64 0A 
+[0;32mI (1224503) NODE_HELLO: HELLO sent (len=14, seq=0xFC1A, nonce=0x4210)[0m
+[0;32mI (1224503) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1225933) NODE_HELLO: OFFER: seq16=0xFC1A, echo_nonce=0x4210, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:98, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 1A FC E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 98 10 42 64 0A 
+[0;32mI (1228663) NODE_HELLO: HELLO sent (len=14, seq=0xD755, nonce=0x97BF)[0m
+[0;32mI (1228663) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1230093) NODE_HELLO: OFFER: seq16=0xD755, echo_nonce=0x97BF, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:99, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 55 D7 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 99 BF 97 64 0A 
+[0;32mI (1232823) NODE_HELLO: HELLO sent (len=14, seq=0xF888, nonce=0xA353)[0m
+[0;32mI (1232823) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1234253) NODE_HELLO: OFFER: seq16=0xF888, echo_nonce=0xA353, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:9A, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 88 F8 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 9A 53 A3 64 0A 
+[0;32mI (1236983) NODE_HELLO: HELLO sent (len=14, seq=0xA28F, nonce=0x3688)[0m
+[0;32mI (1236983) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1238413) NODE_HELLO: OFFER: seq16=0xA28F, echo_nonce=0x3688, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:9B, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 8F A2 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 9B 88 36 64 0A 
+[0;32mI (1241143) NODE_HELLO: HELLO sent (len=14, seq=0xC0FC, nonce=0xB110)[0m
+[0;32mI (1241143) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1242573) NODE_HELLO: OFFER: seq16=0xC0FC, echo_nonce=0xB110, gw_id=E8:6B:EA:09:D5:24, proposed_uid=E8:6B:EA:09:D5:24:00:9C, priority=100, ttl_s=10[0m
+OFFER_RAW (22B): 02 00 FC C0 E8 6B EA 09 D5 24 E8 6B EA 09 D5 24 00 9C 10 B1 64 0A 
+[0;32mI (1245303) NODE_HELLO: HELLO sent (len=14, seq=0xBC3A, nonce=0x2B8F)[0m
+[0;32mI (1245303) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1249463) NODE_HELLO: HELLO sent (len=14, seq=0xE7FB, nonce=0x5982)[0m
+[0;32mI (1249463) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1253623) NODE_HELLO: HELLO sent (len=14, seq=0xB653, nonce=0xAB86)[0m
+[0;32mI (1253623) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1257783) NODE_HELLO: HELLO sent (len=14, seq=0xF212, nonce=0x145E)[0m
+[0;32mI (1257783) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1261943) NODE_HELLO: HELLO sent (len=14, seq=0x6E0A, nonce=0x8C32)[0m
+[0;32mI (1261943) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1266103) NODE_HELLO: HELLO sent (len=14, seq=0xDABC, nonce=0xD006)[0m
+[0;32mI (1266103) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1270263) NODE_HELLO: HELLO sent (len=14, seq=0x1DD4, nonce=0xBCF8)[0m
+[0;32mI (1270263) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1274423) NODE_HELLO: HELLO sent (len=14, seq=0xA6FF, nonce=0x0FC0)[0m
+[0;32mI (1274423) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1278583) NODE_HELLO: HELLO sent (len=14, seq=0x44F0, nonce=0x23CF)[0m
+[0;32mI (1278583) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1282743) NODE_HELLO: HELLO sent (len=14, seq=0xE010, nonce=0xFCD4)[0m
+[0;32mI (1282743) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1286903) NODE_HELLO: HELLO sent (len=14, seq=0xD91D, nonce=0xB035)[0m
+[0;32mI (1286903) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1291063) NODE_HELLO: HELLO sent (len=14, seq=0x8DFA, nonce=0xF8CE)[0m
+[0;32mI (1291063) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1295223) NODE_HELLO: HELLO sent (len=14, seq=0x7B4E, nonce=0x682D)[0m
+[0;32mI (1295223) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m
+[0;32mI (1299383) NODE_HELLO: HELLO sent (len=14, seq=0x1D17, nonce=0x9801)[0m
+[0;32mI (1299383) NODE_HELLO: Waiting for OFFERs (window 2000ms)...[0m

@@ -1,0 +1,100 @@
+Command: C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe C:\Espressif\frameworks\esp-idf-v5.5.1\tools/idf_monitor.py -p COM18 -b 115200 --toolchain-prefix xtensa-esp32-elf- --target esp32 --revision 0 D:\my_first_app\build\my_first_app.elf D:\my_first_app\build\bootloader\bootloader.elf --force-color -m 'C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe' 'C:\Espressif\frameworks\esp-idf-v5.5.1\tools\idf.py' '-p' 'COM18'
+��ets Jun  8 2016 00:22:57
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 188777542, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6380
+ho 0 tail 12 room 4
+load:0x40078000,len:15916
+load:0x40080400,len:3860
+entry 0x40080638
+[0;32mI (30) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (30) boot: compile time Oct  9 2025 09:33:59[0m
+[0;32mI (30) boot: Multicore bootloader[0m
+[0;32mI (31) boot: chip revision: v1.1[0m
+[0;32mI (34) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (38) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (41) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (45) boot: Enabling RNG early entropy source...[0m
+[0;32mI (49) boot: Partition Table:[0m
+[0;32mI (52) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (65) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (71) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (78) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=0b5d0h ( 46544) map[0m
+[0;32mI (105) esp_image: segment 1: paddr=0001b5f8 vaddr=3ffb0000 size=02560h (  9568) load[0m
+[0;32mI (109) esp_image: segment 2: paddr=0001db60 vaddr=40080000 size=024b8h (  9400) load[0m
+[0;32mI (112) esp_image: segment 3: paddr=00020020 vaddr=400d0020 size=194bch (103612) map[0m
+[0;32mI (152) esp_image: segment 4: paddr=000394e4 vaddr=400824b8 size=0c82ch ( 51244) load[0m
+[0;32mI (172) esp_image: segment 5: paddr=00045d18 vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (179) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (179) boot: Disabling RNG early entropy source...[0m
+[0;32mI (190) cpu_start: Multicore app[0m
+[0;32mI (198) cpu_start: Pro cpu start user code[0m
+[0;32mI (198) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (198) app_init: Application information:[0m
+[0;32mI (198) app_init: Project name:     my_first_app[0m
+[0;32mI (203) app_init: App version:      1[0m
+[0;32mI (206) app_init: Compile time:     Oct 13 2025 23:23:59[0m
+[0;32mI (211) app_init: ELF file SHA256:  f6167f7f7...[0m
+[0;32mI (216) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (219) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (223) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (227) efuse_init: Chip rev:         v1.1[0m
+[0;32mI (231) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (237) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (242) heap_init: At 3FFB2E68 len 0002D198 (180 KiB): DRAM[0m
+[0;32mI (248) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (253) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (259) heap_init: At 4008ECE4 len 0001131C (68 KiB): IRAM[0m
+[0;32mI (265) spi_flash: detected chip: gd[0m
+[0;32mI (267) spi_flash: flash io: dio[0m
+[0;33mW (270) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (283) main_task: Started on CPU0[0m
+[0;32mI (293) main_task: Calling app_main()[0m
+[0;32mI (303) main_task: Returned from app_main()[0m
+[0;32mI (1463) NODE_HELLO: HELLO sent (len=14, seq=0xF42D, nonce=0x8CCF)[0m
+[0;32mI (1463) NODE_HELLO: Waiting for OFFERs (window 800ms)...[0m
+[0;32mI (4423) NODE_HELLO: HELLO sent (len=14, seq=0xF646, nonce=0x3129)[0m
+[0;32mI (4423) NODE_HELLO: Waiting for OFFERs (window 800ms)...[0m
+[0;32mI (7383) NODE_HELLO: HELLO sent (len=14, seq=0x5B04, nonce=0x5DB4)[0m
+[0;32mI (7383) NODE_HELLO: Waiting for OFFERs (window 800ms)...[0m
+[0;32mI (10343) NODE_HELLO: HELLO sent (len=14, seq=0x7F78, nonce=0x59D8)[0m
+[0;32mI (10343) NODE_HELLO: Waiting for OFFERs (window 800ms)...[0m
+[0;32mI (13303) NODE_HELLO: HELLO sent (len=14, seq=0x4868, nonce=0x56A7)[0m
+[0;32mI (13303) NODE_HELLO: Waiting for OFFERs (window 800ms)...[0m
+[0;32mI (16263) NODE_HELLO: HELLO sent (len=14, seq=0xB7FF, nonce=0xD43F)[0m
+[0;32mI (16263) NODE_HELLO: Waiting for OFFERs (window 800ms)...[0m
+[0;32mI (19223) NODE_HELLO: HELLO sent (len=14, seq=0xA52B, nonce=0xBAF1)[0m
+[0;32mI (19223) NODE_HELLO: Waiting for OFFERs (window 800ms)...[0m
+[0;32mI (22183) NODE_HELLO: HELLO sent (len=14, seq=0x41FC, nonce=0x6FD9)[0m
+[0;32mI (22183) NODE_HELLO: Waiting for OFFERs (window 800ms)...[0m
+[0;32mI (25143) NODE_HELLO: HELLO sent (len=14, seq=0x2F7A, nonce=0x0796)[0m
+[0;32mI (25143) NODE_HELLO: Waiting for OFFERs (window 800ms)...[0m
+[0;32mI (28103) NODE_HELLO: HELLO sent (len=14, seq=0x5E09, nonce=0x702C)[0m
+[0;32mI (28103) NODE_HELLO: Waiting for OFFERs (window 800ms)...[0m
+[0;32mI (31063) NODE_HELLO: HELLO sent (len=14, seq=0x2CA5, nonce=0x4157)[0m
+[0;32mI (31063) NODE_HELLO: Waiting for OFFERs (window 800ms)...[0m
+[0;32mI (34023) NODE_HELLO: HELLO sent (len=14, seq=0xDF74, nonce=0x0364)[0m
+[0;32mI (34023) NODE_HELLO: Waiting for OFFERs (window 800ms)...[0m
+[0;32mI (36983) NODE_HELLO: HELLO sent (len=14, seq=0x3CC4, nonce=0x5FAF)[0m
+[0;32mI (36983) NODE_HELLO: Waiting for OFFERs (window 800ms)...[0m
+[0;32mI (39943) NODE_HELLO: HELLO sent (len=14, seq=0xB115, nonce=0x8628)[0m
+[0;32mI (39943) NODE_HELLO: Waiting for OFFERs (window 800ms)...[0m
+[0;32mI (42903) NODE_HELLO: HELLO sent (len=14, seq=0xBFA4, nonce=0x50E9)[0m
+[0;32mI (42903) NODE_HELLO: Waiting for OFFERs (window 800ms)...[0m
+[0;32mI (45863) NODE_HELLO: HELLO sent (len=14, seq=0x1657, nonce=0x2FDB)[0m
+[0;32mI (45863) NODE_HELLO: Waiting for OFFERs (window 800ms)...[0m
+[0;32mI (48823) NODE_HELLO: HELLO sent (len=14, seq=0x625E, nonce=0x5020)[0m
+[0;32mI (48823) NODE_HELLO: Waiting for OFFERs (window 800ms)...[0m
+[0;32mI (51783) NODE_HELLO: HELLO sent (len=14, seq=0x54FB, nonce=0xC038)[0m
+[0;32mI (51783) NODE_HELLO: Waiting for OFFERs (window 800ms)...[0m
+[0;32mI (54743) NODE_HELLO: HELLO sent (len=14, seq=0xD5A8, nonce=0x004E)[0m
+[0;32mI (54743) NODE_HELLO: Waiting for OFFERs (window 800ms)...[0m
+[0;32mI (57703) NODE_HELLO: HELLO sent (len=14, seq=0x87A6, nonce=0xC714)[0m
+[0;32mI (57703) NODE_HELLO: Waiting for OFFERs (window 800ms)...[0m
+[0;32mI (60663) NODE_HELLO: HELLO sent (len=14, seq=0x8D93, nonce=0xD725)[0m
+[0;32mI (60663) NODE_HELLO: Waiting for OFFERs (window 800ms)...[0m

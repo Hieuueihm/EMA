@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "cstdint": "c",
+        "compare": "cpp",
+        "provision.h": "c",
+        "time.h": "c",
+        "stationmode.h": "c",
+        "inttypes.h": "c",
+        "cjson.h": "c"
+    }
+}

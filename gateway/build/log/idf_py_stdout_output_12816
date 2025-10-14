@@ -1,0 +1,74 @@
+Command: ninja flash
+[1/5] C:\WINDOWS\system32\cmd.exe /C "cd /D D:\my_first_app\build\esp-idf\esptool_py && C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe C:/Espressif/frameworks/esp-idf-v5.5.1/components/partition_table/check_sizes.py --offset 0x8000 partition --type app D:/my_first_app/build/partition_table/partition-table.bin D:/my_first_app/build/my_first_app.bin"
+my_first_app.bin binary size 0xc7b60 bytes. Smallest app partition is 0x100000 bytes. 0x384a0 bytes (22%) free.
+[2/5] Performing build step for 'bootloader'
+[1/1] C:\WINDOWS\system32\cmd.exe /C "cd /D D:\my_first_app\build\bootloader\esp-idf\esptool_py && C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe C:/Espressif/frameworks/esp-idf-v5.5.1/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x1000 D:/my_first_app/build/bootloader/bootloader.bin"
+Bootloader binary size 0x6680 bytes. 0x980 bytes (8%) free.
+[3/5] No install step for 'bootloader'
+[4/5] Completed 'bootloader'
+[4/5] C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Espressif\frameworks\esp-idf-v5.5.1\components\esptool_py && C:\Espressif\tools\cmake\3.30.2\bin\cmake.exe -D IDF_PATH=C:/Espressif/frameworks/esp-idf-v5.5.1 -D SERIAL_TOOL=C:/Espressif/python_env/idf5.5_py3.11_env/Scripts/python.exe;;C:/Espressif/frameworks/esp-idf-v5.5.1/components/esptool_py/esptool/esptool.py;--chip;esp32 -D SERIAL_TOOL_ARGS=--before=default_reset;--after=hard_reset;write_flash;@flash_args -D WORKING_DIRECTORY=D:/my_first_app/build -P C:/Espressif/frameworks/esp-idf-v5.5.1/components/esptool_py/run_serial_tool.cmake"
+esptool.py --chip esp32 -p COM20 -b 460800 --before=default_reset --after=hard_reset write_flash --flash_mode dio --flash_freq 40m --flash_size 2MB 0x1000 bootloader/bootloader.bin 0x10000 my_first_app.bin 0x8000 partition_table/partition-table.bin
+esptool.py v4.10.0
+Serial port COM20
+Connecting....
+Chip is ESP32-PICO-D4 (revision v1.1)
+Features: WiFi, BT, Dual Core, 240MHz, Embedded Flash, VRef calibration in efuse, Coding Scheme None
+Crystal is 40MHz
+MAC: e8:6b:ea:09:d5:24
+Uploading stub...
+Running stub...
+Stub running...
+Changing baud rate to 460800
+Changed.
+Configuring flash size...
+Flash will be erased from 0x00001000 to 0x00007fff...
+Flash will be erased from 0x00010000 to 0x000d7fff...
+Flash will be erased from 0x00008000 to 0x00008fff...
+SHA digest in image updated
+Compressed 26240 bytes to 16489...
+Writing at 0x00001000... (50 %)
+Writing at 0x000075f7... (100 %)
+Wrote 26240 bytes (16489 compressed) at 0x00001000 in 0.7 seconds (effective 297.3 kbit/s)...
+Hash of data verified.
+Compressed 818016 bytes to 510455...
+Writing at 0x00010000... (3 %)
+Writing at 0x0001c641... (6 %)
+Writing at 0x000255e4... (9 %)
+Writing at 0x00030b80... (12 %)
+Writing at 0x0003647d... (15 %)
+Writing at 0x0003c4b8... (18 %)
+Writing at 0x00042230... (21 %)
+Writing at 0x00048195... (25 %)
+Writing at 0x0004dcb5... (28 %)
+Writing at 0x00053e78... (31 %)
+Writing at 0x000594a2... (34 %)
+Writing at 0x0005ee3f... (37 %)
+Writing at 0x000649e4... (40 %)
+Writing at 0x0006a26d... (43 %)
+Writing at 0x0006f873... (46 %)
+Writing at 0x000753e6... (50 %)
+Writing at 0x0007b3be... (53 %)
+Writing at 0x00080b3f... (56 %)
+Writing at 0x00086822... (59 %)
+Writing at 0x0008c59b... (62 %)
+Writing at 0x00091db5... (65 %)
+Writing at 0x0009799b... (68 %)
+Writing at 0x0009d7c2... (71 %)
+Writing at 0x000a3702... (75 %)
+Writing at 0x000a9040... (78 %)
+Writing at 0x000b2911... (81 %)
+Writing at 0x000b9a69... (84 %)
+Writing at 0x000bf8cc... (87 %)
+Writing at 0x000c59bc... (90 %)
+Writing at 0x000cb895... (93 %)
+Writing at 0x000d1295... (96 %)
+Writing at 0x000d696f... (100 %)
+Wrote 818016 bytes (510455 compressed) at 0x00010000 in 11.7 seconds (effective 560.9 kbit/s)...
+Hash of data verified.
+Compressed 3072 bytes to 103...
+Writing at 0x00008000... (100 %)
+Wrote 3072 bytes (103 compressed) at 0x00008000 in 0.1 seconds (effective 485.5 kbit/s)...
+Hash of data verified.
+
+Leaving...
+Hard resetting via RTS pin...

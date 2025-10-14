@@ -1,0 +1,382 @@
+Command: C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe C:\Espressif\frameworks\esp-idf-v5.5.1\tools/idf_monitor.py -p COM22 -b 115200 --toolchain-prefix xtensa-esp32-elf- --target esp32 --revision 0 D:\my_first_app\build\my_first_app.elf D:\my_first_app\build\bootloader\bootloader.elf --force-color -m 'C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe' 'C:\Espressif\frameworks\esp-idf-v5.5.1\tools\idf.py' '-p' 'COM22'
+ets Jul 29 2019 12:21:46
+
+rst:0x1 (POWERON_RESET),boot:0x13 (SPI_FAST_FLASH_BOOT)
+configsip: 0, SPIWP:0xee
+clk_drv:0x00,q_drv:0x00,d_drv:0x00,cs0_drv:0x00,hd_drv:0x00,wp_drv:0x00
+mode:DIO, clock div:2
+load:0x3fff0030,len:6380
+ho 0 tail 12 room 4
+load:0x40078000,len:15916
+load:0x40080400,len:3860
+entry 0x40080638
+[0;32mI (29) boot: ESP-IDF v5.5.1 2nd stage bootloader[0m
+[0;32mI (29) boot: compile time Oct  9 2025 09:33:59[0m
+[0;32mI (29) boot: Multicore bootloader[0m
+[0;32mI (31) boot: chip revision: v3.1[0m
+[0;32mI (33) boot.esp32: SPI Speed      : 40MHz[0m
+[0;32mI (37) boot.esp32: SPI Mode       : DIO[0m
+[0;32mI (41) boot.esp32: SPI Flash Size : 2MB[0m
+[0;32mI (44) boot: Enabling RNG early entropy source...[0m
+[0;32mI (49) boot: Partition Table:[0m
+[0;32mI (51) boot: ## Label            Usage          Type ST Offset   Length[0m
+[0;32mI (58) boot:  0 nvs              WiFi data        01 02 00009000 00006000[0m
+[0;32mI (64) boot:  1 phy_init         RF data          01 01 0000f000 00001000[0m
+[0;32mI (71) boot:  2 factory          factory app      00 00 00010000 00100000[0m
+[0;32mI (77) boot: End of partition table[0m
+[0;32mI (81) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=0b310h ( 45840) map[0m
+[0;32mI (104) esp_image: segment 1: paddr=0001b338 vaddr=3ffb0000 size=02560h (  9568) load[0m
+[0;32mI (107) esp_image: segment 2: paddr=0001d8a0 vaddr=40080000 size=02778h ( 10104) load[0m
+[0;32mI (112) esp_image: segment 3: paddr=00020020 vaddr=400d0020 size=15c70h ( 89200) map[0m
+[0;32mI (146) esp_image: segment 4: paddr=00035c98 vaddr=40082778 size=0c56ch ( 50540) load[0m
+[0;32mI (166) esp_image: segment 5: paddr=0004220c vaddr=50000000 size=00020h (    32) load[0m
+[0;32mI (173) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (173) boot: Disabling RNG early entropy source...[0m
+[0;32mI (184) cpu_start: Multicore app[0m
+[0;32mI (192) cpu_start: Pro cpu start user code[0m
+[0;32mI (192) cpu_start: cpu freq: 160000000 Hz[0m
+[0;32mI (192) app_init: Application information:[0m
+[0;32mI (192) app_init: Project name:     my_first_app[0m
+[0;32mI (197) app_init: App version:      1[0m
+[0;32mI (200) app_init: Compile time:     Oct  9 2025 22:20:09[0m
+[0;32mI (205) app_init: ELF file SHA256:  33818df6b...[0m
+[0;32mI (209) app_init: ESP-IDF:          v5.5.1[0m
+[0;32mI (213) efuse_init: Min chip rev:     v0.0[0m
+[0;32mI (217) efuse_init: Max chip rev:     v3.99 [0m
+[0;32mI (221) efuse_init: Chip rev:         v3.1[0m
+[0;32mI (225) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (231) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM[0m
+[0;32mI (236) heap_init: At 3FFB2E60 len 0002D1A0 (180 KiB): DRAM[0m
+[0;32mI (241) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM[0m
+[0;32mI (247) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM[0m
+[0;32mI (252) heap_init: At 4008ECE4 len 0001131C (68 KiB): IRAM[0m
+[0;32mI (259) spi_flash: detected chip: generic[0m
+[0;32mI (261) spi_flash: flash io: dio[0m
+[0;33mW (264) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.[0m
+[0;32mI (277) main_task: Started on CPU0[0m
+[0;32mI (287) main_task: Calling app_main()[0m
+[0;32mI (287) SPI_MASTER: SPI Master initialized[0m
+[0;32mI (287) SPI_MASTER: Master sent: 11 22 33 44[0m
+[0;32mI (1287) SPI_MASTER: Master sent: 12 23 34 45[0m
+[0;32mI (2287) SPI_MASTER: Master sent: 13 24 35 46[0m
+[0;32mI (3287) SPI_MASTER: Master sent: 14 25 36 47[0m
+[0;32mI (4287) SPI_MASTER: Master sent: 15 26 37 48[0m
+[0;32mI (5287) SPI_MASTER: Master sent: 16 27 38 49[0m
+[0;32mI (6287) SPI_MASTER: Master sent: 17 28 39 4A[0m
+[0;32mI (7287) SPI_MASTER: Master sent: 18 29 3A 4B[0m
+[0;32mI (8287) SPI_MASTER: Master sent: 19 2A 3B 4C[0m
+[0;32mI (9287) SPI_MASTER: Master sent: 1A 2B 3C 4D[0m
+[0;32mI (10287) SPI_MASTER: Master sent: 1B 2C 3D 4E[0m
+[0;32mI (11287) SPI_MASTER: Master sent: 1C 2D 3E 4F[0m
+[0;32mI (12287) SPI_MASTER: Master sent: 1D 2E 3F 50[0m
+[0;32mI (13287) SPI_MASTER: Master sent: 1E 2F 40 51[0m
+[0;32mI (14287) SPI_MASTER: Master sent: 1F 30 41 52[0m
+[0;32mI (15287) SPI_MASTER: Master sent: 20 31 42 53[0m
+[0;32mI (16287) SPI_MASTER: Master sent: 21 32 43 54[0m
+[0;32mI (17287) SPI_MASTER: Master sent: 22 33 44 55[0m
+[0;32mI (18287) SPI_MASTER: Master sent: 23 34 45 56[0m
+[0;32mI (19287) SPI_MASTER: Master sent: 24 35 46 57[0m
+[0;32mI (20287) SPI_MASTER: Master sent: 25 36 47 58[0m
+[0;32mI (21287) SPI_MASTER: Master sent: 26 37 48 59[0m
+[0;32mI (22287) SPI_MASTER: Master sent: 27 38 49 5A[0m
+[0;32mI (23287) SPI_MASTER: Master sent: 28 39 4A 5B[0m
+[0;32mI (24287) SPI_MASTER: Master sent: 29 3A 4B 5C[0m
+[0;32mI (25287) SPI_MASTER: Master sent: 2A 3B 4C 5D[0m
+[0;32mI (26287) SPI_MASTER: Master sent: 2B 3C 4D 5E[0m
+[0;32mI (27287) SPI_MASTER: Master sent: 2C 3D 4E 5F[0m
+[0;32mI (28287) SPI_MASTER: Master sent: 2D 3E 4F 60[0m
+[0;32mI (29287) SPI_MASTER: Master sent: 2E 3F 50 61[0m
+[0;32mI (30287) SPI_MASTER: Master sent: 2F 40 51 62[0m
+[0;32mI (31287) SPI_MASTER: Master sent: 30 41 52 63[0m
+[0;32mI (32287) SPI_MASTER: Master sent: 31 42 53 64[0m
+[0;32mI (33287) SPI_MASTER: Master sent: 32 43 54 65[0m
+[0;32mI (34287) SPI_MASTER: Master sent: 33 44 55 66[0m
+[0;32mI (35287) SPI_MASTER: Master sent: 34 45 56 67[0m
+[0;32mI (36287) SPI_MASTER: Master sent: 35 46 57 68[0m
+[0;32mI (37287) SPI_MASTER: Master sent: 36 47 58 69[0m
+[0;32mI (38287) SPI_MASTER: Master sent: 37 48 59 6A[0m
+[0;32mI (39287) SPI_MASTER: Master sent: 38 49 5A 6B[0m
+[0;32mI (40287) SPI_MASTER: Master sent: 39 4A 5B 6C[0m
+[0;32mI (41287) SPI_MASTER: Master sent: 3A 4B 5C 6D[0m
+[0;32mI (42287) SPI_MASTER: Master sent: 3B 4C 5D 6E[0m
+[0;32mI (43287) SPI_MASTER: Master sent: 3C 4D 5E 6F[0m
+[0;32mI (44287) SPI_MASTER: Master sent: 3D 4E 5F 70[0m
+[0;32mI (45287) SPI_MASTER: Master sent: 3E 4F 60 71[0m
+[0;32mI (46287) SPI_MASTER: Master sent: 3F 50 61 72[0m
+[0;32mI (47287) SPI_MASTER: Master sent: 40 51 62 73[0m
+[0;32mI (48287) SPI_MASTER: Master sent: 41 52 63 74[0m
+[0;32mI (49287) SPI_MASTER: Master sent: 42 53 64 75[0m
+[0;32mI (50287) SPI_MASTER: Master sent: 43 54 65 76[0m
+[0;32mI (51287) SPI_MASTER: Master sent: 44 55 66 77[0m
+[0;32mI (52287) SPI_MASTER: Master sent: 45 56 67 78[0m
+[0;32mI (53287) SPI_MASTER: Master sent: 46 57 68 79[0m
+[0;32mI (54287) SPI_MASTER: Master sent: 47 58 69 7A[0m
+[0;32mI (55287) SPI_MASTER: Master sent: 48 59 6A 7B[0m
+[0;32mI (56287) SPI_MASTER: Master sent: 49 5A 6B 7C[0m
+[0;32mI (57287) SPI_MASTER: Master sent: 4A 5B 6C 7D[0m
+[0;32mI (58287) SPI_MASTER: Master sent: 4B 5C 6D 7E[0m
+[0;32mI (59287) SPI_MASTER: Master sent: 4C 5D 6E 7F[0m
+[0;32mI (60287) SPI_MASTER: Master sent: 4D 5E 6F 80[0m
+[0;32mI (61287) SPI_MASTER: Master sent: 4E 5F 70 81[0m
+[0;32mI (62287) SPI_MASTER: Master sent: 4F 60 71 82[0m
+[0;32mI (63287) SPI_MASTER: Master sent: 50 61 72 83[0m
+[0;32mI (64287) SPI_MASTER: Master sent: 51 62 73 84[0m
+[0;32mI (65287) SPI_MASTER: Master sent: 52 63 74 85[0m
+[0;32mI (66287) SPI_MASTER: Master sent: 53 64 75 86[0m
+[0;32mI (67287) SPI_MASTER: Master sent: 54 65 76 87[0m
+[0;32mI (68287) SPI_MASTER: Master sent: 55 66 77 88[0m
+[0;32mI (69287) SPI_MASTER: Master sent: 56 67 78 89[0m
+[0;32mI (70287) SPI_MASTER: Master sent: 57 68 79 8A[0m
+[0;32mI (71287) SPI_MASTER: Master sent: 58 69 7A 8B[0m
+[0;32mI (72287) SPI_MASTER: Master sent: 59 6A 7B 8C[0m
+[0;32mI (73287) SPI_MASTER: Master sent: 5A 6B 7C 8D[0m
+[0;32mI (74287) SPI_MASTER: Master sent: 5B 6C 7D 8E[0m
+[0;32mI (75287) SPI_MASTER: Master sent: 5C 6D 7E 8F[0m
+[0;32mI (76287) SPI_MASTER: Master sent: 5D 6E 7F 90[0m
+[0;32mI (77287) SPI_MASTER: Master sent: 5E 6F 80 91[0m
+[0;32mI (78287) SPI_MASTER: Master sent: 5F 70 81 92[0m
+[0;32mI (79287) SPI_MASTER: Master sent: 60 71 82 93[0m
+[0;32mI (80287) SPI_MASTER: Master sent: 61 72 83 94[0m
+[0;32mI (81287) SPI_MASTER: Master sent: 62 73 84 95[0m
+[0;32mI (82287) SPI_MASTER: Master sent: 63 74 85 96[0m
+[0;32mI (83287) SPI_MASTER: Master sent: 64 75 86 97[0m
+[0;32mI (84287) SPI_MASTER: Master sent: 65 76 87 98[0m
+[0;32mI (85287) SPI_MASTER: Master sent: 66 77 88 99[0m
+[0;32mI (86287) SPI_MASTER: Master sent: 67 78 89 9A[0m
+[0;32mI (87287) SPI_MASTER: Master sent: 68 79 8A 9B[0m
+[0;32mI (88287) SPI_MASTER: Master sent: 69 7A 8B 9C[0m
+[0;32mI (89287) SPI_MASTER: Master sent: 6A 7B 8C 9D[0m
+[0;32mI (90287) SPI_MASTER: Master sent: 6B 7C 8D 9E[0m
+[0;32mI (91287) SPI_MASTER: Master sent: 6C 7D 8E 9F[0m
+[0;32mI (92287) SPI_MASTER: Master sent: 6D 7E 8F A0[0m
+[0;32mI (93287) SPI_MASTER: Master sent: 6E 7F 90 A1[0m
+[0;32mI (94287) SPI_MASTER: Master sent: 6F 80 91 A2[0m
+[0;32mI (95287) SPI_MASTER: Master sent: 70 81 92 A3[0m
+[0;32mI (96287) SPI_MASTER: Master sent: 71 82 93 A4[0m
+[0;32mI (97287) SPI_MASTER: Master sent: 72 83 94 A5[0m
+[0;32mI (98287) SPI_MASTER: Master sent: 73 84 95 A6[0m
+[0;32mI (99287) SPI_MASTER: Master sent: 74 85 96 A7[0m
+[0;32mI (100287) SPI_MASTER: Master sent: 75 86 97 A8[0m
+[0;32mI (101287) SPI_MASTER: Master sent: 76 87 98 A9[0m
+[0;32mI (102287) SPI_MASTER: Master sent: 77 88 99 AA[0m
+[0;32mI (103287) SPI_MASTER: Master sent: 78 89 9A AB[0m
+[0;32mI (104287) SPI_MASTER: Master sent: 79 8A 9B AC[0m
+[0;32mI (105287) SPI_MASTER: Master sent: 7A 8B 9C AD[0m
+[0;32mI (106287) SPI_MASTER: Master sent: 7B 8C 9D AE[0m
+[0;32mI (107287) SPI_MASTER: Master sent: 7C 8D 9E AF[0m
+[0;32mI (108287) SPI_MASTER: Master sent: 7D 8E 9F B0[0m
+[0;32mI (109287) SPI_MASTER: Master sent: 7E 8F A0 B1[0m
+[0;32mI (110287) SPI_MASTER: Master sent: 7F 90 A1 B2[0m
+[0;32mI (111287) SPI_MASTER: Master sent: 80 91 A2 B3[0m
+[0;32mI (112287) SPI_MASTER: Master sent: 81 92 A3 B4[0m
+[0;32mI (113287) SPI_MASTER: Master sent: 82 93 A4 B5[0m
+[0;32mI (114287) SPI_MASTER: Master sent: 83 94 A5 B6[0m
+[0;32mI (115287) SPI_MASTER: Master sent: 84 95 A6 B7[0m
+[0;32mI (116287) SPI_MASTER: Master sent: 85 96 A7 B8[0m
+[0;32mI (117287) SPI_MASTER: Master sent: 86 97 A8 B9[0m
+[0;32mI (118287) SPI_MASTER: Master sent: 87 98 A9 BA[0m
+[0;32mI (119287) SPI_MASTER: Master sent: 88 99 AA BB[0m
+[0;32mI (120287) SPI_MASTER: Master sent: 89 9A AB BC[0m
+[0;32mI (121287) SPI_MASTER: Master sent: 8A 9B AC BD[0m
+[0;32mI (122287) SPI_MASTER: Master sent: 8B 9C AD BE[0m
+[0;32mI (123287) SPI_MASTER: Master sent: 8C 9D AE BF[0m
+[0;32mI (124287) SPI_MASTER: Master sent: 8D 9E AF C0[0m
+[0;32mI (125287) SPI_MASTER: Master sent: 8E 9F B0 C1[0m
+[0;32mI (126287) SPI_MASTER: Master sent: 8F A0 B1 C2[0m
+[0;32mI (127287) SPI_MASTER: Master sent: 90 A1 B2 C3[0m
+[0;32mI (128287) SPI_MASTER: Master sent: 91 A2 B3 C4[0m
+[0;32mI (129287) SPI_MASTER: Master sent: 92 A3 B4 C5[0m
+[0;32mI (130287) SPI_MASTER: Master sent: 93 A4 B5 C6[0m
+[0;32mI (131287) SPI_MASTER: Master sent: 94 A5 B6 C7[0m
+[0;32mI (132287) SPI_MASTER: Master sent: 95 A6 B7 C8[0m
+[0;32mI (133287) SPI_MASTER: Master sent: 96 A7 B8 C9[0m
+[0;32mI (134287) SPI_MASTER: Master sent: 97 A8 B9 CA[0m
+[0;32mI (135287) SPI_MASTER: Master sent: 98 A9 BA CB[0m
+[0;32mI (136287) SPI_MASTER: Master sent: 99 AA BB CC[0m
+[0;32mI (137287) SPI_MASTER: Master sent: 9A AB BC CD[0m
+[0;32mI (138287) SPI_MASTER: Master sent: 9B AC BD CE[0m
+[0;32mI (139287) SPI_MASTER: Master sent: 9C AD BE CF[0m
+[0;32mI (140287) SPI_MASTER: Master sent: 9D AE BF D0[0m
+[0;32mI (141287) SPI_MASTER: Master sent: 9E AF C0 D1[0m
+[0;32mI (142287) SPI_MASTER: Master sent: 9F B0 C1 D2[0m
+[0;32mI (143287) SPI_MASTER: Master sent: A0 B1 C2 D3[0m
+[0;32mI (144287) SPI_MASTER: Master sent: A1 B2 C3 D4[0m
+[0;32mI (145287) SPI_MASTER: Master sent: A2 B3 C4 D5[0m
+[0;32mI (146287) SPI_MASTER: Master sent: A3 B4 C5 D6[0m
+[0;32mI (147287) SPI_MASTER: Master sent: A4 B5 C6 D7[0m
+[0;32mI (148287) SPI_MASTER: Master sent: A5 B6 C7 D8[0m
+[0;32mI (149287) SPI_MASTER: Master sent: A6 B7 C8 D9[0m
+[0;32mI (150287) SPI_MASTER: Master sent: A7 B8 C9 DA[0m
+[0;32mI (151287) SPI_MASTER: Master sent: A8 B9 CA DB[0m
+[0;32mI (152287) SPI_MASTER: Master sent: A9 BA CB DC[0m
+[0;32mI (153287) SPI_MASTER: Master sent: AA BB CC DD[0m
+[0;32mI (154287) SPI_MASTER: Master sent: AB BC CD DE[0m
+[0;32mI (155287) SPI_MASTER: Master sent: AC BD CE DF[0m
+[0;32mI (156287) SPI_MASTER: Master sent: AD BE CF E0[0m
+[0;32mI (157287) SPI_MASTER: Master sent: AE BF D0 E1[0m
+[0;32mI (158287) SPI_MASTER: Master sent: AF C0 D1 E2[0m
+[0;32mI (159287) SPI_MASTER: Master sent: B0 C1 D2 E3[0m
+[0;32mI (160287) SPI_MASTER: Master sent: B1 C2 D3 E4[0m
+[0;32mI (161287) SPI_MASTER: Master sent: B2 C3 D4 E5[0m
+[0;32mI (162287) SPI_MASTER: Master sent: B3 C4 D5 E6[0m
+[0;32mI (163287) SPI_MASTER: Master sent: B4 C5 D6 E7[0m
+[0;32mI (164287) SPI_MASTER: Master sent: B5 C6 D7 E8[0m
+[0;32mI (165287) SPI_MASTER: Master sent: B6 C7 D8 E9[0m
+[0;32mI (166287) SPI_MASTER: Master sent: B7 C8 D9 EA[0m
+[0;32mI (167287) SPI_MASTER: Master sent: B8 C9 DA EB[0m
+[0;32mI (168287) SPI_MASTER: Master sent: B9 CA DB EC[0m
+[0;32mI (169287) SPI_MASTER: Master sent: BA CB DC ED[0m
+����������������������������������������������������������������nt: BB CC DD EE
+[0;32mI (171287) SPI_MASTER: Master sent: BC CD DE EF[0m
+[0;32mI (172287) SPI_MASTER: Master sent: BD CE DF F0[0m
+[0;32mI (173287) SPI_MASTER: Master sent: BE CF E0 F1[0m
+[0;32mI (174287) SPI_MASTER: Master sent: BF D0 E1 F2[0m
+[0;32mI (175287) SPI_MASTER: Master sent: C0 D1 E2 F3[0m
+[0;32mI (176287) SPI_MASTER: Master sent: C1 D2 E3 F4[0m
+[0;32mI (177287) SPI_MASTER: Master sent: C2 D3 E4 F5[0m
+[0;32mI (178287) SPI_MASTER: Master sent: C3 D4 E5 F6[0m
+[0;32mI (179287) SPI_MASTER: Master sent: C4 D5 E6 F7[0m
+[0;32mI (180287) SPI_MASTER: Master sent: C5 D6 E7 F8[0m
+[0;32mI (181287) SPI_MASTER: Master sent: C6 D7 E8 F9[0m
+[0;32mI (182287) SPI_MASTER: Master sent: C7 D8 E9 FA[0m
+[0;32mI (183287) SPI_MASTER: Master sent: C8 D9 EA FB[0m
+[0;32mI (184287) SPI_MASTER: Master sent: C9 DA EB FC[0m
+[0;32mI (185287) SPI_MASTER: Master sent: CA DB EC FD[0m
+[0;32mI (186287) SPI_MASTER: Master sent: CB DC ED FE[0m
+[0;32mI (187287) SPI_MASTER: Master sent: CC DD EE FF[0m
+[0;32mI (188287) SPI_MASTER: Master sent: CD DE EF 00[0m
+[0;32mI (189287) SPI_MASTER: Master sent: CE DF F0 01[0m
+[0;32mI (190287) SPI_MASTER: Master sent: CF E0 F1 02[0m
+[0;32mI (191287) SPI_MASTER: Master sent: D0 E1 F2 03[0m
+[0;32mI (192287) SPI_MASTER: Master sent: D1 E2 F3 04[0m
+[0;32mI (193287) SPI_MASTER: Master sent: D2 E3 F4 05[0m
+[0;32mI (194287) SPI_MASTER: Master sent: D3 E4 F5 06[0m
+[0;32mI (195287) SPI_MASTER: Master sent: D4 E5 F6 07[0m
+[0;32mI (196287) SPI_MASTER: Master sent: D5 E6 F7 08[0m
+[0;32mI (197287) SPI_MASTER: Master sent: D6 E7 F8 09[0m
+[0;32mI (198287) SPI_MASTER: Master sent: D7 E8 F9 0A[0m
+[0;32mI (199287) SPI_MASTER: Master sent: D8 E9 FA 0B[0m
+[0;32mI (200287) SPI_MASTER: Master sent: D9 EA FB 0C[0m
+[0;32mI (201287) SPI_MASTER: Master sent: DA EB FC 0D[0m
+[0;32mI (202287) SPI_MASTER: Master sent: DB EC FD 0E[0m
+[0;32mI (203287) SPI_MASTER: Master sent: DC ED FE 0F[0m
+[0;32mI (204287) SPI_MASTER: Master sent: DD EE FF 10[0m
+[0;32mI (205287) SPI_MASTER: Master sent: DE EF 00 11[0m
+[0;32mI (206287) SPI_MASTER: Master sent: DF F0 01 12[0m
+[0;32mI (207287) SPI_MASTER: Master sent: E0 F1 02 13[0m
+[0;32mI (208287) SPI_MASTER: Master sent: E1 F2 03 14[0m
+[0;32mI (209287) SPI_MASTER: Master sent: E2 F3 04 15[0m
+[0;32mI (210287) SPI_MASTER: Master sent: E3 F4 05 16[0m
+[0;32mI (211287) SPI_MASTER: Master sent: E4 F5 06 17[0m
+[0;32mI (212287) SPI_MASTER: Master sent: E5 F6 07 18[0m
+[0;32mI (213287) SPI_MASTER: Master sent: E6 F7 08 19[0m
+[0;32mI (214287) SPI_MASTER: Master sent: E7 F8 09 1A[0m
+[0;32mI (215287) SPI_MASTER: Master sent: E8 F9 0A 1B[0m
+[0;32mI (216287) SPI_MASTER: Master sent: E9 FA 0B 1C[0m
+[0;32mI (217287) SPI_MASTER: Master sent: EA FB 0C 1D[0m
+[0;32mI (218287) SPI_MASTER: Master sent: EB FC 0D 1E[0m
+[0;32mI (219287) SPI_MASTER: Master sent: EC FD 0E 1F[0m
+[0;32mI (220287) SPI_MASTER: Master sent: ED FE 0F 20[0m
+[0;32mI (221287) SPI_MASTER: Master sent: EE FF 10 21[0m
+[0;32mI (222287) SPI_MASTER: Master sent: EF 00 11 22[0m
+[0;32mI (223287) SPI_MASTER: Master sent: F0 01 12 23[0m
+[0;32mI (224287) SPI_MASTER: Master sent: F1 02 13 24[0m
+[0;32mI (225287) SPI_MASTER: Master sent: F2 03 14 25[0m
+[0;32mI (226287) SPI_MASTER: Master sent: F3 04 15 26[0m
+[0;32mI (227287) SPI_MASTER: Master sent: F4 05 16 27[0m
+[0;32mI (228287) SPI_MASTER: Master sent: F5 06 17 28[0m
+[0;32mI (229287) SPI_MASTER: Master sent: F6 07 18 29[0m
+[0;32mI (230287) SPI_MASTER: Master sent: F7 08 19 2A[0m
+[0;32mI (231287) SPI_MASTER: Master sent: F8 09 1A 2B[0m
+[0;32mI (232287) SPI_MASTER: Master sent: F9 0A 1B 2C[0m
+[0;32mI (233287) SPI_MASTER: Master sent: FA 0B 1C 2D[0m
+[0;32mI (234287) SPI_MASTER: Master sent: FB 0C 1D 2E[0m
+[0;32mI (235287) SPI_MASTER: Master sent: FC 0D 1E 2F[0m
+[0;32mI (236287) SPI_MASTER: Master sent: FD 0E 1F 30[0m
+[0;32mI (237287) SPI_MASTER: Master sent: FE 0F 20 31[0m
+[0;32mI (238287) SPI_MASTER: Master sent: FF 10 21 32[0m
+[0;32mI (239287) SPI_MASTER: Master sent: 00 11 22 33[0m
+[0;32mI (240287) SPI_MASTER: Master sent: 01 12 23 34[0m
+[0;32mI (241287) SPI_MASTER: Master sent: 02 13 24 35[0m
+[0;32mI (242287) SPI_MASTER: Master sent: 03 14 25 36[0m
+[0;32mI (243287) SPI_MASTER: Master sent: 04 15 26 37[0m
+[0;32mI (244287) SPI_MASTER: Master sent: 05 16 27 38[0m
+[0;32mI (245287) SPI_MASTER: Master sent: 06 17 28 39[0m
+[0;32mI (246287) SPI_MASTER: Master sent: 07 18 29 3A[0m
+[0;32mI (247287) SPI_MASTER: Master sent: 08 19 2A 3B[0m
+[0;32mI (248287) SPI_MASTER: Master sent: 09 1A 2B 3C[0m
+[0;32mI (249287) SPI_MASTER: Master sent: 0A 1B 2C 3D[0m
+[0;32mI (250287) SPI_MASTER: Master sent: 0B 1C 2D 3E[0m
+[0;32mI (251287) SPI_MASTER: Master sent: 0C 1D 2E 3F[0m
+[0;32mI (252287) SPI_MASTER: Master sent: 0D 1E 2F 40[0m
+[0;32mI (253287) SPI_MASTER: Master sent: 0E 1F 30 41[0m
+[0;32mI (254287) SPI_MASTER: Master sent: 0F 20 31 42[0m
+[0;32mI (255287) SPI_MASTER: Master sent: 10 21 32 43[0m
+[0;32mI (256287) SPI_MASTER: Master sent: 11 22 33 44[0m
+[0;32mI (257287) SPI_MASTER: Master sent: 12 23 34 45[0m
+[0;32mI (258287) SPI_MASTER: Master sent: 13 24 35 46[0m
+[0;32mI (259287) SPI_MASTER: Master sent: 14 25 36 47[0m
+[0;32mI (260287) SPI_MASTER: Master sent: 15 26 37 48[0m
+[0;32mI (261287) SPI_MASTER: Master sent: 16 27 38 49[0m
+[0;32mI (262287) SPI_MASTER: Master sent: 17 28 39 4A[0m
+[0;32mI (263287) SPI_MASTER: Master sent: 18 29 3A 4B[0m
+[0;32mI (264287) SPI_MASTER: Master sent: 19 2A 3B 4C[0m
+[0;32mI (265287) SPI_MASTER: Master sent: 1A 2B 3C 4D[0m
+[0;32mI (266287) SPI_MASTER: Master sent: 1B 2C 3D 4E[0m
+[0;32mI (267287) SPI_MASTER: Master sent: 1C 2D 3E 4F[0m
+[0;32mI (268287) SPI_MASTER: Master sent: 1D 2E 3F 50[0m
+[0;32mI (269287) SPI_MASTER: Master sent: 1E 2F 40 51[0m
+[0;32mI (270287) SPI_MASTER: Master sent: 1F 30 41 52[0m
+[0;32mI (271287) SPI_MASTER: Master sent: 20 31 42 53[0m
+[0;32mI (272287) SPI_MASTER: Master sent: 21 32 43 54[0m
+[0;32mI (273287) SPI_MASTER: Master sent: 22 33 44 55[0m
+[0;32mI (274287) SPI_MASTER: Master sent: 23 34 45 56[0m
+[0;32mI (275287) SPI_MASTER: Master sent: 24 35 46 57[0m
+[0;32mI (276287) SPI_MASTER: Master sent: 25 36 47 58[0m
+[0;32mI (277287) SPI_MASTER: Master sent: 26 37 48 59[0m
+[0;32mI (278287) SPI_MASTER: Master sent: 27 38 49 5A[0m
+[0;32mI (279287) SPI_MASTER: Master sent: 28 39 4A 5B[0m
+[0;32mI (280287) SPI_MASTER: Master sent: 29 3A 4B 5C[0m
+[0;32mI (281287) SPI_MASTER: Master sent: 2A 3B 4C 5D[0m
+[0;32mI (282287) SPI_MASTER: Master sent: 2B 3C 4D 5E[0m
+[0;32mI (283287) SPI_MASTER: Master sent: 2C 3D 4E 5F[0m
+[0;32mI (284287) SPI_MASTER: Master sent: 2D 3E 4F 60[0m
+[0;32mI (285287) SPI_MASTER: Master sent: 2E 3F 50 61[0m
+[0;32mI (286287) SPI_MASTER: Master sent: 2F 40 51 62[0m
+[0;32mI (287287) SPI_MASTER: Master sent: 30 41 52 63[0m
+[0;32mI (288287) SPI_MASTER: Master sent: 31 42 53 64[0m
+[0;32mI (289287) SPI_MASTER: Master sent: 32 43 54 65[0m
+[0;32mI (290287) SPI_MASTER: Master sent: 33 44 55 66[0m
+[0;32mI (291287) SPI_MASTER: Master sent: 34 45 56 67[0m
+[0;32mI (292287) SPI_MASTER: Master sent: 35 46 57 68[0m
+[0;32mI (293287) SPI_MASTER: Master sent: 36 47 58 69[0m
+[0;32mI (294287) SPI_MASTER: Master sent: 37 48 59 6A[0m
+[0;32mI (295287) SPI_MASTER: Master sent: 38 49 5A 6B[0m
+[0;32mI (296287) SPI_MASTER: Master sent: 39 4A 5B 6C[0m
+[0;32mI (297287) SPI_MASTER: Master sent: 3A 4B 5C 6D[0m
+[0;32mI (298287) SPI_MASTER: Master sent: 3B 4C 5D 6E[0m
+[0;32mI (299287) SPI_MASTER: Master sent: 3C 4D 5E 6F[0m
+[0;32mI (300287) SPI_MASTER: Master sent: 3D 4E 5F 70[0m
+[0;32mI (301287) SPI_MASTER: Master sent: 3E 4F 60 71[0m
+[0;32mI (302287) SPI_MASTER: Master sent: 3F 50 61 72[0m
+[0;32mI (303287) SPI_MASTER: Master sent: 40 51 62 73[0m
+[0;32mI (304287) SPI_MASTER: Master sent: 41 52 63 74[0m
+[0;32mI (305287) SPI_MASTER: Master sent: 42 53 64 75[0m
+[0;32mI (306287) SPI_MASTER: Master sent: 43 54 65 76[0m
+[0;32mI (307287) SPI_MASTER: Master sent: 44 55 66 77[0m
+[0;32mI (308287) SPI_MASTER: Master sent: 45 56 67 78[0m
+[0;32mI (309287) SPI_MASTER: Master sent: 46 57 68 79[0m
+[0;32mI (310287) SPI_MASTER: Master sent: 47 58 69 7A[0m
+[0;32mI (311287) SPI_MASTER: Master sent: 48 59 6A 7B[0m
+[0;32mI (312287) SPI_MASTER: Master sent: 49 5A 6B 7C[0m
+[0;32mI (313287) SPI_MASTER: Master sent: 4A 5B 6C 7D[0m
+[0;32mI (314287) SPI_MASTER: Master sent: 4B 5C 6D 7E[0m
+[0;32mI (315287) SPI_MASTER: Master sent: 4C 5D 6E 7F[0m
+[0;32mI (316287) SPI_MASTER: Master sent: 4D 5E 6F 80[0m
+[0;32mI (317287) SPI_MASTER: Master sent: 4E 5F 70 81[0m
+[0;32mI (318287) SPI_MASTER: Master sent: 4F 60 71 82[0m
+[0;32mI (319287) SPI_MASTER: Master sent: 50 61 72 83[0m
+[0;32mI (320287) SPI_MASTER: Master sent: 51 62 73 84[0m
+[0;32mI (321287) SPI_MASTER: Master sent: 52 63 74 85[0m
+[0;32mI (322287) SPI_MASTER: Master sent: 53 64 75 86[0m
+[0;32mI (323287) SPI_MASTER: Master sent: 54 65 76 87[0m

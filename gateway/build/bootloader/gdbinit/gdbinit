@@ -1,0 +1,2 @@
+source D:/my_first_app/build/bootloader/gdbinit/symbols
+source D:/my_first_app/build/bootloader/gdbinit/connect
