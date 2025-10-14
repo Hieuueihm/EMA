@@ -1,4 +1,4 @@
-/* * Data converted from D:/my_first_app/build/esp-idf/mbedtls/x509_crt_bundle
+/* * Data converted from D:/EMA/gateway/build/esp-idf/mbedtls/x509_crt_bundle
  */
 .data
 #if !defined (__APPLE__) && !defined (__linux__)

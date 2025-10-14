@@ -1,8 +1,8 @@
-# Install script for directory: D:/my_first_app/managed_components/espressif__cjson
+# Install script for directory: D:/EMA/gateway/managed_components/espressif__cjson
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/my_first_app")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/gateway")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 

@@ -117,6 +117,7 @@ bool mqtt_start(uint32_t timeout_ms)
     bool ok = mqtt_wait_connected(timeout_ms);
     if (!ok)
         ESP_LOGW(TAG, "wait CONNECTED timeout");
+    ESP_LOGI(TAG, "mqtt started");
     return ok;
 }
 
@@ -132,7 +133,7 @@ void mqtt_stop(void)
 
 bool gw_connect_device(const char *dev)
 {
-    if (!mqtt_start(5000))
+    if (!mqtt_is_connected())
         return false;
 
     cJSON *root = cJSON_CreateObject();
@@ -149,7 +150,7 @@ bool gw_connect_device(const char *dev)
 
 bool gw_disconnect_device(const char *dev)
 {
-    if (!mqtt_start(3000))
+    if (!mqtt_is_connected())
         return false;
 
     cJSON *root = cJSON_CreateObject();
@@ -164,10 +165,11 @@ bool gw_disconnect_device(const char *dev)
     return msg_id != -1;
 }
 
-bool gw_publish_telemetry_ts(const char *dev, cJSON *values_obj)
+bool gw_publish_telemetry_ts(const char *dev, int64_t ts, cJSON *values_obj)
 {
-    if (!mqtt_start(5000))
+    if (!mqtt_is_connected())
     {
+        ESP_LOGW(TAG, "Not connected");
         cJSON_Delete(values_obj);
         return false;
     }
@@ -176,13 +178,17 @@ bool gw_publish_telemetry_ts(const char *dev, cJSON *values_obj)
     cJSON *arr = cJSON_CreateArray();
     cJSON *pt = cJSON_CreateObject();
 
-    cJSON_AddItemToObject(pt, "values", values_obj); // transfer ownership
+    if (ts > 0)
+    {
+        cJSON_AddNumberToObject(pt, "ts", ts);
+    }
+    cJSON_AddItemToObject(pt, "values", values_obj);
     cJSON_AddItemToArray(arr, pt);
     cJSON_AddItemToObject(root, dev, arr);
 
     char *payload = cJSON_PrintUnformatted(root);
     int msg_id = esp_mqtt_client_publish(s_client, "v1/gateway/telemetry", payload, 0, 1, 0);
-    ESP_LOGD(TAG, "TX telemetry %s: %s (msg_id=%d)", dev, payload, msg_id);
+    ESP_LOGI(TAG, "TX telemetry %s: %s (msg_id=%d)", dev, payload, msg_id);
 
     cJSON_free(payload);
     cJSON_Delete(root);
@@ -191,12 +197,13 @@ bool gw_publish_telemetry_ts(const char *dev, cJSON *values_obj)
 
 bool gw_publish_telemetry(const char *dev, cJSON *values_obj)
 {
-    return gw_publish_telemetry_ts(dev, values_obj);
+    // ESP_LOGW(TAG, "Using provided timestamp %" PRId64, now_ms());
+    return gw_publish_telemetry_ts(dev, 0, values_obj);
 }
 
 bool gw_publish_attributes(const char *dev, cJSON *attrs_obj)
 {
-    if (!mqtt_start(5000))
+    if (!mqtt_is_connected())
     {
         cJSON_Delete(attrs_obj);
         return false;

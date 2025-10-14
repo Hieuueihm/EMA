@@ -1,7 +1,0 @@
-Command: cmake -G Ninja -DPYTHON_DEPS_CHECKED=1 -DPYTHON=C:\Espressif\python_env\idf5.5_py3.11_env\Scripts\python.exe -DESP_PLATFORM=1 -DCCACHE_ENABLE=1 D:\my_first_app
-CMake Error at C:/Espressif/frameworks/esp-idf-v5.5.1/tools/cmake/component.cmake:451 (message):
-  Called idf_component_register from a non-component directory.
-Call Stack (most recent call first):
-  CMakeLists.txt:9 (idf_component_register)
-
-

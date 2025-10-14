@@ -13,7 +13,7 @@ bool mqtt_is_connected(void);
 bool gw_connect_device(const char *dev);
 bool gw_disconnect_device(const char *dev);
 bool gw_publish_telemetry(const char *dev, cJSON *values_obj);
-bool gw_publish_telemetry_ts(const char *dev, cJSON *values_obj);
+bool gw_publish_telemetry_ts(const char *dev, int64_t ts, cJSON *values_obj);
 bool gw_publish_attributes(const char *dev, cJSON *attrs_obj);
 
 #endif

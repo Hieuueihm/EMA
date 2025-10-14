@@ -1,4 +1,4 @@
-/* * Data converted from D:/my_first_app/main/index.html
+/* * Data converted from D:/EMA/gateway/main/index.html
  * (null byte appended)
  */
 .data

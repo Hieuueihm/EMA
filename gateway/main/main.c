@@ -24,7 +24,7 @@ static void led_task(void *arg)
     gpio_reset_pin(LED_GPIO);
     gpio_set_direction(LED_GPIO, GPIO_MODE_OUTPUT);
 
-    for (;;)
+    while (1)
     {
         if (ap_mode)
         {
@@ -56,7 +56,6 @@ static void led_task(void *arg)
         }
         else
         {
-            mqtt_start(1000);
             vTaskDelay(pdMS_TO_TICKS(500));
         }
     }
@@ -86,7 +85,7 @@ static void data_task(void *arg)
     const TickType_t PUB_PERIOD_MS = pdMS_TO_TICKS(2000);
     TickType_t last = xTaskGetTickCount();
 
-    for (;;)
+    while (1)
     {
         if (!ap_mode && wifi_state == GOT_IP)
         {
@@ -94,9 +93,15 @@ static void data_task(void *arg)
             {
                 cJSON *vals = cJSON_CreateObject();
                 cJSON_AddNumberToObject(vals, "temperature", 25.3);
-                gw_publish_telemetry("NODE_C", vals); //
-                ESP_LOGI(TAG, "Published telemetry");
-                gw_connect_device("NODE_C");
+                gw_connect_device("NODE_B");
+                if (gw_publish_telemetry("NODE_B", vals) != false)
+                {
+                    ESP_LOGI(TAG, "Published telemetry");
+                }
+            }
+            else
+            {
+                mqtt_start(1000);
             }
         }
 
@@ -109,23 +114,16 @@ static void network_supervisor_task(void *arg)
     const uint32_t QUICK_RETRY_WAIT_MS = 10000;
     const int MAX_QUICK_RETRIES = 6;
 
-    bool mqtt_started = false;
     int quick_retries = 0;
 
-    for (;;)
+    while (1)
     {
         if (!ap_mode)
         {
             if (wifi_state == GOT_IP)
             {
-                if (!mqtt_started)
-                {
-                    ESP_LOGI(TAG, "GOT_IP");
-                    mqtt_start(1000);
-                    mqtt_started = true;
-                }
+
                 vTaskDelay(pdMS_TO_TICKS(1000));
-                continue;
             }
 
             if (wifi_state == CONNECTED || wifi_state == DISCONNECTED)
@@ -143,8 +141,6 @@ static void network_supervisor_task(void *arg)
                 if (quick_retries >= MAX_QUICK_RETRIES)
                 {
                     ESP_LOGW(TAG, "Too many STA retries → switch to AP portal");
-                    mqtt_started = false;
-                    wifi_sta_stop();
                     start_ap_and_server();
                     ap_mode = true;
                 }
@@ -162,6 +158,9 @@ static void network_supervisor_task(void *arg)
 
 void app_main(void)
 {
+
+    esp_log_level_set("MQTT", ESP_LOG_DEBUG);
+
     esp_err_t e = nvs_flash_init();
     if (e == ESP_ERR_NVS_NO_FREE_PAGES || e == ESP_ERR_NVS_NEW_VERSION_FOUND)
     {

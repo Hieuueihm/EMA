@@ -1,2 +1,2 @@
-source D:/my_first_app/build/bootloader/gdbinit/symbols
-source D:/my_first_app/build/bootloader/gdbinit/connect
+source D:/EMA/gateway/build/bootloader/gdbinit/symbols
+source D:/EMA/gateway/build/bootloader/gdbinit/connect

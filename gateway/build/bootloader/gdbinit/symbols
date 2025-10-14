@@ -22,4 +22,4 @@ set confirm off
 set confirm on
 
 # Load application symbols
-file D:/my_first_app/build/bootloader/bootloader.elf
+file D:/EMA/gateway/build/bootloader/bootloader.elf
