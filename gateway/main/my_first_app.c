@@ -144,19 +144,6 @@ void sensor_task(void *pvParameters)
             {
                 buf[len] = '\0';
                 ESP_LOGI(TAG, "Received data: %s", (char *)buf);
-
-                // Parse the data
-                if (sscanf((char *)buf, "MAC: %17[^,], Temp: %f, HR: %f, SpO2: %f", data.mac_address, &data.temperature, &data.heart_rate, &data.spo2) == 4)
-                {
-                    ESP_LOGI(TAG, "Parsed data - MAC: %s, Temperature: %.2f C, Heart Rate: %.2f bpm, SpO2: %.2f%%",
-                             data.mac_address, data.temperature, data.heart_rate, data.spo2);
-
-                    send_data_to_thingsboard(&data);
-                }
-                else
-                {
-                    ESP_LOGE(TAG, "Data format mismatch: %s", (char *)buf);
-                }
             }
         }
 

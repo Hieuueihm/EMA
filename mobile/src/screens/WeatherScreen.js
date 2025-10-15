@@ -30,15 +30,14 @@ export default function WeatherScreen() {
 
 
 
-    const [displayName, setDisplayName] = useState("Hà Nội"); // Hiển thị trên UI
-    const [cityName, setCityName] = useState("Hanoi");         // Giá trị dùng API
+    const [displayName, setDisplayName] = useState("Hà Nội");
+    const [cityName, setCityName] = useState("Hanoi");
 
     const locationList = [
         { name: "Hà Nội", value: "Hanoi" },
         { name: "TP.HCM", value: "Ho Chi Minh" },
     ];
 
-    // Khi user chọn location
     const onSelectLocation = (loc) => {
         setDisplayName(loc.name);
         setCityName(loc.value);
