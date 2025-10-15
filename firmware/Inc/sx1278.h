@@ -22,7 +22,6 @@
 #define LORA_CS_PORT    GPIOA
 
 
-
 #define REG_FIFO                       0x00
 #define REG_OP_MODE                    0x01
 #define REG_FRF_MSB                    0x06
@@ -63,7 +62,7 @@
 
 #define PA_BOOST                       0x80
 
-
+#define IRQ_ALL_MASK               0xFF
 #define IRQ_TX_DONE_MASK               0x08
 #define IRQ_PAYLOAD_CRC_ERROR_MASK     0x20
 #define IRQ_RX_DONE_MASK               0x40
@@ -78,11 +77,11 @@
 typedef struct SX1278_t LoRa;
 
 struct SX1278_t{
-    uint32_t freq;
+    long freq;
     uint32_t implicit;
     struct {
-        void (*lora_write_reg)(uint8_t reg, uint32_t val);
-        uint32_t (*lora_read_reg)(uint8_t reg);
+        void (*lora_write_reg)(uint8_t reg, uint8_t val);
+        uint8_t (*lora_read_reg)(uint8_t reg);
         void (*lora_reset)(void);
         void (*lora_explicit_header_mode)(LoRa *lr);
         void (*lora_implicit_header_mode)(LoRa *lr, uint32_t size);
@@ -90,9 +89,9 @@ struct SX1278_t{
         void (*lora_sleep)(LoRa *lr);
         void (*lora_receive)(LoRa *lr);
         void (*lora_set_tx_power)(LoRa *lr,uint8_t level);
-        void (*lora_set_frequency)(LoRa *lr, uint32_t frequency);
+        void (*lora_set_frequency)(LoRa *lr, long frequency);
         void (*lora_set_spreading_factor)(LoRa *lr, uint8_t sf);
-        void (*lora_set_bandwidth)(LoRa *lr, uint32_t sbw);
+        void (*lora_set_bandwidth)(LoRa *lr, long sbw);
         void (*lora_set_coding_rate)(LoRa *lr, uint8_t denominator);
         void (*lora_set_preamble_length)(LoRa *lr, uint8_t length);
         void (*lora_set_sync_word)(LoRa *lr, uint32_t sw);

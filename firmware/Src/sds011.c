@@ -89,7 +89,6 @@ static Status_e Sds_QueryData(SDS011 *sds)
             case 0:
                 if (byte != 0xAA) {
                     len = 0; 
-					// HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
                     continue;
                 }
                 break;
@@ -121,8 +120,11 @@ static Status_e Sds_QueryData(SDS011 *sds)
                 }
 
                 memcpy(sds->data_received, buf, 10);
-                sds->pm_2_5 = (buf[3] << 8) | buf[2];
-                sds->pm_10  = (buf[5] << 8) | buf[4];
+                uint16_t pm25_raw = (uint16_t)buf[2] | ((uint16_t)buf[3] << 8);
+                uint16_t pm10_raw = (uint16_t)buf[4] | ((uint16_t)buf[5] << 8);
+
+                sds->pm_2_5 = pm25_raw / 10;
+                sds->pm_10  = pm10_raw / 10;
                 return OK;
             }
         }

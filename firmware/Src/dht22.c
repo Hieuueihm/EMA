@@ -115,13 +115,10 @@ Status_e DHT_GetData(DHT *dht)
 		dht->data_raw.Tp1 = DHT_Read(dht);
 		dht->data_raw.Tp2 = DHT_Read(dht);
 		dht->data_raw.Sum = DHT_Read(dht);
-		// blink_led_test(1000);
 
-        // uart_printf("data: %02x %02x %02x %02x %02x\n", dht->data_raw.Rh1, dht->data_raw.Rh2, dht->data_raw.Tp1, dht->data_raw.Tp2, dht->data_raw.Sum);
 
 		if(dht->data_raw.Sum == ((dht->data_raw.Rh1 + dht->data_raw.Rh2 + dht->data_raw.Tp1 + dht->data_raw.Tp2) & 0xFF))
 		{
-            // uart_print("go point");
 			dht->temperature = ((dht->data_raw.Tp1 << 8) | dht->data_raw.Tp2) / 10.0;
 			dht->humidity = ((dht->data_raw.Rh1 << 8) | dht->data_raw.Rh2) / 10.0;
 		}
@@ -141,7 +138,6 @@ static char * GPIO_Clock_get(GPIO_TypeDef *port) {
 }
 DHT DHT_Init(GPIO_TypeDef *port, uint16_t pin){
     GPIO_Clock_Enable(port);
-	uart_printf("%s \n", GPIO_Clock_get(port));
     DHT ins;
     ins.port = port;
     ins.pin = pin;

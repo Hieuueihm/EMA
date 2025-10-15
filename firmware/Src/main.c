@@ -23,42 +23,12 @@ int main(void)
 {
    
     HAL_Init();
-
-   
     SystemClock_Config();
-    // delay_init();
-
-    /* USER CODE BEGIN SysInit */
-
-    /* USER CODE END SysInit */
-
-    /* Initialize all configured peripherals */
     MX_GPIO_Init();
     delay_init();
 
-    // huart1.Instance = USART1;
-    // huart1.Init.BaudRate = 115200;          // tốc độ truyền
-    // huart1.Init.WordLength = UART_WORDLENGTH_8B;
-    // huart1.Init.StopBits = UART_STOPBITS_1;
-    // huart1.Init.Parity = UART_PARITY_NONE;
-    // huart1.Init.Mode = UART_MODE_TX_RX;     // cho phép truyền và nhận
-    // huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-    // huart1.Init.OverSampling = UART_OVERSAMPLING_16;
-
-    // if(HAL_UART_Init(&huart1) != HAL_OK)
-    // {
-    //     // Nếu init lỗi
-    //     Error_Handler();
-    // }
-
-
     uart1_init(115200);
 
-
-    /* USER CODE END 2 */
-
-    /* Infinite loop */
-    /* USER CODE BEGIN WHILE */
     UART_Config cfg1 = {
             .port = UART1,       
             .baudrate = 115200  
@@ -67,80 +37,24 @@ int main(void)
             .port = UART2,       
             .baudrate = 9600  
     };    
-    // huart = UART_Init(cfg1);
-    // huart.api.send_string(&huart, "test\r\n");
     uart_print("program start\r\n");
     
+    uart_print("sds init\r\n");
 
-    // sds = SDS_Init(cfg2);
-    // __HAL_RCC_USART2_CLK_ENABLE();   
-    //     __HAL_RCC_GPIOA_CLK_ENABLE();
+    sds = SDS_Init(cfg2);
 
-    //     {
-    //         GPIO_InitTypeDef GPIO_InitStruct = {0};
+    uart_print("dht init\r\n");
 
-    //         // TX (PA2)
-    //         GPIO_InitStruct.Pin = GPIO_PIN_2;
-    //         GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-    //         GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-    //         HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+    dht = DHT_Init(GPIOA, GPIO_PIN_1);
+    uart_print("mq7 init\r\n");
 
-    //         // RX (PA3)
-    //         GPIO_InitStruct.Pin = GPIO_PIN_3;
-    //         GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-    //         GPIO_InitStruct.Pull = GPIO_NOPULL;
-    //         HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-    //     }
-    // 	MX_USART2_UART_Init();
-        
-    //     	sdsInit(&sds, &huart2);
-    // sds = SDS_Init(cfg2);
+    MQ7_Init();
+    MQ7_Calibrate();
+    uart_print("guva init\r\n");
 
-
-
-  
-
-
-   
-    // dht = DHT_Init(GPIOA, GPIO_PIN_4);
-
-
-
-
-    // huart.api.send_string_wtimeout(&huart, "test1\r\n". 1000);
-    char data1[64];
-            // sds.api.query_data(&sds);
-
-    // size += sprintf(data1 + size, "%d %d  \n ", sds.pm_2_5, sds.pm_10);
-    // for(int i = 0; i < 10; i++) // 10 byte data_receive
-    // {
-    //     size += sprintf(data1 + size, "%02X ", sds.data_received[i]);
-    // }
-    // sprintf(data1 + size, "\n\r"); 
-    // HAL_UART_Transmit(&huart.huart, (uint8_t*)data1, size, 1000);
-	// HAL_Delay(1000);
-
-
-    // Gửi dữ liệu
-
-
-    // dht.api.read_data(&dht);
-
-    // size += sprintf(data1 + size, "Temp: %.1f C  Humidity: %.1f %%\n", dht.temperature, dht.humidity);
-    //     HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, 1);
-
-    // // Gửi tất cả dữ liệu qua UART
-    // HAL_UART_Transmit(&huart1, (uint8_t*)data1, size, 1000);
-
-    // uart_printf((uint8_t*)data1);
-    // Delay trước khi gửi tiếp
-    // MQ7_Init();
-    // MQ7_Calibrate();
-
+    GUVA_Init();
     char msg[64];
-    float ppm = 0;
-    
-//   HAL_SPI_Receive_IT(&hspi1, rxData, sizeof(rxData));
+    float ppm = 0.0f;
 
 
     LoRa ins;
@@ -150,19 +64,34 @@ int main(void)
     ins.api.lora_set_bandwidth(&ins, 125E3);
     ins.api.lora_enable_crc(&ins);
 
+    float uv_mw = 0.0f;
+   
     while (1)
     {
-    // char buf[100];
+
+    char buf[100];
+
+    MQ7_GetPPM(&ppm);
+    GUVA_GetUVI(&uv_mw);
+    dht.api.read_data(&dht);
+    sds.api.query_data(&sds);
+    uint8_t len = 0;
+
+    len += sprintf(buf, "Temp: %.1f C  Humidity: %.1f ppm %.1f uv %.1f pm2.5 %d pm10 %d \r\n ", dht.temperature, dht.humidity, ppm, uv_mw, sds.pm_2_5, sds.pm_10);
+
+    // // In dạng text đơn giản
+    // if (len < 0) len = 0;
+    // if (len > (int)sizeof(buf)) len = sizeof(buf);
+    uart_printf("%d \r\n", len);
+
+    // len += snprintf(buf, "abc", 3);
+    // uart_printf("looo");
+
     
-    // int len = snprintf(buf, sizeof(buf), "abc\r\n");
 
 
-    // ins.api.lora_send_packet(&ins, (uint8_t *)buf, len);
-        
-
+    ins.api.lora_send_packet(&ins, (uint8_t *)buf, len);
     HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-
-   
     HAL_Delay(2000);
     
     

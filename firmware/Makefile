@@ -39,8 +39,9 @@ CFLAGS    = -mcpu=cortex-m3 -mthumb -mlittle-endian \
 			-DHAL_UART_MODULE_ENABLED\
 			-DHAL_ADC_MODULE_ENABLED\
 			-DHAL_SPI_MODULE_ENABLED\
+            $(OPT) $(DEBUG) $(CSTD) \
 			-D__DEBUG_EN\
-            $(OPT) $(DEBUG) $(CSTD)
+
 LIBS = -lm
 LDFLAGS = -T $(LDSCRIPT) --static -Wl,--gc-sections --specs=nosys.specs
 

@@ -9,12 +9,12 @@ static void SPI_transmit(uint8_t txData[], size_t len){
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET);
 }
 
-static void LoRa_Write_Reg(uint8_t reg, uint32_t val){
+static void LoRa_Write_Reg(uint8_t reg, uint8_t val){
     uint8_t out[2] = { 0x80 | reg, val };
-    uart_printf_tag(SPI_TAG, "out[0] = %02X, out[1] = %02X\r\n", out[0], out[1]);
+   //  uart_printf_tag(SPI_TAG, "out[0] = %02X, out[1] = %02X\r\n", out[0], out[1]);
     SPI_transmit(out, sizeof(out));
 }
-static uint32_t LoRa_Read_Reg(uint8_t reg){
+static uint8_t LoRa_Read_Reg(uint8_t reg){
     uint8_t out[2] = { (uint8_t)reg & 0x7F, 0x00 };
     uint8_t in[2] = {0};
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET); 
@@ -38,7 +38,7 @@ static void LoRa_Explicit_Header_Mode(LoRa *lr){
 }
 static void Lora_Implicit_Header_Mode(LoRa *lr, uint32_t size)
 {
-   lr->implicit = 0;
+   lr->implicit = 1;
    lr->api.lora_write_reg(REG_MODEM_LORA_1, lr->api.lora_read_reg(REG_MODEM_LORA_1) | 0x01);
    lr->api.lora_write_reg(REG_PAYLOAD_LENGTH, size);
 }
@@ -48,7 +48,6 @@ static void LoRa_Idle(LoRa *lr)
 }
 static void LoRa_Sleep(LoRa *lr)
 { 
-   uart_printf_tag(LORA_TAG, "sleep spi trans: ");
    lr->api.lora_write_reg(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_SLEEP);
 }
 
@@ -59,12 +58,11 @@ static void LoRa_Receive(LoRa *lr)
 
 static void LoRa_Set_TX_Power(LoRa *lr, uint8_t level)
 {
-   uart_printf_tag(LORA_TAG, "lora set tx spi trans: ");
    if (level < 2) level = 2;
    else if (level > 17) level = 17;
    lr->api.lora_write_reg(REG_PA_CONFIG, PA_BOOST | (level - 2));
 }
-static void LoRa_Set_Frequency(LoRa *lr, uint32_t frequency)
+static void LoRa_Set_Frequency(LoRa *lr, long frequency)
 {
    lr->freq = frequency;
 
@@ -90,9 +88,9 @@ static void LoRa_Set_Spreading_Factor(LoRa *lr, uint8_t sf)
    lr->api.lora_write_reg(REG_MODEM_LORA_2, (lr->api.lora_read_reg(REG_MODEM_LORA_2) & 0x0f) | ((sf << 4) & 0xf0));
 }
 
-static void LoRa_Set_Bandwidth(LoRa *lr, uint32_t sbw)
+static void LoRa_Set_Bandwidth(LoRa *lr, long sbw)
 {
-   uint32_t bw;
+   int bw;
 
    if (sbw <= 7.8E3) bw = 0;
    else if (sbw <= 10.4E3) bw = 1;
@@ -105,6 +103,8 @@ static void LoRa_Set_Bandwidth(LoRa *lr, uint32_t sbw)
    else if (sbw <= 250E3) bw = 8;
    else bw = 9;
    lr->api.lora_write_reg(REG_MODEM_LORA_1, (lr->api.lora_read_reg(REG_MODEM_LORA_1) & 0x0f) | (bw << 4));
+   // lr->api.lora_write_reg(REG_MODEM_LORA_1, 0x72);
+
 }
 
 static void LoRa_Set_Coding_Rate(LoRa *lr, uint8_t denominator)
@@ -128,6 +128,8 @@ static void LoRa_Set_Sync_Word(LoRa *lr, uint32_t sw)
 static void LoRa_Enable_Crc(LoRa *lr)
 {
    lr->api.lora_write_reg(REG_MODEM_LORA_2, lr->api.lora_read_reg(REG_MODEM_LORA_2) | 0x04);
+      // lr->api.lora_write_reg(REG_MODEM_LORA_2, 0xC4);
+
 }
 static void Lora_Disable_Crc(LoRa *lr)
 {
@@ -269,6 +271,7 @@ LoRa SX1278_Init(void){
     HAL_SPI_Init(&hspi1);
 
     LoRa ins;
+    ins.implicit = 1;
     ins.api.lora_write_reg = LoRa_Write_Reg;
     ins.api.lora_read_reg = LoRa_Read_Reg;
     ins.api.lora_reset = LoRa_Reset;

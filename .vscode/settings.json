@@ -23,6 +23,7 @@
         "stm32f1xx_hal_tim_ex.h": "c",
         "delay.h": "c",
         "initializer_list": "c",
-        "utility": "c"
+        "utility": "c",
+        "math.h": "c"
     }
 }
