@@ -7,6 +7,8 @@
         "stationmode.h": "c",
         "inttypes.h": "c",
         "cjson.h": "c",
-        "lora.h": "c"
+        "lora.h": "c",
+        "text_encoding": "c",
+        "typeinfo": "c"
     }
 }

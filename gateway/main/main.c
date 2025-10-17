@@ -15,6 +15,9 @@
 #include "lora.h"
 #include "esp_mac.h"
 
+#include "fake_node.h"
+#include "timesync.h"
+
 static int64_t s_ap_expire_ms = 0;
 static const int64_t AP_LIFETIME_MS = 180000;
 static const char *TAG = "APP";
@@ -96,37 +99,74 @@ static bool apply_saved_sta_config(void)
     return (ssid[0] != '\0');
 }
 
+// static void send_data_task(void *arg)
+// {
+
+//     mqtt_init();
+//     const TickType_t PUB_PERIOD_MS = pdMS_TO_TICKS(2000);
+//     TickType_t last = xTaskGetTickCount();
+
+//     while (1)
+//     {
+//         if (!ap_mode && wifi_state == GOT_IP)
+//         {
+//             if (mqtt_is_connected())
+//             {
+//                 cJSON *vals = cJSON_CreateObject();
+//                 cJSON_AddNumberToObject(vals, "temperature", 25.3);
+//                 gw_connect_device("NODE_B");
+//                 if (gw_publish_telemetry("NODE_B", vals) != false)
+//                 {
+//                     ESP_LOGI(TAG, "Published telemetry");
+//                 }
+//             }
+//             else
+//             {
+//                 mqtt_start(1000);
+//             }
+//         }
+
+//         vTaskDelayUntil(&last, PUB_PERIOD_MS);
+//     }
+// }
 static void send_data_task(void *arg)
 {
-
+    // khởi tạo MQTT / kết nối – bạn đã gọi mqtt_init() trước
     mqtt_init();
-    const TickType_t PUB_PERIOD_MS = pdMS_TO_TICKS(2000);
-    TickType_t last = xTaskGetTickCount();
+
+    const TickType_t PUB_PERIOD_MS = pdMS_TO_TICKS(10000); // 2s định kỳ
+    TickType_t last_wake = xTaskGetTickCount();
 
     while (1)
     {
+        // kiểm tra điều kiện mạng trước khi publish
         if (!ap_mode && wifi_state == GOT_IP)
         {
-            if (mqtt_is_connected())
+            if (!mqtt_is_connected())
             {
-                cJSON *vals = cJSON_CreateObject();
-                cJSON_AddNumberToObject(vals, "temperature", 25.3);
-                gw_connect_device("NODE_B");
-                if (gw_publish_telemetry("NODE_B", vals) != false)
-                {
-                    ESP_LOGI(TAG, "Published telemetry");
-                }
+                mqtt_start(1000); // cố gắng connect nếu chưa
             }
             else
             {
-                mqtt_start(1000);
+                // gửi telemetry cho tất cả node trong mảng
+                for (size_t i = 0; i < NUM_NODES; ++i)
+                {
+                    make_and_send_fake_for_node(&fake_nodes[i]);
+                    // delay nhỏ giữa các node để tránh burst / throttling
+                    vTaskDelay(pdMS_TO_TICKS(1000));
+                }
             }
         }
+        else
+        {
+            // nếu đang AP mode hoặc chưa có IP, log nhẹ
+            ESP_LOGD(TAG, "AP mode or no IP - skipping publish cycle");
+        }
 
-        vTaskDelayUntil(&last, PUB_PERIOD_MS);
+        // chờ tới chu kỳ tiếp theo (2s)
+        vTaskDelayUntil(&last_wake, PUB_PERIOD_MS);
     }
 }
-
 static void lora_task(void *arg)
 {
     uint8_t buf[256];
@@ -151,6 +191,7 @@ static void network_supervisor_task(void *arg)
     const int MAX_QUICK_RETRIES = 6;
 
     int quick_retries = 0;
+    bool synced_time = false;
 
     while (1)
     {
@@ -161,6 +202,17 @@ static void network_supervisor_task(void *arg)
             {
 
                 vTaskDelay(pdMS_TO_TICKS(1000));
+                if (synced_time == false)
+                {
+                    if (ntp_start())
+                    {
+                        synced_time = true;
+                    }
+                    else
+                    {
+                        synced_time = false;
+                    }
+                }
             }
 
             if (wifi_state == CONNECTED || wifi_state == DISCONNECTED)
@@ -183,6 +235,7 @@ static void network_supervisor_task(void *arg)
                     start_ap_and_server();
                     s_ap_expire_ms = (esp_timer_get_time() / 1000) + AP_LIFETIME_MS;
                     ap_mode = true;
+                    synced_time = false;
                 }
                 continue;
             }

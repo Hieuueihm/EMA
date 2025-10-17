@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "gateway",
-    "project_version":    "0b5a24f-dirty",
+    "project_version":    "c928cd8-dirty",
     "project_path":       "C:/EMA/gateway",
     "idf_path":           "C:/Espressif/frameworks/esp-idf-v5.5.1",
     "build_dir":          "C:/EMA/gateway/build",
@@ -1240,7 +1240,7 @@
             "managed_reqs": [],
             "managed_priv_reqs": [ "espressif__cjson" ],
             "file": "C:/EMA/gateway/build/esp-idf/main/libmain.a",
-            "sources": [ "C:/EMA/gateway/main/main.c", "C:/EMA/gateway/main/wifi_sta.c", "C:/EMA/gateway/main/wifi_ap.c", "C:/EMA/gateway/main/lora.c", "C:/EMA/gateway/main/mqtt.c", "C:/EMA/gateway/build/index.html.S" ],
+            "sources": [ "C:/EMA/gateway/main/main.c", "C:/EMA/gateway/main/wifi_sta.c", "C:/EMA/gateway/main/wifi_ap.c", "C:/EMA/gateway/main/lora.c", "C:/EMA/gateway/main/mqtt.c", "C:/EMA/gateway/main/fake_node.c", "C:/EMA/gateway/main/timesync.c", "C:/EMA/gateway/build/index.html.S" ],
             "include_dirs": [ "." ]
         },
         "mbedtls": {

@@ -3,6 +3,7 @@
 #include <string.h>
 #include <sys/time.h>
 
+#include "timesync.h"
 esp_mqtt_client_handle_t mqttClient = NULL;
 #define TAG "MQTT"
 
@@ -188,7 +189,7 @@ bool gw_publish_telemetry_ts(const char *dev, int64_t ts, cJSON *values_obj)
 
     char *payload = cJSON_PrintUnformatted(root);
     int msg_id = esp_mqtt_client_publish(s_client, "v1/gateway/telemetry", payload, 0, 1, 0);
-    ESP_LOGI(TAG, "TX telemetry %s: %s (msg_id=%d)", dev, payload, msg_id);
+    // ESP_LOGI(TAG, "TX telemetry %s: %s (msg_id=%d)", dev, payload, msg_id);
 
     cJSON_free(payload);
     cJSON_Delete(root);
@@ -197,8 +198,14 @@ bool gw_publish_telemetry_ts(const char *dev, int64_t ts, cJSON *values_obj)
 
 bool gw_publish_telemetry(const char *dev, cJSON *values_obj)
 {
-    // ESP_LOGW(TAG, "Using provided timestamp %" PRId64, now_ms());
-    return gw_publish_telemetry_ts(dev, 0, values_obj);
+    if (time_is_synced())
+    {
+        return gw_publish_telemetry_ts(dev, now_ms(), values_obj);
+    }
+    else
+    {
+        return gw_publish_telemetry_ts(dev, 0, values_obj);
+    }
 }
 
 bool gw_publish_attributes(const char *dev, cJSON *attrs_obj)
@@ -214,7 +221,7 @@ bool gw_publish_attributes(const char *dev, cJSON *attrs_obj)
 
     char *payload = cJSON_PrintUnformatted(root);
     int msg_id = esp_mqtt_client_publish(s_client, "v1/gateway/attributes", payload, 0, 1, 0);
-    ESP_LOGD(TAG, "TX attributes %s: %s (msg_id=%d)", dev, payload, msg_id);
+    // ESP_LOGD(TAG, "TX attributes %s: %s (msg_id=%d)", dev, payload, msg_id);
 
     cJSON_free(payload);
     cJSON_Delete(root);
