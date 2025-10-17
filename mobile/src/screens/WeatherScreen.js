@@ -16,7 +16,7 @@ const fontSize = Math.min(width * 0.1, height * 0.08)
 
 export default function WeatherScreen() {
 
-    // const navigation = useNavigation();
+    const navigation = useNavigation();
     const nowUTC = new Date();
     const today = new Date(nowUTC.getTime() + 7 * 60 * 60 * 1000);
 
@@ -167,9 +167,9 @@ export default function WeatherScreen() {
             <SafeAreaView
                 style={{ flexDirection: "row", alignItems: "center", marginTop: height * 0.02, flex: 1 }}>
                 <TouchableOpacity
-                // onPress={() => {
-                //     navigation.navigate(ROUTES.HOME_TAB);
-                // }}
+                    onPress={() => {
+                        navigation.navigate(ROUTES.HOME_SCREEN);
+                    }}
                 >
                     <FontAwesome6 name={"angle-left"}
                         style={{
@@ -208,7 +208,7 @@ export default function WeatherScreen() {
             {showList && (
                 <View style={{
                     position: "absolute",
-                    top: height * 0.06, // tính từ đầu màn hình, cách header một chút
+                    top: height * 0.06,
                     left: width * 0.3,
                     right: width * 0.3,
                     backgroundColor: COLORS.black,
@@ -245,7 +245,7 @@ export default function WeatherScreen() {
                 <Image
                     source={{ uri: `https:${current?.condition.icon}` }}
                     style={{
-                        marginLeft: 0, width: width * 0.3, height: height * 0.2, marginBottom: height * 0.05, marginTop: -height * 0.04
+                        marginLeft: 0, width: width * 0.35, height: height * 0.2, marginBottom: height * 0.05
                     }} />
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'center', }}>
@@ -259,18 +259,18 @@ export default function WeatherScreen() {
                     {current?.temp_c}{'\u2103'}
                 </Text>
             </View>
+            <Text style={{
+                color: COLORS.white,
+                fontSize: fontSize * 0.5,
+                textAlign: 'center',
+                fontWeight: '500'
+            }}>{current?.condition?.text}</Text>
             <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                 <View>
-                    <Text style={{
-                        color: COLORS.white,
-                        fontSize: fontSize * 0.5,
-                        textAlign: 'center', // Căn giữa văn bản
-                        fontWeight: '500'
-                    }}>{current?.condition?.text}</Text>
                     <View style={{
                         flexDirection: 'row',
-                        textAlign: 'space-around', // Căn giữa các phần tử
-                        marginTop: height * 0.005 // Tạo khoảng cách giữa hai dòng văn bản
+                        textAlign: 'space-around',
+                        marginTop: height * 0.005
                     }}>
                         <Text style={{ color: COLORS.white, fontSize: fontSize * 0.4, paddingHorizontal: width * 0.02 }}>
                             Max: {forecast?.forecastday[0]?.day?.maxtemp_c}{'\u2103'}
@@ -286,8 +286,8 @@ export default function WeatherScreen() {
 
             <View style={{
                 flexDirection: 'row',
-                justifyContent: 'center',   // Căn giữa cả cụm theo chiều ngang
-                alignItems: 'center',       // Căn giữa theo chiều dọc nếu cần
+                justifyContent: 'center',
+                alignItems: 'center',
                 marginTop: height * 0.02,
             }}>
                 <View style={{
@@ -295,9 +295,9 @@ export default function WeatherScreen() {
                     width: '85%',
                     borderRadius: 30,
                     height: height * 0.05,
-                    flexDirection: 'row',     // Xếp 3 item ngang
-                    justifyContent: 'space-around', // Khoảng cách đều giữa các item
-                    alignItems: 'center',     // Căn giữa theo chiều dọc
+                    flexDirection: 'row',
+                    justifyContent: 'space-around',
+                    alignItems: 'center',
                 }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Image source={require('../assets/icons/noun-rain.png')} />
@@ -439,11 +439,12 @@ export default function WeatherScreen() {
                 {/* UV Index Card */}
                 <View style={{
                     backgroundColor: COLORS.bgWheather2,
-                    flex: 1,                        // chiếm đều không cần width %
+                    flex: 1,
                     borderRadius: 30,
-                    height: height * 0.23,
+                    height: height * 0.2,
                     borderColor: COLORS.borderUVColor,
                     borderWidth: 2,
+                    marginLeft: width * 0.02,
                     marginRight: width * 0.01
                 }}>
                     <View style={{ flexDirection: 'row', paddingHorizontal: width * 0.03, marginTop: height * 0.012 }}>
@@ -454,9 +455,9 @@ export default function WeatherScreen() {
                         <Text style={{ color: COLORS.bgWhite(0.7), fontWeight: 'bold', fontSize: fontSize * 0.4 }}>UV INDEX</Text>
                     </View>
                     <View style={{ paddingHorizontal: width * 0.05, marginTop: height * 0.01, marginBottom: height * 0.012 }}>
-                        <Text style={{ color: COLORS.bgWhite(0.9), fontSize: fontSize * 0.5, fontWeight: 'bold' }}>
+                        <Text style={{ color: COLORS.bgWhite(0.9), fontSize: fontSize * 0.7, fontWeight: 'bold' }}>
                             {forecast?.forecastday[0]?.day?.uv} </Text>
-                        <Text style={{ color: COLORS.bgWhite(0.9), fontSize: fontSize * 0.4, fontWeight: 'bold' }}>
+                        <Text style={{ color: COLORS.bgWhite(0.9), fontSize: fontSize * 0.5, fontWeight: 'bold' }}>
                             {forecast?.forecastday[0]?.day?.uv !== undefined ? (
                                 forecast?.forecastday[0]?.day?.uv <= 2
                                     ? "Safe"
@@ -472,12 +473,13 @@ export default function WeatherScreen() {
                 {/* Sunrise/Sunset Card */}
                 <View style={{
                     backgroundColor: COLORS.bgWheather2,
-                    flex: 1,                        // chiếm đều
+                    flex: 1,
                     borderRadius: 30,
-                    height: height * 0.23,
+                    height: height * 0.2,
                     borderColor: COLORS.borderUVColor,
                     borderWidth: 2,
-                    marginLeft: width * 0.02                   // khoảng cách giữa 2 card
+                    marginRight: width * 0.02,
+                    marginLeft: width * 0.02
                 }}>
                     <View style={{ flexDirection: 'row', paddingHorizontal: width * 0.03, marginTop: height * 0.012, marginBottom: height * 0.01 }}>
                         <FontAwesome6 name={'sun'} style={{ color: COLORS.bgWhite(0.7), fontSize: fontSize * 0.4, marginRight: width * 0.01, marginTop: height * 0.002 }} />

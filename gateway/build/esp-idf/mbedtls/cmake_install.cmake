@@ -39,6 +39,6 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("D:/EMA/gateway/build/esp-idf/mbedtls/mbedtls/cmake_install.cmake")
+  include("C:/EMA/gateway/build/esp-idf/mbedtls/mbedtls/cmake_install.cmake")
 endif()
 

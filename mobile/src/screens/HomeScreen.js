@@ -1,20 +1,25 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
+import { ROUTES, COLORS } from '../../constants';
 
 const HomeScreen = ({ navigation }) => {
     return (
         <View style={styles.container}>
-            {/* Icon góc trên bên trái */}
             <TouchableOpacity
 
-                style={styles.iconContainer} // Vị trí icon
-                onPress={() => navigation.navigate('Weather')}
+                style={styles.iconContainer}
+                onPress={() => navigation.navigate(ROUTES.WHEATHER_SCREEN)}
             >
-                <FontAwesome6 name="cloudy" size={28} color="red" />
+                <FontAwesome6 name={"angle-left"}
+                    style={{
+                        fontSize: 13,
+                        color: 'RED',
+                        marginLeft: 12 * 0.06,
+                        opacity: 1,
+                    }} />
             </TouchableOpacity>
 
-            {/* Nội dung chính */}
             <Text style={styles.text}>abcc</Text>
         </View >
     );

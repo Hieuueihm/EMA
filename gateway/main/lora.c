@@ -385,7 +385,7 @@ int lora_init(void)
  * @param buf Data to be sent
  * @param size Size of data.
  */
-void lora_send_packet(uint8_t *buf, int size)
+bool lora_send_packet(uint8_t *buf, int size)
 {
     /*
      * Transfer data to radio.
@@ -401,11 +401,19 @@ void lora_send_packet(uint8_t *buf, int size)
     /*
      * Start transmission and wait for conclusion.
      */
+    TickType_t start_tick = xTaskGetTickCount();
     lora_write_reg(REG_OP_MODE, MODE_LONG_RANGE_MODE | MODE_TX);
     while ((lora_read_reg(REG_IRQ_FLAGS) & IRQ_TX_DONE_MASK) == 0)
+    {
         vTaskDelay(2);
+        if ((xTaskGetTickCount() - start_tick) * portTICK_PERIOD_MS > LORA_SEND_PACKET_TIMEOUT)
+        {
+            return false;
+        }
+    }
 
     lora_write_reg(REG_IRQ_FLAGS, IRQ_TX_DONE_MASK);
+    return true;
 }
 
 /**

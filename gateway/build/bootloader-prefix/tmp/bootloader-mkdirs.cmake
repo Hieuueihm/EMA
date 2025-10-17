@@ -10,18 +10,18 @@ if(NOT EXISTS "C:/Espressif/frameworks/esp-idf-v5.5.1/components/bootloader/subp
   file(MAKE_DIRECTORY "C:/Espressif/frameworks/esp-idf-v5.5.1/components/bootloader/subproject")
 endif()
 file(MAKE_DIRECTORY
-  "D:/EMA/gateway/build/bootloader"
-  "D:/EMA/gateway/build/bootloader-prefix"
-  "D:/EMA/gateway/build/bootloader-prefix/tmp"
-  "D:/EMA/gateway/build/bootloader-prefix/src/bootloader-stamp"
-  "D:/EMA/gateway/build/bootloader-prefix/src"
-  "D:/EMA/gateway/build/bootloader-prefix/src/bootloader-stamp"
+  "C:/EMA/gateway/build/bootloader"
+  "C:/EMA/gateway/build/bootloader-prefix"
+  "C:/EMA/gateway/build/bootloader-prefix/tmp"
+  "C:/EMA/gateway/build/bootloader-prefix/src/bootloader-stamp"
+  "C:/EMA/gateway/build/bootloader-prefix/src"
+  "C:/EMA/gateway/build/bootloader-prefix/src/bootloader-stamp"
 )
 
 set(configSubDirs )
 foreach(subDir IN LISTS configSubDirs)
-    file(MAKE_DIRECTORY "D:/EMA/gateway/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
+    file(MAKE_DIRECTORY "C:/EMA/gateway/build/bootloader-prefix/src/bootloader-stamp/${subDir}")
 endforeach()
 if(cfgdir)
-  file(MAKE_DIRECTORY "D:/EMA/gateway/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
+  file(MAKE_DIRECTORY "C:/EMA/gateway/build/bootloader-prefix/src/bootloader-stamp${cfgdir}") # cfgdir has leading slash
 endif()

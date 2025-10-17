@@ -6,6 +6,7 @@
         "time.h": "c",
         "stationmode.h": "c",
         "inttypes.h": "c",
-        "cjson.h": "c"
+        "cjson.h": "c",
+        "lora.h": "c"
     }
 }

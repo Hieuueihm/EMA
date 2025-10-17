@@ -16,6 +16,8 @@ import WeatherScreen from './src/screens/WeatherScreen.js';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { ROUTES } from './constants/routes.js';
+import EnvDashboardScreen from './src/screens/EnvDashboardScreen.js'
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -36,8 +38,10 @@ function AppContent() {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-        {/* <Stack.Screen name="Home" component={HomeScreen} /> */}
-        <Stack.Screen name="Weather" component={WeatherScreen} />
+        <Stack.Screen name={ROUTES.HOME_SCREEN} component={EnvDashboardScreen} />
+
+        {/* <Stack.Screen name={ROUTES.HOME_SCREEN} component={HomeScreen} /> */}
+        <Stack.Screen name={ROUTES.WHEATHER_SCREEN} component={WeatherScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

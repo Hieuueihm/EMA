@@ -1,4 +1,4 @@
-# Install script for directory: D:/EMA/gateway/managed_components/espressif__cjson
+# Install script for directory: C:/EMA/gateway/managed_components/espressif__cjson
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

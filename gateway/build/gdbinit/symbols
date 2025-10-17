@@ -18,8 +18,8 @@ end
 
 # Load bootloader symbols
 set confirm off
-    add-symbol-file D:/EMA/gateway/build/bootloader/bootloader.elf
+    add-symbol-file C:/EMA/gateway/build/bootloader/bootloader.elf
 set confirm on
 
 # Load application symbols
-file D:/EMA/gateway/build/gateway.elf
+file C:/EMA/gateway/build/gateway.elf
