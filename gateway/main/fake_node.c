@@ -47,13 +47,11 @@ void make_and_send_fake_for_node(const fake_node_t *n)
         cJSON_AddNumberToObject(attrs, "lat", lat);
         cJSON_AddNumberToObject(attrs, "lon", lon);
         cJSON_AddNumberToObject(attrs, "buzzer", buzzer);
+        cJSON_AddStringToObject(attrs, "province", n->province_name);
 
-        // gw_publish_attributes sẽ sở hữu attrs -> KHÔNG cJSON_Delete(attrs) ở đây
         if (!gw_publish_attributes(n->dev_name, attrs))
         {
             ESP_LOGW(TAG, "gw_publish_attributes failed for %s", n->dev_name);
-            // nếu gw_publish_attributes trả về false mà KHÔNG nhận ownership,
-            // thì bạn cần tự cJSON_Delete(attrs). Mặc định mình giả định callee nhận ownership.
         }
     }
     cJSON *vals = cJSON_CreateObject();

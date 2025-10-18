@@ -20,3 +20,11 @@ idf_component_register(
 #   INCLUDE_DIRS "."
 
 # )
+
+# idf_component_register(
+#   SRCS
+#     "test_province.c"
+#     "reverse_geocode.c"
+#   INCLUDE_DIRS "."
+
+# )
