@@ -1,10 +1,14 @@
 import React from 'react';
-import { Text, View, Image, TouchableOpacity, StyleSheet, Dimensions, ImageBackground, Linking, ScrollView } from "react-native"
+import {
+    Text, View, Image, Modal, Pressable, FlatList, TouchableOpacity, StyleSheet, Dimensions, TextInput
+    , ImageBackground, Linking, ScrollView
+} from "react-native"
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import { useState, useEffect } from "react"
-import { COLORS, ROUTES } from '../../constants';
+import { COLORS, ROUTES, PROVINCE_MAPPING, PROVINCES_EN } from '../../constants';
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { tb } from '../api';
 
 const { width, height } = Dimensions.get("window");
 const fontSize = Math.min(width * 0.1, height * 0.08)
@@ -22,57 +26,33 @@ const colors = {
     line: '#2b3340',
 };
 
-const TopMetric = ({ icon, label, value, unit, sub }) => (
-    <View style={styles.topMetric}>
-        <View style={styles.metricRow}>
-            <FontAwesome6 name={icon} size={18} color={colors.accent} />
-            <Text style={styles.metricLabel}>{label}</Text>
-        </View>
-        <Text style={styles.topValue}>{value} <Text style={{ fontSize: fontSize * 0.4, color: COLORS.white }}>{unit}</Text></Text>
+const TopMetric = ({ icon, label, value, unit, sub, threshold }) => {
+    const isDanger = threshold !== undefined && value > threshold;
 
-        {sub ? <Text style={styles.metricSub}>{sub}</Text> : null}
-    </View>
-);
-
-const Tile = ({ title, value, unit, right, icon, color = colors.sub }) => (
-    <View style={styles.tile}>
-        <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
-            {icon ? <FontAwesome6 name={icon} size={14} color={color} style={{ marginRight: 8 }} /> : null}
-            <Text style={styles.tileTitle}>{title}</Text>
-        </View>
-        <View style={{ flexDirection: 'row', alignItems: 'baseline' }}>
-            <Text style={styles.tileValue}>{value}</Text>
-            {unit ? <Text style={styles.tileUnit}> {unit}</Text> : null}
-            <View style={{ flex: 1 }} />
-            {right}
-        </View>
-    </View>
-);
-
-/** Sparkline rất nhẹ, không cần thư viện: dùng các cột nhỏ */
-const Sparkline = ({ data = [], height = 36 }) => {
-    const max = Math.max(...data, 1);
     return (
-        <View style={[styles.sparkline, { height }]}>
-            {data.map((v, i) => {
-                const h = Math.max(4, (v / max) * height);
-                return (
-                    <View
-                        key={i}
-                        style={{
-                            width: 4,
-                            marginHorizontal: 2,
-                            height: h,
-                            backgroundColor: colors.accent,
-                            borderRadius: 2,
-                            alignSelf: 'flex-end',
-                        }}
-                    />
-                );
-            })}
+        <View
+            style={[
+                styles.topMetric,
+                isDanger && { backgroundColor: "rgba(248, 49, 49, 0.2)" }, // đổi màu khi vượt ngưỡng
+            ]}
+        >
+            <View style={styles.metricRow}>
+                <FontAwesome6 name={icon} size={18} color={colors.accent} />
+                <Text style={styles.metricLabel}>{label}</Text>
+            </View>
+
+            <Text style={styles.topValue}>
+                {value}{" "}
+                <Text style={{ fontSize: fontSize * 0.4, color: COLORS.white }}>
+                    {unit}
+                </Text>
+            </Text>
+
+            {sub ? <Text style={styles.metricSub}>{sub}</Text> : null}
         </View>
     );
 };
+
 
 const BottomTab = () => (
     <View style={styles.bottomBar}>
@@ -93,16 +73,66 @@ const BottomTab = () => (
 
 const EnvDashboardScreen = () => {
 
+    const [city, setCity] = useState('Ha Noi');
+    const [pickerVisible, setPickerVisible] = useState(false);
+    const [cityNameFSearch, setCityNameFSearch] = useState('Hanoi');
+    const [searchText, setSearchText] = useState("");
+
+    const filteredProvinces = PROVINCES_EN.filter((item) =>
+        item.toLowerCase().includes(searchText.toLowerCase())
+    );
+
     const [weather, setWeather] = useState({})
-    useEffect(() => {
-        api.WeatherAPI.fetchWeatherForecast({ cityName: 'Hanoi', days: '7' }).then(data => {
-            setWeather(data)
-        })
-    }, []);
+    // useEffect(() => {
+    //     api.WeatherAPI.fetchWeatherForecast({ cityName: cityNameFSearch, days: '7' }).then(data => {
+    //         setWeather(data)
+    //     })
+    // }, []);
 
     if (weather) {
         var { current, location, forecast } = weather;
     }
+
+    useEffect(() => {
+        (async () => {
+            try {
+
+                // TEST 2: Lấy toàn bộ (tự phân trang)
+                const all = await tb.getAllDevices({ pageSize: 200 });
+                console.log("✅ Total devices:", all.length);
+                const allEnriched = await tb.getAllDevicesEnriched({
+                    attrKeys: [],                     // để rỗng = lấy tất cả attributes hiện có
+                    tsKeys: ["temperature", "pm25"],   // chọn telemetry cần; để [] nếu muốn tất cả key có sẵn
+                });
+                console.log("Total enriched:", allEnriched.length);
+                console.log("Sample:", allEnriched[1]);
+                const hcm = await tb.getDevicesByProvinceEnriched({
+                    province: "HoChiMinh",
+                    tsKeys: ["temperature", "pm25"],
+                });
+                console.log("HCM devices:", hcm.length);
+                hcm.slice(0, 5).forEach((x, i) => {
+                    console.log(`#${i + 1}`, {
+                        name: x.device?.name,
+                        province: x.attributes?.province,
+                        temp: x.latestTelemetry?.temperature?.value,
+                        pm25: x.latestTelemetry?.pm25?.value,
+                    });
+                });
+
+            } catch (err) {
+                console.error("❌ ThingsBoard test error:", err);
+            }
+        })();
+    }, []);
+
+
+    const onSelectProvince = (vnName) => {
+        console.log(vnName)
+        console.log(PROVINCE_MAPPING[vnName])
+        setCity(vnName);
+        setPickerVisible(false);
+    };
     const navigation = useNavigation();
     const LeftWeather = () => (
         <View style={styles.leftWeather}>
@@ -269,7 +299,6 @@ const EnvDashboardScreen = () => {
         );
     };
 
-
     return (
         <View style={styles.container}>
 
@@ -280,11 +309,18 @@ const EnvDashboardScreen = () => {
                     <LeftWeather />
                 </TouchableOpacity>
                 <View style={styles.centerBox}>
-                    <Text style={styles.brand}>
-                        Hà Nội
-                    </Text>
+                    <TouchableOpacity onPress={() => setPickerVisible(true)} style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Text style={styles.brand}>{city}</Text>
+                        <FontAwesome6
+                            name="chevron-down"
+                            size={fontSize * 0.3}
+                            color="#fff"
+                            style={{ marginLeft: width * 0.01 }}
+                        />
+                    </TouchableOpacity>
+
                     <Text style={styles.location}>
-                        {new Date().toLocaleDateString('vi-VN', {
+                        {new Date().toLocaleDateString('en-VN', {
                             weekday: 'long',
                             day: '2-digit',
                             month: '2-digit',
@@ -296,13 +332,53 @@ const EnvDashboardScreen = () => {
                     <FontAwesome6 name="map" size={22} color="#fff" style={{ marginRight: 12 }} />
                 </TouchableOpacity>
 
+                <Modal visible={pickerVisible} animationType="slide" transparent onRequestClose={() => setPickerVisible(false)}>
+                    <Pressable style={{ flex: 1, backgroundColor: 'rgba(0,0,0,0.35)' }} onPress={() => setPickerVisible(false)}>
+                        <View style={{
+                            marginTop: 'auto',
+                            backgroundColor: '#111827',
+                            borderTopLeftRadius: 16,
+                            borderTopRightRadius: 16,
+                            paddingHorizontal: width * 0.02,
+                            paddingVertical: height * 0.01,
+                            maxHeight: '70%',
+                        }}>
+                            <Text style={{ color: '#fff', fontSize: fontSize * 0.3, fontWeight: '600', marginBottom: height * 0.01 }}>Choose provinces</Text>
+                            <TextInput
+                                placeholder="Search..."
+                                placeholderTextColor="#9CA3AF"
+                                value={searchText}
+                                onChangeText={setSearchText}
+                                style={{
+                                    backgroundColor: "#1f2937",
+                                    color: "#fff",
+                                    paddingHorizontal: width * 0.01,
+                                    paddingVertical: height * 0.01,
+                                    borderRadius: 8,
+                                    marginBottom: height * 0.012,
+                                }}
+                            />
+                            <FlatList
+                                data={filteredProvinces}
+                                keyExtractor={(item) => item}
+                                renderItem={({ item }) => (
+                                    <TouchableOpacity onPress={() => onSelectProvince(item)} style={{ paddingVertical: height * 0.012 }}>
+                                        <Text style={{ color: "#fff", fontSize: fontSize * 0.32 }}>{item}</Text>
+                                    </TouchableOpacity>
+                                )}
+                                ItemSeparatorComponent={() => <View style={{ height: 1, backgroundColor: "#1f2937" }} />}
+                            />
+                        </View>
+                    </Pressable>
+                </Modal>
+
             </View>
 
             <ScrollView contentContainerStyle={{ paddingBottom: height * 0.1 }}>
 
                 {/* Top metrics row */}
                 <View style={styles.topRow}>
-                    <TopMetric icon="temperature-full" label="" value="38" unit="°C" sub="Temperature" />
+                    <TopMetric icon="temperature-full" label="" value="38" unit="°C" sub="Temperature" threshold={30} />
                     <TopMetric icon="water" label="" value="1" unit="a" sub="Humidity" />
                     <TopMetric icon="c" label="" value="0.09" unit="ppm" sub="CO" />
                 </View>
