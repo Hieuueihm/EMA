@@ -23,7 +23,8 @@ static fake_node_t fake_nodes[] = {
     {"NODE_2", 0x1002, "HoChiMinh", 10.763000, 106.660500, 1},
     {"NODE_3", 0x1003, "HoChiMinh", 10.761900, 106.659800, 0},
     {"NODE_4", 0x1004, "HoChiMinh", 10.762200, 106.660900, 0},
-    {"NODE_5", 0x1005, "HoChiMinh", 10.762900, 106.661200, 1}};
+    {"NODE_5", 0x1005, "HoChiMinh", 10.762900, 106.661200, 1},
+    {"NODE_6", 0x1005, "HaNoi", 10.762900, 106.661200, 1}};
 
 static const size_t NUM_NODES = sizeof(fake_nodes) / sizeof(fake_nodes[0]);
 void make_and_send_fake_for_node(const fake_node_t *n);

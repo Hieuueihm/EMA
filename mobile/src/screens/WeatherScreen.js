@@ -4,7 +4,7 @@ import { COLORS, ROUTES } from "../../constants";
 import { TouchableOpacity, ScrollView } from "react-native";
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import { Image } from "react-native";
-import api from "../api";
+import { api } from "../api";
 import UVLine from "../components/UVLine";
 import ParabolaCurve from "../components/Parabol";
 import { useNavigation } from "@react-navigation/native";

@@ -8,7 +8,16 @@ import { useState, useEffect } from "react"
 import { COLORS, ROUTES, PROVINCE_MAPPING, PROVINCES_EN } from '../../constants';
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { tb } from '../api';
+import { tb, api } from '../api';
+
+import {
+    LineChart,
+    BarChart,
+    PieChart,
+    ProgressChart,
+    ContributionGraph,
+    StackedBarChart
+} from "react-native-chart-kit";
 
 const { width, height } = Dimensions.get("window");
 const fontSize = Math.min(width * 0.1, height * 0.08)
@@ -25,6 +34,58 @@ const colors = {
     danger: '#e74c3c',
     line: '#2b3340',
 };
+
+
+const ThemedLineChart = ({
+    labels = [],
+    data = [],
+    unitSuffix = "",
+    W = width - width * 0.1,
+    H = height * 0.2,
+    lineColor = "#ffa726"
+
+}) => {
+
+    return (
+        <View style={[{ paddingTop: W * 0.01 }]}>
+            <LineChart
+                data={{
+                    labels: labels,
+                    datasets: [
+                        {
+                            data
+                        }
+                    ]
+                }}
+                style={{ paddingLeft: 0 }}
+                width={W} // from react-native
+                height={H}
+                yAxisSuffix={unitSuffix}
+                yAxisInterval={1}
+                chartConfig={{
+                    backgroundColor: colors.cardAlt,
+                    backgroundGradientFrom: colors.cardAlt,
+                    backgroundGradientTo: colors.cardAlt,
+                    decimalPlaces: 1,
+                    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                    labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+
+                    style: {
+                        borderRadius: 16,
+                        paddingRight: 0, marginRight: 0
+                    },
+                    propsForDots: {
+                        r: "1",
+                        strokeWidth: "1",
+                        stroke: lineColor
+                    }
+                }}
+                bezier
+
+            />
+        </View>
+    );
+}
 
 const TopMetric = ({ icon, label, value, unit, sub, threshold }) => {
     const isDanger = threshold !== undefined && value > threshold;
@@ -52,8 +113,6 @@ const TopMetric = ({ icon, label, value, unit, sub, threshold }) => {
         </View>
     );
 };
-
-
 const BottomTab = () => (
     <View style={styles.bottomBar}>
         <View style={styles.tabItem}>
@@ -64,68 +123,115 @@ const BottomTab = () => (
             <FontAwesome6 name="bell" size={18} color={colors.text} />
             <Text style={styles.tabText}>Alerts</Text>
         </View>
-        <View style={styles.tabItem}>
-            <FontAwesome6 name="gear" size={18} color={colors.text} />
-            <Text style={styles.tabText}>Settings</Text>
-        </View>
+        {/* <View style={styles.tabItem}> */}
+        {/* <FontAwesome6 name="gear" size={18} color={colors.text} /> */}
+        {/* <Text style={styles.tabText}>Settings</Text> */}
+        {/* </View> */}
     </View>
 );
+const buildChartFromRaw = (series) => {
+    if (!Array.isArray(series) || series.length === 0) {
+        return { labels: [], data: [] };
+    }
+    const labels = [];
+    const data = [];
+
+    for (const p of series) {
+        const ts = +p?.ts;
+        const v = Number(p?.value)
+        if (!Number.isFinite(ts) || !Number.isFinite(v)) continue;
+
+        const d = new Date(ts);
+        const hh = String(d.getHours()).padStart(2, "0");
+        const mm = String(d.getMinutes()).padStart(2, "0");
+        labels.push(`${hh}:${mm}`);
+        data.push(v);
+    }
+    return { labels, data };
+}
+const normalizeLabel = (arr) => {
+    if (!arr || arr.length < 2) return arr;
+
+    const first = arr[0];
+    const last = arr[arr.length - 1];
+
+    const step = (arr.length - 1) / 3;
+    const mid1 = arr[Math.round(step)];
+    const mid2 = arr[Math.round(step * 2)];
+
+    const result = Array(10).fill("");
+    const positions = [0, 3, 6, 9];
+    const labels = [first, mid1, mid2, last];
+
+    positions.forEach((pos, i) => {
+        result[pos] = labels[i];
+    });
+
+    return result;
+}
 
 const EnvDashboardScreen = () => {
+    const navigation = useNavigation();
 
     const [city, setCity] = useState('Ha Noi');
     const [pickerVisible, setPickerVisible] = useState(false);
     const [cityNameFSearch, setCityNameFSearch] = useState('Hanoi');
     const [searchText, setSearchText] = useState("");
+    const [telemetry, setTelemetry] = useState({});
+    const [weather, setWeather] = useState({})
+    const [telemetry12h, setTelemetry12h] = useState({});
+
+    // const
 
     const filteredProvinces = PROVINCES_EN.filter((item) =>
         item.toLowerCase().includes(searchText.toLowerCase())
     );
-
-    const [weather, setWeather] = useState({})
-    // useEffect(() => {
-    //     api.WeatherAPI.fetchWeatherForecast({ cityName: cityNameFSearch, days: '7' }).then(data => {
-    //         setWeather(data)
-    //     })
-    // }, []);
-
-    if (weather) {
-        var { current, location, forecast } = weather;
-    }
-
     useEffect(() => {
-        (async () => {
+        let intervalId;
+
+        async function fetchTelemetry() {
             try {
+                const endTs = Date.now();
+                const startTs = endTs - 60 * 1000;
 
-                // TEST 2: Lấy toàn bộ (tự phân trang)
-                const all = await tb.getAllDevices({ pageSize: 200 });
-                console.log("✅ Total devices:", all.length);
-                const allEnriched = await tb.getAllDevicesEnriched({
-                    attrKeys: [],                     // để rỗng = lấy tất cả attributes hiện có
-                    tsKeys: ["temperature", "pm25"],   // chọn telemetry cần; để [] nếu muốn tất cả key có sẵn
-                });
-                console.log("Total enriched:", allEnriched.length);
-                console.log("Sample:", allEnriched[1]);
-                const hcm = await tb.getDevicesByProvinceEnriched({
-                    province: "HoChiMinh",
-                    tsKeys: ["temperature", "pm25"],
-                });
-                console.log("HCM devices:", hcm.length);
-                hcm.slice(0, 5).forEach((x, i) => {
-                    console.log(`#${i + 1}`, {
-                        name: x.device?.name,
-                        province: x.attributes?.province,
-                        temp: x.latestTelemetry?.temperature?.value,
-                        pm25: x.latestTelemetry?.pm25?.value,
-                    });
-                });
-
+                const bundle = await tb.getAssetsTelemetryByProvince(
+                    "HoChiMinh",
+                    ["temperature", "humidity", "co", "uv", "pm25", "pm10"],
+                    { startTs, endTs, interval: 60000, agg: "AVG", limit: 1000 }
+                );
+                setTelemetry(bundle.length > 0 ? bundle[0].telemetry : {});
             } catch (err) {
-                console.error("❌ ThingsBoard test error:", err);
+                console.error("ThingsBoard test error:", err);
             }
-        })();
-    }, []);
+        }
 
+        async function fetchTelemetry12h() {
+            try {
+                const endTs = Date.now();
+                const startTs = endTs - 12 * 60 * 60 * 1000;
+                const interval = 30 * 60 * 1000;
+
+                const bundle = await tb.getAssetsTelemetryByProvince(
+                    "HoChiMinh",
+                    ["temperature", "humidity"],
+                    { startTs, endTs, interval, agg: "AVG", limit: 1000 }
+                );
+                setTelemetry12h(bundle.length > 0 ? bundle[0].telemetry : {});
+            } catch (err) {
+                console.error("ThingsBoard 12h error:", err);
+            }
+        }
+        fetchTelemetry();
+        fetchTelemetry12h();
+        api.WeatherAPI.fetchWeatherForecast({ cityName: cityNameFSearch, days: '7' }).then(data => {
+            setWeather(data)
+        })
+
+
+        intervalId = setInterval(fetchTelemetry, 60000);
+
+        return () => clearInterval(intervalId);
+    }, []);
 
     const onSelectProvince = (vnName) => {
         console.log(vnName)
@@ -133,7 +239,10 @@ const EnvDashboardScreen = () => {
         setCity(vnName);
         setPickerVisible(false);
     };
-    const navigation = useNavigation();
+
+    function isEmptyObj(obj) {
+        return obj && Object.keys(obj).length === 0 && obj.constructor === Object;
+    }
     const LeftWeather = () => (
         <View style={styles.leftWeather}>
             <Image
@@ -147,157 +256,19 @@ const EnvDashboardScreen = () => {
             </Text>
         </View>
     );
+    const current = weather?.current;
+    const temp_array_12h = telemetry12h?.temperature ?? [];
+    const humidity_array_12h = telemetry12h?.humidity ?? [];
 
 
-    const SparklinePlus = ({
-        data = [],
-        height = height * 0.1,
-        barWidth = 4,
-        gap = 2,
-        unit = '',
-        showGrid = true,
-        gridLevels = 3,
-        showMinMax = true,
-        showLastValue = true,
-        textColor = colors.sub,
-        barColor = colors.accent,
-    }) => {
-        if (!data?.length) return null;
-        const min = Math.min(...data);
-        const max = Math.max(...data);
-        const range = Math.max(1e-6, max - min);
-
-        return (
-            <View style={{ position: 'relative' }}>
-                {showMinMax && (
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: height * 0.001 }}>
-                        <Text style={{ color: textColor, fontSize: fontSize * 0.3 }}>{`Min: ${min}${unit}`}</Text>
-                        <Text style={{ color: textColor, fontSize: fontSize * 0.3 }}>{`Max: ${max}${unit}`}</Text>
-                    </View>
-                )}
-
-                <View style={{ height, borderRadius: 6, backgroundColor: colors.cardAlt, overflow: 'hidden' }}>
-                    {showGrid &&
-                        Array.from({ length: gridLevels + 1 }).map((_, i) => (
-                            <View
-                                key={i}
-                                style={{
-                                    position: 'absolute',
-                                    left: 0,
-                                    right: 0,
-                                    top: (i / gridLevels) * height,
-                                    height: 1,
-                                    backgroundColor: colors.line,
-                                    opacity: 0.7,
-                                }}
-                            />
-                        ))}
-
-                    <View style={{ flexDirection: 'row', alignItems: 'flex-end', height, paddingHorizontal: width * 0.01 }}>
-                        {data.map((v, i) => {
-                            const h = Math.max(3, ((v - min) / range) * height);
-                            return (
-                                <View
-                                    key={i}
-                                    style={{
-                                        width: barWidth,
-                                        height: h,
-                                        marginRight: gap,
-                                        backgroundColor: barColor,
-                                        borderRadius: 2,
-                                        alignSelf: 'flex-end',
-                                    }}
-                                />
-                            );
-                        })}
-                    </View>
-
-                    {showLastValue && (
-                        (() => {
-                            const last = data[data.length - 1];
-                            const y = height - Math.max(3, ((last - min) / range) * height);
-                            return (
-                                <View
-                                    style={{
-                                        position: 'absolute',
-                                        right: width * 0.01,
-                                        top: Math.max(0, y - 14),
-                                        paddingHorizontal: width * 0.01,
-                                        paddingVertical: height * 0.005,
-                                        backgroundColor: colors.card,
-                                        borderWidth: 1,
-                                        borderColor: colors.line,
-                                        borderRadius: 6,
-                                    }}
-                                >
-                                    <Text style={{ color: colors.text, fontSize: fontSize * 0.3 }}>{`${last}${unit}`}</Text>
-                                </View>
-                            );
-                        })()
-                    )}
-                </View>
-            </View>
-        );
-    };
-    const aqiCategory = (aqi) => {
-        if (aqi <= 50) return { label: 'Tốt', color: '#2ecc71' };
-        if (aqi <= 100) return { label: 'Trung bình', color: '#f1c40f' };
-        if (aqi <= 150) return { label: 'Nhạy cảm', color: '#e67e22' };
-        if (aqi <= 200) return { label: 'Xấu', color: '#e74c3c' };
-        if (aqi <= 300) return { label: 'Rất xấu', color: '#8e44ad' };
-        return { label: 'Nguy hại', color: '#7f1d1d' };
-    };
 
 
-    const AQIBar = ({ aqi = 95, max = 500, height = 24 }) => {
-        const segments = [
-            { max: 50, color: '#2ecc71', label: 'Tốt' },
-            { max: 100, color: '#f1c40f', label: 'Trung bình' },
-            { max: 150, color: '#e67e22', label: 'Nhạy cảm' },
-            { max: 200, color: '#e74c3c', label: 'Xấu' },
-            { max: 300, color: '#8e44ad', label: 'Rất xấu' },
-            { max: 500, color: '#7f1d1d', label: 'Nguy hại' },
-        ];
+    const { labels: chartTempLabels, data: chartTempData } = buildChartFromRaw(temp_array_12h);
+    const { labels: chartHumLabels, data: chartHumData } = buildChartFromRaw(humidity_array_12h);
 
-        const percent = Math.min(1, aqi / max);
-        const pos = `${percent * 100}%`;
 
-        return (
-            <View style={{
-                marginVertical: height * 0.2, alignItems: 'center', paddingBottom: height * 0.4
-            }}>
-                <Text style={{ fontSize: fontSize * 0.6, fontWeight: 'bold', color: '#fff', marginBottom: height * 0.3 }}>
-                    AQI
-                </Text>
-
-                <View style={{ flexDirection: 'row', width: '90%', height, borderRadius: 12, overflow: 'hidden' }}>
-                    {segments.map((seg, i) => {
-                        const widthPct = (seg.max - (segments[i - 1]?.max || 0)) / max * 100;
-                        return (
-                            <View key={i} style={{ flex: widthPct, backgroundColor: seg.color }} />
-                        );
-                    })}
-                </View>
-
-                <View
-                    style={{
-                        position: 'absolute',
-                        left: pos,
-                        marginLeft: -width * 0.03,
-                        top: height * 1.5,
-                        alignItems: 'center'
-                    }}
-                >
-                    <View style={{ width: 2, height: height + 8, backgroundColor: '#fff' }} />
-                    <Text style={{
-                        color: '#fff', fontSize: fontSize * 0.3, fontWeight: 'bold', marginTop: height * 0.01, marginBottom: height * 0.1
-                    }}>
-                        {aqi}
-                    </Text>
-                </View>
-            </View>
-        );
-    };
+    const chartTempLabelsNormalized = normalizeLabel(chartTempLabels)
+    const chartHumLabelsNormalized = normalizeLabel(chartHumLabels)
 
     return (
         <View style={styles.container}>
@@ -328,7 +299,7 @@ const EnvDashboardScreen = () => {
                         })}
                     </Text>
                 </View>
-                <TouchableOpacity >
+                <TouchableOpacity onPress={() => navigation.navigate(ROUTES.MAP_SCREEN)} >
                     <FontAwesome6 name="map" size={22} color="#fff" style={{ marginRight: 12 }} />
                 </TouchableOpacity>
 
@@ -378,45 +349,87 @@ const EnvDashboardScreen = () => {
 
                 {/* Top metrics row */}
                 <View style={styles.topRow}>
-                    <TopMetric icon="temperature-full" label="" value="38" unit="°C" sub="Temperature" threshold={30} />
-                    <TopMetric icon="water" label="" value="1" unit="a" sub="Humidity" />
-                    <TopMetric icon="c" label="" value="0.09" unit="ppm" sub="CO" />
+                    <TopMetric
+                        icon="thermometer"
+                        label=""
+                        value={isEmptyObj(telemetry) ? NaN : Number(telemetry.temperature[0].value).toFixed(1)}
+                        unit="°C"
+                        sub="Temperature"
+                        threshold={30}
+                    />
+                    <TopMetric
+                        icon="droplet"
+                        label=""
+                        value={isEmptyObj(telemetry) ? NaN : Number(telemetry.humidity[0].value).toFixed(1)}
+                        unit="%"
+                        sub="Humidity"
+                    />
+                    <TopMetric
+                        icon="cloud"
+                        label=""
+                        value={isEmptyObj(telemetry) ? NaN : Number(telemetry.co[0].value).toFixed(1)}
+                        unit="ppm"
+                        sub="CO"
+                    />
                 </View>
                 <View style={styles.topRow}>
-                    <TopMetric icon="temperature-full" label="" value="38" unit="°C" sub="UV" />
-                    <TopMetric icon="water" label="" value="1" unit="a" sub="PM 2.5" />
-                    <TopMetric icon="c" label="" value="0.09" unit="ppm" sub="PM 10" />
+                    <TopMetric
+                        icon="sun"
+                        label=""
+                        value={isEmptyObj(telemetry) ? NaN : Number(telemetry.uv[0].value).toFixed(1)}
+                        unit=""
+                        sub="UV Index"
+                    />
+                    <TopMetric
+                        icon="wind"
+                        label=""
+                        value={isEmptyObj(telemetry) ? NaN : Number(telemetry.pm25[0].value).toFixed(1)}
+                        unit="µg/m³"
+                        sub="PM 2.5"
+                    />
+                    <TopMetric
+                        icon="wind"
+                        label=""
+                        value={isEmptyObj(telemetry) ? NaN : Number(telemetry.pm10[0].value).toFixed(1)}
+                        unit="µg/m³"
+                        sub="PM 10"
+                    />
                 </View>
-                <AQIBar aqi={225} />
 
                 {/* Big timeline-like graph mock */}
                 <View style={styles.timelineCard}>
-                    <Text style={styles.timelineTitle}>Last 12h • Temp</Text>
-                    <SparklinePlus
-                        data={[22, 23, 24, 26, 25, 27, 29, 28, 26, 25, 24, 23]}
-                        height={56}
-                        unit="°C"
-                        showGrid
-                        gridLevels={4}
-                    />
                     <View style={styles.timelineLegend}>
                         <View style={styles.legendDot} />
                         <Text style={styles.legendText}>Temperature trend</Text>
                     </View>
+                    {chartTempData.length > 0 && (
+                        <ThemedLineChart
+                            labels={chartTempLabelsNormalized}
+                            data={chartTempData}
+                            unitSuffix="°C"
+                            bgColor={colors.cardAlt}
+                            lineColor="#f97316" // cam cho temperature
+                        />
+                    )}
+
+
                 </View>
 
                 <View style={styles.timelineCard}>
-                    <Text style={styles.timelineTitle}>Last 12h • Humidity</Text>
-                    <SparklinePlus
-                        data={[60, 62, 64, 65, 67, 70, 72, 68, 66, 65, 64, 63]}
-                        height={56}
-                        unit="%"
-                        showGrid
-                    />
                     <View style={styles.timelineLegend}>
                         <View style={styles.legendDot} />
                         <Text style={styles.legendText}>Humidity trend</Text>
                     </View>
+                    {chartHumData.length > 0 && (
+                        <ThemedLineChart
+                            labels={chartHumLabelsNormalized}
+                            data={chartHumData}
+                            unitSuffix="%"
+                            bgColor={colors.cardAlt}
+                            lineColor="#22c55e" // xanh cho humidity
+                        />
+                    )}
+
                 </View>
 
 
@@ -426,7 +439,7 @@ const EnvDashboardScreen = () => {
 
             {/* Bottom bar */}
             <BottomTab />
-        </View>
+        </View >
     );
 };
 
@@ -488,9 +501,9 @@ const styles = StyleSheet.create({
     timelineCard: {
         marginHorizontal: width * 0.02,
         marginTop: height * 0.01,
-        paddingHorizontal: width * 0.02,
+        paddingHorizontal: width * 0.01,
 
-        paddingVertical: height * 0.02,
+        paddingVertical: height * 0.01,
         backgroundColor: colors.cardAlt,
         borderRadius: 12,
         borderWidth: 1,
@@ -499,7 +512,7 @@ const styles = StyleSheet.create({
     timelineTitle: { color: colors.sub, fontSize: fontSize * 0.3, marginBottom: height * 0.01 },
     sparkline: { flexDirection: 'row', alignItems: 'flex-end' },
     timelineLegend: { flexDirection: 'row', alignItems: 'center', marginTop: height * 0.01 },
-    legendDot: { width: width * 0.02, height: height * 0.012, borderRadius: 5, backgroundColor: colors.accent, marginRight: 8 },
+    legendDot: { width: width * 0.02, height: height * 0.012, borderRadius: 5, backgroundColor: colors.accent, marginLeft: width * 0.01, marginRight: width * 0.01 },
     legendText: { color: colors.sub, fontSize: fontSize * 0.3 },
 
 

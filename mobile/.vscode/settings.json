@@ -1,5 +1,7 @@
 {
     "java.project.sourcePaths": [
         "src/screens"
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.compile.nullAnalysis.mode": "disabled"
 }

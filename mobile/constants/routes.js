@@ -1,6 +1,7 @@
 export const ROUTES = {
     HOME_SCREEN: 'HomeScreen',
-    WHEATHER_SCREEN: 'WheaterScreen'
+    WHEATHER_SCREEN: 'WheaterScreen',
+    MAP_SCREEN: 'MapScreen'
 
 
 }
