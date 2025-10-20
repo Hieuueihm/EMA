@@ -10,7 +10,6 @@
 #include "stm32f1xx_hal_uart.h"
 #include "stm32f1xx_hal_adc.h"
 #include "delay.h"
-
 #include <stdarg.h>
 #include <stdio.h>
 #include "string.h"

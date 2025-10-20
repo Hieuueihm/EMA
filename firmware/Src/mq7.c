@@ -7,11 +7,7 @@ void MQ7_Init(void){
 
     __HAL_RCC_GPIOA_CLK_ENABLE();
     __HAL_RCC_ADC1_CLK_ENABLE();
-
-
-
-    // PA0
-
+   // PA0
     GPIO_InitTypeDef GPIO_InitStruct = {0};
     GPIO_InitStruct.Pin = GPIO_PIN_0;
     GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
@@ -26,9 +22,7 @@ void MQ7_Init(void){
     hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
     hadc1.Init.NbrOfConversion = 1;
     HAL_ADC_Init(&hadc1);
-
     ADC_ChannelConfTypeDef sConfig = {0};
-
     sConfig.Channel = ADC_CHANNEL_0;     // PA0
     sConfig.Rank = ADC_REGULAR_RANK_1;
     sConfig.SamplingTime = ADC_SAMPLETIME_239CYCLES_5;
@@ -37,7 +31,6 @@ void MQ7_Init(void){
 
 
 }
-
 static Status_e Read_ADC(uint32_t *sum)
 {
   for (int i = 0; i < 10; i++)
@@ -49,6 +42,7 @@ static Status_e Read_ADC(uint32_t *sum)
     } else {
         return ERR;
     }
+    HAL_ADC_Stop(&hadc1);
     HAL_Delay(5);
   }
   *sum /= 10;

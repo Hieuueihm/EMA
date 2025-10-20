@@ -292,7 +292,7 @@ LoRa SX1278_Init(void){
     ins.api.lora_init = LoRa_Init;
     ins.api.lora_send_packet = LoRa_Send_Packet;
     ins.api.lora_receive_packet = LoRa_Receive_Packet;
-    ins.api.lora_receive = LoRa_Receive;
+    ins.api.lora_received = LoRa_Received;
     ins.api.lora_packet_rssi = Lora_Packet_Rssi;
     ins.api.lora_dump_registers = LoRa_Dump_Register;
 

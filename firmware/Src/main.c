@@ -2,7 +2,12 @@
 #include "stm32f1xx_hal_rcc_ex.h"
 #include "stm32f1xx_hal_spi.h"
 #include "stm32f1xx_hal.h"
+#include "lora_packet.h"
+#include <stdlib.h>
 
+uint16_t seq16_random(void) {
+    return (uint16_t)(rand() & 0xFFFF);
+}
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 // SDS011 sds;
@@ -10,15 +15,50 @@ static void MX_GPIO_Init(void);
 SDS011 sds;
 UART_HandleTypeDef huart2;
 DHT dht;
-
 uint8_t data[50];
 uint16_t size = 0;
 // uint8_t data[50];
 // uint16_t size = 0;
-UART_Handler huart;
 extern UART_HandleTypeDef huart1;
 uint8_t rxData[4] = {0};
 volatile uint8_t rx_ready = 0;
+float ppm = 0.0f;
+uint8_t uvi = 0.0f;
+uint8_t gwid_zero[6] = {0,0,0,0,0,0};
+
+
+#define DEVICE_ID 0x111
+
+
+
+
+
+static uint8_t read_all_sensors(const char * buf){
+
+    MQ7_GetPPM(&ppm);
+    GUVA_GetUVI(&uvi);
+    dht.api.read_data(&dht);
+    sds.api.query_data(&sds);
+    uint8_t len = 0;
+
+    len += sprintf(buf, "Temp: %.1f C  Humidity: %.1f ppm %.1f uv %d pm2.5 %d pm10 %d \r\n ", dht.temperature, dht.humidity, ppm, uvi, sds.pm_2_5, sds.pm_10);
+    return len;
+}
+
+static uint16_t fill_sensor_payload(uint8_t *pl, uint16_t cap)
+{
+    if (cap < (4*4 + 2*2)) return 0; 
+
+    uint16_t o = 0;
+    write_f32_be(&pl[o], dht.temperature); o += 4;
+    write_f32_be(&pl[o], dht.humidity);    o += 4;
+    write_f32_be(&pl[o], ppm);             o += 4;
+    pl[o]= uvi;            o += 1;
+    write_u16_be(&pl[o], (uint16_t)sds.pm_2_5); o += 2;
+    write_u16_be(&pl[o], (uint16_t)sds.pm_10);  o += 2;
+    return o; 
+}
+
 int main(void)
 {
    
@@ -53,8 +93,6 @@ int main(void)
     uart_print("guva init\r\n");
 
     GUVA_Init();
-    char msg[64];
-    float ppm = 0.0f;
 
 
     LoRa ins;
@@ -64,36 +102,133 @@ int main(void)
     ins.api.lora_set_bandwidth(&ins, 125E3);
     ins.api.lora_enable_crc(&ins);
 
-    float uv_mw = 0.0f;
-   
+
+
+    uint8_t saved_gwid[6] = {0}; 
+
     while (1)
     {
-
-    char buf[100];
-
-    MQ7_GetPPM(&ppm);
-    GUVA_GetUVI(&uv_mw);
-    dht.api.read_data(&dht);
-    sds.api.query_data(&sds);
-    uint8_t len = 0;
-
-    len += sprintf(buf, "Temp: %.1f C  Humidity: %.1f ppm %.1f uv %.1f pm2.5 %d pm10 %d \r\n ", dht.temperature, dht.humidity, ppm, uv_mw, sds.pm_2_5, sds.pm_10);
-
-    // // In dạng text đơn giản
-    // if (len < 0) len = 0;
-    // if (len > (int)sizeof(buf)) len = sizeof(buf);
-    uart_printf("%d \r\n", len);
-
-    // len += snprintf(buf, "abc", 3);
-    // uart_printf("looo");
-
-    
+        uint8_t tx[32];
+        uint8_t rx[256];
+        uint8_t payload[64];
+        uint8_t pkt[128];
+        uint16_t seq16 = seq16_random();
 
 
-    ins.api.lora_send_packet(&ins, (uint8_t *)buf, len);
-    HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-    HAL_Delay(2000);
-    
+        uint16_t len = lora_pkt_build_hello(tx, sizeof(tx), DEVICE_ID, gwid_zero, seq16 , 0);
+            if (len == 0) {
+                uart_print("build HELLO failed\r\n");
+                HAL_Delay(2000);
+                continue;
+            }
+
+        ins.api.lora_send_packet(&ins, tx, len);
+
+
+        uart_print("send hello ok \r\n");
+
+
+        uint32_t t0 = HAL_GetTick();
+        bool got_resp = false;
+        lora_header_t hdr;    
+        uart_print("wait resp \r\n");
+        ins.api.lora_receive(&ins); 
+        
+        while ((HAL_GetTick() - t0) < 5000)
+        {
+            if (ins.api.lora_received(&ins)) {
+                int rlen = ins.api.lora_receive_packet(&ins, rx, sizeof(rx)); 
+
+                if (rlen >= LORA_HEADER_LEN) {
+
+                    if (lora_parse_header(rx, (uint16_t)rlen, &hdr)) {
+                        if (hdr.msg_type == MSG_HELLO_RESP &&
+                            hdr.device_id == DEVICE_ID &&
+                            hdr.seq16 == seq16 && hdr.ack)
+                        {
+                            got_resp = true;
+                            uart_print("resp okela\r\n");
+                            break;
+                        }
+                    }
+                }
+            } 
+            HAL_Delay(10);  
+
+        }
+
+        uart_print("break point \r\n");
+        if (got_resp) {
+            memcpy(saved_gwid, hdr.gateway_id, 6);
+
+            char logbuf[96];
+            sprintf(logbuf,
+                    "HELLO_RESP ok: dev=0x%04X seq=0x%04X ack=%u gw=%02X:%02X:%02X:%02X:%02X:%02X\r\n",
+                    hdr.device_id, hdr.seq16, hdr.ack,
+                    saved_gwid[0], saved_gwid[1], saved_gwid[2],
+                    saved_gwid[3], saved_gwid[4], saved_gwid[5]);
+            uart_print(logbuf);
+            char dbg[100];
+            read_all_sensors(dbg);
+
+            uint16_t pl_len = fill_sensor_payload(payload, sizeof(payload));
+
+            uint16_t seq_data = seq16_random(); // hoặc ++
+            uint16_t pkt_len = build_data_packet(pkt, sizeof(pkt),
+                                        DEVICE_ID, saved_gwid, seq_data,
+                                        payload, pl_len);
+
+            ins.api.lora_send_packet(&ins, pkt, pkt_len);
+            uart_print("send data okela\r\n");
+
+            uint32_t t0 = HAL_GetTick();
+            bool got_resp = false;
+            lora_header_t hdr;    
+            uart_print("wait resp \r\n");
+            ins.api.lora_receive(&ins); 
+            
+            while ((HAL_GetTick() - t0) < 5000)
+            {
+                if (ins.api.lora_received(&ins)) {
+                    int rlen = ins.api.lora_receive_packet(&ins, rx, sizeof(rx)); 
+                    if (rlen >= LORA_HEADER_LEN) {
+
+                        if (lora_parse_header(rx, (uint16_t)rlen, &hdr)) {
+                            if (hdr.msg_type == MSG_DATA_ACK &&
+                                hdr.device_id == DEVICE_ID &&
+                                hdr.seq16 == seq_data && hdr.ack)
+                            {
+                                got_resp = true;
+                                uart_print("resp data okela\r\n");
+                                break;
+                            }
+                        }
+                    }
+                } 
+                HAL_Delay(10);  
+
+            }
+            if(got_resp){
+
+                HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
+                HAL_Delay(2000);
+                got_resp = true;
+            } else {
+                uart_print("DATA timeout, retry...\r\n");
+                uint32_t backoff = 500 + (seq16 & 0x3FF); 
+                HAL_Delay(backoff);
+            }
+
+
+
+
+
+        } else {
+            uart_print("HELLO timeout, retry...\r\n");
+            uint32_t backoff = 500 + (seq16 & 0x3FF);
+            HAL_Delay(backoff);
+        }
+
     
     
     }

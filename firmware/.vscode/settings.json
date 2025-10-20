@@ -3,6 +3,8 @@
         "random": "c",
         "stm32f1xx_hal_adc.h": "c",
         "math.h": "c",
-        "cstdarg": "c"
+        "cstdarg": "c",
+        "stdio.h": "c",
+        "stm32f1xx_hal_adc_ex.h": "c"
     }
 }
