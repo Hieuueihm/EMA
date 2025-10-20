@@ -1,7 +1,7 @@
 {
     "version":            "1.2",
     "project_name":       "gateway",
-    "project_version":    "a57009b-dirty",
+    "project_version":    "d8571cf-dirty",
     "project_path":       "C:/EMA/gateway",
     "idf_path":           "C:/Espressif/frameworks/esp-idf-v5.5.1",
     "build_dir":          "C:/EMA/gateway/build",
@@ -1235,12 +1235,12 @@
             "dir": "C:/EMA/gateway/main",
             "type": "LIBRARY",
             "lib": "__idf_main",
-            "reqs": [ "driver", "esp_wifi", "esp_netif", "esp_event", "nvs_flash", "esp_http_server", "mqtt" ],
+            "reqs": [],
             "priv_reqs": [ "espressif__cjson" ],
             "managed_reqs": [],
             "managed_priv_reqs": [ "espressif__cjson" ],
             "file": "C:/EMA/gateway/build/esp-idf/main/libmain.a",
-            "sources": [ "C:/EMA/gateway/main/main.c", "C:/EMA/gateway/main/wifi_sta.c", "C:/EMA/gateway/main/wifi_ap.c", "C:/EMA/gateway/main/lora.c", "C:/EMA/gateway/main/mqtt.c", "C:/EMA/gateway/main/fake_node.c", "C:/EMA/gateway/main/timesync.c", "C:/EMA/gateway/build/index.html.S" ],
+            "sources": [ "C:/EMA/gateway/main/my_first_app.c", "C:/EMA/gateway/main/lora.c", "C:/EMA/gateway/main/lora_packet.c" ],
             "include_dirs": [ "." ]
         },
         "mbedtls": {
@@ -2922,7 +2922,7 @@
             "prefix": "idf",
             "dir": "C:/EMA/gateway/main",
             "lib": "__idf_main",
-            "reqs": [ "driver", "esp_wifi", "esp_netif", "esp_event", "nvs_flash", "esp_http_server", "mqtt" ],
+            "reqs": [],
             "priv_reqs": [ "espressif__cjson" ],
             "managed_reqs": [],
             "managed_priv_reqs": [ "espressif__cjson" ],
