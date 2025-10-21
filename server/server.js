@@ -21,11 +21,11 @@ dotenv.config();
 const PORT = Number(process.env.PORT || 8080);
 
 const FB_PROJECT_ID = process.env.FB_PROJECT_ID;
-// const SA_PATH = process.env.SA_PATH || "service-account.json";
+const SA_PATH = process.env.SA_PATH || "service-account.json";
 
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const SA_PATH = path.join(__dirname, 'service-account.json');
+// const __dirname = path.dirname(fileURLToPath(import.meta.url));
+// const SA_PATH = path.join(__dirname, 'service-account.json');
 
 
 const TB_URL = process.env.TB_URL;
@@ -45,6 +45,16 @@ if (!FB_PROJECT_ID) throw new Error("Missing FB_PROJECT_ID in .env");
 if (!TB_URL || !TB_JWT) throw new Error("Missing TB_URL/TB_JWT in .env");
 
 const serviceAccount = JSON.parse(fs.readFileSync(SA_PATH, "utf8"));
+
+const firebaseConfig = {
+    apiKey: "xxx-your-api-key-xxx",
+    authDomain: "project-name.firebaseapp.com",
+    projectId: "project-name",
+    storageBucket: "project-name.appspot.com",
+    messagingSenderId: "xxxxxxxxxxxxxxxx",
+    appId: "x:xxxxxxxxxxxxxxx:web:xxxxxxxxxxxxxxx",
+    measurementId: "G-XXXXXXXXX",
+};
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     // projectId: FB_PROJECT_ID,
