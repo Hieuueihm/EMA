@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "8132142059",
+    "project_id": "emate-af92f",
+    "storage_bucket": "emate-af92f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:8132142059:android:5722f1bbc409fb5cc8efae",
+        "android_client_info": {
+          "package_name": "com.awesomeproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNKnDg0tard6I_AEQ6rPOy_uDV_Han_QU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

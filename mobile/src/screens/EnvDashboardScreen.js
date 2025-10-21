@@ -9,6 +9,8 @@ import { COLORS, ROUTES, PROVINCE_MAPPING, PROVINCES_EN } from '../../constants'
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { tb, api } from '../api';
+import messaging from '@react-native-firebase/messaging';
+import firestore from '@react-native-firebase/firestore';
 
 import {
     LineChart,
@@ -113,22 +115,29 @@ const TopMetric = ({ icon, label, value, unit, sub, threshold }) => {
         </View>
     );
 };
-const BottomTab = () => (
+const BottomTab = ({ unreadCount = 0, onPressCharts, onPressAlerts }) => (
     <View style={styles.bottomBar}>
-        <View style={styles.tabItem}>
-            <FontAwesome6 name="chart-line" size={18} color={colors.text} />
+        <TouchableOpacity style={styles.tabItem} onPress={onPressCharts}>
+            <FontAwesome6 name="chart-line" size={fontSize * 0.4} color={colors.text} />
             <Text style={styles.tabText}>Charts</Text>
-        </View>
-        <View style={styles.tabItem}>
-            <FontAwesome6 name="bell" size={18} color={colors.text} />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.tabItem} onPress={onPressAlerts}>
+            <View style={{ alignItems: 'center' }}>
+                <FontAwesome6 name="bell" size={fontSize * 0.5} color={colors.text} />
+                {unreadCount > 0 && (
+                    <View style={styles.badge}>
+                        <Text style={styles.badgeText}>
+                            {unreadCount > 99 ? '99+' : String(unreadCount)}
+                        </Text>
+                    </View>
+                )}
+            </View>
             <Text style={styles.tabText}>Alerts</Text>
-        </View>
-        {/* <View style={styles.tabItem}> */}
-        {/* <FontAwesome6 name="gear" size={18} color={colors.text} /> */}
-        {/* <Text style={styles.tabText}>Settings</Text> */}
-        {/* </View> */}
+        </TouchableOpacity>
     </View>
 );
+
 const buildChartFromRaw = (series) => {
     if (!Array.isArray(series) || series.length === 0) {
         return { labels: [], data: [] };
@@ -180,6 +189,12 @@ const EnvDashboardScreen = () => {
     const [telemetry, setTelemetry] = useState({});
     const [weather, setWeather] = useState({})
     const [telemetry12h, setTelemetry12h] = useState({});
+
+
+    const [deviceToken, setDeviceToken] = useState(null);
+    const [alerts, setAlerts] = useState([]);
+    const [readsMap, setReadsMap] = useState({});
+    const [unreadCount, setUnreadCount] = useState(0);
 
     // const
 
@@ -233,12 +248,66 @@ const EnvDashboardScreen = () => {
         return () => clearInterval(intervalId);
     }, []);
 
+    useEffect(() => {
+        let mounted = true;
+        (async () => {
+            try {
+                const t = await messaging().getToken();
+                if (mounted) setDeviceToken(t);
+            } catch (e) {
+                console.log('Get FCM token error:', e);
+            }
+        })();
+        return () => { mounted = false; };
+    }, []);
+
+    // Subscribe ALERTS (newest first)
+    useEffect(() => {
+        const unsub = firestore()
+            .collection('alerts')
+            .orderBy('createdAt', 'desc')
+            .limit(200)
+            .onSnapshot(snap => {
+                const arr = [];
+                snap.forEach(d => {
+                    const v = d.data() || {};
+                    arr.push({ id: d.id, title: v.title || 'Alert', body: v.body || '', createdAt: v.createdAt });
+                });
+                setAlerts(arr);
+            }, err => console.log('alerts onSnapshot error:', err));
+        return unsub;
+    }, []);
+
+    // Subscribe READS của thiết bị hiện tại
+    useEffect(() => {
+        if (!deviceToken) return;
+        const unsub = firestore()
+            .collection('fcmTokens').doc(deviceToken)
+            .collection('reads')
+            .onSnapshot(snap => {
+                const map = {};
+                snap.forEach(d => { map[d.id] = true; });
+                setReadsMap(map);
+            }, err => console.log('reads onSnapshot error:', err));
+        return unsub;
+    }, [deviceToken]);
+
+    // Tính số chưa đọc
+    useEffect(() => {
+        if (!alerts.length) { setUnreadCount(0); return; }
+        let c = 0;
+        for (const a of alerts) if (!readsMap[a.id]) c++;
+        setUnreadCount(c);
+    }, [alerts, readsMap]);
+
     const onSelectProvince = (vnName) => {
         console.log(vnName)
         console.log(PROVINCE_MAPPING[vnName])
         setCity(vnName);
         setPickerVisible(false);
     };
+    console.log("unreadCount:", unreadCount);
+
 
     function isEmptyObj(obj) {
         return obj && Object.keys(obj).length === 0 && obj.constructor === Object;
@@ -438,8 +507,11 @@ const EnvDashboardScreen = () => {
             </ScrollView>
 
             {/* Bottom bar */}
-            <BottomTab />
-        </View >
+            <BottomTab
+                unreadCount={unreadCount}
+                onPressCharts={() => {/* đang ở màn này rồi, có thể scroll top hoặc bỏ trống */ }}
+                onPressAlerts={() => navigation.navigate(ROUTES.ALERTS_SCREEN)}
+            /> </View >
     );
 };
 
@@ -530,6 +602,25 @@ const styles = StyleSheet.create({
     },
     tabItem: { alignItems: 'center', gap: height * 0.005 },
     tabText: { color: colors.text, fontSize: fontSize * 0.3 },
+    badge: {
+        position: 'absolute',
+        top: -height * 0.01,
+        right: -width * 0.03,
+        minWidth: width * 0.05,
+        height: height * 0.02,
+        paddingHorizontal: width * 0.01,
+        backgroundColor: colors.danger,  // đỏ
+        borderRadius: 9,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderColor: colors.cardAlt,
+    },
+    badgeText: {
+        color: '#fff',
+        fontSize: fontSize * 0.25,
+        fontWeight: '700',
+    },
 });
 
 export default EnvDashboardScreen;
