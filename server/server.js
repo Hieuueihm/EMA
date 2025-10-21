@@ -47,7 +47,7 @@ if (!TB_URL || !TB_JWT) throw new Error("Missing TB_URL/TB_JWT in .env");
 const serviceAccount = JSON.parse(fs.readFileSync(SA_PATH, "utf8"));
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    projectId: FB_PROJECT_ID,
+    // projectId: FB_PROJECT_ID,
 });
 const messaging = admin.messaging();
 
