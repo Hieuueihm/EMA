@@ -13,12 +13,20 @@ process.on("uncaughtException", (err) => {
     console.error("UNCAUGHT EXCEPTION:", err);
 });
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 dotenv.config();
 
 const PORT = Number(process.env.PORT || 8080);
 
 const FB_PROJECT_ID = process.env.FB_PROJECT_ID;
-const SA_PATH = process.env.SA_PATH || "service-account.json";
+// const SA_PATH = process.env.SA_PATH || "service-account.json";
+
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const SA_PATH = path.join(__dirname, 'service-account.json');
+
 
 const TB_URL = process.env.TB_URL;
 const TB_JWT = process.env.TB_JWT;
@@ -231,7 +239,9 @@ async function pollAllDevices() {
         console.error("Polling error:", e.message);
     }
 }
-
+app.get('/', (req, res) => {
+    res.status(200).send('EMA FCM server up and running.');
+})
 app.get("/health", (_req, res) => res.json({ ok: true }));
 app.post("/tb-scan-now", async (_req, res) => {
     try {
@@ -242,8 +252,17 @@ app.post("/tb-scan-now", async (_req, res) => {
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`EMA FCM server listening on http://localhost:${PORT}`);
+// app.listen(PORT, () => {
+//     console.log(`EMA FCM server listening on http://localhost:${PORT}`);
+//     pollAllDevices();
+//     setInterval(pollAllDevices, Math.max(TB_POLL_SEC, 2) * 1000);
+// });
+
+
+
+//
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`EMA FCM server listening on http://0.0.0.0:${PORT}`);
     pollAllDevices();
     setInterval(pollAllDevices, Math.max(TB_POLL_SEC, 2) * 1000);
 });
