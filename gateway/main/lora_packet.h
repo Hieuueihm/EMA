@@ -11,6 +11,7 @@ typedef enum
     MSG_DATA_FNODE = 0x03,
     MSG_DATA_ACK = 0x04,
     MSG_NODE_CTR = 0x05,
+    MSG_CTR_ACK = 0x06
 } lora_msg_type_t;
 
 typedef struct
@@ -23,7 +24,7 @@ typedef struct
 } lora_header_t;
 
 bool lora_parse_header(const uint8_t *in, uint16_t in_len, lora_header_t *out);
-uint16_t lora_write_header_only(uint8_t *out, uint16_t cap, const lora_header_t *h);
+uint16_t lora_write_header_only(uint8_t *out, uint16_t cap, const lora_header_t *h, bool is_random_seq16);
 
 typedef struct
 {
@@ -33,9 +34,10 @@ typedef struct
     float uvi;
     uint16_t pm25;
     uint16_t pm10;
+    uint8_t buzzer;
 } sensor_payload_t;
 
-#define SENSOR_PAYLOAD_MIN_LEN (4 * 3 + 1 + 2 * 2)
+#define SENSOR_PAYLOAD_MIN_LEN (4 * 3 + 1 + 2 * 2 + 1)
 
 static inline uint16_t read_u16_be(const uint8_t *p)
 {

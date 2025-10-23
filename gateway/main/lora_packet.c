@@ -1,4 +1,5 @@
 #include "lora_packet.h"
+#include <time.h>
 
 bool lora_parse_header(const uint8_t *in, uint16_t in_len, lora_header_t *out)
 {
@@ -13,14 +14,22 @@ bool lora_parse_header(const uint8_t *in, uint16_t in_len, lora_header_t *out)
 
     return true;
 }
-uint16_t lora_write_header_only(uint8_t *out, uint16_t cap, const lora_header_t *h)
+uint16_t lora_write_header_only(uint8_t *out, uint16_t cap, const lora_header_t *h, bool is_random_seq16)
 {
     if (!out || !h || cap < LORA_HEADER_LEN)
         return 0;
     out[0] = h->msg_type;
     write_u16_be(&out[1], h->device_id);
     memcpy(&out[3], h->gateway_id, 6);
-    write_u16_be(&out[9], h->seq16);
+    if (is_random_seq16)
+    {
+        uint16_t rand_seq = (uint16_t)(rand() & 0xFFFF);
+        write_u16_be(&out[9], rand_seq);
+    }
+    else
+    {
+        write_u16_be(&out[9], h->seq16);
+    }
     out[11] = h->ack;
     return LORA_HEADER_LEN;
 }

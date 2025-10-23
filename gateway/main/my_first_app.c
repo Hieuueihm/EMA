@@ -11,66 +11,22 @@
 #include "esp_netif.h"
 #include "lora.h"
 #include "lora_packet.h"
+#include "esp_random.h"
 #include "esp_mac.h"
 
-#define DEDUP_MAX_DEV 64
-#define DEDUP_WINDOW 32
 #define LORA_FREQUENCY 433E6
 #define RESP_QUEUE_LEN 64
 static const char *TAG = "ThingsBoard";
 
-typedef struct
-{
-    uint16_t dev_id;
-    uint16_t seen[DEDUP_WINDOW];
-    uint8_t head;
-    bool used;
-} dedup_entry_t;
-
 static QueueHandle_t g_q_resp = NULL;
 static SemaphoreHandle_t g_lora_mutex = NULL;
-static dedup_entry_t g_dedup[DEDUP_MAX_DEV];
 static uint8_t g_gwid[6] = {0};
+bool is_ctr_done = false;
 
-static bool dedup_seen_and_mark(uint16_t dev_id, uint16_t seq16)
-{
-    int slot = -1;
-    for (int i = 0; i < DEDUP_MAX_DEV; i++)
-    {
-        if (g_dedup[i].used && g_dedup[i].dev_id == dev_id)
-        {
-            slot = i;
-            break;
-        }
-        if (!g_dedup[i].used && slot == -1)
-            slot = i;
-    }
-    if (slot < 0)
-        return false;
-
-    dedup_entry_t *e = &g_dedup[slot];
-    if (!e->used)
-    {
-        e->used = true;
-        e->dev_id = dev_id;
-        e->head = 0;
-        for (int k = 0; k < DEDUP_WINDOW; k++)
-            e->seen[k] = 0xFFFF;
-    }
-    else
-    {
-        for (int k = 0; k < DEDUP_WINDOW; k++)
-            if (e->seen[k] == seq16)
-                return true; // duplicate
-    }
-    e->seen[e->head] = seq16;
-    e->head = (uint8_t)((e->head + 1) % DEDUP_WINDOW);
-    return false;
-}
-static bool send_header_only(const lora_header_t *hdr)
+static bool send_header_only(const lora_header_t *hdr, bool is_random_seq16)
 {
     uint8_t tx[LORA_HEADER_LEN];
-    uint16_t n = lora_write_header_only(tx, sizeof(tx), hdr);
+    uint16_t n = lora_write_header_only(tx, sizeof(tx), hdr, is_random_seq16);
     if (!n)
         return false;
 
@@ -136,13 +92,6 @@ void rx_task(void *pvParameters)
             continue;
         }
 
-        // Dedup (device_id, seq16)
-        if (dedup_seen_and_mark(rxh.device_id, rxh.seq16))
-        {
-            ESP_LOGW(TAG, "Duplicate ignored: dev=0x%04X seq=0x%04X", rxh.device_id, rxh.seq16);
-            continue;
-        }
-
         int payload_len = len - LORA_HEADER_LEN;
         ESP_LOGI(TAG, "pkt gwid = %02X:%02X:%02X:%02X:%02X:%02X",
                  rxh.gateway_id[0], rxh.gateway_id[1], rxh.gateway_id[2],
@@ -150,7 +99,7 @@ void rx_task(void *pvParameters)
         switch (rxh.msg_type)
         {
         case MSG_HELLO:
-        {
+
             lora_header_t resp = rxh;
             resp.msg_type = MSG_HELLO_RESP;
             memcpy(resp.gateway_id, g_gwid, 6);
@@ -165,11 +114,11 @@ void rx_task(void *pvParameters)
             {
                 ESP_LOGI(TAG, "HELLO enq: dev=0x%04X seq=0x%04X", rxh.device_id, rxh.seq16);
             }
-        }
-        break;
+
+            break;
 
         case MSG_DATA_FNODE:
-        {
+
             bool equal = true;
             for (int i = 0; i < 6; i++)
             {
@@ -184,13 +133,13 @@ void rx_task(void *pvParameters)
                 ESP_LOGI(TAG, "DATA_FNODE: dev=0x%04X seq=0x%04X pl=%dB",
                          rxh.device_id, rxh.seq16, payload_len);
                 const uint8_t *pl = &buf[LORA_HEADER_LEN];
+                sensor_payload_t s;
                 if (payload_len < SENSOR_PAYLOAD_MIN_LEN)
                 {
                     ESP_LOGW(TAG, "DATA_FNODE: payload too short (%dB < %dB)", payload_len, SENSOR_PAYLOAD_MIN_LEN);
                 }
                 else
                 {
-                    sensor_payload_t s;
                     int o = 0;
                     s.temperature = rd_f32_be(&pl[o]);
                     o += 4;
@@ -204,14 +153,13 @@ void rx_task(void *pvParameters)
                     o += 2;
                     s.pm10 = rd_u16_be(&pl[o]);
                     o += 2;
+                    s.buzzer = pl[o];
+                    o += 1;
 
-                    // (tùy chọn) nếu còn dữ liệu bổ sung phía sau thì parse tiếp tại đây…
-
-                    // Log dữ liệu đã giải mã
                     ESP_LOGI(TAG,
-                             "DATA from dev=0x%04X seq=0x%04X | T=%.2fC H=%.2f%% CO=%.2fppm UVI=%.2f PM2.5=%u PM10=%u",
+                             "DATA from dev=0x%04X seq=0x%04X | T=%.2fC H=%.2f%% CO=%.2fppm UVI=%.2f PM2.5=%u PM10=%u Buzzer=%u",
                              rxh.device_id, rxh.seq16,
-                             s.temperature, s.humidity, s.co_ppm, s.uvi, s.pm25, s.pm10);
+                             s.temperature, s.humidity, s.co_ppm, s.uvi, s.pm25, s.pm10, s.buzzer);
 
                     // (tuỳ chọn) Publish MQTT / ghi file / đẩy DB ở đây
                     // publish_sensor_mqtt(rxh.device_id, &s);  // ví dụ
@@ -228,9 +176,27 @@ void rx_task(void *pvParameters)
                     ESP_LOGW(TAG, "RESP queue full (DATA_ACK) dev=0x%04X seq=0x%04X",
                              rxh.device_id, rxh.seq16);
                 }
+                if (s.buzzer == 1)
+                {
+                    lora_header_t ctr = rxh;
+                    ctr.msg_type = MSG_NODE_CTR;
+                    ctr.seq16 = esp_random() & 0xFFFF;
+                    memcpy(ctr.gateway_id, g_gwid, 6);
+                    ctr.ack = 1;
+
+                    if (xQueueSend(g_q_resp, &ctr, 0) != pdTRUE)
+                    {
+                        ESP_LOGW(TAG, "RESP queue full (NODE_CTR) dev=0x%04X seq=0x%04X",
+                                 rxh.device_id, rxh.seq16);
+                    }
+                    else
+                    {
+                        ESP_LOGI(TAG, "NODE_CTR enq (mute) dev=0x%04X seq=0x%04X",
+                                 rxh.device_id, rxh.seq16);
+                    }
+                }
             }
             break;
-        }
         }
     }
 }
@@ -243,7 +209,7 @@ static void resp_task(void *arg)
         if (xQueueReceive(g_q_resp, &hdr, portMAX_DELAY) != pdTRUE)
             continue;
 
-        bool ok = send_header_only(&hdr);
+        bool ok = send_header_only(&hdr, false);
         // bool ok = 0;
 
         if (hdr.msg_type == MSG_HELLO_RESP)
@@ -256,10 +222,10 @@ static void resp_task(void *arg)
             ESP_LOGI(TAG, "DATA_ACK    -> dev=0x%04X seq=0x%04X %s",
                      hdr.device_id, hdr.seq16, ok ? "OK" : "FAIL");
         }
-        else
+        else if (hdr.msg_type == MSG_NODE_CTR)
         {
-            ESP_LOGI(TAG, "RESP type=0x%02X -> dev=0x%04X seq=0x%04X %s",
-                     hdr.msg_type, hdr.device_id, hdr.seq16, ok ? "OK" : "FAIL");
+            ESP_LOGI(TAG, "NODE_CTR   -> dev=0x%04X seq=0x%04X  %s",
+                     hdr.device_id, hdr.seq16, ok ? "OK" : "FAIL");
         }
     }
 }
@@ -270,9 +236,6 @@ void app_main(void)
     get_gateway_id(g_gwid);
     ESP_LOGI(TAG, "GWID = %02X:%02X:%02X:%02X:%02X:%02X",
              g_gwid[0], g_gwid[1], g_gwid[2], g_gwid[3], g_gwid[4], g_gwid[5]);
-
-    // Clear dedup table
-    memset(g_dedup, 0, sizeof(g_dedup));
 
     // IPC
     g_q_resp = xQueueCreate(RESP_QUEUE_LEN, sizeof(lora_header_t));
