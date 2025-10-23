@@ -32,6 +32,7 @@ void GUVA_Init(void){
     s2.Rank         = ADC_REGULAR_RANK_1;
     s2.SamplingTime = ADC_SAMPLETIME_239CYCLES_5;
     HAL_ADC_ConfigChannel(&hadc2, &s2);
+    HAL_ADCEx_Calibration_Start(&hadc2);
 
 
     

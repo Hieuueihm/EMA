@@ -79,3 +79,18 @@ uint16_t build_data_packet(uint8_t *out, uint16_t out_cap,
     return (uint16_t)(LORA_HEADER_LEN + payload_len);
 }
 
+
+
+uint16_t lora_write_header_only(uint8_t *out, uint16_t out_cap, const lora_header_t *h)
+{
+    if (!out || !h || out_cap < LORA_HEADER_LEN) return 0;
+
+    uint16_t o = 0;
+    out[o++] = h->msg_type;
+    write_u16_be(&out[o], h->device_id); o += 2;
+    safe_memcpy(&out[o], h->gateway_id, 6); o += 6;
+    write_u16_be(&out[o], h->seq16); o += 2;
+    out[o++] = h->ack;
+
+    return o; 
+}

@@ -39,6 +39,8 @@ CFLAGS    = -mcpu=cortex-m3 -mthumb -mlittle-endian \
 			-DHAL_UART_MODULE_ENABLED\
 			-DHAL_ADC_MODULE_ENABLED\
 			-DHAL_SPI_MODULE_ENABLED\
+			-DHAL_RCC_MODULE_ENABLED\
+			-DHAL_RTC_MODULE_ENABLED\
             $(OPT) $(DEBUG) $(CSTD) \
 			-D__DEBUG_EN\
 
@@ -57,7 +59,10 @@ HAL_FILES = $(HAL_DRIVER_F)/Src/stm32f1xx_hal_gpio_ex.c \
 		$(HAL_DRIVER_F)/Src/stm32f1xx_hal_tim.c \
 		$(HAL_DRIVER_F)/Src/stm32f1xx_hal_tim_ex.c \
 		$(HAL_DRIVER_F)/Src/stm32f1xx_hal_adc.c \
+		$(HAL_DRIVER_F)/Src/stm32f1xx_hal_adc_ex.c \
 		$(HAL_DRIVER_F)/Src/stm32f1xx_hal.c \
+		$(HAL_DRIVER_F)/Src/stm32f1xx_hal_rtc.c \
+		$(HAL_DRIVER_F)/Src/stm32f1xx_hal_rtc_ex.c \
 		$(HAL_DRIVER_F)/Src/stm32f1xx_hal_rcc.c \
 		$(HAL_DRIVER_F)/Src/stm32f1xx_hal_rcc_ex.c \
 		$(HAL_DRIVER_F)/Src/stm32f1xx_hal_spi.c \

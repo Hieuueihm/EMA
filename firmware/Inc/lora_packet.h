@@ -5,6 +5,7 @@
 #define LORA_PKT_MAX_TOTAL_LEN   255 
 #define LORA_HEADER_LEN            12 // 1 bytes msgtype + 2 bytes dev_id + 6 bytes gateway id + 2 bytes seq16 + ack
 #define LORA_MAX_PAYLOAD_LEN     (LORA_PKT_MAX_TOTAL_LEN - LORA_HDR_LEN)
+static const uint8_t ZERO_GWID[6] = {0,0,0,0,0,0};
 
 
 
@@ -15,6 +16,7 @@ typedef enum
     MSG_DATA_FNODE = 0x03,
     MSG_DATA_ACK = 0x04,
     MSG_NODE_CTR = 0x05,
+    MSG_CTR_ACK = 0x06
 } lora_msg_type_t;
 
 
@@ -37,11 +39,13 @@ typedef struct {
     float    uvi;           
     uint16_t pm25;  
     uint16_t pm10;  
+    uint8_t buzzer;
 } lora_payload_sensor_t;
 
 // helpers 
 
 
+uint16_t lora_write_header_only(uint8_t *out, uint16_t out_cap, const lora_header_t *h);
 
 
 uint16_t lora_pkt_build_empty(uint8_t *out, uint16_t out_cap,
@@ -64,7 +68,6 @@ uint16_t build_data_packet(uint8_t *out, uint16_t out_cap,
 
 
 
-static const uint8_t ZERO_GWID[6] = {0,0,0,0,0,0};
 static void safe_memcpy(void *d, const void *s, size_t n){ if(d&&s&&n) memcpy(d,s,n); }
 
 
