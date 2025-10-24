@@ -11,7 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { tb, api } from '../api';
 import messaging from '@react-native-firebase/messaging';
 import firestore from '@react-native-firebase/firestore';
-
+import { getItem, storeItem } from '../utils/AsyncStorage';
 import {
     LineChart,
     BarChart,
@@ -20,6 +20,7 @@ import {
     ContributionGraph,
     StackedBarChart
 } from "react-native-chart-kit";
+import { PROVINCE_MAPPING_WEATHERAPI } from '../../constants/provinces';
 
 const { width, height } = Dimensions.get("window");
 const fontSize = Math.min(width * 0.1, height * 0.08)
@@ -182,9 +183,10 @@ const normalizeLabel = (arr) => {
 const EnvDashboardScreen = () => {
     const navigation = useNavigation();
 
-    const [city, setCity] = useState('Ha Noi');
+    const [city, setCity] = useState('');
     const [pickerVisible, setPickerVisible] = useState(false);
-    const [cityNameFSearch, setCityNameFSearch] = useState('Hanoi');
+    const [cityNameFSearch, setCityNameFSearch] = useState('');
+    const [cityNameFSearchWeatherAPI, setCityNameFSearchWeatherAPI] = useState('')
     const [searchText, setSearchText] = useState("");
     const [telemetry, setTelemetry] = useState({});
     const [weather, setWeather] = useState({})
@@ -201,50 +203,86 @@ const EnvDashboardScreen = () => {
     const filteredProvinces = PROVINCES_EN.filter((item) =>
         item.toLowerCase().includes(searchText.toLowerCase())
     );
+
     useEffect(() => {
-        let intervalId;
+        const loadSelectedProvince = async () => {
+            const storedProvince = await getItem('selected_province');
+            console.log("stored province", storedProvince)
+            setCity(storedProvince);
+            console.log("load from async storage", PROVINCE_MAPPING[storedProvince])
+            console.log("load... from async storage", PROVINCE_MAPPING_WEATHERAPI[storedProvince])
+            setCityNameFSearch(PROVINCE_MAPPING[storedProvince]);
+            setCityNameFSearchWeatherAPI(PROVINCE_MAPPING_WEATHERAPI[storedProvince])
 
-        async function fetchTelemetry() {
-            try {
-                const endTs = Date.now();
-                const startTs = endTs - 60 * 1000;
+        };
+        loadSelectedProvince();
+    }, []);
+    async function fetchTelemetry() {
+        try {
+            const endTs = Date.now();
+            const startTs = endTs - 60 * 1000;
 
-                const bundle = await tb.getAssetsTelemetryByProvince(
-                    "HoChiMinh",
-                    ["temperature", "humidity", "co", "uv", "pm25", "pm10"],
-                    { startTs, endTs, interval: 60000, agg: "AVG", limit: 1000 }
-                );
-                setTelemetry(bundle.length > 0 ? bundle[0].telemetry : {});
-            } catch (err) {
-                console.error("ThingsBoard test error:", err);
-            }
+            const bundle = await tb.getAssetsTelemetryByProvince(
+                cityNameFSearch,
+                ["temperature", "humidity", "co", "uv", "pm25", "pm10"],
+                { startTs, endTs, interval: 60000, agg: "AVG", limit: 1000 }
+            );
+            setTelemetry(bundle.length > 0 ? bundle[0].telemetry : {});
+            console.log('fetch telemetry ', cityNameFSearch)
+        } catch (err) {
+            console.error("ThingsBoard test error:", err);
         }
+    }
 
-        async function fetchTelemetry12h() {
-            try {
-                const endTs = Date.now();
-                const startTs = endTs - 12 * 60 * 60 * 1000;
-                const interval = 30 * 60 * 1000;
+    async function fetchTelemetry12h() {
+        try {
+            const endTs = Date.now();
+            const startTs = endTs - 12 * 60 * 60 * 1000;
+            const interval = 30 * 60 * 1000;
 
-                const bundle = await tb.getAssetsTelemetryByProvince(
-                    "HoChiMinh",
-                    ["temperature", "humidity"],
-                    { startTs, endTs, interval, agg: "AVG", limit: 1000 }
-                );
-                setTelemetry12h(bundle.length > 0 ? bundle[0].telemetry : {});
-            } catch (err) {
-                console.error("ThingsBoard 12h error:", err);
-            }
+            console.log("city name FSearch 12h", cityNameFSearch)
+
+            const bundle = await tb.getAssetsTelemetryByProvince(
+                cityNameFSearch,
+                ["temperature", "humidity"],
+                { startTs, endTs, interval, agg: "AVG", limit: 1000 }
+            );
+            console.log("fetch telemetry 12", cityNameFSearch)
+            setTelemetry12h(bundle.length > 0 ? bundle[0].telemetry : {});
+        } catch (err) {
+            console.error("ThingsBoard 12h error:", err);
         }
-        fetchTelemetry();
-        fetchTelemetry12h();
-        api.WeatherAPI.fetchWeatherForecast({ cityName: cityNameFSearch, days: '7' }).then(data => {
-            setWeather(data)
-        })
+    }
 
 
-        intervalId = setInterval(fetchTelemetry, 60000);
+    async function fetchWeatherForecastF() {
+        try {
+            await api.WeatherAPI.fetchWeatherForecast({ cityName: cityNameFSearchWeatherAPI, days: 7 })
+                .then(data => setWeather(data));
+            console.log("fecth weather ", cityNameFSearchWeatherAPI)
+        } catch (err) {
+            console.error("ThingsBoard 12h error:", err);
+        }
+    }
+    useEffect(() => {
+        (async () => {
+            await fetchTelemetry();
+            await fetchTelemetry12h();
+            await fetchWeatherForecastF();
+        })();
+        // không return gì ở đây (trừ khi bạn có cleanup thực sự là 1 HÀM)
+    }, [cityNameFSearch, cityNameFSearchWeatherAPI]);
 
+    useEffect(() => {
+        const intervalId = setInterval(fetchTelemetry, 60000);
+        return () => clearInterval(intervalId);
+    }, []);
+    useEffect(() => {
+        const intervalId = setInterval(fetchTelemetry12h, 60000);
+        return () => clearInterval(intervalId);
+    }, []);
+    useEffect(() => {
+        const intervalId = setInterval(fetchWeatherForecastF, 60000);
         return () => clearInterval(intervalId);
     }, []);
 
@@ -300,13 +338,15 @@ const EnvDashboardScreen = () => {
         setUnreadCount(c);
     }, [alerts, readsMap]);
 
-    const onSelectProvince = (vnName) => {
+    const onSelectProvince = async (vnName) => {
         console.log(vnName)
         console.log(PROVINCE_MAPPING[vnName])
+        await storeItem('selected_province', vnName);
+        setCityNameFSearch(PROVINCE_MAPPING[vnName])
         setCity(vnName);
+        setCityNameFSearchWeatherAPI(PROVINCE_MAPPING_WEATHERAPI[vnName])
         setPickerVisible(false);
     };
-    console.log("unreadCount:", unreadCount);
 
 
     function isEmptyObj(obj) {

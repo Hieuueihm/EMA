@@ -49,22 +49,24 @@ export default function AlertsScreen() {
         await markAlertRead(token, id);
     }, [token]);
 
-    // ĐỌC TẤT CẢ (batch write)
     const markAllRead = useCallback(async () => {
-        if (!token || unread.length === 0) return;
+        if (!token || !Array.isArray(unread) || unread.length === 0) return;
         try {
             setMarkingAll(true);
             const batch = firestore().batch();
             const base = firestore().collection('fcmTokens').doc(token).collection('reads');
             const ts = firestore.FieldValue.serverTimestamp();
-            unread.forEach(it => {
+
+            unread?.forEach(it => {
                 batch.set(base.doc(it.id), { readAt: ts }, { merge: true });
             });
+
             await batch.commit();
         } finally {
             setMarkingAll(false);
         }
     }, [token, unread]);
+
 
     const renderHeader = () => (
         <View style={styles.header}>
@@ -85,38 +87,44 @@ export default function AlertsScreen() {
             </TouchableOpacity>
         </View>
     );
+    const renderItem = ({ item }) => {
+        if (!item || Object.keys(item).length === 0) {
+            return <></>;
+        }
 
-    const renderItem = ({ item }) => (
-        <View style={styles.card}>
-            {/* viền trái cảnh báo */}
-            <View style={styles.cardStripe} />
-            <View style={styles.cardBody}>
-                <View style={styles.cardTitleRow}>
-                    <FontAwesome6 name="bell" size={16} color="#e74c3c" />
-                    <Text style={styles.cardTitle} numberOfLines={2}>{item.title}</Text>
-                </View>
+        return (
+            <View style={styles.card}>
+                <View style={styles.cardStripe} />
+                <View style={styles.cardBody}>
+                    <View style={styles.cardTitleRow}>
+                        <FontAwesome6 name="bell" size={16} color="#e74c3c" />
+                        <Text style={styles.cardTitle} numberOfLines={2}>{item.title}</Text>
+                    </View>
 
-                {!!item.body && <Text style={styles.cardBodyText}>{item.body}</Text>}
-
-                {/* metadata nếu server có lưu thêm (deviceName/deviceId/location/createdAt) */}
-                <View style={styles.metaRow}>
-                    {/* ví dụ đọc thêm khi server đã lưu: deviceName/deviceId/location */}
-                    {/* <Text style={styles.metaText}>Thiết bị: {item.deviceName || item.deviceId}</Text> */}
-                    {item.createdAt?.toDate && (
-                        <Text style={styles.metaText}>
-                            {item.createdAt.toDate().toLocaleString('vi-VN')}
-                        </Text>
+                    {!!item.body && (
+                        <Text style={styles.cardBodyText}>{item.body}</Text>
                     )}
-                </View>
 
-                <View style={styles.actionsRow}>
-                    <TouchableOpacity style={styles.readBtn} onPress={() => onMark(item.id)}>
-                        <Text style={styles.readBtnText}>Đọc</Text>
-                    </TouchableOpacity>
+                    <View style={styles.metaRow}>
+                        {item.createdAt?.toDate && (
+                            <Text style={styles.metaText}>
+                                {item.createdAt.toDate().toLocaleString('vi-VN')}
+                            </Text>
+                        )}
+                    </View>
+
+                    <View style={styles.actionsRow}>
+                        <TouchableOpacity
+                            style={styles.readBtn}
+                            onPress={() => onMark(item.id)}
+                        >
+                            <Text style={styles.readBtnText}>Đọc</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
-        </View>
-    );
+        );
+    };
 
     if (loading || !token) {
         return (
@@ -131,7 +139,7 @@ export default function AlertsScreen() {
         <View style={styles.container}>
             {renderHeader()}
             <FlatList
-                data={unread}
+                data={unread ? unread : []}
                 keyExtractor={(it) => it.id}
                 contentContainerStyle={{ paddingBottom: 24 }}
                 ListEmptyComponent={

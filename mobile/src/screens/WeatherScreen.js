@@ -10,6 +10,8 @@ import ParabolaCurve from "../components/Parabol";
 import { useNavigation } from "@react-navigation/native";
 import { Dimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { getItem } from "../utils/AsyncStorage";
+import { PROVINCE_MAPPING_WEATHERAPI } from "../../constants/provinces";
 
 const { width, height } = Dimensions.get("window");
 const fontSize = Math.min(width * 0.1, height * 0.08)
@@ -19,45 +21,22 @@ export default function WeatherScreen() {
     const navigation = useNavigation();
     const nowUTC = new Date();
     const today = new Date(nowUTC.getTime() + 7 * 60 * 60 * 1000);
+    const [cityNameFSearch, setCityNameFSearch] = useState('');
 
-
-    const [locations, setLocations] = useState([]);
     const [weather, setWeather] = useState({})
-    const [showList, setShowList] = useState(false);
     const [selectedTab, setSelectedTab] = useState('hourly');
     const scrollViewRef = useRef();
     const [scrollViewIsSet, setScrollViewIsSet] = useState(null);
 
+    const [displayName, setDisplayName] = useState("");
 
-
-    const [displayName, setDisplayName] = useState("Hà Nội");
-    const [cityName, setCityName] = useState("Hanoi");
-
-    const locationList = [
-        { name: "Hà Nội", value: "Hanoi" },
-        { name: "TP.HCM", value: "Ho Chi Minh" },
-    ];
-
-    const onSelectLocation = (loc) => {
-        setDisplayName(loc.name);
-        setCityName(loc.value);
-        setShowList(false);
-
-        // gọi lại API với giá trị mới
-        api.WeatherAPI.fetchWeatherForecast({ cityName: loc.value, days: '7' })
-            .then(data => setWeather(data));
-    };
-    if (weather) {
-        var { current, location, forecast } = weather;
-        var hourly = forecast?.forecastday[1];
-    }
 
     const handleScroll = (tab) => {
         if (!scrollViewRef.current) return;
 
         let scrollPosition = 0;
         const containerWidth = width * 0.85;
-        const numVisible = 4;   // số item hiển thị cùng lúc
+        const numVisible = 4;
         const spacing = 12;
         const itemWidth = (containerWidth - spacing * (numVisible - 1)) / numVisible;
         const scrollPaddingLeft = 0;
@@ -102,19 +81,40 @@ export default function WeatherScreen() {
     }, [hourly]);
 
     useEffect(() => {
-        api.WeatherAPI.fetchLocations({ cityName: cityName }).then(data => {
-            setLocations(data[0].name)
-        })
-        api.WeatherAPI.fetchWeatherForecast({ cityName: cityName, days: '7' }).then(data => {
-            setWeather(data)
-        })
+        (async () => {
+            const storedProvince = await getItem('selected_province');
+            const city = PROVINCE_MAPPING_WEATHERAPI?.[storedProvince] ?? 'Hanoi';
+            setCityNameFSearch(city);
+            setDisplayName(storedProvince ?? '');
+        })();
     }, []);
 
+    // Fetch weather khi đã có cityNameFSearch
     useEffect(() => {
-        // Gọi handleScroll('hourly') khi ScrollView được tạo
+        if (!cityNameFSearch) return;           // ✅ guard để tránh gọi sớm
+        let cancelled = false;
+        (async () => {
+            try {
+                const data = await api.WeatherAPI.fetchWeatherForecast({ cityName: cityNameFSearch, days: 7 });
+                if (!cancelled) setWeather(data);
+            } catch (err) {
+                console.error('WeatherAPI error:', err?.response?.data ?? err?.message ?? err);
+            }
+        })();
+        return () => { cancelled = true; };
+    }, [cityNameFSearch]);
+
+
+
+    if (weather) {
+        var { current, location, forecast } = weather;
+        var hourly = forecast?.forecastday[1];
+    }
+
+    useEffect(() => {
         if (scrollViewRef.current) {
-            setScrollViewIsSet(true); // Đánh dấu rằng ScrollView đã được thiết lập
-            handleScroll('hourly'); // Gọi handleScroll
+            setScrollViewIsSet(true);
+            handleScroll('hourly');
         }
     }, []);
 
@@ -195,48 +195,11 @@ export default function WeatherScreen() {
 
                     <Text style={{ marginRight: width * 0.02, color: COLORS.white, fontSize: fontSize * 0.6, fontWeight: 400 }}> {displayName}</Text>
 
-                    <TouchableOpacity onPress={() => setShowList(!showList)}>
-                        <FontAwesome6
-                            name={"angle-down"}
-                            style={{ marginTop: height * 0.005, fontSize: fontSize * 0.5, color: COLORS.white, marginLeft: width * 0.01 }}
-                        />
-                    </TouchableOpacity>
                     {/* </View> */}
 
                 </View>
             </SafeAreaView>
-            {showList && (
-                <View style={{
-                    position: "absolute",
-                    top: height * 0.06,
-                    left: width * 0.3,
-                    right: width * 0.3,
-                    backgroundColor: COLORS.black,
-                    borderRadius: 8,
-                    paddingVertical: 5,
-                    elevation: 5,
-                    zIndex: 1000,
-                    shadowColor: "#000",
-                    shadowOffset: { width: 0, height: 2 },
-                    shadowOpacity: 0.25,
-                    shadowRadius: 3.84,
-                }}>
-                    {locationList.map((loc, index) => (
-                        <TouchableOpacity
-                            key={index}
-                            onPress={() => onSelectLocation(loc)}
-                            style={{
-                                paddingVertical: 12,
-                                paddingHorizontal: 15,
-                                borderBottomWidth: index !== locationList.length - 1 ? 1 : 0,
-                                borderBottomColor: "rgba(255,255,255,0.2)"
-                            }}
-                        >
-                            <Text style={{ color: COLORS.white, fontSize: fontSize * 0.4 }}>{loc.name}</Text>
-                        </TouchableOpacity>
-                    ))}
-                </View>
-            )}
+
 
 
             {/*image weather*/}

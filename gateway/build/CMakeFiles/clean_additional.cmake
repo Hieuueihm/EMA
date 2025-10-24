@@ -16,6 +16,7 @@ if("${CONFIG}" STREQUAL "" OR "${CONFIG}" STREQUAL "")
   "flasher_args.json"
   "gateway.bin"
   "gateway.map"
+  "index.html.S"
   "ldgen_libraries"
   "ldgen_libraries.in"
   "project_elf_src_esp32.c"

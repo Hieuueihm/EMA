@@ -30,9 +30,9 @@ export function onAlertsSnapshot(cb) {
         .limit(200)
         .onSnapshot(snap => {
             const arr = [];
-            snap.forEach(d => {
+            snap?.forEach(d => {
                 const v = d.data() || {};
-                arr.push({
+                arr?.push({
                     id: d.id,
                     title: v.title || 'Alert',
                     body: v.body || '',
@@ -46,7 +46,7 @@ export function onAlertsSnapshot(cb) {
 export function onReadsSnapshot(token, cb) {
     return readsColForToken(token).onSnapshot(snap => {
         const map = {};
-        snap.forEach(d => { map[d.id] = true; });
+        snap?.forEach(d => { map[d.id] = true; });
         cb(map);
     });
 }
