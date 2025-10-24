@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
     Text, View, Image, Modal, Pressable, FlatList, TouchableOpacity, StyleSheet, Dimensions, TextInput
     , ImageBackground, Linking, ScrollView
@@ -198,6 +198,8 @@ const EnvDashboardScreen = () => {
     const [readsMap, setReadsMap] = useState({});
     const [unreadCount, setUnreadCount] = useState(0);
 
+
+
     // const
 
     const filteredProvinces = PROVINCES_EN.filter((item) =>
@@ -218,6 +220,7 @@ const EnvDashboardScreen = () => {
         loadSelectedProvince();
     }, []);
     async function fetchTelemetry() {
+
         try {
             const endTs = Date.now();
             const startTs = endTs - 60 * 1000;
@@ -235,6 +238,7 @@ const EnvDashboardScreen = () => {
     }
 
     async function fetchTelemetry12h() {
+
         try {
             const endTs = Date.now();
             const startTs = endTs - 12 * 60 * 60 * 1000;
@@ -256,8 +260,9 @@ const EnvDashboardScreen = () => {
 
 
     async function fetchWeatherForecastF() {
+        if (!cityNameFSearchWeatherAPI) return;
         try {
-            await api.WeatherAPI.fetchWeatherForecast({ cityName: cityNameFSearchWeatherAPI, days: 7 })
+            await api.WeatherAPI.fetchWeatherForecast({ cityName: cityNameFSearchWeatherAPI, days: 1 })
                 .then(data => setWeather(data));
             console.log("fecth weather ", cityNameFSearchWeatherAPI)
         } catch (err) {
@@ -265,26 +270,25 @@ const EnvDashboardScreen = () => {
         }
     }
     useEffect(() => {
+        if (!cityNameFSearch) return;
+    }, []);
+    useEffect(() => {
         (async () => {
             await fetchTelemetry();
             await fetchTelemetry12h();
             await fetchWeatherForecastF();
-        })();
-        // không return gì ở đây (trừ khi bạn có cleanup thực sự là 1 HÀM)
-    }, [cityNameFSearch, cityNameFSearchWeatherAPI]);
 
-    useEffect(() => {
-        const intervalId = setInterval(fetchTelemetry, 60000);
-        return () => clearInterval(intervalId);
-    }, []);
-    useEffect(() => {
-        const intervalId = setInterval(fetchTelemetry12h, 60000);
-        return () => clearInterval(intervalId);
-    }, []);
-    useEffect(() => {
-        const intervalId = setInterval(fetchWeatherForecastF, 60000);
-        return () => clearInterval(intervalId);
-    }, []);
+        })();
+
+        if (!cityNameFSearchWeatherAPI) return;
+        const id = setInterval(async () => {
+            await fetchWeatherForecastF();
+            await fetchTelemetry();
+            await fetchTelemetry12h();
+        }, 60000);
+        return () => clearInterval(id);
+
+    }, [cityNameFSearch, cityNameFSearchWeatherAPI]);
 
     useEffect(() => {
         let mounted = true;
@@ -464,7 +468,7 @@ const EnvDashboardScreen = () => {
                         value={isEmptyObj(telemetry) ? NaN : Number(telemetry.temperature[0].value).toFixed(1)}
                         unit="°C"
                         sub="Temperature"
-                        threshold={30}
+                        threshold={40}
                     />
                     <TopMetric
                         icon="droplet"
@@ -479,6 +483,7 @@ const EnvDashboardScreen = () => {
                         value={isEmptyObj(telemetry) ? NaN : Number(telemetry.co[0].value).toFixed(1)}
                         unit="ppm"
                         sub="CO"
+                        threshold={50}
                     />
                 </View>
                 <View style={styles.topRow}>
@@ -488,6 +493,7 @@ const EnvDashboardScreen = () => {
                         value={isEmptyObj(telemetry) ? NaN : Number(telemetry.uv[0].value).toFixed(1)}
                         unit=""
                         sub="UV Index"
+                        threshold={7}
                     />
                     <TopMetric
                         icon="wind"
@@ -495,6 +501,7 @@ const EnvDashboardScreen = () => {
                         value={isEmptyObj(telemetry) ? NaN : Number(telemetry.pm25[0].value).toFixed(1)}
                         unit="µg/m³"
                         sub="PM 2.5"
+
                     />
                     <TopMetric
                         icon="wind"
