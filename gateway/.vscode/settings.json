@@ -9,6 +9,8 @@
         "cjson.h": "c",
         "lora.h": "c",
         "text_encoding": "c",
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "lora_packet.h": "c",
+        "timesync.h": "c"
     }
 }

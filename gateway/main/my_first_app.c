@@ -13,15 +13,14 @@
 #include "lora_packet.h"
 #include "esp_random.h"
 #include "esp_mac.h"
+static const char *TAG = "ThingsBoard";
 
 #define LORA_FREQUENCY 433E6
 #define RESP_QUEUE_LEN 64
-static const char *TAG = "ThingsBoard";
 
 static QueueHandle_t g_q_resp = NULL;
 static SemaphoreHandle_t g_lora_mutex = NULL;
 static uint8_t g_gwid[6] = {0};
-bool is_ctr_done = false;
 
 static bool send_header_only(const lora_header_t *hdr, bool is_random_seq16)
 {

@@ -6,20 +6,26 @@
 #include "freertos/task.h"
 #include "driver/gpio.h"
 #include "mqtt.h"
-
 #include "esp_event.h"
 #include "esp_netif.h"
 #include "esp_wifi.h"
-
 #include "esp_timer.h"
 #include "lora.h"
-#include "esp_mac.h"
-
 #include "fake_node.h"
 #include "timesync.h"
+#include "lora_packet.h"
+#include "esp_random.h"
+#include "esp_mac.h"
+#include <sys/time.h>
+#include "cJSON.h"
 
 static int64_t s_ap_expire_ms = 0;
 static const int64_t AP_LIFETIME_MS = 180000;
+#define LORA_FREQUENCY 433E6
+#define RESP_QUEUE_LEN 64
+static QueueHandle_t g_q_resp = NULL;
+static SemaphoreHandle_t g_lora_mutex = NULL;
+static uint8_t g_gwid[6] = {0};
 static const char *TAG = "APP";
 static bool lora_inited = true;
 #define LED_GPIO 25 //
@@ -27,19 +33,30 @@ static bool lora_inited = true;
 #define LED_OFF() gpio_set_level(LED_GPIO, 0)
 #define WIFI_RETRY_STA_MS 60000
 
-#define MSG_HELLO 0x01
-#define MSG_RESP 0x02
-#define MSG_DATA 0x03
-#define MSG_CONTROL 0x04
-uint8_t mac_sta[6];
 volatile bool ap_mode = false;
 extern wifi_state_t wifi_state;
 
-static void print_mac(const char *tag, const uint8_t mac[6])
+static bool send_header_only(const lora_header_t *hdr, bool is_random_seq16)
 {
-    printf("%s %02X:%02X:%02X:%02X:%02X:%02X\n", tag,
-           mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+    uint8_t tx[LORA_HEADER_LEN];
+    uint16_t n = lora_write_header_only(tx, sizeof(tx), hdr, is_random_seq16);
+    if (!n)
+        return false;
+
+    xSemaphoreTake(g_lora_mutex, portMAX_DELAY);
+    bool ok = lora_send_packet(tx, n);
+    // nếu driver có wait_tx_done(timeout) hãy dùng thay delay
+    vTaskDelay(pdMS_TO_TICKS(50));
+    lora_receive(); // quay lại RX ngay
+    xSemaphoreGive(g_lora_mutex);
+    return ok;
 }
+static void get_gateway_id(uint8_t out6[6])
+{
+    // Lấy MAC STA (6 byte)
+    esp_read_mac(out6, ESP_MAC_WIFI_STA);
+}
+
 static void led_task(void *arg)
 {
     gpio_reset_pin(LED_GPIO);
@@ -81,7 +98,191 @@ static void led_task(void *arg)
         }
     }
 }
+void rx_task(void *pvParameters)
+{
+    uint8_t buf[256];
+    xSemaphoreTake(g_lora_mutex, portMAX_DELAY);
+    if (!lora_init())
+    {
+        xSemaphoreGive(g_lora_mutex);
+        ESP_LOGE(TAG, "LoRa init failed");
+        vTaskDelete(NULL);
+        return;
+    }
 
+    lora_set_frequency(LORA_FREQUENCY);
+    lora_set_spreading_factor(12);
+    lora_set_bandwidth(125E3);
+    lora_enable_crc();
+    lora_receive();
+    xSemaphoreGive(g_lora_mutex);
+
+    while (1)
+    {
+        bool has_pkt = false;
+
+        xSemaphoreTake(g_lora_mutex, portMAX_DELAY);
+        has_pkt = lora_received();
+        xSemaphoreGive(g_lora_mutex);
+
+        if (!has_pkt)
+        {
+            vTaskDelay(pdMS_TO_TICKS(10));
+            continue;
+        }
+        int len = 0;
+
+        xSemaphoreTake(g_lora_mutex, portMAX_DELAY);
+        len = lora_receive_packet(buf, sizeof(buf));
+        xSemaphoreGive(g_lora_mutex);
+        if (len < LORA_HEADER_LEN)
+            continue;
+
+        lora_header_t rxh;
+        if (!lora_parse_header(buf, (uint16_t)len, &rxh))
+        {
+            ESP_LOGW(TAG, "Parse header fail (<%d), drop", LORA_HEADER_LEN);
+            continue;
+        }
+
+        int payload_len = len - LORA_HEADER_LEN;
+        ESP_LOGI(TAG, "pkt gwid = %02X:%02X:%02X:%02X:%02X:%02X",
+                 rxh.gateway_id[0], rxh.gateway_id[1], rxh.gateway_id[2],
+                 rxh.gateway_id[3], rxh.gateway_id[4], rxh.gateway_id[5]);
+        switch (rxh.msg_type)
+        {
+        case MSG_HELLO:
+
+            lora_header_t resp = rxh;
+            resp.msg_type = MSG_HELLO_RESP;
+            memcpy(resp.gateway_id, g_gwid, 6);
+            resp.ack = 1; // HELLO_OK
+
+            if (xQueueSend(g_q_resp, &resp, 0) != pdTRUE)
+            {
+                ESP_LOGW(TAG, "RESP queue full (HELLO_RESP) dev=0x%04X seq=0x%04X",
+                         rxh.device_id, rxh.seq16);
+            }
+            else
+            {
+                ESP_LOGI(TAG, "HELLO enq: dev=0x%04X seq=0x%04X", rxh.device_id, rxh.seq16);
+            }
+
+            break;
+
+        case MSG_DATA_FNODE:
+
+            bool equal = true;
+            for (int i = 0; i < 6; i++)
+            {
+                if (rxh.gateway_id[i] != g_gwid[i])
+                {
+                    equal = false;
+                    break;
+                }
+            }
+            if (equal)
+            {
+                ESP_LOGI(TAG, "DATA_FNODE: dev=0x%04X seq=0x%04X pl=%dB",
+                         rxh.device_id, rxh.seq16, payload_len);
+                const uint8_t *pl = &buf[LORA_HEADER_LEN];
+                sensor_payload_t s;
+                bool sensor_ok = false;
+                if (payload_len < SENSOR_PAYLOAD_MIN_LEN)
+                {
+                    ESP_LOGW(TAG, "DATA_FNODE: payload too short (%dB < %dB)", payload_len, SENSOR_PAYLOAD_MIN_LEN);
+                    sensor_ok = false;
+                }
+                else
+                {
+                    // create data to send to mqtt
+                    sensor_ok = true;
+                    int o = 0;
+                    s.temperature = rd_f32_be(&pl[o]);
+                    o += 4;
+                    s.humidity = rd_f32_be(&pl[o]);
+                    o += 4;
+                    s.co_ppm = rd_f32_be(&pl[o]);
+                    o += 4;
+                    s.uvi = pl[o];
+                    o += 1;
+                    s.pm25 = rd_u16_be(&pl[o]);
+                    o += 2;
+                    s.pm10 = rd_u16_be(&pl[o]);
+                    o += 2;
+                    s.buzzer = pl[o];
+                    o += 1;
+
+                    ESP_LOGI(TAG,
+                             "DATA from dev=0x%04X seq=0x%04X | T=%.2fC H=%.2f%% CO=%.2fppm UVI=%.2f PM2.5=%u PM10=%u Buzzer=%u",
+                             rxh.device_id, rxh.seq16,
+                             s.temperature, s.humidity, s.co_ppm, s.uvi, s.pm25, s.pm10, s.buzzer);
+                }
+
+                // Chuẩn bị ACK
+                lora_header_t ack = rxh;
+                ack.msg_type = MSG_DATA_ACK;
+                memcpy(ack.gateway_id, g_gwid, 6);
+                ack.ack = 1; // ACK OK
+
+                if (xQueueSend(g_q_resp, &ack, 0) != pdTRUE)
+                {
+                    ESP_LOGW(TAG, "RESP queue full (DATA_ACK) dev=0x%04X seq=0x%04X",
+                             rxh.device_id, rxh.seq16);
+                }
+                if (sensor_ok && s.buzzer == 1)
+                {
+                    lora_header_t ctr = rxh;
+                    ctr.msg_type = MSG_NODE_CTR;
+                    ctr.seq16 = esp_random() & 0xFFFF;
+                    memcpy(ctr.gateway_id, g_gwid, 6);
+                    ctr.ack = 1;
+
+                    if (xQueueSend(g_q_resp, &ctr, 0) != pdTRUE)
+                    {
+                        ESP_LOGW(TAG, "RESP queue full (NODE_CTR) dev=0x%04X seq=0x%04X",
+                                 rxh.device_id, rxh.seq16);
+                    }
+                    else
+                    {
+                        ESP_LOGI(TAG, "NODE_CTR enq (mute) dev=0x%04X seq=0x%04X",
+                                 rxh.device_id, rxh.seq16);
+                    }
+                }
+            }
+            break;
+        }
+    }
+}
+
+static void resp_task(void *arg)
+{
+    lora_header_t hdr;
+    while (1)
+    {
+        if (xQueueReceive(g_q_resp, &hdr, portMAX_DELAY) != pdTRUE)
+            continue;
+
+        bool ok = send_header_only(&hdr, false);
+        // bool ok = 0;
+
+        if (hdr.msg_type == MSG_HELLO_RESP)
+        {
+            ESP_LOGI(TAG, "HELLO_RESP -> dev=0x%04X seq=0x%04X %s",
+                     hdr.device_id, hdr.seq16, ok ? "OK" : "FAIL");
+        }
+        else if (hdr.msg_type == MSG_DATA_ACK)
+        {
+            ESP_LOGI(TAG, "DATA_ACK    -> dev=0x%04X seq=0x%04X %s",
+                     hdr.device_id, hdr.seq16, ok ? "OK" : "FAIL");
+        }
+        else if (hdr.msg_type == MSG_NODE_CTR)
+        {
+            ESP_LOGI(TAG, "NODE_CTR   -> dev=0x%04X seq=0x%04X  %s",
+                     hdr.device_id, hdr.seq16, ok ? "OK" : "FAIL");
+        }
+    }
+}
 static bool apply_saved_sta_config(void)
 {
     char ssid[64] = {0}, pass[96] = {0};
@@ -99,92 +300,39 @@ static bool apply_saved_sta_config(void)
     return (ssid[0] != '\0');
 }
 
-// static void send_data_task(void *arg)
-// {
-
-//     mqtt_init();
-//     const TickType_t PUB_PERIOD_MS = pdMS_TO_TICKS(2000);
-//     TickType_t last = xTaskGetTickCount();
-
-//     while (1)
-//     {
-//         if (!ap_mode && wifi_state == GOT_IP)
-//         {
-//             if (mqtt_is_connected())
-//             {
-//                 cJSON *vals = cJSON_CreateObject();
-//                 cJSON_AddNumberToObject(vals, "temperature", 25.3);
-//                 gw_connect_device("NODE_B");
-//                 if (gw_publish_telemetry("NODE_B", vals) != false)
-//                 {
-//                     ESP_LOGI(TAG, "Published telemetry");
-//                 }
-//             }
-//             else
-//             {
-//                 mqtt_start(1000);
-//             }
-//         }
-
-//         vTaskDelayUntil(&last, PUB_PERIOD_MS);
-//     }
-// }
 static void send_data_task(void *arg)
 {
-    // khởi tạo MQTT / kết nối – bạn đã gọi mqtt_init() trước
     mqtt_init();
 
-    const TickType_t PUB_PERIOD_MS = pdMS_TO_TICKS(10000); // 2s định kỳ
+    const TickType_t PUB_PERIOD_MS = pdMS_TO_TICKS(10000);
     TickType_t last_wake = xTaskGetTickCount();
 
     while (1)
     {
-        // kiểm tra điều kiện mạng trước khi publish
         if (!ap_mode && wifi_state == GOT_IP)
         {
             if (!mqtt_is_connected())
             {
-                mqtt_start(1000); // cố gắng connect nếu chưa
+                mqtt_start(1000);
             }
             else
             {
-                // gửi telemetry cho tất cả node trong mảng
                 for (size_t i = 0; i < NUM_NODES; ++i)
                 {
                     make_and_send_fake_for_node(&fake_nodes[i]);
-                    // delay nhỏ giữa các node để tránh burst / throttling
                     vTaskDelay(pdMS_TO_TICKS(1000));
                 }
             }
         }
         else
         {
-            // nếu đang AP mode hoặc chưa có IP, log nhẹ
             ESP_LOGD(TAG, "AP mode or no IP - skipping publish cycle");
         }
 
-        // chờ tới chu kỳ tiếp theo (2s)
         vTaskDelayUntil(&last_wake, PUB_PERIOD_MS);
     }
 }
-static void lora_task(void *arg)
-{
-    uint8_t buf[256];
-    int len;
-    while (1)
-    {
-        if (lora_inited)
-        {
-            lora_receive();
-            if (lora_received())
-            {
 
-                len = lora_receive_packet(buf, sizeof(buf));
-                // parse msg
-            }
-        }
-    }
-}
 static void network_supervisor_task(void *arg)
 {
     const uint32_t QUICK_RETRY_WAIT_MS = 10000;
@@ -264,7 +412,6 @@ void app_main(void)
     esp_err_t e = nvs_flash_init();
     if (e == ESP_ERR_NVS_NO_FREE_PAGES || e == ESP_ERR_NVS_NEW_VERSION_FOUND)
     {
-        ESP_ERROR_CHECK(nvs_flash_erase());
         ESP_ERROR_CHECK(nvs_flash_init());
     }
 
@@ -278,14 +425,6 @@ void app_main(void)
     {
         ESP_LOGI(TAG, "lora initialized");
     }
-    lora_set_frequency(433E6);
-    lora_set_tx_power(17);
-    lora_set_bandwidth(125E3);
-    lora_set_spreading_factor(12);
-    lora_enable_crc();
-
-    esp_wifi_get_mac(WIFI_IF_STA, mac_sta);
-    print_mac(TAG, mac_sta);
 
     ESP_ERROR_CHECK(esp_netif_init());
     esp_err_t err = esp_event_loop_create_default();
@@ -312,34 +451,23 @@ void app_main(void)
     bool have_saved = apply_saved_sta_config();
 
     if (!have_saved)
-    // {
-    //     ESP_LOGI(TAG, "Try STA first (60s)...");
-    //     bool ok = wifi_sta_start_and_wait_ip(WIFI_RETRY_STA_MS);
-    //     if (ok)
-    //     {
-    //         ESP_LOGI(TAG, "Wi-Fi OK → run normally");
-    //         ap_mode = false;
-    //     }
-    //     else
-    //     {
-    //         ESP_LOGW(TAG, "No IP within 60s → start AP portal");
-    //         wifi_sta_stop();
-    //         start_ap_and_server();
-    //         s_ap_expire_ms = (esp_timer_get_time() / 1000) + AP_LIFETIME_MS;
-    //         ap_mode = true;
-    //     }
-    // }
-    // else
     {
         ESP_LOGW(TAG, "No saved Wi-Fi → start AP portal immediately");
         start_ap_and_server();
         s_ap_expire_ms = (esp_timer_get_time() / 1000) + AP_LIFETIME_MS;
         ap_mode = true;
     }
+    get_gateway_id(g_gwid);
+    ESP_LOGI(TAG, "GWID = %02X:%02X:%02X:%02X:%02X:%02X",
+             g_gwid[0], g_gwid[1], g_gwid[2], g_gwid[3], g_gwid[4], g_gwid[5]);
 
-    // Tasks
+    g_q_resp = xQueueCreate(RESP_QUEUE_LEN, sizeof(lora_header_t));
+    g_lora_mutex = xSemaphoreCreateMutex();
+    configASSERT(g_q_resp && g_lora_mutex);
+
+    xTaskCreate(rx_task, "rx_task", 4096, NULL, 5, NULL);
+    xTaskCreate(resp_task, "resp_task", 4096, NULL, 4, NULL);
     xTaskCreate(send_data_task, "send_data_task", 4096, NULL, 1, NULL);
     xTaskCreate(network_supervisor_task, "network_supervisor_task", 4096, NULL, 2, NULL);
     xTaskCreate(led_task, "led_task", 2048, NULL, 3, NULL);
-    // xTaskCreate(lora_task, "lora_task", 4096, NULL, 3, NULL);
 }

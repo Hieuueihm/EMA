@@ -7,6 +7,7 @@ idf_component_register(
     "mqtt.c"
     "fake_node.c"
     "timesync.c"
+    "lora_packet.c"
   INCLUDE_DIRS "."
   REQUIRES driver esp_wifi esp_netif esp_event nvs_flash esp_http_server mqtt
   EMBED_TXTFILES
