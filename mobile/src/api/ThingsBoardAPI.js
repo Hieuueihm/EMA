@@ -1,6 +1,25 @@
 
 const DEFAULT_PAGE_SIZE = 100;
 
+function computeAggParams(days) {
+    // Quy ước gộp:
+    // 1 ngày:   1h/điểm
+    // 3 ngày:   3h/điểm
+    // 7 ngày:   6h/điểm
+    // 15 ngày:  12h/điểm
+    // 30 ngày:  24h/điểm (ngày)
+    if (days <= 1) return { interval: 1 * 3600 * 1000, agg: "AVG" };
+    if (days <= 3) return { interval: 3 * 3600 * 1000, agg: "AVG" };
+    if (days <= 7) return { interval: 6 * 3600 * 1000, agg: "AVG" };
+    if (days <= 15) return { interval: 12 * 3600 * 1000, agg: "AVG" };
+    return { interval: 24 * 3600 * 1000, agg: "AVG" };
+}
+
+function timeRangeFromDays(days) {
+    const endTs = Date.now();
+    const startTs = endTs - days * 24 * 3600 * 1000;
+    return { startTs, endTs };
+}
 
 export function createThingsBoardClient({ baseUrl, jwtToken, fetchImpl, defaultPageSize = DEFAULT_PAGE_SIZE }) {
     if (!baseUrl) throw new Error("Missing baseUrl");
@@ -171,6 +190,43 @@ export function createThingsBoardClient({ baseUrl, jwtToken, fetchImpl, defaultP
 
         return out;
     }
+    async function getProvinceAsset(province, { page = 0, pageSize = defaultPageSize } = {}) {
+        const assets = await getAssetsByProvince(province, { page, pageSize });
+        if (!assets || assets.length === 0) {
+            throw new Error(`No asset found for province "${province}"`);
+        }
+        const strict = assets.find(a => a?.additionalInfo?.province === province);
+        return strict || assets[0];
+    }
+    async function getProvinceAggregatedTimeseries(
+        province,
+        key,
+        days,
+        { limit = 10000, order = "ASC", entityType = "ASSET" } = {}
+    ) {
+        if (!province) throw new Error("Missing province");
+        if (!key) throw new Error("Missing key");
+        const asset = await getProvinceAsset(province);
+        const entityId = asset?.id?.id;
+        if (!entityId) throw new Error(`Asset for "${province}" has no id`);
+
+        const { interval, agg } = computeAggParams(days);
+        const { startTs, endTs } = timeRangeFromDays(days);
+
+        const url =
+            `${baseUrl}/api/plugins/telemetry/${encodeURIComponent(entityType)}/${encodeURIComponent(entityId)}/values/timeseries?` +
+            qs({
+                keys: key,
+                startTs,
+                endTs,
+                interval,
+                limit,
+                agg,
+                order,
+            });
+
+        return await fetchJson(url);
+    }
 
     return {
         getAssetsByProvince,
@@ -179,6 +235,7 @@ export function createThingsBoardClient({ baseUrl, jwtToken, fetchImpl, defaultP
         listDevices,
         getAttributesForEntity,
         getAllDevicesWithAttributes,
+        getProvinceAggregatedTimeseries
     };
 
 }

@@ -8,8 +8,9 @@
 #include "stm32f1xx_hal_tim.h"
 #include "stm32f1xx_hal_rtc_ex.h"
 
-uint16_t seq16_random(void) {
-    uint32_t tick = HAL_GetTick();   
+uint16_t seq16_random(void)
+{
+    uint32_t tick = HAL_GetTick();
     tick ^= (tick << 11);
     tick ^= (tick >> 7);
     tick ^= (tick << 3);
@@ -29,106 +30,120 @@ uint8_t rxData[4] = {0};
 volatile uint8_t rx_ready = 0;
 float ppm = 0.0f;
 uint8_t uvi = 0.0f;
-uint8_t saved_gwid[6] = {0}; 
+uint8_t saved_gwid[6] = {0};
 extern volatile uint8_t s_co_alarm;
 
 #define DEVICE_ID 0x111
 
-static void Buzzer_Init(void) {
-    __HAL_RCC_GPIOB_CLK_ENABLE();   
+static void Buzzer_Init(void)
+{
+    __HAL_RCC_GPIOB_CLK_ENABLE();
 
     GPIO_InitTypeDef GPIO_InitStruct = {0};
-    GPIO_InitStruct.Pin   = GPIO_PIN_10;        
-    GPIO_InitStruct.Mode  = GPIO_MODE_OUTPUT_PP; 
-    GPIO_InitStruct.Pull  = GPIO_NOPULL;       
-    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW; 
+    GPIO_InitStruct.Pin = GPIO_PIN_10;
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_RESET);
 }
 
-static void Buzzer_On(void) {
+static void Buzzer_On(void)
+{
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_SET);
 }
 
-static void Buzzer_Off(void) {
+static void Buzzer_Off(void)
+{
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10, GPIO_PIN_RESET);
 }
-static void Buzzer_BeepMs(uint32_t ms) {
+static void Buzzer_BeepMs(uint32_t ms)
+{
     Buzzer_On();
     HAL_Delay(ms);
     Buzzer_Off();
 }
 
+static volatile bool g_buzzer_muted = false;
 
-static volatile bool g_buzzer_muted = false;   
+static inline void Buzzer_MuteOn(void)
+{
+    g_buzzer_muted = true;
+    Buzzer_Off();
+}
+static inline void Buzzer_MuteOff(void) { g_buzzer_muted = false; }
 
-static inline void Buzzer_MuteOn(void)  { g_buzzer_muted = true;  Buzzer_Off(); }
-static inline void Buzzer_MuteOff(void) { g_buzzer_muted = false;              }
-
-static inline void Buzzer_AlertBeepMs(uint32_t ms) {
-    if (!g_buzzer_muted) Buzzer_BeepMs(ms);
+static inline void Buzzer_AlertBeepMs(uint32_t ms)
+{
+    if (!g_buzzer_muted)
+        Buzzer_BeepMs(ms);
 }
 
 bool lora_send_one_cycle(uint8_t buzzer_state);
 
 bool lora_send_data(uint8_t buzzer_state);
 
+#define LORA_RX_TIMEOUT_MS 10000U
+#define MAX_RETRY 10U
+#define SLEEP_TOTAL 15 * 60
+#define SLEEP_CHECK_INTERVAL 5000U
+#define CO_ALARM_PPM_THRESHOLD 50.0f
 
-
-#define LORA_RX_TIMEOUT_MS     10000U  
-#define MAX_RETRY              10U      
-#define SLEEP_TOTAL             15 * 60
-#define SLEEP_CHECK_INTERVAL   5000U    
-#define CO_ALARM_PPM_THRESHOLD 50.0f 
-
-
-
-static void read_all_now(void) {
+static void read_all_now(void)
+{
     MQ7_GetPPM(&ppm);
     GUVA_GetUVI(&uvi);
     dht.api.read_data(&dht);
     sds.api.query_data(&sds);
 }
 UART_Config cfg1 = {
-            .port = UART1,       
-            .baudrate = 115200  
-};    
+    .port = UART1,
+    .baudrate = 115200};
 UART_Config cfg2 = {
-            .port = UART2,       
-            .baudrate = 9600  
-    };
+    .port = UART2,
+    .baudrate = 9600};
 LoRa ins;
 static uint16_t fill_sensor_payload(uint8_t *pl, uint16_t cap, uint8_t buzzer)
 {
-    if (cap < (4*4 + 2*2)) return 0; 
+    if (cap < (4 * 4 + 2 * 2))
+        return 0;
 
     uint16_t o = 0;
-    write_f32_be(&pl[o], dht.temperature); o += 4;
-    write_f32_be(&pl[o], dht.humidity);    o += 4;
-    write_f32_be(&pl[o], ppm);             o += 4;
-    pl[o]= uvi;            o += 1;
-    write_u16_be(&pl[o], (uint16_t)sds.pm_2_5); o += 2;
-    write_u16_be(&pl[o], (uint16_t)sds.pm_10);  o += 2;
-    pl[o] = buzzer; o += 1;
+    write_f32_be(&pl[o], dht.temperature);
+    o += 4;
+    write_f32_be(&pl[o], dht.humidity);
+    o += 4;
+    write_f32_be(&pl[o], ppm);
+    o += 4;
+    pl[o] = uvi;
+    o += 1;
+    write_u16_be(&pl[o], (uint16_t)sds.pm_2_5);
+    o += 2;
+    write_u16_be(&pl[o], (uint16_t)sds.pm_10);
+    o += 2;
+    pl[o] = buzzer;
+    o += 1;
 
-    return o; 
+    return o;
 }
-
 
 static bool lora_downlink_poll_for_mute(uint32_t timeout_ms)
 {
     uint8_t rx[256];
-    lora_header_t rxh;           
+    lora_header_t rxh;
     uint32_t t0 = HAL_GetTick();
 
-    ins.api.lora_receive(&ins);  
+    ins.api.lora_receive(&ins);
 
-    while ((HAL_GetTick() - t0) < timeout_ms) {
-        if (ins.api.lora_received(&ins)) {
+    while ((HAL_GetTick() - t0) < timeout_ms)
+    {
+        if (ins.api.lora_received(&ins))
+        {
             int rlen = ins.api.lora_receive_packet(&ins, rx, sizeof(rx));
-            if (rlen >= LORA_HEADER_LEN && lora_parse_header(rx, (uint16_t)rlen, &rxh)) {
+            if (rlen >= LORA_HEADER_LEN && lora_parse_header(rx, (uint16_t)rlen, &rxh))
+            {
 
                 if (rxh.msg_type == MSG_NODE_CTR &&
                     rxh.device_id == DEVICE_ID &&
@@ -139,16 +154,19 @@ static bool lora_downlink_poll_for_mute(uint32_t timeout_ms)
                     uart_print("[DOWNLINK] CTRL: BUZZER MUTE\r\n");
 
                     uint8_t tx[LORA_HEADER_LEN];
-                    lora_header_t ack = rxh;        
+                    lora_header_t ack = rxh;
                     ack.msg_type = MSG_CTR_ACK;
                     ack.ack = 1;
 
                     uint16_t n = lora_write_header_only(tx, sizeof(tx), &ack);
-                    if (n > 0) {
+                    if (n > 0)
+                    {
                         ins.api.lora_send_packet(&ins, tx, n);
                         uart_print("[UPLINK] MSG_CTR_ACK sent\r\n");
                         return true;
-                    } else {
+                    }
+                    else
+                    {
                         uart_print("[UPLINK] MSG_CTR_ACK build FAIL\r\n");
                         return true;
                     }
@@ -157,12 +175,12 @@ static bool lora_downlink_poll_for_mute(uint32_t timeout_ms)
         }
         HAL_Delay(10);
     }
-    return false; 
+    return false;
 }
 RTC_HandleTypeDef hrtc;
 
 volatile uint16_t rtc_sec_accum = 0;
-volatile uint8_t  flag_15min = 0;
+volatile uint8_t flag_15min = 0;
 void MX_RTC_Init(void)
 {
     __HAL_RCC_BKP_CLK_ENABLE();
@@ -170,13 +188,14 @@ void MX_RTC_Init(void)
     HAL_PWR_EnableBkUpAccess();
 
     __HAL_RCC_LSE_CONFIG(RCC_LSE_ON);
-    while (__HAL_RCC_GET_FLAG(RCC_FLAG_LSERDY) == RESET);
+    while (__HAL_RCC_GET_FLAG(RCC_FLAG_LSERDY) == RESET)
+        ;
 
     __HAL_RCC_RTC_CONFIG(RCC_RTCCLKSOURCE_LSE);
     __HAL_RCC_RTC_ENABLE();
 
     hrtc.Instance = RTC;
-    hrtc.Init.AsynchPrediv = 32767; 
+    hrtc.Init.AsynchPrediv = 32767;
     hrtc.Init.OutPut = RTC_OUTPUTSOURCE_NONE;
 
     if (HAL_RTC_Init(&hrtc) != HAL_OK)
@@ -189,14 +208,15 @@ void MX_RTC_Init(void)
 }
 void RTC_IRQHandler(void)
 {
-    HAL_RTCEx_RTCIRQHandler(&hrtc);     
+    HAL_RTCEx_RTCIRQHandler(&hrtc);
 }
 
 void HAL_RTCEx_RTCEventCallback(RTC_HandleTypeDef *hrtc)
 {
-    if (++rtc_sec_accum >= SLEEP_TOTAL) {        
+    if (++rtc_sec_accum >= SLEEP_TOTAL)
+    {
         rtc_sec_accum = 0;
-        flag_15min = 1;                  
+        flag_15min = 1;
     }
 }
 static void Periph_StopForSleep(void)
@@ -229,25 +249,25 @@ static void Periph_RestoreAfterWake(void)
 static void Sleep_ADC_AWD_or_15min_TIM2(void)
 {
 
-    Periph_StopForSleep();            
+    Periph_StopForSleep();
     HAL_SuspendTick();
-    HAL_RTCEx_SetSecond_IT(&hrtc);               
+    HAL_RTCEx_SetSecond_IT(&hrtc);
     HAL_NVIC_SetPriority(RTC_IRQn, 2, 0);
     HAL_NVIC_EnableIRQ(RTC_IRQn);
-    while(1){
+    while (1)
+    {
         HAL_PWR_EnterSLEEPMode(PWR_MAINREGULATOR_ON, PWR_SLEEPENTRY_WFI);
-        if (s_co_alarm || flag_15min) break;
+        if (s_co_alarm || flag_15min)
+            break;
     }
-    HAL_RTCEx_DeactivateSecond(&hrtc); 
+    HAL_RTCEx_DeactivateSecond(&hrtc);
 
     HAL_ResumeTick();
     Periph_RestoreAfterWake();
-
-  
 }
 int main(void)
 {
-   
+
     HAL_Init();
     MX_RTC_Init();
     SystemClock_Config();
@@ -255,12 +275,10 @@ int main(void)
     delay_init();
     Buzzer_Init();
 
-
     uart1_init(115200);
 
-   
     uart_print("program start\r\n");
-    
+
     uart_print("sds init\r\n");
 
     sds = SDS_Init(cfg2);
@@ -278,58 +296,65 @@ int main(void)
     uart_print("guva init\r\n");
     GUVA_Init();
 
-
     ins = SX1278_Init();
     ins.api.lora_set_frequency(&ins, 433E6);
     ins.api.lora_set_spreading_factor(&ins, 12);
     ins.api.lora_set_bandwidth(&ins, 125E3);
     ins.api.lora_enable_crc(&ins);
 
-    uint32_t last_alert_ms= 0;
+    uint32_t last_alert_ms = 0;
     bool flag_when_alert = false;
     bool ok = false;
     MQ7_ENABLE_WDG_ITR();
     while (1)
     {
-        if(~s_co_alarm){
+        if (~s_co_alarm)
+        {
             uart_print("\r\n=== SEND ===\r\n");
             ok = lora_send_data(0);
         }
-       
-     
-        if(s_co_alarm){
+
+        if (s_co_alarm)
+        {
             Buzzer_AlertBeepMs(2000);
         }
-        while(s_co_alarm) {
+        while (s_co_alarm)
+        {
             uart_print("HIGH CO \r\n");
-            if(!flag_when_alert){
+            if (!flag_when_alert)
+            {
                 uart_print("send data alert C0 higher than thr\r\n");
                 flag_when_alert = lora_send_data(1);
-                    if(!flag_when_alert){
-                        uart_print("All retries exhausted → sleep\r\n");
-                        HAL_Delay(5000);
-                        continue;
-                    }
-                    last_alert_ms = HAL_GetTick(); 
+                if (!flag_when_alert)
+                {
+                    uart_print("All retries exhausted → sleep\r\n");
+                    HAL_Delay(5000);
+                    continue;
+                }
+                last_alert_ms = HAL_GetTick();
             }
-          
+
             // send success
             float ppm = 0;
             MQ7_GetPPM(&ppm);
-            if(ppm < CO_ALARM_PPM_THRESHOLD - 30){
+            if (ppm < CO_ALARM_PPM_THRESHOLD - 30)
+            {
                 uart_print("send data when co < thr\r\n");
                 bool flag = false;
                 flag = lora_send_data(0);
-                if(!flag){
+                if (!flag)
+                {
                     uart_print("All retries exhausted → sleep (resend)\r\n");
                     HAL_Delay(5000);
                     continue;
-                }else {
-                    last_alert_ms = HAL_GetTick(); 
-                    uart_print("co is lower than thr and data will be sent \r\n");      
-                     __disable_irq();              
-                     s_co_alarm = 0;
-                     flag_when_alert = false;
+                }
+                else
+                {
+                    last_alert_ms = HAL_GetTick();
+                    uart_print("co is lower than thr and data will be sent \r\n");
+                    __disable_irq();
+                    s_co_alarm = 0;
+                    flag_when_alert = false;
                     __enable_irq();
                     MQ7_ENABLE_WDG_ITR();
                     Buzzer_MuteOff();
@@ -338,67 +363,76 @@ int main(void)
                 }
             }
 
-            if ((int32_t)(HAL_GetTick() - last_alert_ms) >= 300000) { 
+            if ((int32_t)(HAL_GetTick() - last_alert_ms) >= 300000)
+            {
                 uart_print("periodic alert resend (5 min)\r\n");
                 bool ok_periodic = lora_send_data(1);
-                if (!ok_periodic) {
+                if (!ok_periodic)
+                {
                     uart_print("Periodic alert resend failed\r\n");
-                } else {
+                }
+                else
+                {
                     uart_print("Periodic alert resend OK\r\n");
                 }
-                last_alert_ms = HAL_GetTick();  
-            }       
+                last_alert_ms = HAL_GetTick();
+            }
             Buzzer_AlertBeepMs(1000);
             lora_downlink_poll_for_mute(4000);
         }
 
         uart_print("Send data OK → entering SLEEP\r\n");
-        Sleep_ADC_AWD_or_15min_TIM2();   // ngủ thật sự
-        
-        if(flag_15min == 1){
+        Sleep_ADC_AWD_or_15min_TIM2();
+
+        if (flag_15min == 1)
+        {
             uart_print("Wake by RTC\r\n");
             flag_15min = 0;
         }
-        if (s_co_alarm)  uart_print("Wake by CO AWD\r\n");
-          
-        HAL_Delay(5000);
+        if (s_co_alarm)
+            uart_print("Wake by CO AWD\r\n");
 
-        
-    
-    
+        HAL_Delay(5000);
     }
     /* USER CODE END 3 */
 }
 
-bool lora_send_data(uint8_t buzzer_state){
+bool lora_send_data(uint8_t buzzer_state)
+{
     bool ok = false;
-    for (uint8_t attempt = 1; attempt <= MAX_RETRY; ++attempt) {
-            uint16_t seq = seq16_random();
-            uint32_t backoff_ms = 200 + (seq & 0x1FF); 
-            HAL_Delay(backoff_ms);
+    for (uint8_t attempt = 1; attempt <= MAX_RETRY; ++attempt)
+    {
+        uint16_t seq = seq16_random();
+        uint32_t backoff_ms = 200 + (seq & 0x1FF);
+        HAL_Delay(backoff_ms);
 
-            ok = lora_send_one_cycle(buzzer_state);
-            if (ok) {
-                uart_print("Send data OK\r\n");
-                break;
-            } else {
-                char buf[48];
-                sprintf(buf, "Attempt %u/%u failed\r\n", attempt, MAX_RETRY);
-                uart_print(buf);
-            }
+        ok = lora_send_one_cycle(buzzer_state);
+        if (ok)
+        {
+            uart_print("Send data OK\r\n");
+            break;
         }
+        else
+        {
+            char buf[48];
+            sprintf(buf, "Attempt %u/%u failed\r\n", attempt, MAX_RETRY);
+            uart_print(buf);
+        }
+    }
     return ok;
 }
 
-bool lora_send_one_cycle(uint8_t buzzer_state){
+bool lora_send_one_cycle(uint8_t buzzer_state)
+{
     uint8_t rx[256];
     uint8_t payload[64];
     uint8_t pkt[128];
     uint8_t tx[32];
-    
+
     uint16_t seq_hello = seq16_random();
     uint16_t len = lora_pkt_build_hello(tx, sizeof(tx), DEVICE_ID, ZERO_GWID, seq_hello, 0);
-    if (len == 0) {
+    if (len == 0)
+    {
         uart_print("build HELLO failed\r\n");
         return false;
     }
@@ -408,13 +442,17 @@ bool lora_send_one_cycle(uint8_t buzzer_state){
     lora_header_t hdr;
     ins.api.lora_receive(&ins);
     uint32_t t0 = HAL_GetTick();
-    while ((HAL_GetTick() - t0) < LORA_RX_TIMEOUT_MS) {
-        if (ins.api.lora_received(&ins)) {
+    while ((HAL_GetTick() - t0) < LORA_RX_TIMEOUT_MS)
+    {
+        if (ins.api.lora_received(&ins))
+        {
             int rlen = ins.api.lora_receive_packet(&ins, rx, sizeof(rx));
-            if (rlen >= LORA_HEADER_LEN && lora_parse_header(rx, (uint16_t)rlen, &hdr)) {
+            if (rlen >= LORA_HEADER_LEN && lora_parse_header(rx, (uint16_t)rlen, &hdr))
+            {
                 if (hdr.msg_type == MSG_HELLO_RESP &&
                     hdr.device_id == DEVICE_ID &&
-                    hdr.seq16 == seq_hello && hdr.ack) {
+                    hdr.seq16 == seq_hello && hdr.ack)
+                {
                     memcpy(saved_gwid, hdr.gateway_id, 6);
                     got_resp = true;
                     break;
@@ -423,13 +461,15 @@ bool lora_send_one_cycle(uint8_t buzzer_state){
         }
         HAL_Delay(10);
     }
-    if (!got_resp) {
+    if (!got_resp)
+    {
         uart_print("HELLO timeout\r\n");
         return false;
     }
     read_all_now();
     uint16_t pl_len = fill_sensor_payload(payload, sizeof(payload), buzzer_state);
-    if (pl_len == 0) {
+    if (pl_len == 0)
+    {
         uart_print("payload too small\r\n");
         return false;
     }
@@ -438,7 +478,8 @@ bool lora_send_one_cycle(uint8_t buzzer_state){
     uint16_t pkt_len = build_data_packet(pkt, sizeof(pkt),
                                          DEVICE_ID, saved_gwid, seq_data,
                                          payload, pl_len);
-    if (pkt_len == 0) {
+    if (pkt_len == 0)
+    {
         uart_print("build DATA failed\r\n");
         return false;
     }
@@ -450,13 +491,17 @@ bool lora_send_one_cycle(uint8_t buzzer_state){
     got_resp = false;
     ins.api.lora_receive(&ins);
     t0 = HAL_GetTick();
-    while ((HAL_GetTick() - t0) < LORA_RX_TIMEOUT_MS) {
-        if (ins.api.lora_received(&ins)) {
+    while ((HAL_GetTick() - t0) < LORA_RX_TIMEOUT_MS)
+    {
+        if (ins.api.lora_received(&ins))
+        {
             int rlen = ins.api.lora_receive_packet(&ins, rx, sizeof(rx));
-            if (rlen >= LORA_HEADER_LEN && lora_parse_header(rx, (uint16_t)rlen, &hdr)) {
+            if (rlen >= LORA_HEADER_LEN && lora_parse_header(rx, (uint16_t)rlen, &hdr))
+            {
                 if (hdr.msg_type == MSG_DATA_ACK &&
                     hdr.device_id == DEVICE_ID &&
-                    hdr.seq16 == seq_data && hdr.ack) {
+                    hdr.seq16 == seq_data && hdr.ack)
+                {
                     got_resp = true;
                     break;
                 }
@@ -465,19 +510,16 @@ bool lora_send_one_cycle(uint8_t buzzer_state){
         HAL_Delay(10);
     }
 
-    if (!got_resp) {
+    if (!got_resp)
+    {
         uart_print("DATA timeout\r\n");
         return false;
     }
 
     uart_print("DATA ack ok\r\n");
-    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET); 
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
     return true;
-
-
-
 }
-
 
 void SystemClock_Config(void)
 {
@@ -536,12 +578,7 @@ static void MX_GPIO_Init(void)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-
-
-   
 }
-
 
 void Error_Handler(void)
 {
@@ -553,4 +590,3 @@ void Error_Handler(void)
     }
     /* USER CODE END Error_Handler_Debug */
 }
-

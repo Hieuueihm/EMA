@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import firestore from '@react-native-firebase/firestore';
 import { onAlertsSnapshot, onReadsSnapshot, getDeviceToken, markAlertRead } from '../../constants/helpers';
-
+import { ROUTES } from '../../constants';
 const { width, height } = Dimensions.get('window');
 
 export default function AlertsScreen() {
@@ -70,12 +70,12 @@ export default function AlertsScreen() {
 
     const renderHeader = () => (
         <View style={styles.header}>
-            <TouchableOpacity style={styles.headerBtn} onPress={() => navigation.goBack()}>
+            <TouchableOpacity style={styles.headerBtn} onPress={() => navigation.navigate(ROUTES.HOME_SCREEN)}>
                 <FontAwesome6 name="chevron-left" size={16} color="#fff" />
-                <Text style={styles.headerBtnText}>Back</Text>
+                <Text style={styles.headerBtnText}>Quay lại</Text>
             </TouchableOpacity>
 
-            <Text style={styles.headerTitle}>Alerts</Text>
+            <Text style={styles.headerTitle}>Cảnh báo</Text>
 
             <TouchableOpacity
                 style={[styles.headerBtnRight, unread.length === 0 || markingAll ? styles.btnDisabled : null]}
@@ -130,7 +130,7 @@ export default function AlertsScreen() {
         return (
             <View style={styles.center}>
                 <ActivityIndicator />
-                <Text style={{ color: '#fff', marginTop: 8 }}>Đang tải Alerts…</Text>
+                <Text style={{ color: '#fff', marginTop: 8 }}>Đang tải cảnh báo...</Text>
             </View>
         );
     }

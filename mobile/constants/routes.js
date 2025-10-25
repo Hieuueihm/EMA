@@ -3,6 +3,7 @@ export const ROUTES = {
     WHEATHER_SCREEN: 'WheaterScreen',
     MAP_SCREEN: 'MapScreen',
     ALERTS_SCREEN: 'AlertsScreen',
+    CHARTS_SCREEN: 'ChartsScreen',
 
 
 }

@@ -138,7 +138,7 @@ export default function MapScreen() {
                         key={m?.device?.id?.id}
                         coordinate={{ latitude: m?.attributes?.lat, longitude: m?.attributes?.lon }}
                         title={m?.device?.name}
-                        description={`Buzzer: ${m?.attributes?.buzzer == true ? 'ON' : 'OFF'}`}
+                        description={`Cảnh báo: ${m?.attributes?.buzzer == true ? 'Bật' : 'Tắt'}`}
                         pinColor={m?.attributes?.buzzer == true ? 'red' : 'green'}
                     />
                 ))}

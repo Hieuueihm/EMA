@@ -23,6 +23,7 @@ import messaging from '@react-native-firebase/messaging';
 import { Platform } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
 import AlertsScreen from './src/screens/AlertsScreen.js';
+import ChartsScreen from './src/screens/ChartsScreen.js';
 const Stack = createNativeStackNavigator();
 
 const notificationsTopic = `notifications_${Platform.OS}`;
@@ -126,6 +127,7 @@ function AppContent() {
         <Stack.Screen name={ROUTES.WHEATHER_SCREEN} component={WeatherScreen} />
         <Stack.Screen name={ROUTES.MAP_SCREEN} component={MapScreen} />
         <Stack.Screen name={ROUTES.ALERTS_SCREEN} component={AlertsScreen} />
+        <Stack.Screen name={ROUTES.CHARTS_SCREEN} component={ChartsScreen} />
 
       </Stack.Navigator>
     </NavigationContainer>

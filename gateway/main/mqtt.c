@@ -2,7 +2,6 @@
 #include <inttypes.h>
 #include <string.h>
 #include <sys/time.h>
-
 #include "timesync.h"
 esp_mqtt_client_handle_t mqttClient = NULL;
 #define TAG "MQTT"
