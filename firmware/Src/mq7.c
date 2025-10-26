@@ -57,6 +57,7 @@ static Status_e Read_ADC(uint32_t *avg) {
     *avg /= 10;
     return OK;
 }
+
 static Status_e MQ7_ReadVoltages(float *v_adc, float *v_node) {
     uint32_t adc_val = 0;
     Status_e stt = Read_ADC(&adc_val);
@@ -66,7 +67,8 @@ static Status_e MQ7_ReadVoltages(float *v_adc, float *v_node) {
     float Vnode = Vadc / K_SCALE;              
 
     if (Vnode > v_in) Vnode = v_in;
-    if (Vnode < 0.0f) Vnode = 0.0f;
+    if (Vnode < 0.001f) Vnode = 0.001f;     
+    if (Vadc  < 0.0f)  Vadc  = 0.0f;
 
     if (v_adc)  *v_adc  = Vadc;
     if (v_node) *v_node = Vnode;
@@ -85,42 +87,93 @@ static Status_e readRsRL(float *RsRL) {
     if (stt != OK) return stt;
     if (Vnode <= 0.0f) return ERR;            
 
-    *RsRL = (v_in - Vnode) / Vnode;           
+    float r = (v_in - Vnode) / Vnode;
+
+    if (r < 0.01f) r = 0.01f;
+    if (r > 100.0f) r = 100.0f;
+
+    *RsRL = r;
+       
     return OK;
 }
 static Status_e readRs(float *Rs){
     float ratio = 0;
     Status_e stt = readRsRL(&ratio);
     if (stt != OK) return stt;
-    *Rs = _LOAD_RES * ratio;
+   
+    float Rs_val = _LOAD_RES * ratio;
+
+    if (Rs_val < 0.1f)   Rs_val = 0.1f;
+    if (Rs_val > 1e6f)   Rs_val = 1e6f;
+
+    *Rs = Rs_val;
     return OK;
 }
 
 Status_e MQ7_Calibrate(void){
-  float Rs = 0;
-  for (int i = 0; i <= CALIBRATION_SECONDS; i++) {
-		delay_ms(1000);
-    Status_e stt = readRs(&Rs); 
-    if(stt == ERR) return ERR;
-		R0 = Rs / _CALIBRATION_CONSTANT;
-    uart_printf("calibration %d\r\n", i);
-	}
-  return OK;
+    const int WARMUP_S = 3;                
+    for (int i = 0; i < WARMUP_S; i++) {
+        delay_ms(1000);
+        uart_printf("warmup %d/%d\r\n", i+1, WARMUP_S);
+    }
+
+    const int SAMPLES = 40;                
+    double acc = 0.0;
+    int ok_cnt = 0;
+
+    for (int i = 0; i < SAMPLES; i++) {
+        float Rs = 0;
+        if (readRs(&Rs) == OK) {
+            acc += Rs;
+            ok_cnt++;
+        }
+        uart_printf("calibration sampling %d/%d\r\n", i+1, SAMPLES);
+        delay_ms(1000);
+    }
+
+    if (ok_cnt == 0) return ERR;
+
+    float Rs_avg = (float)(acc / ok_cnt);
+    R0 = Rs_avg / _CALIBRATION_CONSTANT;
+
+    if (R0 < 0.1f)  R0 = 0.1f;
+    if (R0 > 1e6f)  R0 = 1e6f;
+
+    uart_printf("R0=%.3f (Rs_avg=%.3f, samples=%d)\r\n", R0, Rs_avg, ok_cnt);
+    return OK;
 }
 
-
+static float g_ppm_ema = 0.0f;
+static uint8_t g_ppm_ema_init = 0;
 Status_e MQ7_GetPPM(float *CO_ppm){
+    if (!CO_ppm) return ERR;
 
-    float Rs = 0; 
+    float Rs = 0;
     Status_e stt = readRs(&Rs);
+    if (stt != OK) return stt;
 
-    
+    if (R0 <= 0.0f) return ERR; 
+
     float ratio = Rs / R0;
 
-    *CO_ppm = (float) _COEF_A0 * pow(ratio,_COEF_A1);
-    return stt;
+    if (ratio < 0.02f) ratio = 0.02f;
+    if (ratio > 50.0f) ratio = 50.0f;
 
+    float ppm = (float)_COEF_A0 * powf(ratio, _COEF_A1);
 
+    if (ppm < 0.0f)   ppm = 0.0f;
+    if (ppm > 50000.f) ppm = 50000.f; 
+
+    const float alpha = 0.2f;
+    if (!g_ppm_ema_init) {
+        g_ppm_ema = ppm;
+        g_ppm_ema_init = 1;
+    } else {
+        g_ppm_ema = g_ppm_ema + alpha * (ppm - g_ppm_ema);
+    }
+
+    *CO_ppm = g_ppm_ema;
+    return OK;
 }
 
 
