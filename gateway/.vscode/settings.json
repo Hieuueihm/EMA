@@ -11,6 +11,7 @@
         "text_encoding": "c",
         "typeinfo": "c",
         "lora_packet.h": "c",
-        "timesync.h": "c"
+        "timesync.h": "c",
+        "numbers": "c"
     }
 }

@@ -34,10 +34,6 @@ void make_and_send_fake_for_node(const fake_node_t *n)
     float pm25 = pm25_base + rnd_perturb(6.0f);
     float pm10 = pm10_base + rnd_perturb(8.0f);
     uint8_t buzzer = n->buzzer;
-    uint8_t dev_status = 0; // 0 OK, 1 WARN, 2 ERR
-    // giả sử nếu pm25 > 50 → WARN
-    if (pm25 > 50.0f)
-        dev_status = 1;
 
     // add fields (tên phù hợp với ThingsBoard / gateway)
     cJSON *attrs = cJSON_CreateObject();

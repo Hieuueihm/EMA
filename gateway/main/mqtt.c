@@ -3,6 +3,8 @@
 #include <string.h>
 #include <sys/time.h>
 #include "timesync.h"
+#include "lora_packet.h"
+#include "main.h"
 esp_mqtt_client_handle_t mqttClient = NULL;
 #define TAG "MQTT"
 
@@ -13,6 +15,52 @@ static esp_mqtt_client_handle_t s_client = NULL;
 static EventGroupHandle_t s_mqtt_evt = NULL;
 #define MQTT_CONNECTED_BIT BIT0
 
+static uint16_t seq16_random(void)
+{
+    uint32_t tick = (uint32_t)xTaskGetTickCount();
+    tick ^= (tick << 11);
+    tick ^= (tick >> 7);
+    tick ^= (tick << 3);
+    return (uint16_t)(tick & 0xFFFF);
+}
+
+static bool lora_enqueue_node_ctr(uint16_t dev_id)
+{
+    if (g_q_resp == NULL)
+    {
+        ESP_LOGE("APP", "RESP queue not ready");
+        return false;
+    }
+    lora_header_t ctr = {0};
+    ctr.msg_type = MSG_NODE_CTR;
+    ctr.device_id = dev_id;
+    ctr.seq16 = seq16_random();
+    memcpy(ctr.gateway_id, g_gwid, 6);
+    ctr.ack = 1;
+
+    if (xQueueSend(g_q_resp, &ctr, 0) != pdTRUE)
+    {
+        ESP_LOGW("APP", "RESP queue full (NODE_CTR) dev=0x%04X", dev_id);
+        return false;
+    }
+    ESP_LOGI("APP", "NODE_CTR enq dev=0x%04X seq=0x%04X", dev_id, ctr.seq16);
+    return true;
+}
+static bool devname_to_devid(const char *name, uint16_t *out)
+{
+    if (!name || !out)
+        return false;
+    const char *p = name;
+    if (strncmp(name, "NODE_", 5) == 0)
+        p = name + 5;
+    unsigned x = 0;
+    if (sscanf(p, "%x", &x) == 1 && x <= 0xFFFF)
+    {
+        *out = (uint16_t)x;
+        return true;
+    }
+    return false;
+}
 static bool mqtt_wait_connected(uint32_t timeout_ms)
 {
     if (!s_mqtt_evt)
@@ -38,7 +86,6 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
         ESP_LOGI(TAG, "CONNECTED");
         if (s_mqtt_evt)
             xEventGroupSetBits(s_mqtt_evt, MQTT_CONNECTED_BIT);
-        esp_mqtt_client_subscribe(event->client, "v1/gateway/rpc", 1);
         esp_mqtt_client_subscribe(event->client, "v1/gateway/attributes", 1);
         break;
 
@@ -63,6 +110,29 @@ static void mqtt_event_handler(void *handler_args, esp_event_base_t base, int32_
     case MQTT_EVENT_DATA:
         ESP_LOGI(TAG, "DATA topic=%.*s", event->topic_len, event->topic);
         ESP_LOGI(TAG, "DATA %.*s", event->data_len, event->data);
+
+        if (strncmp(event->topic, "v1/gateway/attributes", event->topic_len) == 0)
+        {
+            char *buf = malloc(event->data_len + 1);
+            memcpy(buf, event->data, event->data_len);
+            buf[event->data_len] = 0;
+            cJSON *root = cJSON_Parse(buf);
+            if (root)
+            {
+                cJSON *dev = cJSON_GetObjectItemCaseSensitive(root, "device");
+                uint16_t dev_id = 0;
+                if (devname_to_devid(dev->valuestring, &dev_id))
+                {
+                    lora_enqueue_node_ctr(dev_id);
+                }
+                else
+                {
+                    ESP_LOGW(TAG, "Unknown device name: %s", dev->valuestring);
+                }
+            }
+            cJSON_Delete(root);
+            free(buf);
+        }
         break;
 
     case MQTT_EVENT_ERROR:

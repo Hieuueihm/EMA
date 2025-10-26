@@ -18,7 +18,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { tb } from '../api';
 import { PROVINCE_MAPPING } from '../constants';
 import { getItem } from '../utils/AsyncStorage';
-
+import { COLORS, ROUTES } from '../../constants';
 const { width } = Dimensions.get('window');
 
 const DAY_OPTIONS = [1, 3, 7, 15, 30];
@@ -163,7 +163,7 @@ export default function ChartsScreen() {
         <SafeAreaView style={styles.container}>
             {/* Header */}
             <View style={styles.headerRow}>
-                <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backBtn}>
+                <TouchableOpacity onPress={() => navigation.navigate(ROUTES.HOME_SCREEN)} style={styles.backBtn}>
                     <Text style={styles.backTxt}>‹</Text>
                 </TouchableOpacity>
 

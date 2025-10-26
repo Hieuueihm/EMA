@@ -18,14 +18,19 @@
 #include "esp_mac.h"
 #include <sys/time.h>
 #include "cJSON.h"
+#include "reverse_geocode.h"
+#include "main.h"
+#include "esp_task_wdt.h"
 
 static int64_t s_ap_expire_ms = 0;
 static const int64_t AP_LIFETIME_MS = 180000;
 #define LORA_FREQUENCY 433E6
 #define RESP_QUEUE_LEN 64
-static QueueHandle_t g_q_resp = NULL;
+
+QueueHandle_t g_q_resp = NULL;
+uint8_t g_gwid[6] = {0};
+
 static SemaphoreHandle_t g_lora_mutex = NULL;
-static uint8_t g_gwid[6] = {0};
 static const char *TAG = "APP";
 static bool lora_inited = true;
 #define LED_GPIO 25 //
@@ -36,6 +41,16 @@ static bool lora_inited = true;
 volatile bool ap_mode = false;
 extern wifi_state_t wifi_state;
 
+typedef struct
+{
+    uint16_t device_id;
+    sensor_payload_t s;
+    const char *province;
+} sensor_event_t;
+
+#define MQTT_QUEUE_LEN 16
+static QueueHandle_t g_q_mqtt = NULL;
+
 static bool send_header_only(const lora_header_t *hdr, bool is_random_seq16)
 {
     uint8_t tx[LORA_HEADER_LEN];
@@ -45,9 +60,7 @@ static bool send_header_only(const lora_header_t *hdr, bool is_random_seq16)
 
     xSemaphoreTake(g_lora_mutex, portMAX_DELAY);
     bool ok = lora_send_packet(tx, n);
-    // nếu driver có wait_tx_done(timeout) hãy dùng thay delay
-    vTaskDelay(pdMS_TO_TICKS(50));
-    lora_receive(); // quay lại RX ngay
+    lora_receive();
     xSemaphoreGive(g_lora_mutex);
     return ok;
 }
@@ -57,6 +70,41 @@ static void get_gateway_id(uint8_t out6[6])
     esp_read_mac(out6, ESP_MAC_WIFI_STA);
 }
 
+static cJSON *build_values_obj(const sensor_payload_t *s)
+{
+    cJSON *obj = cJSON_CreateObject();
+    if (!obj)
+        return NULL;
+
+    cJSON_AddNumberToObject(obj, "temperature", s->temperature);
+    cJSON_AddNumberToObject(obj, "humidity", s->humidity);
+    cJSON_AddNumberToObject(obj, "co_ppm", s->co_ppm);
+    cJSON_AddNumberToObject(obj, "uvi", s->uvi);
+    cJSON_AddNumberToObject(obj, "pm25", s->pm25);
+    cJSON_AddNumberToObject(obj, "pm10", s->pm10);
+    return obj;
+}
+static inline void make_dev_name(char *out, size_t cap, uint16_t dev_id)
+{
+    snprintf(out, cap, "NODE_%04X", dev_id);
+}
+static cJSON *build_attrs_obj(uint16_t device_id,
+                              float lat, float lon, uint8_t buzzer,
+                              const char *province)
+{
+    cJSON *obj = cJSON_CreateObject();
+    if (!obj)
+        return NULL;
+    char id_str[8];
+    sprintf(id_str, "%04X", device_id);
+    cJSON_AddStringToObject(obj, "device_id", id_str);
+    cJSON_AddNumberToObject(obj, "lat", lat);
+    cJSON_AddNumberToObject(obj, "lon", lon);
+    cJSON_AddNumberToObject(obj, "buzzer", buzzer);
+    cJSON_AddStringToObject(obj, "province", province ? province : "");
+
+    return obj;
+}
 static void led_task(void *arg)
 {
     gpio_reset_pin(LED_GPIO);
@@ -101,47 +149,50 @@ static void led_task(void *arg)
 void rx_task(void *pvParameters)
 {
     uint8_t buf[256];
+
     xSemaphoreTake(g_lora_mutex, portMAX_DELAY);
     if (!lora_init())
     {
+        lora_inited = false;
         xSemaphoreGive(g_lora_mutex);
         ESP_LOGE(TAG, "LoRa init failed");
         vTaskDelete(NULL);
         return;
     }
-
     lora_set_frequency(LORA_FREQUENCY);
     lora_set_spreading_factor(12);
     lora_set_bandwidth(125E3);
     lora_enable_crc();
-    lora_receive();
+    lora_receive(); // arm RX lần đầu
     xSemaphoreGive(g_lora_mutex);
 
     while (1)
     {
-        bool has_pkt = false;
+        vTaskDelay(pdMS_TO_TICKS(5));
 
         xSemaphoreTake(g_lora_mutex, portMAX_DELAY);
-        has_pkt = lora_received();
-        xSemaphoreGive(g_lora_mutex);
 
-        if (!has_pkt)
+        if (!lora_received())
         {
-            vTaskDelay(pdMS_TO_TICKS(10));
+            xSemaphoreGive(g_lora_mutex);
             continue;
         }
-        int len = 0;
 
-        xSemaphoreTake(g_lora_mutex, portMAX_DELAY);
-        len = lora_receive_packet(buf, sizeof(buf));
-        xSemaphoreGive(g_lora_mutex);
+        int len = lora_receive_packet(buf, sizeof(buf));
         if (len < LORA_HEADER_LEN)
+        {
+            lora_receive(); // re-arm nếu rác
+            xSemaphoreGive(g_lora_mutex);
             continue;
+        }
 
         lora_header_t rxh;
-        if (!lora_parse_header(buf, (uint16_t)len, &rxh))
+        bool ok_hdr = lora_parse_header(buf, (uint16_t)len, &rxh);
+        if (!ok_hdr)
         {
             ESP_LOGW(TAG, "Parse header fail (<%d), drop", LORA_HEADER_LEN);
+            lora_receive(); // re-arm
+            xSemaphoreGive(g_lora_mutex);
             continue;
         }
 
@@ -149,54 +200,39 @@ void rx_task(void *pvParameters)
         ESP_LOGI(TAG, "pkt gwid = %02X:%02X:%02X:%02X:%02X:%02X",
                  rxh.gateway_id[0], rxh.gateway_id[1], rxh.gateway_id[2],
                  rxh.gateway_id[3], rxh.gateway_id[4], rxh.gateway_id[5]);
+
         switch (rxh.msg_type)
         {
         case MSG_HELLO:
-
+        {
             lora_header_t resp = rxh;
             resp.msg_type = MSG_HELLO_RESP;
             memcpy(resp.gateway_id, g_gwid, 6);
-            resp.ack = 1; // HELLO_OK
-
+            resp.ack = 1;
+            xSemaphoreGive(g_lora_mutex);
             if (xQueueSend(g_q_resp, &resp, 0) != pdTRUE)
             {
-                ESP_LOGW(TAG, "RESP queue full (HELLO_RESP) dev=0x%04X seq=0x%04X",
-                         rxh.device_id, rxh.seq16);
+                ESP_LOGW(TAG, "RESP queue full (HELLO_RESP) dev=0x%04X seq=0x%04X", rxh.device_id, rxh.seq16);
             }
             else
             {
                 ESP_LOGI(TAG, "HELLO enq: dev=0x%04X seq=0x%04X", rxh.device_id, rxh.seq16);
             }
-
+            xSemaphoreTake(g_lora_mutex, portMAX_DELAY);
+            lora_receive();
+            xSemaphoreGive(g_lora_mutex);
             break;
+        }
 
         case MSG_DATA_FNODE:
-
-            bool equal = true;
-            for (int i = 0; i < 6; i++)
-            {
-                if (rxh.gateway_id[i] != g_gwid[i])
-                {
-                    equal = false;
-                    break;
-                }
-            }
+        {
+            bool equal = memcmp(rxh.gateway_id, g_gwid, 6) == 0;
             if (equal)
             {
-                ESP_LOGI(TAG, "DATA_FNODE: dev=0x%04X seq=0x%04X pl=%dB",
-                         rxh.device_id, rxh.seq16, payload_len);
                 const uint8_t *pl = &buf[LORA_HEADER_LEN];
-                sensor_payload_t s;
-                bool sensor_ok = false;
-                if (payload_len < SENSOR_PAYLOAD_MIN_LEN)
+                if (payload_len >= SENSOR_PAYLOAD_MIN_LEN)
                 {
-                    ESP_LOGW(TAG, "DATA_FNODE: payload too short (%dB < %dB)", payload_len, SENSOR_PAYLOAD_MIN_LEN);
-                    sensor_ok = false;
-                }
-                else
-                {
-                    // create data to send to mqtt
-                    sensor_ok = true;
+                    sensor_payload_t s;
                     int o = 0;
                     s.temperature = rd_f32_be(&pl[o]);
                     o += 4;
@@ -204,52 +240,67 @@ void rx_task(void *pvParameters)
                     o += 4;
                     s.co_ppm = rd_f32_be(&pl[o]);
                     o += 4;
-                    s.uvi = pl[o];
-                    o += 1;
+                    s.uvi = pl[o++];
                     s.pm25 = rd_u16_be(&pl[o]);
                     o += 2;
                     s.pm10 = rd_u16_be(&pl[o]);
                     o += 2;
-                    s.buzzer = pl[o];
-                    o += 1;
+                    s.buzzer = pl[o++];
+                    s.latitude = rd_f32_be(&pl[o]);
+                    o += 4;
+                    s.longitude = rd_f32_be(&pl[o]);
+                    o += 4;
 
-                    ESP_LOGI(TAG,
-                             "DATA from dev=0x%04X seq=0x%04X | T=%.2fC H=%.2f%% CO=%.2fppm UVI=%.2f PM2.5=%u PM10=%u Buzzer=%u",
-                             rxh.device_id, rxh.seq16,
-                             s.temperature, s.humidity, s.co_ppm, s.uvi, s.pm25, s.pm10, s.buzzer);
-                }
+                    ESP_LOGI(TAG, "DATA from dev=0x%04X seq=0x%04X | T=%.2f H=%.2f CO=%.2f UVI=%.2f PM2.5=%u PM10=%u Bz=%u Lat=%.6f Lon=%.6f",
+                             rxh.device_id, rxh.seq16, s.temperature, s.humidity, s.co_ppm, s.uvi, s.pm25, s.pm10, s.buzzer, s.latitude, s.longitude);
 
-                // Chuẩn bị ACK
-                lora_header_t ack = rxh;
-                ack.msg_type = MSG_DATA_ACK;
-                memcpy(ack.gateway_id, g_gwid, 6);
-                ack.ack = 1; // ACK OK
-
-                if (xQueueSend(g_q_resp, &ack, 0) != pdTRUE)
-                {
-                    ESP_LOGW(TAG, "RESP queue full (DATA_ACK) dev=0x%04X seq=0x%04X",
-                             rxh.device_id, rxh.seq16);
-                }
-                if (sensor_ok && s.buzzer == 1)
-                {
-                    lora_header_t ctr = rxh;
-                    ctr.msg_type = MSG_NODE_CTR;
-                    ctr.seq16 = esp_random() & 0xFFFF;
-                    memcpy(ctr.gateway_id, g_gwid, 6);
-                    ctr.ack = 1;
-
-                    if (xQueueSend(g_q_resp, &ctr, 0) != pdTRUE)
+                    xSemaphoreGive(g_lora_mutex);
+                    sensor_event_t ev = {.device_id = rxh.device_id, .s = s};
+                    if (xQueueSend(g_q_mqtt, &ev, 0) != pdTRUE)
                     {
-                        ESP_LOGW(TAG, "RESP queue full (NODE_CTR) dev=0x%04X seq=0x%04X",
-                                 rxh.device_id, rxh.seq16);
+                        ESP_LOGW(TAG, "MQTT queue full, drop dev=0x%04X", rxh.device_id);
                     }
                     else
                     {
-                        ESP_LOGI(TAG, "NODE_CTR enq (mute) dev=0x%04X seq=0x%04X",
-                                 rxh.device_id, rxh.seq16);
+                        ESP_LOGI(TAG, "ENQ MQTT dev=0x%04X", rxh.device_id);
+                    }
+
+                    lora_header_t ack = rxh;
+                    ack.msg_type = MSG_DATA_ACK;
+                    memcpy(ack.gateway_id, g_gwid, 6);
+                    ack.ack = 1;
+                    if (xQueueSend(g_q_resp, &ack, 0) != pdTRUE)
+                    {
+                        ESP_LOGW(TAG, "RESP queue full (DATA_ACK) dev=0x%04X seq=0x%04X", rxh.device_id, rxh.seq16);
                     }
                 }
+                else
+                {
+                    ESP_LOGW(TAG, "DATA payload too short (%d)", payload_len);
+                    xSemaphoreGive(g_lora_mutex);
+                }
+
+                xSemaphoreTake(g_lora_mutex, portMAX_DELAY);
+                lora_receive();
+                xSemaphoreGive(g_lora_mutex);
             }
+            else
+            {
+                lora_receive();
+                xSemaphoreGive(g_lora_mutex);
+            }
+            break;
+        }
+
+        case MSG_CTR_ACK:
+            ESP_LOGI(TAG, "CTR_ACK received from dev=0x%04X seq=0x%04X", rxh.device_id, rxh.seq16);
+            lora_receive();
+            xSemaphoreGive(g_lora_mutex);
+            break;
+
+        default:
+            lora_receive();
+            xSemaphoreGive(g_lora_mutex);
             break;
         }
     }
@@ -281,6 +332,7 @@ static void resp_task(void *arg)
             ESP_LOGI(TAG, "NODE_CTR   -> dev=0x%04X seq=0x%04X  %s",
                      hdr.device_id, hdr.seq16, ok ? "OK" : "FAIL");
         }
+        vTaskDelay(pdMS_TO_TICKS(10));
     }
 }
 static bool apply_saved_sta_config(void)
@@ -303,9 +355,7 @@ static bool apply_saved_sta_config(void)
 static void send_data_task(void *arg)
 {
     mqtt_init();
-
-    const TickType_t PUB_PERIOD_MS = pdMS_TO_TICKS(10000);
-    TickType_t last_wake = xTaskGetTickCount();
+    sensor_event_t ev;
 
     while (1)
     {
@@ -315,24 +365,59 @@ static void send_data_task(void *arg)
             {
                 mqtt_start(1000);
             }
-            else
+            else if (xQueueReceive(g_q_mqtt, &ev, pdMS_TO_TICKS(1000)) == pdTRUE)
             {
-                for (size_t i = 0; i < NUM_NODES; ++i)
+                char dev_name[32];
+                make_dev_name(dev_name, sizeof(dev_name), ev.device_id);
+                cJSON *values = build_values_obj(&ev.s);
+                if (values)
                 {
-                    make_and_send_fake_for_node(&fake_nodes[i]);
-                    vTaskDelay(pdMS_TO_TICKS(1000));
+                    bool ok_t = gw_publish_telemetry(dev_name, values);
+                    if (!ok_t)
+                    {
+                        ESP_LOGW(TAG, "gw_publish_telemetry FAIL dev=%s", dev_name);
+                    }
+                    else
+                    {
+                        ESP_LOGI(TAG, "Telemetry published dev=%s", dev_name);
+                    }
+                }
+                else
+                {
+                    ESP_LOGE(TAG, "build_values_obj NULL");
+                }
+                const char *province = NULL;
+                reverse_geocode_province(ev.s.latitude, ev.s.longitude, &province);
+                cJSON *attrs = build_attrs_obj(ev.device_id,
+                                               ev.s.latitude, ev.s.longitude,
+                                               ev.s.buzzer, province);
+
+                if (attrs)
+                {
+                    bool ok_a = gw_publish_attributes(dev_name, attrs);
+                    if (!ok_a)
+                    {
+                        ESP_LOGW(TAG, "gw_publish_attributes FAIL dev=%s", dev_name);
+                    }
+                    else
+                    {
+                        ESP_LOGI(TAG, "Attributes published dev=%s", dev_name);
+                    }
+                }
+                else
+                {
+                    ESP_LOGE(TAG, "build_attrs_obj NULL");
                 }
             }
-        }
-        else
-        {
-            ESP_LOGD(TAG, "AP mode or no IP - skipping publish cycle");
-        }
+            else
+            {
+                ESP_LOGD(TAG, "AP mode or no IP - skipping publish cycle");
+            }
 
-        vTaskDelayUntil(&last_wake, PUB_PERIOD_MS);
+            vTaskDelay(pdMS_TO_TICKS(100));
+        }
     }
 }
-
 static void network_supervisor_task(void *arg)
 {
     const uint32_t QUICK_RETRY_WAIT_MS = 10000;
@@ -406,28 +491,17 @@ static void network_supervisor_task(void *arg)
 
 void app_main(void)
 {
+    esp_err_t err;
+    esp_log_level_set(TAG, ESP_LOG_DEBUG);
 
-    esp_log_level_set("MQTT", ESP_LOG_DEBUG);
-
-    esp_err_t e = nvs_flash_init();
-    if (e == ESP_ERR_NVS_NO_FREE_PAGES || e == ESP_ERR_NVS_NEW_VERSION_FOUND)
+    err = nvs_flash_init();
+    if (err == ESP_ERR_NVS_NO_FREE_PAGES || err == ESP_ERR_NVS_NEW_VERSION_FOUND)
     {
         ESP_ERROR_CHECK(nvs_flash_init());
     }
 
-    // init lora
-    if (!lora_init())
-    {
-        ESP_LOGW(TAG, "lora initialize failed");
-        lora_inited = false;
-    }
-    else
-    {
-        ESP_LOGI(TAG, "lora initialized");
-    }
-
     ESP_ERROR_CHECK(esp_netif_init());
-    esp_err_t err = esp_event_loop_create_default();
+    err = esp_event_loop_create_default();
     if (err != ESP_OK && err != ESP_ERR_INVALID_STATE)
         ESP_ERROR_CHECK(err);
     // wifi_nvs_reset_wifi();
@@ -462,11 +536,13 @@ void app_main(void)
              g_gwid[0], g_gwid[1], g_gwid[2], g_gwid[3], g_gwid[4], g_gwid[5]);
 
     g_q_resp = xQueueCreate(RESP_QUEUE_LEN, sizeof(lora_header_t));
+    g_q_mqtt = xQueueCreate(MQTT_QUEUE_LEN, sizeof(sensor_event_t));
     g_lora_mutex = xSemaphoreCreateMutex();
     configASSERT(g_q_resp && g_lora_mutex);
 
-    // xTaskCreate(rx_task, "rx_task", 4096, NULL, 5, NULL);
-    // xTaskCreate(resp_task, "resp_task", 4096, NULL, 4, NULL);
+    xTaskCreate(rx_task, "rx_task", 7168, NULL, 5, NULL);
+    xTaskCreate(resp_task, "resp_task", 6144, NULL, 4, NULL);
+
     xTaskCreate(send_data_task, "send_data_task", 4096, NULL, 1, NULL);
     xTaskCreate(network_supervisor_task, "network_supervisor_task", 4096, NULL, 2, NULL);
     xTaskCreate(led_task, "led_task", 2048, NULL, 3, NULL);

@@ -7,7 +7,7 @@
 #define LORA_MISO_GPIO 19 // Pin số 19 cho MISO
 #define LORA_MOSI_GPIO 27 // Pin số 27 cho MOSI
 #define LORA_SCK_GPIO 5   // Pin số 5 cho SCK
-#define LORA_SEND_PACKET_TIMEOUT 5000
+#define LORA_SEND_PACKET_TIMEOUT 1500
 
 void lora_reset(void);
 void lora_explicit_header_mode(void);

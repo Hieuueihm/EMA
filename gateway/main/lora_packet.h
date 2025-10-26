@@ -35,9 +35,11 @@ typedef struct
     uint16_t pm25;
     uint16_t pm10;
     uint8_t buzzer;
+    float latitude;
+    float longitude;
 } sensor_payload_t;
 
-#define SENSOR_PAYLOAD_MIN_LEN (4 * 3 + 1 + 2 * 2 + 1)
+#define SENSOR_PAYLOAD_MIN_LEN (4 * 3 + 1 + 2 * 2 + 1 + 4 * 2)
 
 static inline uint16_t read_u16_be(const uint8_t *p)
 {
