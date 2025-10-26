@@ -540,10 +540,9 @@ void app_main(void)
     g_lora_mutex = xSemaphoreCreateMutex();
     configASSERT(g_q_resp && g_lora_mutex);
 
-    xTaskCreate(rx_task, "rx_task", 7168, NULL, 5, NULL);
-    xTaskCreate(resp_task, "resp_task", 6144, NULL, 4, NULL);
-
+    xTaskCreate(rx_task, "rx_task", 4096, NULL, 5, NULL);
+    xTaskCreate(resp_task, "resp_task", 4096, NULL, 4, NULL);
     xTaskCreate(send_data_task, "send_data_task", 4096, NULL, 1, NULL);
-    xTaskCreate(network_supervisor_task, "network_supervisor_task", 4096, NULL, 2, NULL);
+    xTaskCreate(network_supervisor_task, "network_supervisor_task", 2048, NULL, 2, NULL);
     xTaskCreate(led_task, "led_task", 2048, NULL, 3, NULL);
 }
