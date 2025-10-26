@@ -1,6 +1,7 @@
 #include "mq7.h"
 #include "stm32f1xx_hal_gpio.h"
 uint8_t s_co_alarm = 0;
+uint8_t awd_event = 0;
 ADC_HandleTypeDef hadc1;
 float R0;
 float v_in = 5.0f;
@@ -122,6 +123,24 @@ Status_e MQ7_GetPPM(float *CO_ppm){
 
 }
 
+
+bool MQ7_ReCallPPM(void){
+    awd_event = 0;
+    float ppm = 0;
+    MQ7_GetPPM(&ppm);
+    if(ppm >=CO_ALARM_PPM_THRESHOLD + 1.0f ){
+        s_co_alarm = 1;
+        uart_printf("current ppm:  %f \r\\n", ppm);
+        uart_print("AWD confirmed: HIGH CO\r\n");
+        return OK;
+
+    }
+    __HAL_ADC_CLEAR_FLAG(&hadc1, ADC_FLAG_AWD | ADC_FLAG_EOC);
+    __HAL_ADC_ENABLE_IT(&hadc1, ADC_IT_AWD);
+    
+    return ERR;
+
+}
 static inline float ppm_to_Rs(float ppm) {
     return R0 * powf((ppm / _COEF_A0), (1.0f / _COEF_A1));
 }
@@ -186,10 +205,9 @@ void MQ7_ENABLE_WDG_ITR(void){
 void HAL_ADC_LevelOutOfWindowCallback(ADC_HandleTypeDef* hadc)
 {
     if (hadc->Instance == ADC1) {
-        // HAL_Delay("call alert \r\n");
-        HAL_GPIO_TogglePin(GPIOC, GPIO_PIN_13);
-        s_co_alarm = 1;                          
+        awd_event = 1;                         
         __HAL_ADC_DISABLE_IT(&hadc1, ADC_IT_AWD); 
+        __HAL_ADC_CLEAR_FLAG(&hadc1, ADC_FLAG_AWD | ADC_FLAG_EOC);
         
     }
 }

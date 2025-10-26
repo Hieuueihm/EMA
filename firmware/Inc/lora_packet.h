@@ -40,6 +40,8 @@ typedef struct {
     uint16_t pm25;  
     uint16_t pm10;  
     uint8_t buzzer;
+    float latitude;    
+    float longitude; 
 } lora_payload_sensor_t;
 
 // helpers 
