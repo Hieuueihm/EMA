@@ -18,7 +18,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { tb } from '../api';
 import { ROUTES, PROVINCE_MAPPING } from '../../constants';
 import { getItem } from '../utils/AsyncStorage';
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const DAY_OPTIONS = [1, 3, 7, 15, 30];
 
@@ -189,16 +189,16 @@ export default function ChartsScreen() {
                 </Text>
 
                 {loading ? (
-                    <View style={{ height: 260, alignItems: 'center', justifyContent: 'center' }}>
+                    <View style={{ height: height * 0.35, alignItems: 'center', justifyContent: 'center' }}>
                         <ActivityIndicator color="#fff" />
-                        <Text style={{ color: '#cfd9ee', marginTop: 8 }}>Đang tải dữ liệu…</Text>
+                        <Text style={{ color: '#cfd9ee', marginTop: width * 0.001 }}>Đang tải dữ liệu…</Text>
                     </View>
                 ) : (
                     series.length > 0 && (
                         <LineChart
                             data={{ labels, datasets: [{ data: series }] }}
-                            width={width - 32}
-                            height={260}
+                            width={width - width * 0.1}
+                            height={height * 0.35}
                             formatYLabel={formatY}
                             withVerticalLabels={labels.length <= 12}
                             withHorizontalLabels
