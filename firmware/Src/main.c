@@ -564,7 +564,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     HAL_GPIO_Init(LORA_DIO0_PORT, &GPIO_InitStruct);
 
     uint32_t irq = EXTI15_10_IRQn;
-    HAL_NVIC_SetPriority(irq, 3, 0);
+    HAL_NVIC_SetPriority(irq, 4, 0);
     HAL_NVIC_EnableIRQ(irq);
 }
 

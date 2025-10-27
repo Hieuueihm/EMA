@@ -232,6 +232,9 @@ void MQ7_AWD_SetByPPM(float ppm_on)
     if (HAL_ADC_AnalogWDGConfig(&hadc1, &awd) != HAL_OK) {
         Error_Handler();
     }
+    
+    HAL_NVIC_SetPriority(ADC1_2_IRQn, 1, 0);
+HAL_NVIC_EnableIRQ(ADC1_2_IRQn);
     __HAL_ADC_CLEAR_FLAG(&hadc1, ADC_FLAG_AWD);
     __HAL_ADC_ENABLE_IT(&hadc1, ADC_IT_AWD);
 
