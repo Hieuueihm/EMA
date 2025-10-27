@@ -261,7 +261,11 @@ static wake_reason_t  Sleep_ADC_AWD_or_15min(void)
             uart_print("Wake by RTC\r\n");
             flag_15min = 0;
      }
-        if (awd_event) uart_print("Wake by CO AWD\r\n");
+    if (awd_event) uart_print("Wake by CO AWD\r\n");
+    MQ7_DebugADC();
+    float ppm = 0;
+MQ7_GetPPM(&ppm);
+    uart_printf("current ppm %f\r\n", ppm);
 
     if(awd_event && !s_co_alarm){
         MQ7_ReCallPPM();

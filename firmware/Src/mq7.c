@@ -64,7 +64,7 @@ static Status_e MQ7_ReadVoltages(float *v_adc, float *v_node) {
     if (stt != OK) return stt;
 
     float Vadc  = (adc_val * VREF_V) / 4095.0f; 
-    float Vnode = Vadc * K_SCALE;              
+    float Vnode = Vadc / K_SCALE;              
 
     if (Vnode > v_in) Vnode = v_in;
     if (Vnode < 0.001f) Vnode = 0.001f;     
@@ -233,8 +233,7 @@ void MQ7_AWD_SetByPPM(float ppm_on)
         Error_Handler();
     }
     
-    HAL_NVIC_SetPriority(ADC1_2_IRQn, 1, 0);
-HAL_NVIC_EnableIRQ(ADC1_2_IRQn);
+   
     __HAL_ADC_CLEAR_FLAG(&hadc1, ADC_FLAG_AWD);
     __HAL_ADC_ENABLE_IT(&hadc1, ADC_IT_AWD);
 
