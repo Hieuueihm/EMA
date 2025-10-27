@@ -16,9 +16,8 @@ import { LineChart } from 'react-native-chart-kit';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { tb } from '../api';
-import { PROVINCE_MAPPING } from '../constants';
+import { ROUTES, PROVINCE_MAPPING } from '../../constants';
 import { getItem } from '../utils/AsyncStorage';
-import { COLORS, ROUTES } from '../../constants';
 const { width } = Dimensions.get('window');
 
 const DAY_OPTIONS = [1, 3, 7, 15, 30];
@@ -70,8 +69,7 @@ export default function ChartsScreen() {
         (async () => {
             try {
                 const stored = await getItem('selected_province');
-                console.log('stored province name:', stored);
-                const mapped = PROVINCE_MAPPING?.[stored ?? ''] || stored || 'HaNoi';
+                const mapped = PROVINCE_MAPPING[stored];
                 console.log('mapped province name:', mapped);
                 if (!cancelled) setProvinceName(mapped);
             } catch {

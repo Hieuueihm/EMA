@@ -205,13 +205,13 @@ const EnvDashboardScreen = () => {
 
     const fetchTelemetry = useCallback(async (provinceName) => {
         const endTs = Date.now();
-        const startTs = endTs - 60 * 1000;
+        const startTs = endTs - 60 * 60 * 1000;
         const keys = ["temperature", "humidity", "co", "uv", "pm25", "pm10"];
 
         const bundle = await tb.getAssetsTelemetryByProvince(
             provinceName,
             keys,
-            { startTs, endTs, interval: 60000, agg: "AVG", limit: 1000 }
+            { startTs, endTs, interval: 60 * 60000, agg: "AVG", limit: 1000 }
         );
         return bundle.length > 0 ? bundle[0].telemetry : {};
     }, []);

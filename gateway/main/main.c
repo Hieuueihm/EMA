@@ -78,8 +78,8 @@ static cJSON *build_values_obj(const sensor_payload_t *s)
 
     cJSON_AddNumberToObject(obj, "temperature", s->temperature);
     cJSON_AddNumberToObject(obj, "humidity", s->humidity);
-    cJSON_AddNumberToObject(obj, "co_ppm", s->co_ppm);
-    cJSON_AddNumberToObject(obj, "uvi", s->uvi);
+    cJSON_AddNumberToObject(obj, "co", s->co_ppm);
+    cJSON_AddNumberToObject(obj, "uv", s->uvi);
     cJSON_AddNumberToObject(obj, "pm25", s->pm25);
     cJSON_AddNumberToObject(obj, "pm10", s->pm10);
     return obj;
@@ -491,6 +491,8 @@ static void network_supervisor_task(void *arg)
 
 void app_main(void)
 {
+    esp_task_wdt_deinit();
+
     esp_err_t err;
     esp_log_level_set(TAG, ESP_LOG_DEBUG);
 
