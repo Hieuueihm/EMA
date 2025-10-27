@@ -6,10 +6,10 @@
 #include "stm32f1xx_hal_adc.h"
 #include "math.h"
 #include "stm32f1xx_hal_adc_ex.h"
-#define _CALIBRATION_CONSTANT 5.0
+#define _CALIBRATION_CONSTANT 5
 #define _LOAD_RES 10.0
-#define _COEF_A0 100.0
-#define _COEF_A1 -1.513
+#define _COEF_A0 19.32
+#define _COEF_A1 -0.64
 #define CALIBRATION_SECONDS 15
 #define CO_ALARM_PPM_THRESHOLD 50.0f 
 

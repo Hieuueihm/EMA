@@ -84,11 +84,16 @@ typedef enum {
 #define LATITUDE1   21.028511f   // Hồ Hoàn Kiếm
 #define LONGITUDE1  105.804817f
 
-static void read_all_now(void) {
-    MQ7_GetPPM(&ppm);
-    GUVA_GetUVI(&uvi);
-    dht.api.read_data(&dht);
-    sds.api.query_data(&sds);
+static Status_e read_all_now(void) {
+    Status_e stt;
+    stt = MQ7_GetPPM(&ppm);
+    if(stt != OK) return stt;
+    stt = GUVA_GetUVI(&uvi);
+    if(stt != OK) return stt;
+    stt = dht.api.read_data(&dht);
+    if(stt != OK) return stt;
+    stt = sds.api.query_data(&sds);
+    return stt;
 }
 UART_Config cfg1 = {
             .port = UART1,       
@@ -468,7 +473,12 @@ bool lora_send_one_cycle(uint8_t buzzer_state){
         uart_print("HELLO timeout\r\n");
         return false;
     }
-    read_all_now();
+    Status_e stt;
+    stt = read_all_now();
+    if(stt != OK){
+        uart_print("read data failed\r\n");
+        return false;
+    }
     uint16_t pl_len = fill_sensor_payload(payload, sizeof(payload), buzzer_state);
     if (pl_len == 0) {
         uart_print("payload too small\r\n");
@@ -649,4 +659,3 @@ void Error_Handler(void)
     }
     /* USER CODE END Error_Handler_Debug */
 }
-

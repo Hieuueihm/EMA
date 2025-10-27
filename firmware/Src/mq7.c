@@ -64,7 +64,7 @@ static Status_e MQ7_ReadVoltages(float *v_adc, float *v_node) {
     if (stt != OK) return stt;
 
     float Vadc  = (adc_val * VREF_V) / 4095.0f; 
-    float Vnode = Vadc / K_SCALE;              
+    float Vnode = Vadc * K_SCALE;              
 
     if (Vnode > v_in) Vnode = v_in;
     if (Vnode < 0.001f) Vnode = 0.001f;     
