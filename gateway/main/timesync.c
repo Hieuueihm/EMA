@@ -2,7 +2,8 @@
 
 static const char *TAG = "TIME";
 
-static volatile bool s_time_synced = false;
+static volatile
+ bool s_time_synced = false;
 
 static void time_sync_notification_cb(struct timeval *tv)
 {
