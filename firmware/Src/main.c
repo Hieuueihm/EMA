@@ -93,6 +93,8 @@ static Status_e read_all_now(void) {
     stt = dht.api.read_data(&dht);
     if(stt != OK) return stt;
     stt = sds.api.query_data(&sds);
+    if(ppm <0 || ppm >= 500 || uvi < 0 || dht.temperature <0 || dht.temperature > 100 ||
+         dht.humidity < 0 || dht.humidity > 100 || sds.pm_10 < 0 || sds.pm_2_5 <0) return ERR;
     return stt;
 }
 UART_Config cfg1 = {
