@@ -27,7 +27,7 @@ EMA consists of four main components:
 
 ### 2️⃣ Gateway (ESP32 TTGO LoRa)
 - Receives LoRa packets from sensor nodes
-- Validates packet headers and forwards data via **Wi-Fi (MQTT/HTTP)** to **ThingsBoard Cloud**
+- Validates packet headers and forwards data via **Wi-Fi (MQTT)** to **ThingsBoard Cloud**
 - Handles reconnection and local buffering when offline
 - Runs under FreeRTOS with dedicated tasks for RX/TX and MQTT management
 
@@ -41,7 +41,7 @@ EMA consists of four main components:
   ```env
   FB_PROJECT_ID=...
   SA_PATH=service-account.json
-  TB_URL=https://thingsboard.cloud
+  TB_URL=https://demo.thingsboard.io
   TB_JWT=...
   TB_POLL_SEC=5
   TB_PAGE_SIZE=100
@@ -91,7 +91,7 @@ EMA/
 
 ### Gateway
 1. Configure Wi-Fi and MQTT credentials in source  
-2. Build with ESP-IDF or Arduino  
+2. Build with ESP-IDF 
 3. Flash to TTGO LoRa32 board
 
 ### Server
