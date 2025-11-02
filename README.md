@@ -75,10 +75,10 @@ EMA/
 
 | Component | Toolchain / Environment |
 |------------|-------------------------|
-| Firmware | STM32CubeIDE / ARM-GCC |
-| Gateway | ESP-IDF / Arduino-ESP32 |
+| Firmware |  ARM-GCC, st-flash, make|
+| Gateway | ESP-IDF |
 | Server | Node.js 18+, Firebase Admin SDK |
-| Mobile | React Native CLI, Android Studio or Xcode |
+| Mobile | React Native CLI, Android Studio |
 
 ---
 
