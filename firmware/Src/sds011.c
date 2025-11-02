@@ -67,37 +67,39 @@ static Status_e Set_SleepMode(SDS011 *sds){
 
 
 
-static Status_e Sds_QueryData(SDS011 *sds)
+static Status_e Sds_QueryData(SDS011 *sds, uint32_t TIMEOUT_MS)
 {
-    Status_e stt = sds->sds_uart.api.send_string_wtimeout(&sds->sds_uart,  (const char*)Sds011_Query, 1000);
-    if (stt != OK)
-        return TIMEOUT;
+    Status_e stt = sds->sds_uart.api.send_string_wtimeout(&sds->sds_uart, (const char*)Sds011_Query, TIMEOUT_MS);
+    if (stt != OK) return TIMEOUT;
 
     uint8_t buf[10];
     uint8_t byte;
     int len = 0;
     uint8_t checksum = 0;
 
+    uint32_t t0 = HAL_GetTick();    
+    uint32_t t_last = t0;                
+    const uint32_t INTERBYTE_MS = 50;   
+
     while (len < 10) 
     {
-        while (sds->sds_uart.api.available(&sds->sds_uart) > 0)
+        if ((HAL_GetTick() - t0) >= TIMEOUT_MS) {
+            return TIMEOUT;
+        }
+
+        if (sds->sds_uart.api.available(&sds->sds_uart) > 0)
         {
             sds->sds_uart.api.read_byte(&sds->sds_uart, &byte);
+            t_last = HAL_GetTick();
 
             switch (len)
             {
             case 0:
-                if (byte != 0xAA) {
-                    len = 0; 
-                    continue;
-                }
+                if (byte != 0xAA) { len = 0; continue; }
                 break;
 
             case 1:
-                if (byte != 0xC0) {
-                    len = 0; 
-                    continue;
-                }
+                if (byte != 0xC0) { len = 0; continue; }
                 break;
             }
 
@@ -105,34 +107,32 @@ static Status_e Sds_QueryData(SDS011 *sds)
 
             if (len == 10)
             {
-                if (buf[9] != 0xAB) {
-                    len = 0;
-                    continue;
-                }
+                if (buf[9] != 0xAB) { len = 0; continue; }
 
                 checksum = 0;
-                for (int i = 2; i <= 7; i++)
-                    checksum += buf[i];
+                for (int i = 2; i <= 7; i++) checksum += buf[i];
 
-                if (checksum != buf[8]) {
-                    len = 0;
-                    continue;
-                }
+                if (checksum != buf[8]) { len = 0; continue; }
 
                 memcpy(sds->data_received, buf, 10);
                 uint16_t pm25_raw = (uint16_t)buf[2] | ((uint16_t)buf[3] << 8);
                 uint16_t pm10_raw = (uint16_t)buf[4] | ((uint16_t)buf[5] << 8);
 
-                sds->pm_2_5 = pm25_raw / 10;
-                sds->pm_10  = pm10_raw / 10;
+                sds->pm_2_5 = pm25_raw / 10.0f;
+                sds->pm_10  = pm10_raw / 10.0f;
                 return OK;
+            }
+        }
+        else
+        {
+            if (len > 0 && (HAL_GetTick() - t_last) >= INTERBYTE_MS) {
+                len = 0;
             }
         }
     }
 
     return TIMEOUT;
 }
-
 
 
 SDS011 SDS_Init(UART_Config cfg){

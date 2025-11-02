@@ -81,20 +81,23 @@ typedef enum {
 #define SLEEP_CHECK_INTERVAL   5000U    
 
 
-#define LATITUDE1   21.028511f   // Hồ Hoàn Kiếm
+#define LATITUDE1   21.028511f  
 #define LONGITUDE1  105.804817f
 
-static Status_e read_all_now(void) {
+static Status_e read_all_sensors(void) {
     Status_e stt;
     stt = MQ7_GetPPM(&ppm);
     if(stt != OK) return stt;
     stt = GUVA_GetUVI(&uvi);
     if(stt != OK) return stt;
-    stt = dht.api.read_data(&dht);
+    stt = dht.api.read_data(&dht, 5000000);
     if(stt != OK) return stt;
-    stt = sds.api.query_data(&sds);
-    if(ppm <0 || ppm >= 500 || uvi < 0 || dht.temperature <0 || dht.temperature > 100 ||
-         dht.humidity < 0 || dht.humidity > 100 || sds.pm_10 < 0 || sds.pm_2_5 <0) return ERR;
+    stt = sds.api.query_data(&sds, 5000);
+    if(ppm <0 || ppm >= 2000 || uvi < 0 || dht.temperature <0 || dht.temperature > 100 ||
+         dht.humidity < 0 || dht.humidity > 100 || sds.pm_10 < 0 || sds.pm_2_5 <0){
+            uart_print("err in data\r\n");
+            return ERR;
+         }
     return stt;
 }
 UART_Config cfg1 = {
@@ -480,7 +483,7 @@ bool lora_send_one_cycle(uint8_t buzzer_state){
         return false;
     }
     Status_e stt;
-    stt = read_all_now();
+    stt = read_all_sensors();
     if(stt != OK){
         uart_print("read data failed\r\n");
         return false;
@@ -577,9 +580,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 static void MX_TIM3_Init(void)
 {
     __HAL_RCC_TIM3_CLK_ENABLE();
+    uint32_t pclk2  = HAL_RCC_GetPCLK2Freq();    
+
 
     htim3.Instance = TIM3;
-    htim3.Init.Prescaler = 7200 - 1;      
+    htim3.Init.Prescaler = (pclk2 / 10000) - 1;     
     htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
     htim3.Init.Period = 10000 - 1;        
     htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;

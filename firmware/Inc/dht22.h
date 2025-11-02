@@ -28,7 +28,7 @@ struct DHT_t {
 	float 			temperature;
 	float 			humidity;
     struct {
-        Status_e (*read_data)(DHT *dht);
+        Status_e (*read_data)(DHT *dht, uint32_t TIMEOUT_US);
     } api;
 };
 

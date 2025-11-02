@@ -8,7 +8,7 @@ ADC_HandleTypeDef hadc2;
 void GUVA_Init(void){
     __HAL_RCC_GPIOB_CLK_ENABLE();
     __HAL_RCC_ADC2_CLK_ENABLE();
-    // RCC->APB2ENR |= RCC_APB2ENR_ADC2EN;
+    RCC->APB2ENR |= RCC_APB2ENR_ADC2EN;
 
 
     GPIO_InitTypeDef GPIO_InitStruct = {0};
@@ -44,7 +44,7 @@ Status_e GUVA_ReadVoltage(float *voltage)
     float sum = 0;
      for (int i = 0; i < SAMPLING_COUNT; i++) {
         if (HAL_ADC_Start(&hadc2) != HAL_OK) return ERR;
-        if (HAL_ADC_PollForConversion(&hadc2, 100) != HAL_OK) return ERR;
+        if (HAL_ADC_PollForConversion(&hadc2, 100) != HAL_OK) return TIMEOUT;
         sum += HAL_ADC_GetValue(&hadc2);
         HAL_ADC_Stop(&hadc2);
         HAL_Delay(2);
@@ -62,7 +62,7 @@ Status_e GUVA_ReadVoltage(float *voltage)
 Status_e GUVA_GetUVI(uint8_t *uvi) {
     if (!uvi) return ERR;
     float voltage = 0.0f;
-    if (GUVA_ReadVoltage(&voltage) != OK) return -1;
+    if (GUVA_ReadVoltage(&voltage) != OK) return ERR;
 
     float uvi_f = voltage;
     if (uvi_f < 0.0f) uvi_f = 0.0f;

@@ -19,7 +19,7 @@ typedef struct SDS011_t {
         uint16_t (*get_pm10)(SDS011 *sds);
         Status_e (*set_working_mode)(SDS011 *sds);
         Status_e (*set_sleep_mode)(SDS011 *sds);
-        Status_e (*query_data)(SDS011 *sds);
+        Status_e (*query_data)(SDS011 *sds, uint32_t TIMEOUT_MS);
     } api;
 };
 

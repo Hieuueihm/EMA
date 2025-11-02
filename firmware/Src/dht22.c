@@ -34,10 +34,11 @@ static uint8_t Bus_Read(DHT *dht)
 }
 
 
-static uint8_t DHT_Check_Response(DHT *dht)
+static uint8_t DHT_Check_Response(DHT *dht, uint32_t TIMEOUT_US)
 {
 
-	uint8_t Response = 0;
+	uint8_t res = 0;
+	uint32_t timeout = 0;
 
 
 	Set_Pin_Mode(dht, Output);
@@ -64,16 +65,19 @@ static uint8_t DHT_Check_Response(DHT *dht)
 
 
 		delay_us(90);
-		Response = (Bus_Read(dht)) ? 1 : -1;
+		res = (Bus_Read(dht)) ? 1 : -1;
 
         delay_us(50);
 	}
 
-	/* Wait for the pin to go reset */
-	//   uint32_t count = 0;
-    while (Bus_Read(dht)) {};
-	// uart_print("go end");
-	return Response;
+	while (Bus_Read(dht)) {
+		delay_us(1);
+		if (++timeout >= TIMEOUT_US) {
+			res = -1;
+			break;
+		}
+	}
+	return res;
 }
 
 static uint8_t DHT_Read(DHT *dht)
@@ -105,10 +109,10 @@ static uint8_t DHT_Read(DHT *dht)
 
 
 
-Status_e DHT_GetData(DHT *dht)
+Status_e DHT_GetData(DHT *dht, uint32_t TIMEOUT_US)
 {
 
-	if(DHT_Check_Response(dht))
+	if(DHT_Check_Response(dht, TIMEOUT_US))
 	{
 		dht->data_raw.Rh1 = DHT_Read(dht);
 		dht->data_raw.Rh2 = DHT_Read(dht);
@@ -122,7 +126,7 @@ Status_e DHT_GetData(DHT *dht)
 			dht->temperature = ((dht->data_raw.Tp1 << 8) | dht->data_raw.Tp2) / 10.0;
 			dht->humidity = ((dht->data_raw.Rh1 << 8) | dht->data_raw.Rh2) / 10.0;
 		}
-	} else return ERR;
+	} else return TIMEOUT;
     return OK;
 }
 static void GPIO_Clock_Enable(GPIO_TypeDef *port) {

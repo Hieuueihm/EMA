@@ -11,11 +11,14 @@ void delay_init(void)
     TIM_ClockConfigTypeDef sClockSourceConfig = {0};
     TIM_MasterConfigTypeDef sMasterConfig = {0};
 
+    uint32_t pclk2  = HAL_RCC_GetPCLK2Freq();    
+
+
     /* USER CODE BEGIN TIM1_Init 1 */
 
     /* USER CODE END TIM1_Init 1 */
     htim1.Instance = TIM1;
-    htim1.Init.Prescaler = (SystemCoreClock / 1000000) -1;
+    htim1.Init.Prescaler = (pclk2 / 1000000) -1;
     htim1.Init.CounterMode = TIM_COUNTERMODE_UP;
     htim1.Init.Period = 0xffff-1;
     htim1.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
