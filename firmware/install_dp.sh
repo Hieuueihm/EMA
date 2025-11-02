@@ -5,21 +5,21 @@
 
 set -e
 
-echo "===== Cập nhật hệ thống ====="
+echo "===== System update====="
 sudo apt update
 sudo apt upgrade -y
 
-echo "===== Cài đặt ARM GCC toolchain ====="
+echo "===== ARM gcc tool-chain ====="
 sudo apt install -y gcc-arm-none-eabi gdb-arm-none-eabi binutils-arm-none-eabi make
 
-echo "===== Cài đặt st-flash (ST-Link) ====="
+echo "===== st-flash (ST-Link) ====="
 sudo apt install -y stlink-tools
 
-echo "===== Kiểm tra phiên bản ====="
+echo "===== Check the version ====="
 echo "ARM GCC version:"
 arm-none-eabi-gcc --version
 
 echo "st-flash version:"
 st-flash --version
 
-echo "===== Hoàn tất cài đặt ====="
+echo "===== Done ====="
