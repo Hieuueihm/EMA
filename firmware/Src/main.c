@@ -213,6 +213,7 @@ void HAL_RTCEx_RTCEventCallback(RTC_HandleTypeDef *hrtc)
 }
 static void Periph_StopForSleep(void)
 {
+    HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_SET); 
     __HAL_RCC_USART1_CLK_DISABLE();
     __HAL_RCC_USART2_CLK_DISABLE();
     __HAL_RCC_GPIOB_CLK_DISABLE();
