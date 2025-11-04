@@ -14,12 +14,10 @@ def main():
     with open(GEOJSON, "r", encoding="utf-8") as f:
         gj = json.load(f)
 
-    # Đọc polygon các tỉnh
     features = []
     for i, feat in enumerate(gj["features"]):
         geom = shape(feat["geometry"])
         props = feat.get("properties", {})
-        # Thử nhiều key tên tỉnh – tùy nguồn dữ liệu
         name = props.get("VARNAME_1")
         features.append((geom, name))
 
