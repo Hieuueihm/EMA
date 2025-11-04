@@ -111,7 +111,7 @@ static Status_e readRs(float *Rs){
 }
 
 Status_e MQ7_Calibrate(void){
-    const int WARMUP_S = 3;                
+    const int WARMUP_S = 90;                
     for (int i = 0; i < WARMUP_S; i++) {
         delay_ms(1000);
         uart_printf("warmup %d/%d\r\n", i+1, WARMUP_S);
