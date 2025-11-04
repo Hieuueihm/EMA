@@ -25,7 +25,7 @@ EMA consists of four main components:
 
 ---
 
-### 2️⃣ Gateway (ESP32 TTGO LoRa)
+### 2️⃣ Gateway (ESP32 LilyGo LoRa)
 - Receives LoRa packets from sensor nodes
 - Validates packet headers and forwards data via **Wi-Fi (MQTT)** to **ThingsBoard Cloud**
 - Handles reconnection and local buffering when offline
@@ -63,7 +63,7 @@ EMA consists of four main components:
 ```
 EMA/
 ├─ firmware/     # STM32F103C8T6 firmware for LoRa sensor nodes
-├─ gateway/      # ESP32 TTGO LoRa gateway firmware
+├─ gateway/      # ESP32 LilyGo LoRa gateway firmware
 ├─ server/       # Node.js backend for alerting and Firebase push
 ├─ mobile/       # React Native mobile app for visualization
 └─ README.md     # This documentation file
@@ -92,7 +92,7 @@ EMA/
 ### Gateway
 1. Configure Wi-Fi and MQTT credentials in source  
 2. Build with ESP-IDF 
-3. Flash to TTGO LoRa32 board
+3. Flash to LilyGo LoRa32 board
 
 ### Server
 ```bash
