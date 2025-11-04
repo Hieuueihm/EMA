@@ -152,7 +152,16 @@ bool wifi_sta_apply_saved_config(void)
     wifi_config_t cfg = {0};
     strncpy((char *)cfg.sta.ssid, ssid, sizeof(cfg.sta.ssid));
     strncpy((char *)cfg.sta.password, pass, sizeof(cfg.sta.password));
-    cfg.sta.threshold.authmode = WIFI_AUTH_WPA2_PSK;
+
+    // size_t passlen = strlen(pass);
+    // if (passlen == 0)
+    // {
+    cfg.sta.threshold.authmode = WIFI_AUTH_OPEN; // mạng không có pass
+    // }
+    // else
+    // {
+    //     cfg.sta.threshold.authmode = WIFI_AUTH_WPA2_PSK; // mạng có pass
+    // }
 
     ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &cfg));
     ESP_LOGI(TAG, "Applied SSID from NVS");

@@ -175,7 +175,7 @@ esp_err_t start_ap_and_server(void)
     ap.ap.ssid_len = strlen(ap_ssid);
     strncpy((char *)ap.ap.password, "12345678", sizeof(ap.ap.password));
     ap.ap.channel = 6;
-    ap.ap.authmode = WIFI_AUTH_WPA_WPA2_PSK;
+    ap.ap.authmode = WIFI_AUTH_OPEN;
     ap.ap.max_connection = 4;
     if (strlen("12345678") == 0)
         ap.ap.authmode = WIFI_AUTH_OPEN;

@@ -345,7 +345,7 @@ static bool apply_saved_sta_config(void)
     wifi_config_t cfg = {0};
     strncpy((char *)cfg.sta.ssid, ssid, sizeof(cfg.sta.ssid));
     strncpy((char *)cfg.sta.password, pass, sizeof(cfg.sta.password));
-    cfg.sta.threshold.authmode = WIFI_AUTH_WPA2_PSK;
+    cfg.sta.threshold.authmode = WIFI_AUTH_OPEN;
 
     ESP_ERROR_CHECK(esp_wifi_set_config(WIFI_IF_STA, &cfg));
     ESP_LOGI(TAG, "Applied saved SSID from NVS");
@@ -421,7 +421,7 @@ static void send_data_task(void *arg)
 static void network_supervisor_task(void *arg)
 {
     const uint32_t QUICK_RETRY_WAIT_MS = 10000;
-    const int MAX_QUICK_RETRIES = 6;
+    const int MAX_QUICK_RETRIES = 1;
 
     int quick_retries = 0;
     bool synced_time = false;
