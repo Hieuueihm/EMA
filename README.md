@@ -31,7 +31,7 @@ EMA consists of four main components:
 - Handles reconnection and local buffering when offline
 - Runs under FreeRTOS with dedicated tasks for RX/TX and MQTT management
 <img width="1577" height="711" alt="image" src="https://github.com/user-attachments/assets/a7362dcc-889f-46d4-8806-694eebf66e8c" />
-<img width="1728" height="803" alt="image" src="https://github.com/user-attachments/assets/d83bc51c-868c-4bc6-9af7-82a164b864b3" />
+<img width="1405" height="359" alt="image" src="https://github.com/user-attachments/assets/742931b0-618e-4b7a-80ce-bc3510bcc338" />
 
 
 ---
