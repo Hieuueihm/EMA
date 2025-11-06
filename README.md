@@ -59,6 +59,9 @@ EMA consists of four main components:
 - Receives **push alerts** from EMA server through FCM
 - Implements date-range filters (1, 3, 7, 15, 30 days) and province selector
 
+  <img width="1375" height="43" alt="image" src="https://github.com/user-attachments/assets/5bb82d1f-7959-49e3-ae02-755d83ef1e5f" />
+
+
 ---
 
 ## 🗂️ Project Structure
